@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GoToSelectedRecord
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GoToSelectedRecord
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GoToSelectedRecord (tableNum; selRecNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      selRecNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Number of selected record to access
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_GoToSelectedRecord
+    </font>
+   </code>
+   moves to the record number
+   <code>
+    selRecNum
+   </code>
+   in the current selection of table number
+   <code>
+    tableNum
+   </code>
+   , and makes that record the current record. The current selection does not change.
+  </p>
+  <p>
+   Note that the
+   <code>
+    selRecNum
+   </code>
+   parameter is not the same as the number returned by
+   <code>
+    PA_GetRecordNumber
+   </code>
+   ; it represents the record's position in the current selection. The record's position depends on how the selection is made and whether or not the selection is sorted.
+  </p>
+  <p>
+   If there are no records in the current selection, or the number is not in the selection, then
+   <code>
+    <font color="#CF0000">
+     PA_GoToSelectedRecord
+    </font>
+   </code>
+   does nothing.
+  </p>
+  <p>
+   Before calling
+   <code>
+    <font color="#CF0000">
+     PA_GoToSelectedRecord
+    </font>
+   </code>
+   the 4D plug-in should indicate if the many-to-one and one-to-many relations should be activated by using
+   <code>
+    PA_UseAutomaticRelation
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   This routine does not use virtual structure
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See
+   <code>
+    <a href="CMU84879.HTM">
+     PA_RecordsInSelection
+    </a>
+   </code>
+   for an example of use.
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84879.HTM">
+    PA_RecordsInSelection
+   </a>
+   ,
+   <a href="CMU84877.HTM">
+    PA_SelectedRecordNumber
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (invalid table number).
+  </p>
+  <b>
+   <p>
+    Current Selections and Records
+   </p>
+  </b>
+  <p>
+   The current selection does not change.  If
+   <code>
+    selRecNum
+   </code>
+   is a valid number (from 1 to the number of records in the current selection), the current record becomes record number
+   <code>
+    selRecNum
+   </code>
+   of the selection.
+  </p>
+ </body>
+</html>

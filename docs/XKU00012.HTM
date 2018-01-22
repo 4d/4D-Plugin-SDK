@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84573.HTM">
+      About the internal resource manager
+     </a>
+    </b>
+    <li>
+     <b>
+      <a href="CMU84572.HTM">
+       PA_CloseResfile
+      </a>
+     </b>
+     (resfile)
+     <li>
+      <b>
+       <a href="CMU84571.HTM">
+        PA_CountResourceKinds
+       </a>
+      </b>
+      (resfile) → long
+      <li>
+       <b>
+        <a href="CMU84570.HTM">
+         PA_CountResources
+        </a>
+       </b>
+       (resfile; kind) → long
+       <li>
+        <b>
+         <a href="CMU84569.HTM">
+          PA_CreateResFile
+         </a>
+        </b>
+        (fullPath) → short
+        <li>
+         <b>
+          <a href="CMU84568.HTM">
+           PA_CreateResource
+          </a>
+         </b>
+         (resFile; kind; resID; name; resData; dataSize) → short
+         <li>
+          <b>
+           <a href="CMU84567.HTM">
+            PA_CreateResourceFromHandle
+           </a>
+          </b>
+          (resFile; kind; id; name; resourceHandle) → short
+          <li>
+           <b>
+            <a href="CMU84566.HTM">
+             PA_DetachResource
+            </a>
+           </b>
+           (resFile; resourceHandle)
+           <li>
+            <b>
+             <a href="CMU84565.HTM">
+              PA_GetDatabaseResfile
+             </a>
+            </b>
+            → short
+            <li>
+             <b>
+              <a href="CMU84564.HTM">
+               PA_GetIndexedResource
+              </a>
+             </b>
+             (resfile; kind; index; data) → long
+             <li>
+              <b>
+               <a href="CMU84563.HTM">
+                PA_GetIndexedResourceKind
+               </a>
+              </b>
+              (resfile; index) → unsigned long
+              <li>
+               <b>
+                <a href="CMU84562.HTM">
+                 PA_GetResource
+                </a>
+               </b>
+               (resfile; kind; resID; resData) → long
+               <li>
+                <b>
+                 <a href="CMU84353.HTM">
+                  PA_ReleaseResource
+                 </a>
+                </b>
+                (resfile; kind; resID)
+                <li>
+                 <b>
+                  <a href="CMU84352.HTM">
+                   PA_ReleaseResourceHandle
+                  </a>
+                 </b>
+                 (resourceHandle; resfile)
+                 <li>
+                  <b>
+                   <a href="CMU84561.HTM">
+                    PA_GetResourceHandle
+                   </a>
+                  </b>
+                  (resfile; kind; resID) → PA_Handle
+                  <li>
+                   <b>
+                    <a href="CMU84560.HTM">
+                     PA_GetResourceIDList
+                    </a>
+                   </b>
+                   (resFile; kind; IDlist) → long
+                   <li>
+                    <b>
+                     <a href="CMU84559.HTM">
+                      PA_GetResourceKindList
+                     </a>
+                    </b>
+                    (resFile; kindList) → long
+                    <li>
+                     <b>
+                      <a href="CMU84558.HTM">
+                       PA_GetResourceName
+                      </a>
+                     </b>
+                     (resFile; kind; resID; name)
+                     <li>
+                      <b>
+                       <a href="CMU84557.HTM">
+                        PA_GetResourceNameList
+                       </a>
+                      </b>
+                      (resFile; kind; nameList) → long
+                      <li>
+                       <b>
+                        <a href="CMU84556.HTM">
+                         PA_GetResourceSize
+                        </a>
+                       </b>
+                       (resFile; kind; resID) → long
+                       <li>
+                        <b>
+                         <a href="CMU84555.HTM">
+                          PA_GetResourceTimeStamp
+                         </a>
+                        </b>
+                        (resFile; kind; resID) → long
+                        <li>
+                         <b>
+                          <a href="CMU84554.HTM">
+                           PA_GetUniqueResID
+                          </a>
+                         </b>
+                         (resFile; kind) → short
+                         <li>
+                          <b>
+                           <a href="CMU84553.HTM">
+                            PA_LockResource
+                           </a>
+                          </b>
+                          (resfile; kind; resID) → char
+                          <li>
+                           <b>
+                            <a href="CMU84552.HTM">
+                             PA_LockResourceHandle
+                            </a>
+                           </b>
+                           (resfile; rHandle)
+                           <li>
+                            <b>
+                             <a href="CMU84551.HTM">
+                              PA_OpenResFile
+                             </a>
+                            </b>
+                            (fullPath) → short
+                            <li>
+                             <b>
+                              <a href="CMU84351.HTM">
+                               PA_UseResFile
+                              </a>
+                             </b>
+                             (resfile)
+                             <li>
+                              <b>
+                               <a href="CMU84550.HTM">
+                                PA_RemoveResourceByID
+                               </a>
+                              </b>
+                              (resFile; kind; resID)
+                              <li>
+                               <b>
+                                <a href="CMU84549.HTM">
+                                 PA_RemoveResourceByName
+                                </a>
+                               </b>
+                               (resfile; kind; resName)
+                               <li>
+                                <b>
+                                 <a href="CMU84548.HTM">
+                                  PA_SetResource
+                                 </a>
+                                </b>
+                                (resfile; kind; resID; newData; dataSize)
+                                <li>
+                                 <b>
+                                  <a href="CMU84547.HTM">
+                                   PA_SetResourceName
+                                  </a>
+                                 </b>
+                                 (resFile; kind; resID; newName)
+                                 <li>
+                                  <b>
+                                   <a href="CMU84546.HTM">
+                                    PA_UnlockResource
+                                   </a>
+                                  </b>
+                                  (resfile; kind; id)
+                                  <li>
+                                   <b>
+                                    <a href="CMU84545.HTM">
+                                     PA_UnlockResourceHandle
+                                    </a>
+                                   </b>
+                                   (resfile; resHandle)
+                                   <li>
+                                    <b>
+                                     <a href="CMU84544.HTM">
+                                      PA_UpdateResFile
+                                     </a>
+                                    </b>
+                                    (resfile)
+                                    <li>
+                                     <b>
+                                      <a href="CMU84479.HTM">
+                                       PA_WriteResourceHandle
+                                      </a>
+                                     </b>
+                                     (resFile; resHandle)
+                                    </li>
+                                   </li>
+                                  </li>
+                                 </li>
+                                </li>
+                               </li>
+                              </li>
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+  <script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   try {
+var pageTracker = _gat._getTracker("UA-121440-11");
+pageTracker._trackPageview();
+} catch(err) {}
+  </script>
+ </body>
+</html>

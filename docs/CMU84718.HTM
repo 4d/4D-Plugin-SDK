@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CreateVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CreateVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 11
+  </p>
+  <hr/>
+  <p>
+   PA_CreateVariable (varKind; stringSize) → PA_Variable
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      varKind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_VariableKind
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind of the variable to create
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      stringSize
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of a string variable
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Variable of appropriate kind
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_CreateVariable
+    </font>
+   </code>
+   creates and initializes a variable of the appropriate kind and returns it.
+  </p>
+  <p>
+   Pass the kind of variable you want to create in the
+   <code>
+    varKind
+   </code>
+   parameter. If you create a string variable, pass the length of the string in
+   <code>
+    stringSize
+   </code>
+   . For all other kinds, the
+   <code>
+    stringSize
+   </code>
+   parameter is ignored.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_CreateVariable
+    </font>
+   </p>
+  </code>
+  initializes the variable at its default value (0 for numerics, empty string, null date, 0 size BLOB, zero element array) and takes care of every memory allocation needed by some specific kinds (arrays, BLOBs)
+ </body>
+</html>
+<p>
+ The different kinds of variables are listed in an enumeration in the PublicType.h header file:
+</p>
+// --------------------------------------------------------------------------------
+// 4D Application expression and variable types
+// --------------------------------------------------------------------------------
+
+typedef enum
+{														
+  eVK_Real	      = 1,   // Variable declared using C_REAL
+  eVK_Date	      = 4,   // Variable declared using C_DATE
+  eVK_Undefined	      = 5,   // Undefined variable
+  eVK_Boolean	      = 6,   // variable declared using C_BOOLEAN
+  eVK_Integer	      = 8,   // variable declared using C_INTEGER
+  eVK_Longint	      = 9,   // Variable declared using C_LONGINT
+  eVK_Picture	      = 10,  // Variable declared using C_PICTURE
+  eVK_Time	      = 11,  // Variable declared using C_TIME
+  eVK_ArrayOfArray    = 13,  // Any two-dimensional array
+  eVK_ArrayReal	      = 14,  // One dimension array declared using ARRAY REAL
+  eVK_ArrayInteger    = 15,  // One dimension array declared using ARRAY INTEGER
+  eVK_ArrayLongint    = 16,  // One dimension array declared using ARRAY LONGINT
+  eVK_ArrayDate	      = 17,  // One dimension array declared using ARRAY DATE
+  eVK_ArrayPicture    = 19,  // One dimension array declared using ARRAY PICTURE
+  eVK_ArrayPointer    = 20,  // One dimension array declared using ARRAY POINTER
+  eVK_ArrayBoolean    = 22,  // One dimension array declared using ARRAY BOOLEAN
+  eVK_Pointer	      = 23,  // Variable declared using C_POINTER
+  eVK_Blob	      = 30,  // Variable declared using C_BLOB
+  eVK_Unistring	      = 33,  // Variable declared using C_STRING or C_TEXT
+  eVK_ArrayUnicode    = 34   // One Dimension array declared using ARRAY STRING or ARRAY TEXT
+} PA_VariableKind;
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Create  variables .
+</p>
+<p>
+</p>
+<pre><code>   PA_Variable   aLong, aPicture, aTextArray;
+ 
+   aLong = PA_CreateVariable(eVK_Longint, 0);
+   aPicture = PA_CreateVariable(eVK_Picture, 0);
+   aTextArray = PA_CreateVariable(eVK_ArrayText, 0);
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ Every PA_GetxxxVariable, Every PA_SetxxxVariable,
+ <a href="CMU84850.HTM">
+  PA_VariableKind
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+keeps the last error that occurred
+<u>
+ before
+</u>
+calling
+<code>
+ <font color="#CF0000">
+  PA_CreateVariable
+ </font>
+</code>
+.

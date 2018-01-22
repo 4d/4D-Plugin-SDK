@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <h3 align="CENTER">
+   <a href="XKALPUSA.HTM">
+    A
+   </a>
+   <a href="XKALPUSB.HTM">
+    B
+   </a>
+   <a href="XKALPUSC.HTM">
+    C
+   </a>
+   <a href="XKALPUSD.HTM">
+    D
+   </a>
+   <a href="XKALPUSE.HTM">
+    E
+   </a>
+   <a href="XKALPUSF.HTM">
+    F
+   </a>
+   <a href="XKALPUSG.HTM">
+    G
+   </a>
+   H
+   <a href="XKALPUSI.HTM">
+    I
+   </a>
+   J
+   <a href="XKALPUSK.HTM">
+    K
+   </a>
+   <a href="XKALPUSL.HTM">
+    L
+   </a>
+   <a href="XKALPUSM.HTM">
+    M
+   </a>
+   <a href="XKALPUSN.HTM">
+    N
+   </a>
+   <a href="XKALPUSO.HTM">
+    O
+   </a>
+   <a href="XKALPUSP.HTM">
+    P
+   </a>
+   <a href="XKALPUSQ.HTM">
+    Q
+   </a>
+   R
+   <a href="XKALPUSS.HTM">
+    S
+   </a>
+   <a href="XKALPUST.HTM">
+    T
+   </a>
+   <a href="XKALPUSU.HTM">
+    U
+   </a>
+   <a href="XKALPUSV.HTM">
+    V
+   </a>
+   <a href="XKALPUSW.HTM">
+    W
+   </a>
+   X
+   <a href="XKALPUSY.HTM">
+    Y
+   </a>
+   Z
+  </h3>
+  <br/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84800.HTM">
+      PA_ReadOnly
+     </a>
+    </b>
+    (tableNum)
+    <li>
+     <b>
+      <a href="CMU84801.HTM">
+       PA_ReadWrite
+      </a>
+     </b>
+     (tableNum)
+     <li>
+      <b>
+       <a href="CMU84865.HTM">
+        PA_ReadWriteBlock
+       </a>
+      </b>
+      <li>
+       <b>
+        <a href="CMU84575.HTM">
+         PA_ReceiveDataFromServer
+        </a>
+       </b>
+       (pluginRef; dataRef; dataKind; data) → long
+       <li>
+        <b>
+         <a href="CMU84579.HTM">
+          PA_ReceiveDocumentFromServer
+         </a>
+        </b>
+        (docName; data) → long
+        <li>
+         <b>
+          <a href="CMU84897.HTM">
+           PA_RecordNumber
+          </a>
+         </b>
+         (tableNum)
+         <li>
+          <b>
+           <a href="CMU84879.HTM">
+            PA_RecordsInSelection
+           </a>
+          </b>
+          (tableNum) → long
+          <li>
+           <b>
+            <a href="CMU84869.HTM">
+             PA_Rect
+            </a>
+           </b>
+           <li>
+            <b>
+             <a href="CMU84524.HTM">
+              PA_RedrawWindow
+             </a>
+            </b>
+            <li>
+             <b>
+              <a href="CMU84797.HTM">
+               PA_RelateMany
+              </a>
+             </b>
+             (tableNum)
+             <li>
+              <b>
+               <a href="CMU84359.HTM">
+                PA_RelateManySelection
+               </a>
+              </b>
+              (manyTable; manyField)
+              <li>
+               <b>
+                <a href="CMU84798.HTM">
+                 PA_RelateOne
+                </a>
+               </b>
+               (tableNum)
+               <li>
+                <b>
+                 <a href="CMU84362.HTM">
+                  PA_RelateOneSelection
+                 </a>
+                </b>
+                (manyTable; oneTable)
+                <li>
+                 <b>
+                  <a href="CMU84353.HTM">
+                   PA_ReleaseResource
+                  </a>
+                 </b>
+                 (resfile; kind; resID)
+                 <li>
+                  <b>
+                   <a href="CMU84352.HTM">
+                    PA_ReleaseResourceHandle
+                   </a>
+                  </b>
+                  (resourceHandle; resfile)
+                  <li>
+                   <b>
+                    <a href="CMU84550.HTM">
+                     PA_RemoveResourceByID
+                    </a>
+                   </b>
+                   (resFile; kind; resID)
+                   <li>
+                    <b>
+                     <a href="CMU84549.HTM">
+                      PA_RemoveResourceByName
+                     </a>
+                    </b>
+                    (resfile; kind; resName)
+                    <li>
+                     <b>
+                      <a href="CMU84722.HTM">
+                       PA_Request
+                      </a>
+                     </b>
+                     (message; value; okButton; cancelButton) → char
+                     <li>
+                      <b>
+                       <a href="CMU84339.HTM">
+                        PA_RequestRedraw
+                       </a>
+                      </b>
+                      (params)
+                      <li>
+                       <b>
+                        <a href="CMU84690.HTM">
+                         PA_ResizeArray
+                        </a>
+                       </b>
+                       (array; newNb)
+                       <li>
+                        <b>
+                         <a href="CMU84595.HTM">
+                          PA_ReturnBlob
+                         </a>
+                        </b>
+                        (params; blob; len)
+                        <li>
+                         <b>
+                          <a href="CMU84590.HTM">
+                           PA_ReturnBlobHandle
+                          </a>
+                         </b>
+                         (params; hblob)
+                         <li>
+                          <b>
+                           <a href="CMU84593.HTM">
+                            PA_ReturnDate
+                           </a>
+                          </b>
+                          (params; day; month; year)
+                          <li>
+                           <b>
+                            <a href="CMU84598.HTM">
+                             PA_ReturnDouble
+                            </a>
+                           </b>
+                           (params; value)
+                           <li>
+                            <b>
+                             <a href="CMU84599.HTM">
+                              PA_ReturnLong
+                             </a>
+                            </b>
+                            (params; value)
+                            <li>
+                             <b>
+                              <a href="CMU84594.HTM">
+                               PA_ReturnPicture
+                              </a>
+                             </b>
+                             (params; pnewPicture; pictSize; info)
+                             <li>
+                              <b>
+                               <a href="CMU84606.HTM">
+                                PA_ReturnPictureHandle
+                               </a>
+                              </b>
+                              (params; hPicture; info)
+                              <li>
+                               <b>
+                                <a href="CMU84600.HTM">
+                                 PA_ReturnShort
+                                </a>
+                               </b>
+                               (params; returnedString)
+                               <li>
+                                <b>
+                                 <a href="CMU84597.HTM">
+                                  PA_ReturnString
+                                 </a>
+                                </b>
+                                (params; resultString)
+                                <li>
+                                 <b>
+                                  <a href="CMU84596.HTM">
+                                   PA_ReturnText
+                                  </a>
+                                 </b>
+                                 (params; text; len)
+                                 <li>
+                                  <b>
+                                   <a href="CMU84592.HTM">
+                                    PA_ReturnTime
+                                   </a>
+                                  </b>
+                                  (params; value)
+                                 </li>
+                                </li>
+                               </li>
+                              </li>
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+ </body>
+</html>

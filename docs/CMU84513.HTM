@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_UpdateEditMenu
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_UpdateEditMenu
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_UpdateEditMenu (undoString; undo; redo; cut; copy; paste; clear; selectAll)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      undoString
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      New string for the "Undo" item
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      undo
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Enable (1)/Disable (0) the "Undo" item
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      redo
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Enable (1)/Disable (0) the "Redo" item
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      cut
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Enable (1)/Disable (0) the "Cut" item
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      copy
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Enable (1)/Disable (0) the "Copy" item
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      paste
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Enable (1)/Disable (0) the "Paste" item
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      clear
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Enable (1)/Disable (0) the "Clear" item
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      selectAll
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Enable (1)/Disable (0) the "Select all" item
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_UpdateEditMenu
+    </font>
+   </code>
+   forces the "Edit" menu to update, using the new values passed.
+  </p>
+  <p>
+   Pass the new value of the "Undo" item in
+   <code>
+    undoString
+   </code>
+   .
+  </p>
+  <p>
+   All other parameters change the state of each corresponding item. If the parameter is 0, the item is disabled; if it is 1, the item is enabled.
+  </p>
+  <p>
+   Depending on default settings or on previous calls to
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84816.HTM">
+     PA_UseCStrings
+    </a>
+   </code>
+   ,
+   <code>
+    undoString
+   </code>
+   must be a Pascal or an ANSI C string.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   This routine should only be used from within an external area. It can work without any area, but it was not written for this purpose and the developer should not use this routine outside an external area.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Disable all items of the Edit menu except "Undo".
+  </p>
+  <pre><code><table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+<tr><td align="LEFT" valign="TOP" width="22%"></td><td align="LEFT" valign="TOP" width="78%"></td></tr> 
+<tr><td align="LEFT" valign="TOP" width="22%"></td><td align="LEFT" valign="TOP" width="78%">PA_UpdateEditMenu("Undo disable this menu", 1, 0, 0, 0, 0, 0, 0) ;</td></tr> 
+</table> 
+ 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   No reference.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+
+// Execute some C code in Main Process. Function should be declared as void myFunc(void*)
+// It may be mandatory for some API call on MacOSX like calling system dialogs
+//
+void PA_RunInMainProcess        ( PA_RunInMainProcessProcPtr procPtr, void* parameters );
+//
+
+</body></html>

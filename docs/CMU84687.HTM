@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetArrayStringSize
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetArrayStringSize
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetArrayStringSize (array) → short
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      array
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Array to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Max size of one string element
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetArrayStringSize
+    </font>
+   </code>
+   returns the maximum size that an element of the string array
+   <code>
+    array
+   </code>
+   can have.
+  </p>
+  <p>
+   Knowing the maximum size of a string is useful in preventing memory overlap when writing a string in an array. If the source string is too long, you will need to cut it.
+  </p>
+  <p>
+   If
+   <code>
+    array
+   </code>
+   is not a
+   <code>
+    eVK_ArrayString
+   </code>
+   , the routine returns 0.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Truncate a string if it is too long to fit in the array.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void mySetArrayString( PA_Variable v, long idx, char *s )
+   {
+      short max = PA_GetArrayStringSize( v );
+      TruncateString( s, max );
+      PA_SetStringInArray( v, idx, s );
+   }
+ 
+   // generic truncation depending on String Settings
+   void TruncateString( char *s, short max)
+   {
+      if ( PA_GetUserStringKind() == eSK_CString )
+      {
+         if ( max &lt; strlen(s) )
+            strlen[max + 1] = 0;
+      }
+      else
+      {
+         if ( s[0] &gt; max )
+            s[0] = max;
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Dial4DFindArrayReal
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Dial4DFindArrayReal
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Dial4DFindArrayReal (dialog; variable; value; startPosition) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dialog
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Dial4D
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Dialog reference
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      variable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the variable to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      value
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      double
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Value to find in the array
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      startPosition
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Starting position of the search
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Index of the first matching value, or -1 if not found.
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Dial4DFindArrayReal
+    </font>
+   </code>
+   searches the first occurrence of the specified value and returns its index. If the value is not found, it returns -1. You can specify the starting position of the search so to be able to scan the full array.
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU00230.HTM">
+    Find in array
+   </a>
+   ,
+   <a href="CMU84376.HTM">
+    PA_Dial4DFindArrayLong
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

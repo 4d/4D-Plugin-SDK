@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+// ---------------------------------------------------------------
+// pictures manipulations 
+// ---------------------------------------------------------------
+
+//
+// creates a CGPDFDocumentRef on Mac, and a gdiplus::metafile* on Windows
+//
+
+void*        PA_CreateNativePictureForPrinting( PA_Picture picture );
+
+</body></html>

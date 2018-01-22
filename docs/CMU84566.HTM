@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_DetachResource
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_DetachResource
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_DetachResource (resFile; resourceHandle)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resFile
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      File reference number of the file to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resourceHandle
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Resource handle to detach
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_DetachResource
+    </font>
+   </code>
+   tells the Internal Resource Manager that the resource data referenced by
+   <code>
+    resHandle
+   </code>
+   (from file
+   <code>
+    resFile
+   </code>
+   ) is no longer a resource; thus, the plug-in can use it like a regular
+   <code>
+    PA_Handle
+   </code>
+   (
+   <code>
+    <a href="CMU84808.HTM">
+     PA_DisposeHandle
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84806.HTM">
+     PA_SetHandleSize
+    </a>
+   </code>
+   ).
+  </p>
+  <p>
+   If the resource does not exist or if
+   <code>
+    resFile
+   </code>
+   is an invalid file reference number, the routine leaves the data pointed to by
+   <code>
+    resData
+   </code>
+   unchanged, returns 0L, and
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   returns -5 ("Resource not found").
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Load a resource handle, and use it as a regular handle.
+  </p>
+  <p>
+  </p>
+  <pre><code>   PA_Handle   h;
+ 
+   h = PA_GetResourceHandle(resFile, 'TiTi', 128);
+   if(h)
+   {
+      PA_DetachResource(resFile, h);
+      if(PA_GetLastError() ==eER_NoErr)
+      {
+      /* OK, h points now to a "regular" data, we can use it as we want */
+         . . .
+         . . .
+         PA_DisposeHandle(h);
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84561.HTM">
+    PA_GetResourceHandle
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ReturnPicture
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ReturnPicture
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ReturnPicture (params; pnewPicture; pictSize; info)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pnewPicture
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the new picture data to be returned
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pictSize
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Picture size in bytes
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      info
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PictureInfo
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Picture info (Background)
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ReturnPicture
+    </font>
+   </code>
+   sets the returned value of the plug-in routine to the picture data pointed to by the handle
+   <code>
+    newPicture
+   </code>
+   . Pass the background-drawing 4D information in
+   <code>
+    info
+   </code>
+   .
+  </p>
+  <p>
+   After the call,
+   <code>
+    picture
+   </code>
+   still belongs to the plug-in, you can dispose of it.
+  </p>
+  <p>
+   Be sure that, with this call, the picture is duplicated to the result value. You can dispose of it once you have finished working with it. If you simply want to return the handle itself without duplicating the picture data, use
+   <code>
+    PA_ReturnPBlobHandle.
+   </code>
+  </p>
+ </body>
+</html>
+<p>
+ See
+ <code>
+  Create a new plug-in
+ </code>
+ for a description of returned values accessors.
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84821.HTM">
+  Create a new plugin
+ </a>
+ ,
+ <a href="CMU84606.HTM">
+  PA_ReturnPictureHandle
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ None.
+</p>

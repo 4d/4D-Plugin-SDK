@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SetGrowZone
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SetGrowZone
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SetGrowZone (growZoneHandler) → void *
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      growZoneHandler
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to a GrowZone routine
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The actual 4D Grow Zone Handler
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_SetGrowZone
+    </font>
+   </code>
+   tells 4D to use the routine
+   <code>
+    gzHandler
+   </code>
+   when it will be short of memory. It returns a pointer to the actual growZoneHandler routine in use.
+  </p>
+  <p>
+   The grow zone handler may only be called when 4th Dimension runs under Windows or MacOS 9.
+  </p>
+  <b>
+   <u>
+    <p>
+     The rules
+    </p>
+   </u>
+  </b>
+ </body>
+</html>
+for installing your GrowZone handler are as follows:
+<p>
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td align="LEFT" valign="TOP" width="7%">
+   </td>
+   <td align="LEFT" valign="TOP" width="93%">
+    -
+    <code>
+     PA_SetGrowZone
+    </code>
+    MUST be called during the initialization phase, when the PluginMain routine receives the
+    <code>
+     kInitPlugin
+    </code>
+    selector. Installing a GrowZone Handler at another moment may lead to a system crash once the memory manager needs room.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="7%">
+   </td>
+   <td align="LEFT" valign="TOP" width="93%">
+    - The code of the GrowZone Handler should dispose of all the memory it can and then it MUST call the original GrowZone Handler (it must keep it in a global variable) at the end of its code.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="7%">
+   </td>
+   <td align="LEFT" valign="TOP" width="93%">
+    -
+    <code>
+     PA_SetGrowZone
+    </code>
+    MUST be called during the de-initialization phase, when the PluginMain routine receives the
+    <code>
+     kDeinitPlugin
+    </code>
+    selector, restoring the previously saved 4D GrowZone Handler.
+   </td>
+  </tr>
+ </table>
+</p>
+<b>
+ <p>
+  IMPORTANT NOTE
+ </p>
+</b>
+<p>
+ In its GrowZoneHandler, the plug-in must never allocate memory  (malloc,
+ <code>
+  <a href="CMU84809.HTM">
+   PA_NewHandle
+  </a>
+ </code>
+ , GetResource, etc.), or do anything that could allocate memory (MessageBox under Windows, Alert under MacOS). It must only dispose of non-critical memory.
+</p>
+<b>
+ <p>
+  NOTE FOR WINDOWS PLUG-IN
+ </p>
+</b>
+<p>
+ This routine is usefull only if the plug-in uses Mac2Win (under Windows) to allocate memory or if the plug-in uses
+ <code>
+  <a href="CMU84809.HTM">
+   PA_NewHandle
+  </a>
+ </code>
+ . If the plug-in uses only the Windows Memory Manager, its handles will be swapped on disk by Windows when necessary.
+</p>
+<p>
+ This may be a good moment to clear any temporary buffer.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Installing and using a private grow zone handler:
+</p>
+<p>
+</p>
+<pre><code>   void   *gPreviousGrowZone;
+   
+   void MyGrowZoneHandler ()
+   {
+      // Dispose of the max memory the plug-in can
+      /* . . . DisposeHandle, ReleaseResource, free, GlobalFree . . .*/
+      // At least, call the original 4D GrowZoneHandler
+      gPreviousGrowZone();
+   }
+   
+   void PluginMain( long selector, PA_PluginParameters params )
+   {
+      switch ( selector )
+      {
+         case kInitPlugin :
+            // Install my GrowZoneHandler only at kInitPlugin time
+            gPreviousGrowZone = PA_SetGrowZone( MyGrowZoneHandler );
+            break;
+   
+         case kDeinitPlugin :
+         {
+            void*   ignore;
+            // restore previous GrowZoneHandler only at kDeinitPlugin time
+            ignore = PA_SetGrowZone( gPreviousGrowZone );
+         }
+         break;
+      }
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ No reference.
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+always returns
+<code>
+ eER_NoErr
+</code>

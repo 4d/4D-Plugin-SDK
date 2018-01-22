@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Dial4DGetLong
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Dial4DGetLong
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Dial4DGetLong (dialog; variable) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dialog
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Dial4D
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Dialog reference
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      variable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the variable to access
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Dial4DGetLong
+    </font>
+   </code>
+   gets the value of a variable whose name is
+   <code>
+    variable
+   </code>
+   and returns its value as a long integer. This command is preferred over the
+   <code>
+    <a href="CMU84452.HTM">
+     PA_Dial4DGetVariable
+    </a>
+   </code>
+   call because it handles the type casting for the developer.
+  </p>
+  <p>
+   If this command is applied to an array, it will return the current element of the array.
+  </p>
+  <p>
+   By default,
+   <code>
+    variable
+   </code>
+   needs to be null terminated C string. If you previously call
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   you need to pass a Pascal string to the command.
+  </p>
+  <p>
+   By default,
+   <code>
+    varName
+   </code>
+   needs to use Macintosh characters set on Macintosh, and ANSI characters set under Windows. You can call
+   <code>
+    <a href="CMU84815.HTM">
+     PA_UseMacCharacters
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84814.HTM">
+     PA_UseAnsiCharacters
+    </a>
+   </code>
+   to specifically use Macintosh or ANSI characters.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Check the value of 3 radio buttons and return the one that is on.
+  </p>
+  <p>
+  </p>
+  <pre><code>   /* . . . previous code (PA_NewDialog, PA_OpenDialog, PA_ModalDialog, ...*/
+ 
+   if ( PA_Dial4DGetLong( dialog, "radio_1" ) == 1)
+      result = 1;
+   else if ( PA_Dial4DGetLong( dialog, "radio_2" ) == 1)
+      result = 2;
+   else if ( PA_Dial4DGetLong( dialog, "radio_3" ) == 1)
+      result = 3;
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84449.HTM">
+    PA_Dial4DSetLong
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

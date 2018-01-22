@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_OpenOrderBy
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_OpenOrderBy
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_OpenOrderBy (tNum) → PA_OrderByRef
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_OpenOrderBy
+    </font>
+   </code>
+   tells the API to prepare an
+   <code>
+    <a href="CMU00049.HTM">
+     Order By
+    </a>
+   </code>
+   sequence for the current selection of table
+   <code>
+    tNum
+   </code>
+   in the current process. After calling this routine, you will add sort criteria (fields and their ordering order) using
+   <code>
+    <a href="CMU84780.HTM">
+     PA_AddFieldToOrderBy
+    </a>
+   </code>
+   and then start the sorting by calling
+   <code>
+    <a href="CMU84779.HTM">
+     PA_CloseOrderBy
+    </a>
+   </code>
+   .
+  </p>
+  <code>
+   <p>
+    tNum
+   </p>
+  </code>
+  is the table which selection must by reordered.
+  <code>
+   PA_AddFieldToSelection
+  </code>
+  may include related fields, as in the
+  <code>
+   <a href="CMU00049.HTM">
+    ORDER BY
+   </a>
+  </code>
+  command.
+ </body>
+</html>
+<p>
+ To dispatch the standard "Order By" 4D dialog, use
+ <code>
+  <a href="CMU84719.HTM">
+   PA_OrderByDialog
+  </a>
+ </code>
+ .
+</p>
+<b>
+ <p>
+  Examples
+ </p>
+</b>
+<p>
+ (1) We want to sort this table(N°1)  by Command_Theme and Command_Name, ascending.
+</p>
+<pre><code>   // Prepare to sort Table N°1 ([Commands])
+      ref = PA_OpenOrderBy(1);
+   // Add [Commands]Theme_Name field, ascending.
+      PA_AddFieldToOrderBy(ref, 1, 3, 1);
+   // Add [Commands]Command_Name field, ascending.
+      PA_AddFieldToOrderBy(ref, 1, 2, 1);
+   // Sort
+      PA_CloseOrderBy(ref);
+   // Error check is done with PA_GetLastError();
+</code></pre>
+<p>
+ (2) Our structure is now this one, which is a bit more efficient :
+</p>
+<p>
+ [Commands] is table 1 and [Themes] is table 2. We want to sort [Commands] by Theme_Nams and Command_Name.
+</p>
+<p>
+</p>
+<pre><code>   // Prepare to sort
+      ref = PA_OpenOrderBy(1);
+   // Add [Themes]Theme_Name field, ascending.
+      PA_AddFieldToOrderBy(ref, 2, 2, 1);
+   // Add [Commands]Command_Name, ascending.
+      PA_AddFieldToOrderBy(ref, 1, 2, 1);
+   // Sort
+      PA_CloseOrderBy(ref);
+   // Error check is done with PA_GetLastError();
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84780.HTM">
+  PA_AddFieldToOrderBy
+ </a>
+ ,
+ <a href="CMU84779.HTM">
+  PA_CloseOrderBy
+ </a>
+ ,
+ <a href="CMU84782.HTM">
+  PA_OrderBy
+ </a>
+ ,
+ <a href="CMU84719.HTM">
+  PA_OrderByDialog
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+() keeps the last error that occurred
+<u>
+ before
+</u>
+calling the routine. If the table number is invalid, it is after the call to
+<code>
+ <a href="CMU84779.HTM">
+  PA_CloseOrderBy
+ </a>
+</code>
+that
+<code>
+ <a href="CMU84896.HTM">
+  PA_GetLastError
+ </a>
+</code>
+will return an error.

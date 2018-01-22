@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_DocumentExistOnServer
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_DocumentExistOnServer
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_DocumentExistOnServer (docName; fileType; fileCreator) → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      docName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the file to test
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fileType
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      4 bytes FileType of the file to test
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fileCreator
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      4 bytes FileCreator of the file to test
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 = The document exists. 0 = File not found
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   While running under 4D Client, the routine
+   <code>
+    <font color="#CF0000">
+     PA_DocumentExistOnServer
+    </font>
+   </code>
+   allows the 4D plug-in to test if a document located on the server machine exists and if the plug-in can access to it.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  :
+ </body>
+</html>
+<p>
+ This routine is available only with 4D Client. To detect if the 4D plug-in is running on 4D Client, use
+ <code>
+  <a href="CMU84887.HTM">
+   PA_Is4DClient
+  </a>
+ </code>
+ .
+</p>
+<p>
+ Before the call the 4D plug-in passes:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ The name, in
+ <code>
+  docName
+ </code>
+ , of the document to test. The 4D plug-in MUST pass the short name of the document, NOT the pathname to the document. The document will  be located in the same folder/directory than the structure.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ The File Type, in
+ <code>
+  fileType
+ </code>
+ , and File Creator in
+ <code>
+  fileCreator
+ </code>
+ , of the file to test. Under Windows, this information is mapped to the Windows file plug-ins declared within the database using the 4D command
+ <code>
+  <a href="CMU00366.HTM">
+   MAP FILE TYPES
+  </a>
+ </code>
+ or by a ExtW resource located in the .RSR file of a 4D plug-in available for the database.
+</p>
+<p>
+ After the call:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ If the document does not exist, the routine returns 0.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ If the document exists and the 4D plug-in can access it (*), the routine returns 1.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ If the document exists but cannot be not accessed (*), the routine returns 1 and the appropriate MacOS-based File Manager error code in
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ .
+</p>
+<p>
+ (*) This routine actually tries to open the document in read-write access (and then immediately close it if successful) in order to determine if the document can be accessed.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Try to avoid error before reading a document on the server.
+</p>
+<p>
+</p>
+<pre><code>   long WrapReceiveDocument(char *name, char *data)
+   {
+      if( PA_DocumentExistsOnServer(name) &amp;&amp; PA_GetLastError() == eER_NoErr) )
+      {
+         /* . . . read the doc . . . */
+      }
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84579.HTM">
+  PA_ReceiveDocumentFromServer
+ </a>
+ ,
+ <a href="CMU84578.HTM">
+  PA_SendDocumentToServer
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

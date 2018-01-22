@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_AddField
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_AddField
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_AddField (tableRef; fieldName; fieldKind; alphaLength)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableRef
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_TableRef
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      reference to the Table to create
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fieldName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      name of the field
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fieldKind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_FieldKind
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      field kind
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      alphaLength
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      length of the alpha field
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The
+   <code>
+    <font color="#CF0000">
+     PA_AddField
+    </font>
+   </code>
+   command adds a field to the specified table reference.
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   See
+   <code>
+    <a href="CMU84382.HTM">
+     PA_CreateTableRef
+    </a>
+   </code>
+   for a complete example.
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84372.HTM">
+    PA_CreateTable
+   </a>
+   ,
+   <a href="CMU84382.HTM">
+    PA_CreateTableRef
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    eER_TooManyFields
+   </p>
+  </code>
+  ,
+  <code>
+   eER_InvalidCreateTableRef
+  </code>
+ </body>
+</html>

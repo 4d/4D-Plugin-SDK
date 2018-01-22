@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+void   PA_CopyUnichars( 
+           PA_Unichar* source,
+           PA_Unichar* dest,
+           long maxbytesize );
+
+
+</body></html>

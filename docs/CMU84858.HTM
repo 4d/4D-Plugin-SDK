@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   4th Dimension Variables
+  </p>
+  <pre><code>typedef struct PA_Variable
+{
+   char   fType;
+   char   fFiller;
+   union
+   {
+      double   fReal;      // C_REAL variable
+      PA_Date   fDate;      // C_DATE variable
+      char   fBoolean;      // C_BOOLEAN variable
+      PA_Text   fText;      // C_TEXT variable
+      PA_Picture   fPicture;      // C_PICTURE variable
+      PA_Blob   fBlob;      // C_BLOB variable
+      long   fLongint;      // C_LONGINT variable
+      long   fTime;      // C_TIME variable
+      PA_String   fString;      // C_STRING variable
+      PA_Array   fArray;      // Any array
+   } uValue;
+} PA_Variable;
+</code></pre>
+ </body>
+</html>

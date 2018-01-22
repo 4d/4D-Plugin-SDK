@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_FindPackage
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_FindPackage
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_FindPackage (pluginID) → short
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pluginID
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      ID of the plug-in
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Package number in the plugin list.
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      0 if there is no plug-in with that ID.
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_FindPackage
+    </font>
+   </code>
+   returns the 4D internal number for the plug-in ID
+   <code>
+    pluginID
+   </code>
+   . If no plug-in has this ID,
+   <code>
+    <font color="#CF0000">
+     PA_FindPackage
+    </font>
+   </code>
+   returns 0.
+  </p>
+  <p>
+  </p>
+  <p>
+   At startup, 4D launches every plug-in found in the 4DX folders (4D folder and the structure folder) and stores them in an array. The number returned is the position of the wanted plug-in in the array. This number will be useful in obtaining more plug-in information using the
+   <code>
+    <a href="CMU84663.HTM">
+     PA_PackageInfo
+    </a>
+   </code>
+   function.
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   Several packages can have the same ID. The returned number is the number of the "first" one found by 4th Dimension.
+  </p>
+  <p>
+   Basically, this function is useful in checking if a 4D plug-in is present or not. DO NOT call this function during plug-in init event because the plug-in to check may be loaded after your plug-in, and in this case you will not see it. Call this function when needed in a function call.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   This routine checks if 4D Write (using ID 12000) is installed or not.
+  </p>
+  <p>
+  </p>
+  <pre><code> 
+   if ( 0 == PA_FindPackage( 12000 ) )
+   {
+      PA_Alert( "This plug-in needs 4D Write" );
+      gPluginCanRun = false;
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84663.HTM">
+    PA_PackageInfo
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

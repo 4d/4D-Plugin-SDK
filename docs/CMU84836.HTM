@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Quit4D
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Quit4D
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Quit4D
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   Calling
+   <code>
+    <font color="#CF0000">
+     PA_Quit4D
+    </font>
+   </code>
+   from a 4D Extension has the same effect as calling the 4D command
+   <code>
+    QUIT
+   </code>
+   <code>
+    4D
+   </code>
+   from a 4D Method.
+  </p>
+  <p>
+   The decision to quit 4th Dimension is usually made by the user.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Forced quit on fatal error:
+  </p>
+  <p>
+  </p>
+  <pre><code>   . . . some code . . .
+   aCriticalData = MyAllocateMemory( neededBufferSize );
+   if ( aCriticaldata == 0L )
+   {
+      //the allocation failed, but we absolutley needed it: time to quit...
+      MyErrorMessage("Please allocate more memory");
+      // Quit before crash
+      PA_Quit4D();
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   No reference.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

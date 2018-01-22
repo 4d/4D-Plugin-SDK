@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_KillProcess
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_KillProcess
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_KillProcess
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   Called at the very end of the source code implementing an external process, the routine
+   <code>
+    <font color="#CF0000">
+     PA_KillProcess
+    </font>
+   </code>
+   notifies the 4D scheduler that the external process is terminating.
+  </p>
+  <p>
+   I
+   <b>
+    MPORTANT NOTE
+   </b>
+  </p>
+ </body>
+</html>
+<code>
+ <p>
+  <font color="#CF0000">
+   PA_KillProcess
+  </font>
+ </p>
+</code>
+is NOT the equivalent of the
+<code>
+ <a href="CMU00156.HTM">
+  Abort
+ </a>
+</code>
+button of the Runtime Explorer.
+<p>
+ Calling this routine MUST be the last action performed by an external process that is terminating.
+</p>
+<p>
+ This call verifies that the 4D scheduler will be notified of the termination and will update its internal process table accordingly.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ See
+ <code>
+  <a href="CMU84462.HTM">
+   External processes
+  </a>
+ </code>
+ for an example of use.
+</p>
+<p>
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84751.HTM">
+  PA_NewProcess
+ </a>
+ ,
+ <a href="CMU84755.HTM">
+  PA_Yield
+ </a>
+ ,
+ <a href="CMU84754.HTM">
+  PA_YieldAbsolute
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+always returns
+<code>
+ eER_NoErr
+</code>

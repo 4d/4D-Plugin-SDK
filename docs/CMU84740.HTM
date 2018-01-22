@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   PA_ClosePrinterSession
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ClosePrinterSession
+    </font>
+   </code>
+   cancels the exclusive access to the PrintManager the 4D Plug-in has previously obtained with
+   <code>
+    <a href="CMU84741.HTM">
+     PA_OpenPrinterSession
+    </a>
+   </code>
+   or a successful call to
+   <code>
+    <a href="CMU84742.HTM">
+     PA_TryToOpenPrinterSession
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   A call to
+   <code>
+    <a href="CMU84741.HTM">
+     PA_OpenPrinterSession
+    </a>
+   </code>
+   ( or a successful call to
+   <code>
+    <a href="CMU84742.HTM">
+     PA_TryToOpenPrinterSession
+    </a>
+   </code>
+   ) must be counter-balanced by a call to
+   <code>
+    <font color="#CF0000">
+     PA_ClosePrinterSession
+    </font>
+   </code>
+   . Otherwise, the PrintManager will be unavailable to all the other processes until the end of the 4D work session.
+  </p>
+  <p>
+   On Macintosh, this routine calls internally PrClose, so you do not need to call it yourself.
+  </p>
+  <p>
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See
+   <code>
+    <a href="CMU84741.HTM">
+     PA_OpenPrinterSession
+    </a>
+   </code>
+   for an example.
+  </p>
+  <p>
+  </p>
+  <pre><code> 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84741.HTM">
+    PA_OpenPrinterSession
+   </a>
+   ,
+   <a href="CMU84742.HTM">
+    PA_TryToOpenPrinterSession
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

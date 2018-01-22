@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_AddFieldToOrderBy
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_AddFieldToOrderBy
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_AddFieldToOrderBy (orderByRef; tNum; fNum; oDirection)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      orderByRef
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_OrderByRef
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      OrderBy reference
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      oDirection
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Ordering direction
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_AddFieldToOrderBy
+    </font>
+   </code>
+   adds the field
+   <code>
+    fNum
+   </code>
+   of the table
+   <code>
+    tNum
+   </code>
+   to the sort criteria for the
+   <code>
+    <a href="CMU00049.HTM">
+     Order By
+    </a>
+   </code>
+   sequence, previously prepared by
+   <code>
+    <a href="CMU84781.HTM">
+     PA_OpenOrderBy
+    </a>
+   </code>
+   . The sequence must be closed with a call to
+   <code>
+    <a href="CMU84779.HTM">
+     PA_CLoseOrderBy
+    </a>
+   </code>
+   which launches the reorder.
+  </p>
+  <p>
+   The added field can belong to a related table of the main table (the one that is going to be reordered and whose number was given to
+   <code>
+    <a href="CMU84781.HTM">
+     PA_OpenOrderBy
+    </a>
+   </code>
+   ).
+  </p>
+  <p>
+   You can have up to 20 fields defined within the sort criteria. It is the developer's responsibility not to exceed this count. If
+   <code>
+    PA_AddToField
+   </code>
+   has already been called 20 times before calling
+   <code>
+    <a href="CMU84779.HTM">
+     PA_CloseOrderBy
+    </a>
+   </code>
+   , superfluous calls will be ignored.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See
+   <code>
+    <a href="CMU84781.HTM">
+     PA_OpenOrderBy
+    </a>
+   </code>
+   for an example of use
+  </p>
+  <p>
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84779.HTM">
+    PA_CloseOrderBy
+   </a>
+   ,
+   <a href="CMU84781.HTM">
+    PA_OpenOrderBy
+   </a>
+   ,
+   <a href="CMU84782.HTM">
+    PA_OrderBy
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  keeps the last error that occurred
+  <u>
+   before
+  </u>
+  calling the routine
+ </body>
+</html>

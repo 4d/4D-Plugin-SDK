@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>//
+
+void PA_GetPointerValueProperties ( 
+        PA_Pointer inPointer, 
+        PA_VariableKind* outKind, 
+        long* outStringLength,
+        long* outArraySize);
+
+//	
+</body></html>

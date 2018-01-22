@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+// ---------------------------------------------------------------
+// pictures manipulations 
+// ---------------------------------------------------------------
+PA_Unistring    PA_GetPictureData( PA_Picture picture, long index, PA_Handle handle );
+//
+</body></html>

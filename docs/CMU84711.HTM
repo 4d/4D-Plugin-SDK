@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPictureVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPictureVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetPictureVariable (aVariable; thePicture; pictInfo) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      aVariable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Variable to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      thePicture
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Data of the picture variable
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pictInfo
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PictureInfo *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Picture info
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Picture size in bytes
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetPictureVariable
+    </font>
+   </code>
+   puts the content of the variable
+   <code>
+    aVariable
+   </code>
+   in the data pointed to by
+   <code>
+    thePicture
+   </code>
+   and returns its size in bytes. In addition, it returns the picture info in
+   <code>
+    pictInfo
+   </code>
+   .
+  </p>
+  <p>
+   If
+   <code>
+    aVariable
+   </code>
+   has not the kind
+   <code>
+    eVK_Picture
+   </code>
+   , the routine returns 0 and
+   <code>
+    thePicture
+   </code>
+   and
+   <code>
+    pictInfo
+   </code>
+   are returned unchanged.
+  </p>
+  <p>
+   If the picture size is unknown, call the function a first time with
+   <code>
+    thePicture
+   </code>
+   equal to zero. The returned value will be the size of the needed buffer. Allocate the buffer and call the function again with the correct buffer.
+  </p>
+  <code>
+   <p>
+    thePicture
+   </p>
+  </code>
+  is a copy of the original. You can get just a handle to the picture by calling
+  <code>
+   <a href="CMU84710.HTM">
+    PA_GetPictureHandleVariable
+   </a>
+  </code>
+  .
+ </body>
+</html>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Get a picture variable.
+</p>
+<p>
+</p>
+<pre><code>   char            *thePict;
+   PA_PictureInfo   theInfo;
+   long            pictSize;
+ 
+   // First call the routine with a nil pointer to get the blob size
+      pictSize = PA_GetBlobVariable(aVariable, 0L, 0L);
+   // Then allocate the buffer
+      thePict = malloc(pictSize);
+   // If it is ok, get the picture (duplicate it, in fact)
+      pictSize = PA_GetBlobVariable(aVariable, thePict, &amp;theInfo);
+   // Work with it
+      /* . . . */
+   // Cleanup
+      free(thePict);
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84710.HTM">
+  PA_GetPictureHandleVariable
+ </a>
+ ,
+ <a href="CMU84813.HTM">
+  PA_PictureInfo
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+keeps the last error that occurred
+<u>
+ before
+</u>
+calling the routine.

@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+//
+// pass 0 to retainOnly to duplicate the picture into a new one, or 1 to just retain
+// the current picture
+//
+
+PA_Picture   PA_DuplicatePicture( PA_Picture picture, char retainOnly );
+
+
+</body></html>

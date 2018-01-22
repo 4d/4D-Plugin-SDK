@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// ---------------------------------------------------------------
+// Tables, fields, indexes & relations
+// This command allows you to create tables, fields, indexes and/or
+// relations using an xml definition.
+// ---------------------------------------------------------------
+
+void PA_CreateElementsFromXMLDefinition( PA_Unistring* xmlDefinition);
+</body></html>

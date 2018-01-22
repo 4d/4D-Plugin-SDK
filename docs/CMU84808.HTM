@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_DisposeHandle
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_DisposeHandle
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_DisposeHandle (handle)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      handle
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The handle to dispose
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_DisposeHandle
+    </font>
+   </code>
+   releases all storage allocated for handle, which becomes invalid.
+  </p>
+  <code>
+   <p>
+    handle
+   </p>
+  </code>
+  is a
+  <code>
+   PA_Handle
+  </code>
+  allocated by
+  <code>
+   <a href="CMU84809.HTM">
+    PA_NewHandle
+   </a>
+  </code>
+  .
+ </body>
+</html>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+</p>
+<pre><code>   Handle h;
+   h = PA_NewHandle( 256 );
+   if ( h )
+   {
+      /* do whatever you want with the handle */
+      PA_DisposeHandle( h );
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84809.HTM">
+  PA_NewHandle
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (not a valid handle, etc.).
+</p>

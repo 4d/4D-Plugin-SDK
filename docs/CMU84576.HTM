@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SendDataToServer
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SendDataToServer
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SendDataToServer (pluginRef; dataRef; dataKind; data; dataSize)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pluginRef
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      ID number of plug-in's server instance
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dataRef
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      ID number of data to be written
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dataKind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Type (4-byte OSType) of data to be written
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      data
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to data to be written
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dataSize
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Size of data to be written in bytes
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   Provided there is a running server instance of a 4D plug-in on the server machine, calling
+   <code>
+    <font color="#CF0000">
+     PA_SendDataToServer
+    </font>
+   </code>
+   allows a 4D plug-in, from a client machine, to send data to the server instance of that 4D plug-in package.
+  </p>
+  <p>
+   Before the call:
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   The 4D plug-in passes in
+   <code>
+    pluginRef
+   </code>
+   the ID number of the plug-in's server instance. This number is  the resource ID number of the 4BNX resource for this plug-in.
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   The 4D plug-in passes the type of data (4 byte OSType) and the data ID number the 4D plug-in is sending in
+   <code>
+    dataKind
+   </code>
+   and
+   <code>
+    dataRef
+   </code>
+   . These values can be whatever is required, using private conventions.
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   The 4D plug-in passes in
+   <code>
+    dataSize
+   </code>
+   the size in bytes of the data being sent.
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   The 4D plug-in passes in
+   <code>
+    data
+   </code>
+   a pointer to the data to be sent.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  :
+ </body>
+</html>
+<p>
+ For Macintosh or Windows+Altura users: if
+ <code>
+  data
+ </code>
+ is the master pointer of a handle, you must lock the handle before the call.
+</p>
+<p>
+ If you want to send the data of a
+ <code>
+  PA_Handle
+ </code>
+ , use the pointer returned by
+ <code>
+  <a href="CMU84805.HTM">
+   PA_LockHandle
+  </a>
+ </code>
+ before the call.
+</p>
+<b>
+ <p>
+  NOTE
+ </p>
+</b>
+:
+<p>
+ It is the 4D plug-in's responsibility of the to dispose of the data once the routine completed.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Send a picture parameter to the server. Assuming the plug-in expects that parameter 1 of the routine from within 4D is a picture.
+</p>
+<p>
+</p>
+<pre><code>   #define   kMY_PLUG_SERVERID   ((long)16789)
+   #define   kDATA_PICTUREKIND   'PICT'
+   #define   kDATA_TEXTKIND      'TEXT'
+   #define   kDATA_BIZARRE      '?¿?¿'
+ 
+   PA_Handle   h;
+   char      *ptr;
+   h = PA_GetPictureHandleParameter(params, 1);
+   ptr = PA_LockHandle(h);
+   PA_SendDataToServer(kMY_PLUG_SERVERID, 0x100, kDATA_PICTUREKIND, ptr, PA_GetHandleSize(h));
+   PA_UnlockHandle(h);
+   
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84575.HTM">
+  PA_ReceiveDataFromServer
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   4th Dimension Picture expression (basically the same as
+   <code>
+    <a href="CMU84860.HTM">
+     PA_Blob
+    </a>
+   </code>
+   )
+  </p>
+  <pre><code>typedef struct PA_Picture
+{
+   long      fSize;
+   PA_Handle      fHandle;
+} PA_Picture;</code></pre>
+  /*
+ a PA_Picture can contains various representation of the same picture
+ in different formats to ensure the best display depending on which
+ platform the picture is displayed,
+ or if the picture is displayed on screen or on printer
+
+ you can iterate throw those representations by incrementing index until
+ an error is returned the returned string will give informations about
+ the format of the picture (JPEG, PNG...) if you pass a NULL handle,
+ you are just collecting informations about the picture by examining
+ the returned string when you pass a valid handle allocated by PA_NewHandle,
+ the handle will be filled by the specific data of the picture, 
+ in the indexed picture format.
+
+*/
+ </body>
+</html>

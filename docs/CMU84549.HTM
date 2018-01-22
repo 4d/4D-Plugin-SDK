@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_RemoveResourceByName
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_RemoveResourceByName
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_RemoveResourceByName (resfile; kind; resName)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resfile
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      File reference number of the file to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      kind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind (4 Bytes type) of resource to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of resource to delete
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_RemoveResourceByName
+    </font>
+   </code>
+   removes the resource name
+   <code>
+    resName
+   </code>
+   of type
+   <code>
+    kind
+   </code>
+   from the file referenced by
+   <code>
+    resFile
+   </code>
+   .
+  </p>
+  <p>
+   If the resource does not exist or if
+   <code>
+    resFile
+   </code>
+   is an invalid file reference number, the routine does nothing and sets
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to -3.
+  </p>
+  <p>
+   If more than one resource in the file has the name
+   <code>
+    resName
+   </code>
+   , the routine removes the first one it finds. Note that the removed resource is not necessarily the oldest.
+  </p>
+  <p>
+   Depending on default settings or on previous calls to
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84816.HTM">
+     PA_UseCStrings
+    </a>
+   </code>
+   ,
+   <code>
+    resName
+   </code>
+   will be a Pascal or an ANSI C string.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Remove personal resource named "MySuperResource".
+  </p>
+  <p>
+  </p>
+  <pre><code>   #define kMyResourceKind   'PERS'
+   /* . . . */
+   PA_RemoveResourceByID(resFile, kMyResourceKind, "MySuperResource");
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84550.HTM">
+    PA_RemoveResourceByID
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

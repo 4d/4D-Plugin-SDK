@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SetAdvancedPropertiesEditable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SetAdvancedPropertiesEditable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SetAdvancedPropertiesEditable (params; editable)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      editable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 = Advanced properties are editable
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_SetAdvancedPropertiesEditable
+    </font>
+   </code>
+   lets 4th Dimension activate the
+   <b>
+    Edit...
+   </b>
+   button of the
+   <b>
+    Advanced Properties
+   </b>
+   field of an area, in the
+   <b>
+    Properties
+   </b>
+   palette, in the Form Editor.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_SetAdvancedPropertiesEditable
+    </font>
+   </p>
+  </code>
+  must be called only when AreaEvent is
+  <code>
+   eAE_ArePropertiesEditable
+  </code>
+  . At any other event,
+  <code>
+   <font color="#CF0000">
+    PA_SetAdvancedPropertiesEditable
+   </font>
+  </code>
+  does nothing and
+  <code>
+   <a href="CMU84896.HTM">
+    PA_GetLastError
+   </a>
+  </code>
+  returns
+  <code>
+   eER_BadEventCall
+  </code>
+  .
+ </body>
+</html>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ See the complete sample in
+ <code>
+  <a href="CMU84478.HTM">
+   Create and use an external area
+  </a>
+ </code>
+ .
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84478.HTM">
+  Create and use an external area
+ </a>
+ ,
+ <a href="CMU84356.HTM">
+  PA_GetAdvancedProperties
+ </a>
+ ,
+ <a href="CMU84480.HTM">
+  PA_GetAdvancedPropertiesToDispose
+ </a>
+ ,
+ <a href="CMU84481.HTM">
+  PA_SetAdvancedProperties
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (
+ <code>
+  eER_BadEventCall
+ </code>
+ ).
+</p>

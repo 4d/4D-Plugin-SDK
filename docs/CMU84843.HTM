@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetTrueTableNumber
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetTrueTableNumber
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetTrueTableNumber (trueNb) → short
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      trueNb
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      virtualNb
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   Given a virtual table number, the command
+   <code>
+    <font color="#CF0000">
+     PA_GetTrueTableNumber
+    </font>
+   </code>
+   returns the true table number. It is the number in the real structure, the one that is defined in the Design environment.
+  </p>
+  <p>
+   If you want to call API routines that use table numbers, be sure to switch between virtual/real structure if necessary, depending of what you want to do.
+  </p>
+  <p>
+   The virtual structure is used when the 4D commands
+   <code>
+    <a href="CMU00601.HTM">
+     SET TABLE TITLES
+    </a>
+   </code>
+   and
+   <code>
+    <a href="CMU00602.HTM">
+     SET FIELD TITLES
+    </a>
+   </code>
+   are called.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Using a hidden table and a visible table in the same block of code.
+  </p>
+  <p>
+  </p>
+  <pre><code>   short DoSomethingWithThisTable(short virtualTable)
+   {
+   // Each time an error occurs, we immediately call return with this error
+      short   trueTable;
+ 
+   // fVirtualIsOK is a global char variable, initialized at startup
+   // by calling PA_VirtualStructuredUsed
+      if(! fVirtualIsOK)
+         return MY_ERROR_VS;
+ 
+   // OK, virtual structure is supported, we can work
+   // First, get the number of the virtual table in real mode
+      trueTable = PA_GetTrueTableNumber(virtualTable);
+ 
+   // -------------- Start to work
+   // Load the current record of the specified table
+      PA_LoadRecord(trueTable);
+      if(PA_GetLastError())
+         return PA_GetLastError();
+   // if no error, load the record of my hidden table
+   // (for this sample, we defined in a macro kMY_SPECIAL_TABLE)
+      PA_LoadRecord(kMY_SPECIAL_TABLE)
+      if(PA_GetLastError())
+         return PA_GetLastError();
+   // OK, both records are loaded, do something with them
+      . . .
+ 
+      return PA_GetLastError();
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84841.HTM">
+    PA_GetVirtualTableNumber
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

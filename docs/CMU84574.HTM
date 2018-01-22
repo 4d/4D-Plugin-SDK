@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <b>
+   <u>
+    <p>
+     Network communication between the server and client instances of 4D plug-ins
+    </p>
+   </u>
+  </b>
+ </body>
+</html>
+<p>
+ Thanks to its Virtual Network layer and the Network Components, 4D Server is able to concurrently communicate with 4D Clients via different network protocols. All  4D Server internal communication services of are based on this architecture.
+</p>
+<p>
+ Two of these communications are made available to 4D plug-ins through the routines services
+ <code>
+  <a href="CMU84576.HTM">
+   PA_SendDataToServer
+  </a>
+ </code>
+ and
+ <code>
+  <a href="CMU84575.HTM">
+   PA_ReceiveDataFromServer
+  </a>
+ </code>
+ . These routines allow the 4D plug-in to exchange data between the server and client instances of the Plug-in.
+</p>
+<p>
+ Using these routines frees the developer from handling network issues. Requests are handled by the 4D Server Virtual Network layer and the Network Components. In other words, the 4D plug-in requests become part of the dialog between 4D Server and 4D Client.
+</p>
+<b>
+ <u>
+  <p>
+   The 4D Server READ DATA services
+  </p>
+ </u>
+</b>
+<p>
+ The routine
+ <code>
+  <a href="CMU84575.HTM">
+   PA_ReceiveDataFromServer
+  </a>
+ </code>
+ allows a 4D plug-in's client instance to request some data from a 4D plug-in's server instance. To do so, the 4D plug-in's client instance passes the following parameters to the
+ <code>
+  ReceiveDataFromServer
+ </code>
+ routine :
+</p>
+<p>
+ - The ID number of 4D plug-in's server instance
+</p>
+<p>
+ - The Requested Data ID number
+</p>
+<p>
+ - The Requested Data Type (4-byte OSType)
+</p>
+<p>
+ - A pointer to the buffer that will receive the data
+</p>
+<p>
+ When such a call is made from a 4D Client, 4D Server calls the server instance of the 4D plug-in whose ID number has been passed, if it exists, and set the selector value of the
+ <code>
+  PluginMain
+ </code>
+ routine of the plug-in's Server instance to
+ <code>
+  kReadOnServer
+ </code>
+ . The 4D plug-in's server instance is also passed the other parameters using a
+ <code>
+  ReadWriteBlock
+ </code>
+ data structure, defined in the header file "PublicTypes.h" as:
+</p>
+<pre><code>typedef struct PA_ReadWriteBlock
+{
+   unsigned long   fDataType;
+   short         fDataID;
+   long         fDataSize;
+   long         fPackID;
+   long         fProcessID;
+} PA_ReadWriteBlock;
+</code></pre>
+<p>
+ The 4D server plug-in instance receives a pointer to this structure in the field
+ <code>
+  fParameters
+ </code>
+ of the
+ <code>
+  PluginBlock
+ </code>
+ structure pointed to by the "usual"
+ <code>
+  PluginParameters
+ </code>
+ , in the
+ <code>
+  PluginMain
+ </code>
+ routine.
+</p>
+<p>
+ Upon receipt of this call, the 4D plug-in's server instance, depending on the type and ID of the requested data, decides whether to send data or not.
+</p>
+<p>
+ If data needs to be sent back, the 4D plug-in's server instance MUST:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Allocate a block of memory, copy the requested data into it, then pass a pointer to this block in the package
+ <code>
+  fResult
+ </code>
+ field (of the
+ <code>
+  PA_PluginBlock
+ </code>
+ structure). If you use a MacOS handle, you lock this handle and pass the master pointer of this handle.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Pass the length of this block in the field
+ <code>
+  fDataSize
+ </code>
+ of the
+ <code>
+  ReadWriteBlock
+ </code>
+ data structure.
+</p>
+<b>
+ <p>
+  IMPORTANT NOTE:
+ </p>
+</b>
+<p>
+ The memory block whose address is returned in
+ <code>
+  fResult
+ </code>
+ belongs to the 4D plug-in's server instance. Once the data have been sent over the network, 4D Server will call back the 4D plug-in's server instance with selector set to
+ <code>
+  kServerCleanUp
+ </code>
+ . At this point the 4D plug-in's server instance will be able to dispose of the block.
+</p>
+<p>
+ If NO data has to be sent back the 4D plug-in's server instance MUST:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Return 0L in the
+ <code>
+  fResult
+ </code>
+ .
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Pass 0 (zero) in the field
+ <code>
+  fDataSize
+ </code>
+ of the
+ <code>
+  ReadWriteBlock
+ </code>
+ data structure.
+</p>
+<p>
+ Once the 4D plug-in's server instance gives the control back to 4D Server, the network communication service starts sending the data (if any) to the 4D plug-in's client instance.
+</p>
+<p>
+ Once the data has been sent to the client, 4D Server calls back the 4D plug-in's server instance with opCode set to
+ <code>
+  kServerCleanUp
+ </code>
+ , passing a pointer to the
+ <code>
+  ReadWriteBlock
+ </code>
+ data structure in
+ <code>
+  fParameters
+ </code>
+ and the pointer to the data returned previously still in
+ <code>
+  fResult
+ </code>
+ . At this point the 4D plug-in's server instance can dispose of the data if no longer required.
+</p>
+<b>
+ <p>
+  IMPORTANT NOTE:
+ </p>
+</b>
+On the client side, the 4D plug-in waits for the network I/O completion. The routine
+<code>
+ <a href="CMU84575.HTM">
+  PA_ReceiveDataFromServer
+ </a>
+</code>
+returns control to the 4D plug-in when the data (if any) has been received. On the server side the 4D plug-in is called twice, once for providing the data to be sent back, once for optionally disposing of the data after it has been sent.
+<b>
+ <u>
+  <p>
+   4D Server WRITE DATA services
+  </p>
+ </u>
+</b>
+<p>
+ The routine
+ <code>
+  <a href="CMU84576.HTM">
+   PA_SendDataToServer
+  </a>
+ </code>
+ allows an 4D plug-in's client instance to send some data to an 4D plug-in's server instance. To do so, the 4D plug-in's client instance passes the following information to the
+ <code>
+  <a href="CMU84576.HTM">
+   PA_SendDataToServer
+  </a>
+ </code>
+ routine:
+</p>
+<p>
+ - The ID number of 4D plug-in's server instance
+</p>
+<p>
+ - The Requested Data ID number
+</p>
+<p>
+ - The Requested Data Type (4-byte OSType)
+</p>
+<p>
+ - A pointer to data to be written and its size
+</p>
+<p>
+ When such a call is made from a connected 4D Client, 4D Server calls the server instance of the 4D plug-in whose ID number has been passed, if the server instance exists, and call the plug-in with a selector value set to
+ <code>
+  kWriteOnServer
+ </code>
+ .
+</p>
+<p>
+ The 4D plug-in's server instance is also passed:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ a pointer to a
+ <code>
+  ReadWriteBlock
+ </code>
+ data structure in the parameter
+ <code>
+  fParameters
+ </code>
+ of the
+ <code>
+  PA_PluginBlock
+ </code>
+ structure (the one that is pointed to by a
+ <code>
+  PA_PluginParameters
+ </code>
+ in the
+ <code>
+  PluginMain
+ </code>
+ routine).
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ a pointer to the data that has been received in the
+ <code>
+  fResult
+ </code>
+ field of the
+ <code>
+  PA_PluginBlock
+ </code>
+ .
+</p>
+<b>
+ <p>
+  IMPORTANT NOTE:
+ </p>
+</b>
+The pointer passed in
+<code>
+ fResult
+</code>
+belongs to 4D Server. The 4D plug-in's server instance must copy the data if it intends to do something with it later on.
+<p>
+ Upon reception of this call the 4D plug-in's server instance, depending on the type and ID of the data, performs the appropriate actions.
+</p>
+<p>
+ Note that:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ The 4D plug-in can choose whatever values are needed for the type and the ID number of the data it reads or writes. These are private conventions.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ The 4D plug-in's server instance is fully responsive to the temporary or permanent, memory-based or disk-based storage handling of the data exchanged with the client instances of the 4D plug-in(s).
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ 4D Server does not interfere with the data, it simply insures the network transport of the data.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ The READ DATA and WRITE DATA services are Client/Server oriented. Client instances of 4D plug-in(s) can send requests to server instances of 4D plug-in(s). The reverse is NOT true. A 4D plug-in's server instance cannot send a request to any 4D plug-in's client instance.
+</p>
+<p>
+ Other considerations while executing the server instance of a 4D plug-in:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ The developer must be very careful while debugging code. If the server instance of a 4D plug-in crashes it will interrupt the work of all the users connected to the server.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Avoid the execution of time-consuming operations as these types of operations will slow down all users who are connected to the server.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Limit, as much as is possible, the exchange of large amounts of data through the READ DATA and WRITE DATA services. This will slow down the network activity for all users connected to the server.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Limit, as much as is possible, the implementation of user interface components. The main purpose of the server machine is to serve, not be used as work station.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Do NOT spend development resources and time developing 4D plug-ins running on the server machine whose purpose is to provide a 4D Server service that replicates functionality of 4th Dimension or 4D Client. Future versions of the 4D Client/Server architecture would most likely obsolete such 4D plug-ins.
+</p>
+<b>
+ <p>
+  Sample code using the Send/Data functions
+ </p>
+</b>
+<pre><code>/*
+   When the 4D Client plug-in instance wants to read some data,
+   It calls PA_GetDataFromServer with the appropriates parameters.
+   
+   As an example with the pre-defined constants of this sample,
+   to get a small icon form the server, the client use:
+   
+   char *icon;
+   buffer = malloc(SIZEOF_SMALL_ICON);
+   if(icon)
+   {
+      PA_GetDataFromServer(kSignature, kSmallIcon, kPICTType, icon);
+      // . . . deal with icon . . . 
+   }
+      
+   When the 4D Client plug-in instance wants to send some data to
+   the server, it calls PA_SendDataToServer:
+   // assuming icon is a regular pointer to the good data
+   PA_SendDataToServer(kSignature, kSmallIcon, kPICTType, icon, size);
+*/
+</code></pre>
+<pre><code>#include "4DPluginAPI.h"
+#include "PublicTypes.h"
+</code></pre>
+<pre><code>//   Constants:
+#define kSignature      ((long)16789)
+#define kPICTType   'PICT'
+   #define kSmallIcon   15000
+   #define kBigIcon   15001
+   
+#define kTEXTType   'TEXT'
+   #define kFullPath   15000
+   #define kPrefs      15001
+   
+#define kBLOB      'BLOB'
+   #define kBlob1   15000
+   #define kBlob2   15001
+</code></pre>
+<pre><code>void PluginMain(long selector, PluginParameters params)
+{
+   switch(selector)
+   {
+   // Initialization (both Client and server instances), server stuff
+      /* ... kInitPlugin...kServerInitPlugin...*/
+      
+   // A client send some data with PA_SendDataToServer
+      case kWriteOnServer:
+         GetFromClient(params);
+         break;
+   
+   // A client requests some data with PA_ReadDataOnServer
+      case kReadOnServer:
+         SendToClient((ReadWritePtr)params, result);
+         break;
+   
+   // The client has received the data: time to cleanup
+      case kServerCleanUp:
+         CleanServer(result);
+         break;
+</code></pre>
+<pre><code>   /*
+      case first_routine:
+         . . .
+         break;
+      
+      case second_routine:
+         . . .
+         break;
+   */
+   }
+}
+</code></pre>
+<pre><code>//   PA_SendDataToServer had been executed on the workstation:
+void GetFromClient(PluginParameters params)
+{
+   ReadWriteBlock *rwb;
+   char      *data;
+   
+   // Get the sent data info, and a pointer to the data itself
+   rwb = (ReadWriteBlock *) params-&gt;fParameters;
+   data = params-&gt;fResult;
+   
+// It may be useful to check that the received data
+// is really the one we expect (a magic number could
+// be add to all data, and checked here)
+   
+   //   So let's check which kind of data the client has sent
+   switch(rwb-&gt;fDataType)
+   {
+   // We are receiving a picture (icons in this sample)
+      case kPICTType:
+         switch(rwb-&gt;fDataID)
+         {
+            case kSmallIcon:
+               /* Do something for this kind of data *//
+               break;
+               
+            case kBigIcon:
+               /* Do something for this kind of data *//
+               break;
+         }
+         break;
+         
+   // We are receiving text (path, prefs)
+      case kTEXTType:
+         switch(rwb-&gt;fDataID)
+         {
+            case kFullPath:
+               /* Do something for this kind of data *//
+               break;
+               
+            case kPrefs:
+               /* Do something for this kind of data *//
+               break;
+               
+         }
+         break;
+   
+   // We are receiving special data
+      case kBLOB:
+         switch(rwb-&gt;fDataID)
+         {
+            case kBlob1:
+               /* Do something for this kind of data *//
+               break;
+               
+            case kBlob2:
+               /* Do something for this kind of data *//
+               break;
+               
+         }
+         break;
+   }
+}
+</code></pre>
+<pre><code>//   PA_ReceiveDataFromServer had been executed on the workstation:
+void SendToClient(PluginParameters params)
+{
+   OSErr   err;
+   SLONG   size;
+   char   *buffer;
+   
+   ReadWriteBlock      *rwb;
+   
+   // Get the requested data info
+   rwb = (ReadWriteBlock *) params-&gt;fParameters;
+   
+   //   Let's check what kind of data is requested by the client.
+   switch(rwb-&gt;fDataType)
+   {
+   // The client wants an icon
+      case kPICTType:
+         switch(rwb-&gt;fDataID)
+         {
+            case kSmallIcon:
+         //   Create the buffer we have to return:
+               size = SIZE_OF_SMALL_ICON;
+               buffer = malloc(size);
+               if(buffer)
+               {
+               /* . . . Fills buffer with the icon data . . . */
+                  *params-&gt;fResult = (long)buffer;
+                  rwb-&gt;fDataSize = size;
+               }
+               break;
+               
+            case kBigIcon:
+         //   Create the buffer we have to return:
+               size = SIZE_OF_BIG_ICON;
+               buffer = malloc(size);
+               if(buffer)
+               {
+               /* . . . Fills buffer with the icon data . . . */
+                  *params-&gt;fResult = (long)buffer;
+                  rwb-&gt;fDataSize = size;
+               }
+               break;
+         }
+         
+   // The client wants a text
+         case kTEXTType:
+            switch(rwb-&gt;fDataID)
+            {
+         /*
+            This is like kPICTType:
+               - switch the type of data (kFullPath, kPrefs)
+               - For each kind of data:
+                  Allocate a buffer
+                  fill it with the appropriate data
+                  set rwb-&gt;fDataSize to its size
+                  set *params-&gt;fResult to this buffer
+         */
+            }
+            break;
+   
+   // The client wants a special data
+         case kTEXTType:
+            switch(rwb-&gt;fDataID)
+            {
+         /*
+            This is like kPICTType:
+               - switch the type of data (kBlob1, kBlob2)
+               - For each kind of data:
+                  Allocate a buffer
+                  fill it with the appropriate data
+                  set rwb-&gt;fDataSize to its size
+                  set *params-&gt;fResult to this buffer
+         */
+            }
+            break;
+         
+      break;
+   } // switch(rwb-&gt;fDataType)
+</code></pre>
+<pre><code>}
+</code></pre>
+<pre><code>// The server has sent data to the client.
+// The client has received it, and 4D ask us to cleanup
+// memory if necessary (we could keep the data if we need it)
+void CleanServer(PluginParameters params)ResultPtr result)
+{
+   char    *data;
+</code></pre>
+<pre><code>   data = *params-&gt;fResult;
+   
+   if(data)
+   {
+      free(data);
+      *params-&gt;fResult = 0L;
+   }
+}
+</code></pre>

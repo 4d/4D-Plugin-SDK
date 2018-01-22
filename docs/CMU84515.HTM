@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GotoArea
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GotoArea
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GotoArea (variableName)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      variableName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the object that should get the focus
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GotoArea
+    </font>
+   </code>
+   is used to select the data entry variable
+   <code>
+    variableName
+   </code>
+   as the active area of the form. It is equivalent to the user's clicking on or tabbing into
+   <code>
+    variableName
+   </code>
+   <pre><code>.
+</code></pre>
+   <p>
+    This is like the
+    <code>
+     <a href="CMU00206.HTM">
+      GOTO AREA
+     </a>
+    </code>
+    4th Dimension command except that the routine cannot give the focus to fields.
+   </p>
+   <b>
+    <p>
+     NOTE
+    </p>
+   </b>
+   <p>
+    If
+    <code>
+     variableName
+    </code>
+    is not an existing object, the focus is "lost" and the user must click on a variable/field to get it again.
+   </p>
+   <b>
+    <p>
+     Example
+    </p>
+   </b>
+   <p>
+    Force user to enter a certain value in a variable.
+   </p>
+   <p>
+   </p>
+   <pre><code>   if(MyGetLongVariableValue("VAT") == 0) // Call PA_GetVariable and so on.
+   {
+      PA_Alert("You must set the value of the VAT before");
+      PA_GotoArea("VAT");
+   }
+</code></pre>
+   <b>
+    <p>
+     See Also
+    </p>
+   </b>
+   <p>
+    <a href="CMU00206.HTM">
+     GOTO AREA
+    </a>
+    .
+   </p>
+   <b>
+    <p>
+     Error Handling
+    </p>
+   </b>
+   <p>
+    None.
+   </p>
+  </p>
+ </body>
+</html>

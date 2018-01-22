@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_RecordsInSelection
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_RecordsInSelection
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_RecordsInSelection (tableNum) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Number of records in the current selection
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_RecordsInSelection
+    </font>
+   </code>
+   returns the number of records in the current selection of the Table number
+   <code>
+    tableNum
+   </code>
+   .
+  </p>
+  <p>
+   A 4D plug-in most typically uses
+   <code>
+    <font color="#CF0000">
+     PA_RecordsInSelection
+    </font>
+   </code>
+   after a query to determine the number of records return by the search command.
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   This routine does not use virtual structure
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Walking through a selection (no error checking here):
+  </p>
+  <p>
+  </p>
+  <pre><code>   void DoSomethingWithTheSelection (short tableNum)
+   {
+      register long   i;
+      
+   // Here, we do not want to activate the relations
+      PA_AutomaticRelation(0, 0);
+   // Loop for each record in the selection
+      for(i = 1; i &lt;= PA_RecordsInSelection(tableNum); i++)
+      {
+         PA_Yield();   // Give time to other tasks
+   // load record i of the selection
+         PA_GoToSelectedRecord(tableNum, i);
+      /*
+         Do something with the record.
+         PA_SaveRecord can be called here.
+      */
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84878.HTM">
+    PA_GotoSelectedRecord
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (invalid table number)
+  </p>
+ </body>
+</html>

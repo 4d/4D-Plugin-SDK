@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ConvertStrings
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ConvertStrings
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ConvertStrings (string1; kind1; charset1; string2; kind2; charset2)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      string1
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The string to convert
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      kind1
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_StringKind
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind of string1 (Pascal or C)
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      charset1
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_CharSet
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      CharsSet used (Macintosh or ANSI) in string1
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      string2
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The converted string
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      kind2
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_StringKind
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind of string2 (Pascal or C)
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      charset2
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_CharSet
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      CharsSet used (Macintosh or ANSI) in string2
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ConvertStrings
+    </font>
+   </code>
+   converts the string
+   <code>
+    string1
+   </code>
+   to the string
+   <code>
+    string2
+   </code>
+   .
+  </p>
+  <p>
+   Pass in
+   <code>
+    string1
+   </code>
+   the string to convert, in
+   <code>
+    kind1
+   </code>
+   its kind and in
+   <code>
+    charset1
+   </code>
+   its chars set.
+   <code>
+    Kinds
+   </code>
+   and
+   <code>
+    CharsSets
+   </code>
+   are enums, defined in PublicTypes.h as:
+  </p>
+  <pre><code>typedef enum
+{
+   eSK_CString = 0,
+   eSK_PString
+} PA_StringKind;
+ 
+typedef enum
+{
+   eCS_Macintosh = 0,
+   eCS_Ansi,
+   eCS_Unicode
+} PA_CharSet;</code></pre>
+  <p>
+   Pass a buffer to the converted string in
+   <code>
+    string2
+   </code>
+   , and in the format and charset types you want
+   <code>
+    string1
+   </code>
+   to be converted
+   <code>
+    kind2
+   </code>
+   and
+   <code>
+    charset2
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Pascal to C string conversion using the default characters settings.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void MyPascalToCString(char *pStr, char *cStr)
+   {
+   #if VERSIONMAC
+      PA_ConvertStrings(pStr, eSK_PString, eCS_Macintosh,
+                        cStr, eSK_CString, eCS_Macintosh);
+   #endif
+   #if VERSIONWIN
+      PA_ConvertStrings(pStr, eSK_PString, eCS_Ansi, 
+                        cStr, eSK_CString, eCS_Ansi);
+   #endif
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   No reference.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetAreaEvent
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetAreaEvent
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetAreaEvent (params) → PA_AreaEvent
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_AreaEvent
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Type of event in the area
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetAreaEvent
+    </font>
+   </code>
+   returns the event that 4D passes to the area. The code of an external area usually consists of a switch of the event kind received.
+  </p>
+  <code>
+   <p>
+    params
+   </p>
+  </code>
+  is the
+  <code>
+   PA_PluginParameters
+  </code>
+  the plug-in received in its
+  <code>
+   PluginMain
+  </code>
+  routine.
+ </body>
+</html>
+<p>
+ Currently, the events that an area can receive are stored in an enum, in the "PublicTypes.h" header file. Refer to the Plug-in Area Tutorial for more information.
+</p>
+<pre><code>typedef enum
+{
+   eAE_Idle   = 0,
+   eAE_MouseDown   = 1,
+   eAE_MouseUp   = 2,
+   eAE_KeyDown   = 3,
+   eAE_KeyUp   = 4,
+   eAE_AutoKey   = 5,
+   eAE_Update   = 6,
+   eAE_InitArea   = 16,
+   eAE_Deinit   = 17,
+   aAE_Cursor   = 18,
+   eAE_IsFocusable   = 20,
+   eAE_Select   = 21,
+   eAE_Deselect   = 22,
+   eAE_Scroll   = 25,
+   eAE_DesignUpdate   = 26,
+   eAE_TestPrintSize   = 27,
+   eAE_GetPrintSize   = 28,
+   eAE_PrintBand   = 29,
+   eAE_UndoCommand   = 30,
+   eAE_CutCommand   = 31,
+   eAE_CopyCommand   = 32,
+   eAE_PasteCommand   = 33,
+   eAE_ClearCommand   = 34,
+   eAE_SelectAllCommand   = 35,
+   eAE_SelectDeselect   = 38,
+   eAE_UpdateEditCommands   = 43, 
+   eAE_LoadRecord   = 69,
+   eAE_SaveRecord   = 70,
+   eAE_AllowDrop   = 80,
+   eAE_Drag   = 81,
+   eAE_Drop   = 82,
+   eAE_EditAdvancedProperties   = 600,
+   eAE_DisposeAdvancedProperties   = 601,
+   eAE_Init   = 602,
+   eAE_AreAdvancedPropertiesEditable   = 603,
+   eAE_GetMenuIcon   = 604,
+   eAE_DesignInit   = 605
+} PA_AreaEvent;
+</code></pre>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Tell the user he clicked in the area
+</p>
+<p>
+</p>
+<pre><code>   if(PA_GetAreaEvent(params) == eAE_MouseDown)
+   {
+      PA_Alert("You press the mouse in MY area");
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84478.HTM">
+  Create and use an external area
+ </a>
+ ,
+ <a href="CMU84499.HTM">
+  PA_GetAreaName
+ </a>
+ ,
+ <a href="CMU84500.HTM">
+  PA_GetAreaRect
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+keeps the last error that occurred
+<u>
+ before
+</u>
+calling the routine.

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SetBooleanVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SetBooleanVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SetBooleanVariable (aVariable; newValue)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      aVariable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the variable to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      newValue
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      New value for aVariable
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_SetBooleanVariable
+    </font>
+   </code>
+   sets the content of the boolean variable pointed to by
+   <code>
+    aVariable
+   </code>
+   to
+   <code>
+    newValue
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   The kind of variable pointed to by
+   <code>
+    aVariable
+   </code>
+   is set to
+   <code>
+    eVK_Boolean
+   </code>
+   by the routine, even if it was not its previous kind.
+  </p>
+  <p>
+   Make sure that you do not change 4D variable kinds (using
+   <code>
+    <a href="CMU84717.HTM">
+     PA_GetVariable
+    </a>
+   </code>
+   ), especially in compiled mode.
+  </p>
+  <p>
+   Remember that True = 1 and False = 0 for 4D.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Use macros for True and False.
+  </p>
+  <p>
+  </p>
+  <pre><code>   #define FALSE4D   ((char)0)
+   #define TRUE4D   ((char)1)
+   void mySetBooleanVariable(PA_Variable *v, char b)
+   {
+      if(PA_GetVariableKind(*v) == eVK_Boolean)
+      {
+         if(b)
+            PA_SetBooleanVariable(v,TRUE4D);
+         else
+            PA_SetBooleanVariable(v,FALSE4D);
+      }
+   }   
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   No reference.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  keeps the last error that occurred
+  <u>
+   before
+  </u>
+  calling the routine.
+ </body>
+</html>

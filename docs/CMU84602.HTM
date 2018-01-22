@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SetBlobHandleParameter
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SetBlobHandleParameter
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SetBlobHandleParameter (params; index; hblob)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      index
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Index of the parameter in params
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      hblob
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      New BLOB handle
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_SetBlobHandleParameter
+    </font>
+   </code>
+   sets the value of the BLOB handle in the
+   <code>
+    index
+   </code>
+   parameter in
+   <code>
+    params
+   </code>
+   to
+   <code>
+    hblob
+   </code>
+   .
+  </p>
+  <p>
+   Pass a handle to the new data in
+   <code>
+    hblob
+   </code>
+   . This can be useful if you no longer need to use the handle as it will not be duplicated, as
+   <code>
+    PA_SertBlobParameter
+   </code>
+   does (which can lead to memory problems for "larger" BLOBs).
+  </p>
+  <p>
+   The previous BLOB in the parameter is disposed.
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   After the call, the handle belongs to 4D; you must never dispose of it.
+  </p>
+  <p>
+   See
+   <code>
+    Create a new plug-in
+   </code>
+   for a description of parameter accessors.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  :
+ </body>
+</html>
+<p>
+ The first parameter starts at
+ <code>
+  index
+ </code>
+ 1
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Set a BLOB parameter.
+</p>
+<p>
+</p>
+<pre><code>   PA_Handle   h;
+   h = PA_NewHandle(kMY_BUFFER_SIZE);
+   /* . . . fill the handle . . .*/
+   PA_SetBlobHandleParameter(params, index, h);
+   // Never call DisposeHandle(h) from now.
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84821.HTM">
+  Create a new plugin
+ </a>
+ ,
+ <a href="CMU84608.HTM">
+  PA_SetBlobParameter
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ None.
+</p>

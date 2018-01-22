@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetAdvancedProperties
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetAdvancedProperties
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetAdvancedProperties (properties; dataSize) → void*
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      properties
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginProperties
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Properties of the Plugin Area
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dataSize
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the size of the data
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to Advanced Properties buffer
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_GetAdvancedProperties
+    </font>
+   </code>
+   returns a pointer to the buffer that holds the Advanced Properties of the Area. The properties parameter can be accessed using the
+   <pre><code>PA_GetPluginProperties</code></pre>
+   command.
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <pre><code>   // read Advanced Properties parameters
+   PA_GetPluginProperties( params, &amp;props );
+   advancedProperties = PA_GetAdvancedProperties( &amp;props, &amp;advancedPropertiesSize );
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84478.HTM">
+    Create and use an external area
+   </a>
+   ,
+   <a href="CMU84480.HTM">
+    PA_GetAdvancedPropertiesToDispose
+   </a>
+   ,
+   <a href="CMU84498.HTM">
+    PA_GetPluginProperties
+   </a>
+   ,
+   <a href="CMU84481.HTM">
+    PA_SetAdvancedProperties
+   </a>
+   .
+  </p>
+ </body>
+</html>

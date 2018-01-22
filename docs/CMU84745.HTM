@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPointerKind
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPointerKind
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetPointerKind (pointer) → PA_PointerKind
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pointer
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Pointer
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The pointer to analyze
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PointerKind
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Type of pointer
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetPointerKind
+    </font>
+   </code>
+   returns the type of
+   <code>
+    pointer
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   4th Dimension pointers are not standard C pointers. They are structures that tell 4D to what kind of data they point: a table, a field, or a variable (process or interprocess).
+  </p>
+  <p>
+   Since a pointer does not have the same definition and use in interpreted and compiled mode, the developer should use the accessors of this API.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_GetPointerKind
+    </font>
+   </p>
+  </code>
+  returns a value of type
+  <code>
+   <a href="CMU84465.HTM">
+    PA_PointerKind
+   </a>
+  </code>
+  , defined in PublicTypes.h as:
+ </body>
+</html>
+<pre><code>typedef enum
+{
+   ePK_InvalidPointer   = -1,
+   ePK_PointerToVariable   = 0,
+   ePK_PointerToTable,
+   ePK_PointerToField
+} PA_PointerKind;
+</code></pre>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Check the kind of a pointer before using the object pointed to by it:
+</p>
+<p>
+</p>
+<pre><code>   short DoWithTablePointer (PA_Pointer thePtr)
+   {
+      /* . . . code . . . */
+      if ( PA_GetPointerKind( thePtr ) != ePK_PointerToTable )
+         return kMY_ERROR_BAD_4DPOINTER;
+      /* . . . code . . . */
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84746.HTM">
+  PA_GetPointerParameter
+ </a>
+ ,
+ <a href="CMU84744.HTM">
+  PA_GetPointerTableField
+ </a>
+ ,
+ <a href="CMU84341.HTM">
+  PA_GetPointerValue
+ </a>
+ ,
+ <a href="CMU84743.HTM">
+  PA_GetPointerVariable
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  PA_GetLastError()
+ </p>
+</code>
+keeps the last error that occurred
+<u>
+ before
+</u>
+calling the routine.

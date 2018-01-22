@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_MethodNames
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_MethodNames
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_MethodNames (arraynames; arrayIDs)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      arraynames
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      variable to an array of strings that holds names
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      arrayIDs
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      variable to an array of integers that holds IDs
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The
+   <code>
+    <font color="#CF0000">
+     PA_MethodNames
+    </font>
+   </code>
+   command fills to PA_Variable structure with two arrays that holds the names and the ID of all the project methods of the database.
+  </p>
+  <p>
+   You can then use the
+   <code>
+    <a href="CMU84679.HTM">
+     PA_GetStringInArray
+    </a>
+   </code>
+   and the
+   <code>
+    <a href="CMU84686.HTM">
+     PA_GetIntegerInArray
+    </a>
+   </code>
+   to read the name or the ID of a particular method. To avoid memory leaks, call
+   <code>
+    <a href="CMU84692.HTM">
+     PA_ClearVariable
+    </a>
+   </code>
+   on both variables to release the memory they use.
+  </p>
+  <p>
+   You can pass a NULL value as one of the parameters if you only need to read names or IDs.
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   fills an array parameter with the method names.
+  </p>
+  <pre><code><table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="93%"></td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="93%">PA_Variable arraynames;</td></tr> 
+</table> 
+ 
+ 
+   PA_GetMethodNames( &amp;arraynames, 0 );
+   PA_SetVariableParameter( params, 1, arraynames, 1 );
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84686.HTM">
+    PA_GetIntegerInArray
+   </a>
+   ,
+   <a href="CMU84679.HTM">
+    PA_GetStringInArray
+   </a>
+   .
+  </p>
+ </body>
+</html>

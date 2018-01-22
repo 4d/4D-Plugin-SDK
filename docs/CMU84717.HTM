@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetVariable (vName) → PA_Variable
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      vName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of process/interprocess variable to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Value of the variable whose name is vName
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetVariable
+    </font>
+   </code>
+   returns the content of the variable whose name is passed in
+   <code>
+    vName
+   </code>
+   .
+  </p>
+  <p>
+   To get the content of an interprocess variable,
+   <code>
+    vName
+   </code>
+   must start by the interprocess sign ("&lt;&gt;" under Windows or the diamond under MacOS)
+  </p>
+  <p>
+   If the 4D Plug-in attempts to access a non-existing variable, the
+   <code>
+    <a href="CMU84858.HTM">
+     PA_Variable
+    </a>
+   </code>
+   data structure returned with a type =
+   <code>
+    eVK_Undefined
+   </code>
+   (this can be get by the
+   <code>
+    <a href="CMU84716.HTM">
+     PA_GetVariableKind
+    </a>
+   </code>
+   routine) and
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   returns
+   <code>
+    eER_NoErr
+   </code>
+   .
+  </p>
+  <p>
+   <b>
+    NOTE:
+   </b>
+  </p>
+  <p>
+   Depending on default settings and on previous calls to
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84816.HTM">
+     PA_UseCStrings
+    </a>
+   </code>
+   ,
+   <code>
+    vName
+   </code>
+   must be a Pascal or a C string.
+  </p>
+  <p>
+   <b>
+    IMPORTANT NOTE:
+   </b>
+  </p>
+  <p>
+   For Text, Picture, and BLOB, remember that the handles to the data of those structures belong to 4th Dimension. Do not dispose of it or call
+   <code>
+    <a href="CMU84692.HTM">
+     PA_ClearVariable
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   (1) Checking the kind of a variable.
+  </p>
+  <p>
+  </p>
+  <pre><code>   // We are waiting for a longint variable
+   PA_Variable   aVar;
+   aVar = PA_GetVariable("\pmyPrivateVar"); // using Pstring on a Mac
+   if(PA_GetVariableKind(aVar) != eVK_Longint)
+      PA_Alert("\pI expected a long integer variable");
+ 
+</code></pre>
+  <p>
+   (2) Get the value of a system variable (OK).
+  </p>
+  <pre><code>   char GetOK ()
+   {
+      PA_Variable   ok;
+      char      okValue = (char) 0;
+      
+   // Note that in interpreted mode, OK may be undefined
+      ok = PA_GetVariable("OK"); // using C strings on Windows
+ 
+      if(PA_GetLastError() == eER_NoErr)
+      {
+         switch (PA_GetVariableKind(ok))
+         {
+            case eVK_Real:
+               if (PA_GetRealVariable(ok) != 0.0 )
+                  okValue = 1;
+               break;
+            case eVK_Longint:
+               if (PA_GetLongintVariable(ok) != 0)
+                  okValue = 1;
+               break;
+         }
+      }
+      
+      return okValue;
+   }
+ 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84716.HTM">
+    PA_GetVariableKind
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred.
+  </p>
+ </body>
+</html>

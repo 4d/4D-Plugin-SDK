@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Get4Dfolder
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Get4Dfolder
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Get4Dfolder (FolderPath)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      FolderPath
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to a char buffer
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Full path of the 4D Folder
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Get4Dfolder
+    </font>
+   </code>
+   returns the long name of the 4D folder just as the 4D Command
+   <code>
+    4D Folder
+   </code>
+   does.
+  </p>
+  <p>
+   By using the
+   <code>
+    <font color="#CF0000">
+     PA_Get4Dfolder
+    </font>
+   </code>
+   routine to get the actual pathname to that folder, you ensure that your code will work on any platform running any localized system -- even if the path or the name of this folder changes in future versions of 4th Dimension.
+  </p>
+  <p>
+   See the
+   <code>
+    4D Folder
+   </code>
+   documentation for more information about the folder content.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Creating a full path to a private preference file in the 4D Folder.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void CreatePrefFilePath ( char *pref )
+   {
+      // Get the path to the 4D Folder
+      PA_Get4DFolder( pref );
+      // Concat. the pref file name
+      strcat( pref, "MyPuginPref" );
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   4D Folder.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

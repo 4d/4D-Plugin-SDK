@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetUpdateHDC
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetUpdateHDC
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetUpdateHDC  → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      HDC where the area can draw
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetUpdateHDC
+    </font>
+   </code>
+   works only under Windows. It returns the current Device Context that the plug-in can use to draw whatever it wants.
+  </p>
+  <p>
+   This routine must be called when
+   <code>
+    <a href="CMU84501.HTM">
+     PA_GetAreaEvent
+    </a>
+   </code>
+   returns
+   <code>
+    eAE_Update
+   </code>
+   . Otherwise, it does nothing and
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   returns
+   <code>
+    eER_BadEventCall
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Sample Drawing in the Design environment. Assuming the usual dispatch in PluginMain has been done. PluginMain calls the area main routine.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void DoArea (PA_PluginParameters params)
+   {
+      PA_AreaEvent   event = PA_GetAreaEvent(params);
+      switch(event)
+      {
+         /* . . . */
+         case eAE_DesignUpdate :
+         {
+            HDC      hdc;
+            PA_Rect   rect;
+      // tell 4D we will draw ourselves
+            PA_CustomizeDesignMode( params );
+      // get the HDC and the area rect
+            hdc = (HDC) PA_GetUpdateHDC();
+            rect = PA_GetAreaRect( params );
+      // Paint something
+            AreaPaint( hdc, rect );
+         }
+            break;
+   }
+ 
+   void AreaPaint( HDC hdc, PA_Rect parect )
+   {
+      HBRUSH   hbrush;
+      RECT      rect;
+      HGDIOBJ   old;
+   // We need to use a Windows RECT
+      rect.left   = parect.fLeft;
+      rect.top    = parect.fTop;
+      rect.right  = parect.fRight;
+      rect.bottom = parect.fBottom;
+ 
+      hbrush = CreateSolidBrush( 0 );
+   
+      old = SelectObject( hdc, hbrush );
+      FrameRect( hdc, &amp;rect, hbrush ); // Sample Drawing
+      SelectObject( hdc, old );
+   }
+ 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84478.HTM">
+    Create and use an external area
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (
+   <code>
+    eER_BadEventCall
+   </code>
+   )
+  </p>
+ </body>
+</html>

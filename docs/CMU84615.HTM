@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetExportFilter
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetExportFilter
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetExportFilter  → char *
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the export ASCII map
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetExportFilter
+    </font>
+   </code>
+   returns pointer to the export ASCII map for the current process.
+  </p>
+  <p>
+   This pointer is valid until the process is terminated. There is one export ASCII map per process and, by default, when a new process is started, the export ASCII map is set to the default map (each character is exported as is).
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE:
+   </p>
+  </b>
+  <p>
+   The pointer returned is a pointer to a private data structure maintained for each process; therefore, do not attempt any Memory Manager calls using this pointer.
+  </p>
+  <p>
+   The export ASCII map for a process is used by 4th Dimension to:
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   Export a selection of records using
+   <code>
+    <a href="CMU00167.HTM">
+     EXPORT TEXT
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU00084.HTM">
+     EXPORT DIF
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU00085.HTM">
+     EXPORT SYLK
+    </a>
+   </code>
+   ,
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   Print a Quick Report using a direct ASCII printer driver,
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   Write or send characters to a document or a serial port using
+   <code>
+    <a href="CMU00103.HTM">
+     SEND PACKET
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   This routine has two purposes:
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   The 4D Plug-in has text export capabilities and the export ASCII map is required inside those routines. To obtain the filtered ASCII code of a character, get the value of the corresponding element from the array. If, for example, the filtered ASCII code of the character whose ASCII code is 225 is needed, read the value of the 225th element from the table whose pointer is returned.
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   The 4D Plug-in provides export ASCII map editing capabilities. To map a character to another, simply change the value of the corresponding element.
+  </p>
+  <p>
+   For example, to change the filtered ASCII code of the character whose ASCII code is 225, change the value of the 225th element from the table whose pointer is returned.
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84614.HTM">
+    PA_GetImportFilter
+   </a>
+   ,
+   <a href="CMU00205.HTM">
+    USE ASCII MAP
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   An external process is a process that belongs to a plug-in, launched by the routine
+   <code>
+    <a href="CMU84751.HTM">
+     PA_NewProcess
+    </a>
+   </code>
+   . The plug-in runs the process, takes care of its windows and menus, and interacts with the user if necessary. An external process can be invisible and/or can have no user interface.
+  </p>
+  <p>
+   4th Dimension allows the plug-in the possibility of creating this external process and then send it all  events belonging to it if it has a user interface.
+  </p>
+  <p>
+   To create and manage an external process, the plug-in must execute the following instructions:
+  </p>
+  <p>
+   - Create the process, by calling PA_
+   <code>
+    NewProcess
+   </code>
+   , passing it a stack size, a process name, and a pointer to the routine that runs the process.
+  </p>
+  <p>
+   - Run the process code(see below) and interact with the user if necessary.
+  </p>
+  <p>
+   - Repetitively call
+   <code>
+    <a href="CMU84749.HTM">
+     PA_IsProcessDying
+    </a>
+   </code>
+   to know if it must terminate
+  </p>
+  <p>
+   - Call
+   <code>
+    <a href="CMU84761.HTM">
+     PA_KillProcess
+    </a>
+   </code>
+   when it has finished its work.
+  </p>
+  <p>
+   While writing an external process, the following actions MUST be performed:
+  </p>
+  <p>
+   · The routine of the process code has no parameters.
+  </p>
+  <p>
+   · At the very beginning of the code,
+   <code>
+    <a href="CMU84754.HTM">
+     PA_YieldAbsolute
+    </a>
+   </code>
+   must be called. This allows the 4D scheduler to correctly handle the addition of the external process to its internal process table.
+  </p>
+  <p>
+   · If, as it should be, the external process includes a waiting loop :
+  </p>
+  <p>
+   - it must call
+   <code>
+    <a href="CMU84461.HTM">
+     PA_WaitNextEvent
+    </a>
+   </code>
+   to get the current event returned (such as
+   <code>
+    mouseDown
+   </code>
+   ). On Macintosh, it can use
+   <code>
+    GetNextEvent
+   </code>
+   instead, but for cross-platform purpose it is recommended to use
+   <code>
+    <a href="CMU84461.HTM">
+     PA_WaitNextEvent
+    </a>
+   </code>
+   . Calling
+   <code>
+    <a href="CMU84461.HTM">
+     PA_WaitNextEvent
+    </a>
+   </code>
+   is important, since this routine gives the hand to 4D for other processes. If the main loop of the external process never calls it, other processes will be frozen.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   If the external process has no user interface, the main loop can either call
+   <code>
+    <a href="CMU84461.HTM">
+     PA_WaitNextEvent
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84755.HTM">
+     PA_Yield
+    </a>
+   </code>
+   to give time for other running processes.
+  </p>
+  <p>
+   - it must call
+   <code>
+    <a href="CMU84749.HTM">
+     PA_IsProcessDying
+    </a>
+   </code>
+   to see if the user or 4th Dimension wants the process to abort. If
+   <code>
+    <a href="CMU84749.HTM">
+     PA_IsProcessDying
+    </a>
+   </code>
+   returns 1, the external process must exit the event loop as soon as possible and call
+   <code>
+    <a href="CMU84761.HTM">
+     PA_KillProcess
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   Executing external processes receives  1 in
+   <code>
+    <a href="CMU84749.HTM">
+     PA_IsProcessDying
+    </a>
+   </code>
+   when:
+  </p>
+  <p>
+   · The user chooses
+   <b>
+    Quit
+   </b>
+   ,
+   <b>
+    New Database
+   </b>
+   , or
+   <b>
+    Open
+   </b>
+   <b>
+    Database
+   </b>
+   from the 4D File menu
+  </p>
+  <p>
+   · The 4D command
+   <code>
+    <a href="CMU00291.HTM">
+     QUIT 4D
+    </a>
+   </code>
+   is called,
+  </p>
+  <p>
+   · The routine
+   <code>
+    PA_Quit
+   </code>
+   is called.
+  </p>
+  <p>
+   · The user chooses "Abort" in the Runtime Explorer
+  </p>
+  <p>
+   The 4D scheduler takes control and tells the external processes that it must terminate. It waits for a predetermined period of time and then forcefully aborts any remaining executing processes . If the process is terminated because the database is closed, it is at this point that 4D will call the
+   <code>
+    kDeInitPlugin
+   </code>
+   or
+   <code>
+    kServerDeInitPlugin
+   </code>
+   phase of the 4D plug-in.
+  </p>
+  <p>
+   · Calling
+   <code>
+    <a href="CMU84749.HTM">
+     PA_IsProcessDying
+    </a>
+   </code>
+   MUST be the last action performed by a terminating external process. This assures that the 4D scheduler is notified of the termination and updates its internal process table according.
+  </p>
+  <p>
+   · The 4D plug-in should NOT call any API's routine that would trigger the execution of a 4D command that displays a 4D Form from within the external process, such as
+   <code>
+    <a href="CMU00056.HTM">
+     ADD RECORD
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU00105.HTM">
+     DISPLAY RECORD
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU00059.HTM">
+     DISPLAY SELECTION
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU00204.HTM">
+     MODIFY SELECTION
+    </a>
+   </code>
+   and
+   <code>
+    <a href="CMU00040.HTM">
+     DIALOG
+    </a>
+   </code>
+   . Executing one of these 4th Dimension commands from within the external process may lead to a System Error.
+  </p>
+  <p>
+   · If the external process has user interface components it may open as many windows as is required. These windows belong to the external process and form the external processes' window list. For the cases where user interfaces components are required it is the responsibility of the 4D plug-in to set up its own menu bars. 4th Dimension automatically inserts the Apple (MacOS) or Help (Windows) menus.
+  </p>
+  <p>
+   The external process can be made invisible. For example, another process applying the 4D command
+   <code>
+    <a href="CMU00324.HTM">
+     HIDE PROCESS
+    </a>
+   </code>
+   to the 4D plug-in process is valid. In such cases the visible field of the 4D plug-in window records are set to FALSE.
+  </p>
+  <p>
+   There are differences between Macintosh and Windows windows, as everyone knows.
+  </p>
+  <p>
+   If the programmer uses Macintosh routines and Altura Mac2Win to run its code under Windows, he can write its code "as usual" : the plug-in creates its windows and processes them into an event loop.
+  </p>
+  <p>
+   A Windows programmer can create and use windows and their WinProc as usual. 4th Dimension will give the correct event to winProc of the window that receive it. But remember that, as the windows were created from an external process and belongs to it, and not to 4th Dimension, this process must run the event loop that calls
+   <code>
+    <a href="CMU84461.HTM">
+     PA_WaitNextEvent
+    </a>
+   </code>
+   and
+   <code>
+    <a href="CMU84749.HTM">
+     PA_IsProcessDying
+    </a>
+   </code>
+   to keep a "reference" to the code that created the windows. There is no problem to add a winProc to the window by calling the Windows routine
+   <code>
+    SetWindowLong
+   </code>
+   .
+  </p>
+  <p>
+   Under MacOS, most of the Windows Manager routines are patched by 4th Dimension. In order to comply with the 4D multitasking environment the 4D plug-in must use them rather than directly accessing data structures or System Globals. For instance, the MacOS toolbox function call
+   <code>
+    FrontWindow
+   </code>
+   will return the front most window within the 4D plug-ins external process. Meanwhile, the System Global WindowList ($9D6) will contain a pointer to the front most window for the entire 4th Dimension active session.
+  </p>
+  <p>
+   In both cases, the programmer can use
+   <code>
+    <a href="CMU84514.HTM">
+     PA_NewWindow
+    </a>
+   </code>
+   to create the window on both platform and insure that it will be added to the 4th Dimension application windows list.
+  </p>
+  <b>
+   <p>
+    Summary of an external process code
+   </p>
+  </b>
+  <pre><code>// No parameter, no returned value
+// -----------------------------
+void TheProcess (void)
+{
+   PA_Event      event;
+   char      done = 0;
+</code></pre>
+  <pre><code>// Tell 4D the process exists and runs
+// -----------------------------------
+   PA_Yield()
+</code></pre>
+  <pre><code>   while(!done)
+   {
+// Check if the loop must end
+// --------------------------
+      done = PA_IsProcessDying();
+</code></pre>
+  <pre><code>// Get event/Give hand to other processes
+// --------------------------------------
+      if( !done &amp;&amp; PA_WaitNextEvent( &amp;event ) )
+      {
+         /* . . . */
+      }
+// NOTE PA_Yield() can be used instead of PA_WaitNextEvent if there is no user interface
+</code></pre>
+  <pre><code>   }
+// Last line of the code : tell 4D we we've finish
+   PA_KillProcess();
+</code></pre>
+  <pre><code>}
+</code></pre>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Sample code of an external process without user interface. This is the skeleton of what should be done by every external process. In this sample, the external process loops until there are 8 processes running.
+  </p>
+  <p>
+   To run this process, the plug-in simply calls:
+  </p>
+  <pre><code>   aProcessNum = PA_NewProcess(SampleProcess, (32 * 1024), "Sample process")
+</code></pre>
+  <p>
+   Here is the code of the process :
+  </p>
+  <p>
+  </p>
+  <pre><code>/*   =======================================================
+   Code of the sample external process
+   
+   This external process loops until 8 processes at least are running.
+   
+   During its loop, the process MUST call PA_WaitNextEvent to give
+   hand to the 4D scheduler. If it does not that, the user will think
+   its machine has froze.
+   Note that :
+      - PA_WaitNextEvent will always returns 0 when there is no
+        user interface
+      - You can call PA_Yield instead (we use this in this sample)
+   ======================================================= */
+void SampleProcess ()
+{
+   char      done = (char) 0;
+   long      myProcess;
+</code></pre>
+  <pre><code>// ______________________________________ 1st "must be done"
+// Tell 4D to schedule us
+   PA_YieldAbsolute();
+</code></pre>
+  <pre><code>// Get our number
+   myProcess = PA_GetCurrentProcessNumber();
+   
+// Main loop
+   while (!done)
+   {
+// ______________________________________ 2nd "must be done"
+// Give time to other processes
+      PA_Yield();
+</code></pre>
+  <pre><code>// Sleep a little bit, say 5 seconds
+      PA_PutProcessToSleep(myProcess, 300);
+// If we are dying, leave the loop
+// ______________________________________ 3rd "must be done"
+      done = PA_IsProcessDying();
+      if(!done)
+      {
+         if( PA_CountActiveProcess() &gt;= 8 )
+         {
+            PA_Alert("There are at least 8 active processes");
+            done = (char) 1;
+         }
+      }
+   }
+</code></pre>
+  <pre><code>// ______________________________________ 4th "must be done"
+// At least, tell 4D we have finish
+   PA_KillProcess();
+   
+} /* SampleProcess */
+</code></pre>
+ </body>
+</html>

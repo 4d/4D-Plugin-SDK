@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84748.HTM">
+      PA_GetBlobHandleParameter
+     </a>
+    </b>
+    (params; index) → PA_Handle
+    <li>
+     <b>
+      <a href="CMU84827.HTM">
+       PA_GetBlobParameter
+      </a>
+     </b>
+     (params; index; blob) → long
+     <li>
+      <b>
+       <a href="CMU84825.HTM">
+        PA_GetDateParameter
+       </a>
+      </b>
+      (params; index; day; month; year)
+      <li>
+       <b>
+        <a href="CMU84830.HTM">
+         PA_GetDoubleParameter
+        </a>
+       </b>
+       (params; index) → double
+       <li>
+        <b>
+         <a href="CMU84831.HTM">
+          PA_GetLongParameter
+         </a>
+        </b>
+        (params; index) → long
+        <li>
+         <b>
+          <a href="CMU84747.HTM">
+           PA_GetPictureHandleParameter
+          </a>
+         </b>
+         (params; index; info) → PA_Handle
+         <li>
+          <b>
+           <a href="CMU84826.HTM">
+            PA_GetPictureParameter
+           </a>
+          </b>
+          (params; index; picture; pictInfo) → long
+          <li>
+           <b>
+            <a href="CMU84746.HTM">
+             PA_GetPointerParameter
+            </a>
+           </b>
+           (params; index) → PA_Pointer
+           <li>
+            <b>
+             <a href="CMU84832.HTM">
+              PA_GetShortParameter
+             </a>
+            </b>
+            (params; index) → short
+            <li>
+             <b>
+              <a href="CMU84829.HTM">
+               PA_GetStringParameter
+              </a>
+             </b>
+             (params; index; string)
+             <li>
+              <b>
+               <a href="CMU84828.HTM">
+                PA_GetTextParameter
+               </a>
+              </b>
+              (params; index; text) → long
+              <li>
+               <b>
+                <a href="CMU84824.HTM">
+                 PA_GetTimeParameter
+                </a>
+               </b>
+               (params; index) → long
+               <li>
+                <b>
+                 <a href="CMU84823.HTM">
+                  PA_GetVariableParameter
+                 </a>
+                </b>
+                (params; index) → PA_Variable
+                <li>
+                 <b>
+                  <a href="CMU84595.HTM">
+                   PA_ReturnBlob
+                  </a>
+                 </b>
+                 (params; blob; len)
+                 <li>
+                  <b>
+                   <a href="CMU84590.HTM">
+                    PA_ReturnBlobHandle
+                   </a>
+                  </b>
+                  (params; hblob)
+                  <li>
+                   <b>
+                    <a href="CMU84593.HTM">
+                     PA_ReturnDate
+                    </a>
+                   </b>
+                   (params; day; month; year)
+                   <li>
+                    <b>
+                     <a href="CMU84598.HTM">
+                      PA_ReturnDouble
+                     </a>
+                    </b>
+                    (params; value)
+                    <li>
+                     <b>
+                      <a href="CMU84599.HTM">
+                       PA_ReturnLong
+                      </a>
+                     </b>
+                     (params; value)
+                     <li>
+                      <b>
+                       <a href="CMU84594.HTM">
+                        PA_ReturnPicture
+                       </a>
+                      </b>
+                      (params; pnewPicture; pictSize; info)
+                      <li>
+                       <b>
+                        <a href="CMU84606.HTM">
+                         PA_ReturnPictureHandle
+                        </a>
+                       </b>
+                       (params; hPicture; info)
+                       <li>
+                        <b>
+                         <a href="CMU84600.HTM">
+                          PA_ReturnShort
+                         </a>
+                        </b>
+                        (params; returnedString)
+                        <li>
+                         <b>
+                          <a href="CMU84597.HTM">
+                           PA_ReturnString
+                          </a>
+                         </b>
+                         (params; resultString)
+                         <li>
+                          <b>
+                           <a href="CMU84596.HTM">
+                            PA_ReturnText
+                           </a>
+                          </b>
+                          (params; text; len)
+                          <li>
+                           <b>
+                            <a href="CMU84592.HTM">
+                             PA_ReturnTime
+                            </a>
+                           </b>
+                           (params; value)
+                           <li>
+                            <b>
+                             <a href="CMU84602.HTM">
+                              PA_SetBlobHandleParameter
+                             </a>
+                            </b>
+                            (params; index; hblob)
+                            <li>
+                             <b>
+                              <a href="CMU84608.HTM">
+                               PA_SetBlobParameter
+                              </a>
+                             </b>
+                             (params; index; blob; blobSize)
+                             <li>
+                              <b>
+                               <a href="CMU84605.HTM">
+                                PA_SetDateParameter
+                               </a>
+                              </b>
+                              (params; index; day; month; year)
+                              <li>
+                               <b>
+                                <a href="CMU84611.HTM">
+                                 PA_SetDoubleParameter
+                                </a>
+                               </b>
+                               (params; index; value)
+                               <li>
+                                <b>
+                                 <a href="CMU84612.HTM">
+                                  PA_SetLongParameter
+                                 </a>
+                                </b>
+                                (params; index; value)
+                                <li>
+                                 <b>
+                                  <a href="CMU84601.HTM">
+                                   PA_SetPictureHandleParameter
+                                  </a>
+                                 </b>
+                                 (params; index; hpicture; info)
+                                 <li>
+                                  <b>
+                                   <a href="CMU84607.HTM">
+                                    PA_SetPictureParameter
+                                   </a>
+                                  </b>
+                                  (params; index; newPicture; pictSize; info)
+                                  <li>
+                                   <b>
+                                    <a href="CMU84613.HTM">
+                                     PA_SetShortParameter
+                                    </a>
+                                   </b>
+                                   (params; index; value)
+                                   <li>
+                                    <b>
+                                     <a href="CMU84610.HTM">
+                                      PA_SetStringParameter
+                                     </a>
+                                    </b>
+                                    (params; index; string)
+                                    <li>
+                                     <b>
+                                      <a href="CMU84609.HTM">
+                                       PA_SetTextParameter
+                                      </a>
+                                     </b>
+                                     (params; index; text; len)
+                                     <li>
+                                      <b>
+                                       <a href="CMU84604.HTM">
+                                        PA_SetTimeParameter
+                                       </a>
+                                      </b>
+                                      (params; index; value)
+                                      <li>
+                                       <b>
+                                        <a href="CMU84603.HTM">
+                                         PA_SetVariableParameter
+                                        </a>
+                                       </b>
+                                       (params; index; variable; clearOldValue)
+                                      </li>
+                                     </li>
+                                    </li>
+                                   </li>
+                                  </li>
+                                 </li>
+                                </li>
+                               </li>
+                              </li>
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+ </body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CreateResource
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CreateResource
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CreateResource (resFile; kind; resID; name; resData; dataSize) → short
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resFile
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      File reference number of the file to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      kind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind (4 Bytes type) of resource to create
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resID
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Unique resource ID (or -1)
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      name
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Resource name
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resData
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Resource data pointer
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dataSize
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Sizes of resData in bytes
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Unique ID for this resource
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_CreateResource
+    </font>
+   </code>
+   adds a resource of type
+   <code>
+    kind
+   </code>
+   and unique number
+   <code>
+    ID
+   </code>
+   to the resource file
+   <code>
+    resFile
+   </code>
+   . The resource will be filled with the data pointed by
+   <code>
+    resData
+   </code>
+   .
+  </p>
+  <p>
+   Pass in
+   <code>
+    resFile
+   </code>
+   the reference number of the file to access (obtained with
+   <code>
+    <a href="CMU84569.HTM">
+     PA_CreateResFile
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84551.HTM">
+     PA_OpenResFile
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84565.HTM">
+     PA_GetDatabaseResFile
+    </a>
+   </code>
+   ).
+  </p>
+  <p>
+   In
+   <code>
+    kind
+   </code>
+   , you pass the 4-bytes type of the resource ('TEXT', 'PICT', 'toto').
+  </p>
+  <p>
+   Pass in
+   <code>
+    resID
+   </code>
+   the unique ID of the resource you want to create. If you pass -1 in
+   <code>
+    resID
+   </code>
+   , then 4th Dimension will find a unique ID for you.
+  </p>
+  <p>
+   In
+   <code>
+    name
+   </code>
+   , pass a string and the name of the resource (it can be a null string). Depending on default settings or on previous calls to
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84816.HTM">
+     PA_UseCStrings
+    </a>
+   </code>
+   ,
+   <code>
+    name
+   </code>
+   will be either a Pascal or ANSI C string.
+  </p>
+  <p>
+   In
+   <code>
+    resData
+   </code>
+   , pass a pointer to the data of the new resource and its size in bytes in
+   <code>
+    dataSize
+   </code>
+   .
+  </p>
+  <p>
+   If the resources has been successfully created,
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   is set to
+   <code>
+    eER_NoErr
+   </code>
+   and the routine returns the ID (it will be equal to
+   <code>
+    resID
+   </code>
+   if it was not -1).
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE
+   </p>
+  </b>
+  <p>
+   If a resource of the same kind and the same ID already exists,
+   <code>
+    <font color="#CF0000">
+     PA_CreateResource
+    </font>
+   </code>
+   overwrites it without generating any error.
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   (1) Wrap the routine to ensure that we do not overwrite an existing resource. To do this, use
+   <code>
+    <a href="CMU84561.HTM">
+     PA_GetResourceHandle
+    </a>
+   </code>
+   that returns 0 if the specified resource does not exist.
+  </p>
+  <p>
+  </p>
+  <pre><code>   short myCreateResource(short resFile, unsigned long kind, short resID, char *name, char *data, long size)
+   {
+   // if resID is -1, 4D will find an unique ID for us. We do not care in this case.
+      if(resID != -1)
+      {
+         PA_Handle h = PA_GetResourceHandle(resFile, kind, resID);
+         if(h) // the same resource already exists. Return the error, but first release memory
+         {
+            PA_DetachResource(resFile, h);
+            PA_DisposeHandle(h);
+            MyGenerateError (kMY_ERROR_CODE_RESOURCE_EXISTS);
+            return -1; // this must be checked in the calling routine
+         }
+      }
+   // We are here: the resource does not exists, or resID is -1.
+      return PA_CreateResource(resFile, kind, resID, data, size);
+   }
+</code></pre>
+  <p>
+   (2)Create a new resource based on a private structure (using the previous wrapper)
+  </p>
+  <p>
+  </p>
+  <pre><code>   typedef struct
+   {
+      long   f1;
+      long   f2;
+      long   f3;
+      long   f4;
+   } AStructure;
+   #define   
+ 
+   short Add_AStructureResource(short resFile, AStructure *toAdd, char *name)
+   {
+      return myCreateResource(resFile,
+         'Tißo',
+         -1, // let 4D find an ID and return it
+         name,
+         (char *) toAdd,
+         sizeof(AStructure));
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84567.HTM">
+    PA_CreateResourceFromHandle
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

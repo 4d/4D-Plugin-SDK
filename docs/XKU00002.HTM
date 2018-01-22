@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84658.HTM">
+      PA_CheckFreeStack
+     </a>
+    </b>
+    (request) → Long
+    <li>
+     <b>
+      <a href="CMU84660.HTM">
+       PA_Close4DPreferences
+      </a>
+     </b>
+     <li>
+      <b>
+       <a href="CMU84664.HTM">
+        PA_FindPackage
+       </a>
+      </b>
+      (pluginID) → short
+      <li>
+       <b>
+        <a href="CMU84812.HTM">
+         PA_Get4Dfolder
+        </a>
+       </b>
+       (FolderPath)
+       <li>
+        <b>
+         <a href="CMU84651.HTM">
+          PA_Get4DHInstance
+         </a>
+        </b>
+        → long
+        <li>
+         <b>
+          <a href="CMU84662.HTM">
+           PA_Get4DPreferencesFilename
+          </a>
+         </b>
+         (prefsName)
+         <li>
+          <b>
+           <a href="CMU84543.HTM">
+            PA_Get4DPreferencesFolder
+           </a>
+          </b>
+          (folderPath)
+          <li>
+           <b>
+            <a href="CMU84874.HTM">
+             PA_Get4DVersion
+            </a>
+           </b>
+           → unsigned long
+           <li>
+            <b>
+             <a href="CMU84657.HTM">
+              PA_Get4DWinMacOSGlobals
+             </a>
+            </b>
+            → void *
+            <li>
+             <b>
+              <a href="CMU84822.HTM">
+               PA_GetApplicationFullPath
+              </a>
+             </b>
+             (applicationPath)
+             <li>
+              <b>
+               <a href="CMU84383.HTM">
+                PA_GetCenturyInfo
+               </a>
+              </b>
+              (pivotYear; defaultCentury)
+              <li>
+               <b>
+                <a href="CMU84666.HTM">
+                 PA_GetDataName
+                </a>
+               </b>
+               (dataName)
+               <li>
+                <b>
+                 <a href="CMU84665.HTM">
+                  PA_GetLogName
+                 </a>
+                </b>
+                (logName)
+                <li>
+                 <b>
+                  <a href="CMU84872.HTM">
+                   PA_GetMessagesStatus
+                  </a>
+                 </b>
+                 → char
+                 <li>
+                  <b>
+                   <a href="CMU84835.HTM">
+                    PA_GetPlatformInterface
+                   </a>
+                  </b>
+                  → PA_PlatformInterface
+                  <li>
+                   <b>
+                    <a href="CMU84667.HTM">
+                     PA_GetStructureName
+                    </a>
+                   </b>
+                   (structName)
+                   <li>
+                    <b>
+                     <a href="CMU84668.HTM">
+                      PA_GetStructureFullPath
+                     </a>
+                    </b>
+                    (structurePath)
+                    <li>
+                     <b>
+                      <a href="CMU84811.HTM">
+                       PA_GetTipsEnabled
+                      </a>
+                     </b>
+                     → char
+                     <li>
+                      <b>
+                       <a href="CMU84834.HTM">
+                        PA_GetToolBarInfo
+                       </a>
+                      </b>
+                      (displayed; toolbarHeight)
+                      <li>
+                       <b>
+                        <a href="CMU84887.HTM">
+                         PA_Is4DClient
+                        </a>
+                       </b>
+                       → char
+                       <li>
+                        <b>
+                         <a href="CMU84876.HTM">
+                          PA_Is4DMono
+                         </a>
+                        </b>
+                        → char
+                        <li>
+                         <b>
+                          <a href="CMU84888.HTM">
+                           PA_Is4DServer
+                          </a>
+                         </b>
+                         → char
+                         <li>
+                          <b>
+                           <a href="CMU84886.HTM">
+                            PA_IsCompiled
+                           </a>
+                          </b>
+                          → char
+                          <li>
+                           <b>
+                            <a href="CMU84873.HTM">
+                             PA_IsDataBaseLocked
+                            </a>
+                           </b>
+                           → char
+                           <li>
+                            <b>
+                             <a href="CMU84875.HTM">
+                              PA_IsDemoVersion
+                             </a>
+                            </b>
+                            → char
+                            <li>
+                             <b>
+                              <a href="CMU84819.HTM">
+                               PA_IsWebProcess
+                              </a>
+                             </b>
+                             → char
+                             <li>
+                              <b>
+                               <a href="CMU84663.HTM">
+                                PA_PackageInfo
+                               </a>
+                              </b>
+                              (packageNumber; pluginID; procPtr; data; resfile; name)
+                              <li>
+                               <b>
+                                <a href="CMU84836.HTM">
+                                 PA_Quit4D
+                                </a>
+                               </b>
+                               <li>
+                                <b>
+                                 <a href="CMU84871.HTM">
+                                  PA_SetMessagesStatus
+                                 </a>
+                                </b>
+                                (showMessage)
+                                <li>
+                                 <b>
+                                  <a href="CMU84870.HTM">
+                                   PA_SetThermometerRect
+                                  </a>
+                                 </b>
+                                 (rect)
+                                 <li>
+                                  <b>
+                                   <a href="CMU84810.HTM">
+                                    PA_SetTipsEnabled
+                                   </a>
+                                  </b>
+                                  (enabled)
+                                  <li>
+                                   <b>
+                                    <a href="CMU84833.HTM">
+                                     PA_ShowHideToolBar
+                                    </a>
+                                   </b>
+                                   (displayed)
+                                  </li>
+                                 </li>
+                                </li>
+                               </li>
+                              </li>
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84661.HTM">
+      PA_Open4DPreferencesMacResFile
+     </a>
+    </b>
+    → short
+    <li>
+     <b>
+      <a href="CMU84659.HTM">
+       PA_SetGrowZone
+      </a>
+     </b>
+     (growZoneHandler) → void *
+    </li>
+   </li>
+  </ul>
+  <script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   try {
+var pageTracker = _gat._getTracker("UA-121440-11");
+pageTracker._trackPageview();
+} catch(err) {}
+  </script>
+ </body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_NewWindow
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_NewWindow
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_NewWindow (wRect; wLevel; wKind; wTitle; closeBox) → PA_WindowRef
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      wRect
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Rect
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Global coordinates of window
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      wLevel
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_WindowLevel
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Window level
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      wKind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Window kind
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      wTitle
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Window title
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      closeBox
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 = Has closebox
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_WindowRef
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Reference to the created window
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_NewWindow
+    </font>
+   </code>
+   creates a new window.
+  </p>
+  <p>
+   Pass the global coordinates of the window in
+   <code>
+    wRect
+   </code>
+   .
+  </p>
+  <p>
+   Pass  the level of the window in
+   <code>
+    wLevel
+   </code>
+   . It is one of the following enum:
+  </p>
+  <pre><code>typedef enum
+{
+   eWL_Window      = 1,
+   eWL_Palette     = 2,
+   eWL_Dialog      = 5,
+   eWL_OnEvent     = 6,
+   eWL_Toolbar     = 7,
+   eWL_Combo       = 8,
+   eWL_Tip         = 9,
+   eWL_SuperDialog = 10
+} PA_WindowLevel;
+</code></pre>
+  <p>
+   The level of a window tells 4D how to draw the window in relation to other windows: a tip is always in front, a combo is behind a tip, a dialog is over a palette, a standard window is behind all of this.
+  </p>
+  <p>
+   Pass the kind of the window in
+   <code>
+    wKind
+   </code>
+   . Use the usual values that can be passed to the
+   <code>
+    <a href="CMU00153.HTM">
+     Open window
+    </a>
+   </code>
+   4th Dimension function: 0 = "plain no zoom box", 1 = "Modal dialog box", 2 = "Plain dialog box", etc.
+  </p>
+  <p>
+   Pass the title of the window in
+   <code>
+    wTitle
+   </code>
+   (Pascal or C string, depending on default settings or previous calls to
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84816.HTM">
+     PA_UseCStrings
+    </a>
+   </code>
+   ).
+  </p>
+  <p>
+   Pass at least 1 in
+   <code>
+    closeBox
+   </code>
+   to add a closebox to your window. Note that this parameter is ignored for certain kind of windows.
+  </p>
+  <p>
+   This routine is usually used in the code of an external process, but it can be called elsewhere (ie: drawing a thermometer window).
+  </p>
+  <p>
+   It is important that Windows programmers use this routine to create their windows as it is the only way for 4th Dimension to recognize the window as one of its windows. On the other hand, using MacOS API routines such as
+   <code>
+    NewCWindow
+   </code>
+   is sufficient for adding the window to the 4th Dimension WindowList, but this can be done only when compiling for MacOS and for Windows using Altura Mac32Win.
+  </p>
+  <p>
+   Thus, for multi-platform purposes, plug-in developers should use
+   <code>
+    <font color="#CF0000">
+     PA_NewWindow
+    </font>
+   </code>
+   to create a window.
+  </p>
+  <p>
+   To close a window created with
+   <code>
+    <font color="#CF0000">
+     PA_NewWindow
+    </font>
+   </code>
+   , use
+   <code>
+    <a href="CMU84517.HTM">
+     PA_CloseWindow
+    </a>
+   </code>
+   or the 4th Dimension command
+   <code>
+    <a href="CMU00154.HTM">
+     CLOSE WINDOW
+    </a>
+   </code>
+   . Please note that
+   <code>
+    <a href="CMU84517.HTM">
+     PA_CloseWindow
+    </a>
+   </code>
+   cannot close plug-in external windows.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   Windows programmers can add a winProc to the newly created window : get its corresponding HWND (
+   <code>
+    <a href="CMU84522.HTM">
+     PA_GetHWND
+    </a>
+   </code>
+   ) and call
+   <code>
+    SetWindowLong
+   </code>
+   with the adress of the winProc.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Some wrappers to
+   <code>
+    PA_NewWindow.
+   </code>
+  </p>
+ </body>
+</html>
+<p>
+</p>
+<pre><code>   #define kNO_CLOSEBOX   ((char) 0)
+   #define kCLOSEBOX      ((char)1)
+   PA_WindowRef   CreateDocumentWindow(PA_Rect r, char *title)
+   {
+      return PA_NewWindow(r, eWL_Window, 0, title, kCLOSEBOX);
+   }
+ 
+   PA_WindowRef   CreateDialogtWindow(PA_Rect r, char *title)
+   {
+      return PA_NewWindow(r, eWL_Dialog, 5, title, kNO_CLOSEBOX);
+   }
+ 
+   PA_WindowRef   CreatePalette(PA_Rect r, char *title)
+   {
+      return PA_NewWindow(r, eWL_Palette, 722, title, kNO_CLOSEBOX);
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84517.HTM">
+  PA_CloseWindow
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ None.
+</p>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPictureHandleField
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPictureHandleField
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetPictureHandleField (tNum; fNum; info) → PA_Handle
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      info
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PictureInfo*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to picture info
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Handle to the picture
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetPictureHandleField
+    </font>
+   </code>
+   returns a handle to the picture data of the field number
+   <code>
+    fNum
+   </code>
+   of the current record of table number
+   <code>
+    tNum
+   </code>
+   . It returns the picture info used when the picture is displayed in the background in
+   <code>
+    *info
+   </code>
+   .
+  </p>
+  <p>
+   If the field is not a picture field, the routine leaves
+   <code>
+    info
+   </code>
+   unchanged, returns 0 and set an error code in
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   The handle belongs to 4th Dimension.
+   <u>
+    Never dispose of it
+   </u>
+   .
+  </p>
+  <p>
+   To get a copy of the picture data, use
+   <code>
+    <a href="CMU84636.HTM">
+     PA_GetPictureField
+    </a>
+   </code>
+   . It is only really useful for getting the Handle for saving memory, especially if the plug-in only wants to view the picture as "read-only".
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Draw a picture on Macintosh (and Windows + Mac2Win) :  the received handle is a regular PicHandle.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void DrawPictureField( short tNum, short fNum, Rect *r )
+   {
+      PA_Handle         h =0L;
+      PA_PictureInfo   info;
+ 
+      h = PA_GetPictureHandleField( tNum, fNum, r, &amp;info );
+      DrawPicture( (PicHandle) h, &amp;r );
+      // Do NOT dispose the picture here, it stills belongs to 4D
+   }
+ 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84636.HTM">
+    PA_GetPictureField
+   </a>
+   ,
+   <a href="CMU84624.HTM">
+    PA_SetPictureField
+   </a>
+   ,
+   <a href="CMU84616.HTM">
+    PA_SetPictureHandleField
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (
+   <code>
+    eER_InvalidFileNumber
+   </code>
+   ,
+   <code>
+    eER_InvalidFieldNumber
+   </code>
+   ).
+  </p>
+ </body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetStructureFullPath
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetStructureFullPath
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetStructureFullPath (structurePath)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      structurePath
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to a char buffer
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Full path of the structure file
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetStructureFullPath
+    </font>
+   </code>
+   fills the buffer pointed to by
+   <code>
+    structPath
+   </code>
+   with the full path name of the current structure in use.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <code>
+   <p>
+    structPath
+   </p>
+  </code>
+  can contain up to 255 characters.
+ </body>
+</html>
+<p>
+ Be sure to leave enough room for the path. It is a good habit to always use 255 length strings (declared as Str255 under MacOS or char[256] under Windows).
+</p>
+<code>
+ <p>
+  <font color="#CF0000">
+   PA_GetStructureFullPath
+  </font>
+ </p>
+</code>
+works like the
+<code>
+ <a href="CMU00489.HTM">
+  Structure file
+ </a>
+</code>
+4D command.
+<b>
+ <p>
+  WARNING
+ </p>
+</b>
+:
+<p>
+ If you call this command while running 4D Client, only the name of the structure file is returned; the long name is not returned.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+</p>
+<pre><code>   char structPath[256];
+   PA_getStructureFullPath( structPath );
+   PA_Alert( structPath );
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84822.HTM">
+  PA_GetApplicationFullPath
+ </a>
+ ,
+ <a href="CMU84666.HTM">
+  PA_GetDataName
+ </a>
+ ,
+ <a href="CMU84665.HTM">
+  PA_GetLogName
+ </a>
+ ,
+ <a href="CMU84667.HTM">
+  PA_GetStructureName
+ </a>
+ ,
+ <a href="CMU00489.HTM">
+  Structure file
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+always returns
+<code>
+ eER_NoErr
+</code>

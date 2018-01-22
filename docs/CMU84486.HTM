@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetDragAndDropInfo
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetDragAndDropInfo
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  typedef struct PA_DragAndDropInfo
+{
+	char	            fReserved1[10];
+	long                fToArrayIndice;    // indice of element when destination is an array
+	long	            fReserved2[2];
+	long	            fFromArrayIndice;  // indice of element when source is an array
+	short	            fFromProcess;
+	short	            fFromWhereV;       // where user clicks at first
+	short	            fFromWhereH;
+	short	            fToWhereV;		// where user release mouse button
+	short	            fToWhereH;
+	long	            fReserved3;
+	char	            fVariableName[32];	// empty string or variable name if user drags a variable
+	char	            fInterProcess;
+	short 	            fField;
+	short  	            fTable;		// zero or table name if user drags a field from a table
+	PA_DragContextRef   fDragContext;	// the current drag and drop context (new v11 field)
+} PA_DragAndDropInfo;
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetDragAndDropInfo (params) → PA_DragAndDropInfo
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_DragAndDropInfo
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Information on the Drag/Droppped object
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetDragAndDropInfo
+    </font>
+   </code>
+   returns a structure of type
+   <code>
+    PA_DragAndDropInfo
+   </code>
+   , which contains various information on the object being drag/dropped onto the area. This routine must be called when
+   <code>
+    <a href="CMU84501.HTM">
+     PA_GetAreaEvent
+    </a>
+   </code>
+   returns
+   <code>
+    eAE_Drop
+   </code>
+   or
+   <code>
+    eAE_AllowDrop
+   </code>
+   . If it is called at another time, it does nothing,
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   returns
+   <code>
+    eER_BadEventCall
+   </code>
+   , and,  most importantly, the returned structure can contain garbage (the returned
+   <code>
+    PA_DragAndDropInfo
+   </code>
+   is not initialized to null values).
+  </p>
+  <p>
+   When the event is
+   <code>
+    eAE_AllowDrop
+   </code>
+   , the area can check the kind of object being dropped, and then allow or disallow the drop by calling
+   <code>
+    <a href="CMU84485.HTM">
+     PA_AllowDrop
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   If the drag/drop is allowed and the user dropped the object, call
+   <code>
+    <font color="#CF0000">
+     PA_GetDragAndDropInfo
+    </font>
+   </code>
+   again to retrieve its value.
+  </p>
+  <p>
+   The
+   <code>
+    PA_DragAndDropInfo
+   </code>
+   structure is defined in the "PublicTypes.h" header file, and this API contains its the main accessors (
+   <code>
+    <a href="CMU84476.HTM">
+     PA_GetDragAndDropKind
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84475.HTM">
+     PA_GetDragAndDropVariable
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84474.HTM">
+     PA_GetDragAndDropTableField
+    </a>
+   </code>
+   ).
+  </p>
+  <pre><code>typedef struct PA_DragAndDropInfo
+{
+   char   fReserved1[10];
+   long   fToArrayIndice;   // index of element when destination is an array
+   long   fReserved2[2];
+   long   fFromArrayIndex;   // index of element when source is an array
+   short   fFromProcess;
+   short   fFromWhereV;   // where user clicks at first
+   short   fFromWhereH;
+   short   fToWhereV;      // where user release mouse button - _global_ coordinates
+   short   fToWhereH;
+   long   fReserved3;
+   char   fVariableName[32];   // empty string or variable name if user drags a variable
+   char   fInterProcess;
+   short    fField;
+   short   fTable;      // zero or table name if user drags a field from a table
+} PA_DragAndDropInfo;
+</code></pre>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   The routines "Drag and Drop" are internal to 4th Dimension. The developer cannot use them with other applications.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   The coordinates included in the structure referring to the screen are global. The area must convert them (
+   <code>
+    ScreenToClient
+   </code>
+   under Windows and
+   <code>
+    GlobalToLocal
+   </code>
+   under MacOS) if those coordinates are used by it later.
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   (1) See the sample in
+   <code>
+    Drag and drop with a plug-in area.
+   </code>
+  </p>
+ </body>
+</html>
+<p>
+ (2) Allow drag and drop only if the object is a real array element.
+</p>
+<p>
+</p>
+<pre><code>   /* . . . assume we are dispatching a PA_AreaEvent . . . */
+      case eAE_AllowDrop:
+      {
+         char   allow = 0;
+         long   index;
+      // get the drag-drop info
+         PA_GetDragAndDropInfo   ddi = PA_GetDragDropInfo(params);
+      // if the object is a variable...
+         if( PA_GetDragAndDropKind(ddi) == eDK_DragVariable )
+         {
+      // ... of type array long integer...
+            if( PA_GetVariableKind(PA_GetDragAndDropVariable(params, &amp;index)) == eVK_ArrayLongint )
+      // ... we accept it.
+               allow = 1;
+            
+         }
+         PA_AllowDrop(params, allow);
+      }
+         break;
+ 
+</code></pre>
+<p>
+ (3) Returns the process number owning the object.
+</p>
+<p>
+</p>
+<pre><code>   long GetSourceProcessOfTheObject(PA_PluginParameters params)
+   {
+      PA_DragAndDropInfo   ddi = PA_GetDragAndDropInfo(params);
+      if( PA_GetLastError() == eER_NoErr)
+         return ddi.fFromProcess;
+      else
+         return 0L.
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84473.HTM">
+  Drag and drop with a plugin area
+ </a>
+ ,
+ <a href="CMU84485.HTM">
+  PA_AllowDrop
+ </a>
+ ,
+ <a href="CMU84483.HTM">
+  PA_CustomizeDragOver
+ </a>
+ ,
+ <a href="CMU84484.HTM">
+  PA_GetDragPositions
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (
+ <code>
+  eER_BadEventCall
+ </code>
+ )
+</p>

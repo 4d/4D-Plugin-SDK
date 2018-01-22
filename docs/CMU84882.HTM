@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_DeleteSelection
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_DeleteSelection
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_DeleteSelection (tableNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_DeleteSelection
+    </font>
+   </code>
+   deletes all the records in the selection for the table number
+   <code>
+    tableNum
+   </code>
+   .
+  </p>
+  <p>
+   Before attempting to delete record(s), the 4D plug-in must make sure it has access to the table in read-write mode for the current process, by calling
+   <code>
+    <a href="CMU84894.HTM">
+     PA_UseSet
+    </a>
+   </code>
+   . Otherwise the records will not be deleted.
+  </p>
+  <p>
+   While deleting the records,
+   <code>
+    <font color="#CF0000">
+     PA_DeleteSelection
+    </font>
+   </code>
+   may encounter records already being used by an other user or process. In this case the locked records are left untouched and are automatically placed into the set "LockedSet" by 4th Dimension. After the call it is the 4D plug-in's responsibility to test this set using
+   <code>
+    <a href="CMU84894.HTM">
+     PA_UseSet
+    </a>
+   </code>
+   . Usually the 4D plug-in would implement a repeat loop of calls to
+   <code>
+    <font color="#CF0000">
+     PA_DeleteSelection
+    </font>
+   </code>
+   until the selection returned by
+   <code>
+    <a href="CMU84894.HTM">
+     PA_UseSet
+    </a>
+   </code>
+   is empty.
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   This routine does not use virtual structure
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Loop until the selection is deleted.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void MyDeleteSelection (short tableNum)
+   {
+      long   lockedCount;
+   // Loop
+      do
+      {
+         PA_Yield();   // Give time to other tasks
+ 
+         lockedCount = 0L;
+   // Delete the selection
+         PA_DeleteSelection(tableNum);
+   // If no error, test the "LockedSet"
+         if(! PA_GetLastErr())
+         {
+            PA_UseSet(tableNum;"LockedSet");
+            if(! PA_GetLastErr())
+               lockedCount = PA_RecordsInSelection(tableNum);
+         }
+   // loop until an error occurs or the selection is empty
+      } while( (PA_GetLastErr() == eER_NoErr) &amp;&amp; (lockedCount != 0L) )
+      
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84801.HTM">
+    PA_ReadWrite
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+  <b>
+   <p>
+    Current Selections and Records
+   </p>
+  </b>
+  <p>
+   After deleting the selection, it is empty.
+  </p>
+ </body>
+</html>

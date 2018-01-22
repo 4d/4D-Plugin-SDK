@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPageChange
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPageChange
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2004.1
+  </p>
+  <hr/>
+  <p>
+   PA_GetPageChange (params; *pageFrom; *pageTo)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      *pageFrom
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Closing page number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      *pageTo
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Opening page number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_GetPageChange
+    </font>
+   </code>
+   returns both the number of the page that is being closed and opened. This command must be called when
+   <code>
+    <a href="CMU84501.HTM">
+     PA_GetAreaEvent
+    </a>
+   </code>
+   returns
+   <code>
+    eAE_PageChange
+   </code>
+   . This event indicates that the current page is being changed.
+  </p>
+  <p>
+   The returned values must be compared to the plug-in area page number (returned by
+   <code>
+    <a href="CMU84498.HTM">
+     PA_GetPluginProperties
+    </a>
+   </code>
+   ) and to the current page number (returned by
+   <code>
+    <a href="CMU84519.HTM">
+     PA_GetCurrentPage
+    </a>
+   </code>
+   ) to know if the page in which the area is located is being closed or opened.
+  </p>
+  <p>
+   When the form is changing page to or from your area page:
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   If
+   <code>
+    PA_GetCurrentPage() == *pageTo
+   </code>
+   , the page is being opened. You should take this opportunity to install your native controls.
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   If
+   <code>
+    PA_GetCurrentPage() == *pageFrom
+   </code>
+   , the page is being closed. You should take this opportunity to remove your native controls.
+  </p>
+  <code>
+   <p>
+    params
+   </p>
+  </code>
+  is the
+  <code>
+   PA_PluginParameters
+  </code>
+  the plug-in received in its
+  <code>
+   PluginMain
+  </code>
+  routine.
+ </body>
+</html>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84519.HTM">
+  PA_GetCurrentPage
+ </a>
+ ,
+ <a href="CMU84498.HTM">
+  PA_GetPluginProperties
+ </a>
+ .
+</p>

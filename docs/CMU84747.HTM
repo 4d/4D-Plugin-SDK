@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPictureHandleParameter
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPictureHandleParameter
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetPictureHandleParameter (params; index; info) → PA_Handle
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      index
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Index of the parameter in params
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      info
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PictureInfo *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Picture info
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Handle to the picture
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_GetPictureHandleParameter
+    </font>
+   </code>
+   returns a handle to the picture of the
+   <code>
+    index
+   </code>
+   parameter in
+   <code>
+    params
+   </code>
+   , and its information ( background drawing) in
+   <code>
+    info
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   The handle belongs to 4D. Never dispose of it.
+  </p>
+  <p>
+   This may be very useful, especially when the plug-in wants to read the picture but not modify it. On the other hand,
+   <code>
+    <a href="CMU84826.HTM">
+     PA_GetPictureParameter
+    </a>
+   </code>
+   gets a copy of the picture and can manipulate it, but this may lead to memory problems for "large" pictures.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Drawing the Picture for Macintosh/Windows+Altura
+  </p>
+  <p>
+   This is the same sample as in
+   <code>
+    <a href="CMU84826.HTM">
+     PA_GetPictureParameter
+    </a>
+   </code>
+   ,  but it uses less memory
+  </p>
+  <p>
+  </p>
+  <pre><code>   void PluginMain( long selector, PA_PluginParameters params)
+   {
+      switch ( selector )
+      {
+         . . .kInitPlugin, kDeinitPlugin ...
+ 
+         case kMyRoutine : // declared as DrawMyPict(&amp;P) in the STR# resource
+            DoDrawMyPict(prams);
+            break;
+      }
+   }
+ 
+   void DrawPicture (PA_PluginParameters params)
+   {
+      PicHandle   pict;
+      PA_PictureInfo   info;
+      Rect      r = {0, 0, 100, 100};
+ 
+      pict = PA_GetPicturehandleParameter(params, 1, &amp;info);
+      if(pict)
+         DrawPicture(pict, &amp;r);
+      // NEVER CALL DisposeHandle((Handle) pict) : pict belongs to 4D.
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84821.HTM">
+    Create a new plugin
+   </a>
+   ,
+   <a href="CMU84826.HTM">
+    PA_GetPictureParameter
+   </a>
+   .
+  </p>
+ </body>
+</html>

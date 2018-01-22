@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetClick
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetClick
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetClick (params; x; y)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      x
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Horizontal click position
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      y
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Vertical click position
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetClick
+    </font>
+   </code>
+   returns the horizontal and vertical coordinates of the mouse click (expressed in local coordinates, referring to the owning window) in  shorts pointed to by
+   <code>
+    x
+   </code>
+   and
+   <code>
+    y
+   </code>
+   .
+  </p>
+  <code>
+   <p>
+    params
+   </p>
+  </code>
+  is the
+  <code>
+   PA_PluginParameters
+  </code>
+  the plug-in received in its
+  <code>
+   PluginMain
+  </code>
+  routine.
+ </body>
+</html>
+<p>
+ This routine must be called when
+ <code>
+  <a href="CMU84501.HTM">
+   PA_GetAreaEvent
+  </a>
+ </code>
+ returns
+ <code>
+  eAE_MouseDown
+ </code>
+ or
+ <code>
+  eAE_MouseUp
+ </code>
+ . Otherwise, it sets *x and *y to 0 and
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ returns
+ <code>
+  eER_BadEventCall
+ </code>
+ .
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Do something different if the user clicks in the upper/lower area.
+</p>
+<p>
+</p>
+<pre><code>   // we assume PA_GetAreaEvent has returned aAE_MouseDown
+   void DispatchTheClick(PA_PluginParameters params)
+   {
+      PA_AreaRect   r = PA_GetAreaRect(params);
+      short         x, y;
+ 
+      PA_GetClick(params, &amp;x, &amp;y);
+      if( y &lt; = (r.fBottom - r.fTop)/2 )
+         DoClickInUpZone(params);
+      else
+         DoClickInLowZone(params);
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84478.HTM">
+  Create and use an external area
+ </a>
+ ,
+ <a href="CMU84489.HTM">
+  PA_GetKey
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (
+ <code>
+  eER_BadEventCall
+ </code>
+ )
+</p>

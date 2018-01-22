@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CreateRecord
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CreateRecord
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CreateRecord (tableNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_CreateRecord
+    </font>
+   </code>
+   does the same thing than the 4D command
+   <code>
+    <a href="CMU00068.HTM">
+     CREATE RECORD
+    </a>
+   </code>
+   : it creates a new empty record for the table specified by
+   <code>
+    tableNum
+   </code>
+   . The new record is resident only in memory and becomes the current record of the table for this process.
+  </p>
+  <p>
+   All the fields of the new record are initialized with their default values e.g. empty strings for alphanumeric fields and zeros for numeric fields. Before saving the record the 4D Extension would typically store values into the fields of the record using the
+   <code>
+    PA_SetxxxField
+   </code>
+   routines.
+  </p>
+  <p>
+   A call to
+   <code>
+    <font color="#CF0000">
+     PA_CreateRecord
+    </font>
+   </code>
+   is usually followed by a call to
+   <code>
+    <a href="CMU84900.HTM">
+     PA_SaveRecord
+    </a>
+   </code>
+   which saves the record once the values of the fields in the record have been set.
+  </p>
+  <p>
+   The record is not saved on the disk unless the 4D Plug-in calls
+   <code>
+    <a href="CMU84900.HTM">
+     PA_SaveRecord
+    </a>
+   </code>
+   or the
+   <code>
+    <a href="CMU00053.HTM">
+     SAVE RECORD
+    </a>
+   </code>
+   command is invoked from within 4th Dimension.
+  </p>
+  <p>
+   If the 4D Extension changes the current record for the table before saving the new record the new record is lost.
+  </p>
+  <p>
+   The error checking is made by calling
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   immediately after a call to
+   <code>
+    <font color="#CF0000">
+     PA_CreateRecord
+    </font>
+   </code>
+   . Usually, if an error occurs, it will be a because
+   <code>
+    tableNum
+   </code>
+   is out of range (
+   <code>
+    eInvalidFileNumber
+   </code>
+   ).
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84900.HTM">
+    PA_SaveRecord
+   </a>
+   ,
+   <a href="CMU84618.HTM">
+    PA_SetBooleanField
+   </a>
+   ,
+   <a href="CMU84626.HTM">
+    PA_SetTextField
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (most often
+   <code>
+    eInvalidFileNumber
+   </code>
+   ).
+  </p>
+ </body>
+</html>

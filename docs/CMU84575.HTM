@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ReceiveDataFromServer
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ReceiveDataFromServer
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ReceiveDataFromServer (pluginRef; dataRef; dataKind; data) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pluginRef
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      ID number of plugin's server instance
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dataRef
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      ID number of data to be read
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dataKind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Type (4-byte OSType) of data to be read
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      data
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Requested data
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Received data size in bytes
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   Provided the 4D plug-in is running a server instance of an plug-in on the server machine, calling
+   <code>
+    <font color="#CF0000">
+     PA_ReceiveDataFromServer
+    </font>
+   </code>
+   lets the 4D plug-in request data from the server instance of that plug-in from a client machine .
+  </p>
+  <p>
+   Before the call:
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   The 4D plug-in passes the ID number of the plug-in's server instance in
+   <code>
+    pluginRef
+   </code>
+   . This number is the resource ID number of the 4BNX resource for this 4D plug-in.
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   The 4D plug-in passes the type of data (4 byte OSType) and the data ID number requested in dataKind and dataRef. These values can be whatever is required, using private conventions.
+  </p>
+  <p>
+   After the call, the 4D plug-in obtains the reply to the request in the buffer pointed to by
+   <code>
+    data
+   </code>
+   , and returns its size in bytes.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   We receive the picture sent in the example given in
+   <code>
+    <a href="CMU84576.HTM">
+     PA_SendDataToServer
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+  </p>
+  <pre><code>   #define   kMY_PLUG_SERVERID   ((long)16789)
+   #define   kDATA_PICTUREKIND   'PICT'
+   #define   kDATA_TEXTKIND      'TEXT'
+   #define   kDATA_BIZARRE      '?¿?¿'
+ 
+   PA_Handle   thePict;
+   long      pictSize;
+   char      *ptr;
+   pictSize = ReceiveDataFromServer(kMY_PLUG_SERVERID, 0x100, kDATA_PICTUREKIND, 0L);
+   if( PA_GetLastError() == eER_NoErr)
+   {
+      thePict = PA_NewHandle(pictSize);
+      if(thePict)
+      {
+      ptr = PA_LockHandle(thePict);
+         pictSize = ReceiveDataFromServer(kMY_PLUG_SERVERID, 0x100, kDATA_PICTUREKIND, ptr);
+      PA_UnlockHandle(thePict);
+      /* . . . do something with the picture . . .*/
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84576.HTM">
+    PA_SendDataToServer
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

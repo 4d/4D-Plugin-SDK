@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SetThermometerRect
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SetThermometerRect
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SetThermometerRect (rect)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      rect
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Rect
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      New rectangle of the thermometer
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_SetThermometerRect
+    </font>
+   </code>
+   sets the location where the thermometer displayed during time-consuming operations, such as sorts and searches, will appear.
+  </p>
+  <p>
+   The 4D plug-in fills the
+   <code>
+    <a href="CMU84869.HTM">
+     PA_Rect
+    </a>
+   </code>
+   structure with the left, top, right and bottom coordinates (expressed in the global coordinates system) of the thermometer's window contents rectangle. Be sure to consider the height of the window's title bar when calculating the coordinates.
+  </p>
+  <p>
+   The location of the thermometer window is information that is local to each process and maintained until the process is terminated. If the 4D plug-in does not use this entry point, 4th Dimension includes its own algorithm to decide where the window will appear depending on the context and the operation whose progress is being displayed.
+  </p>
+  <b>
+   <p>
+    USER INTERFACE NOTE:
+   </p>
+  </b>
+  <p>
+   While the progress of a time-consuming operation is shown, the user may move the thermometer window by dragging its title bar. In this case, the thermometer will appear the nex time in the in the last location to which is was moved. It is a good programming habit to let the user choose where windows are displayed.
+  </p>
+  <b>
+   <p>
+    NOTE:
+   </p>
+  </b>
+  <p>
+   If the 4D plug-in changes the location of the thermometer and then wants to let 4th Dimension reverts to its own algorithm, call
+   <code>
+    <font color="#CF0000">
+     PA_SetThermometerRect
+    </font>
+   </code>
+   again with an empty rect.
+  </p>
+  <p>
+   Keep in mind that the routine expects the complete
+   <code>
+    <a href="CMU84869.HTM">
+     PA_Rect
+    </a>
+   </code>
+   structure to be passed and not a pointer to it as System APIs use.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   A 500 pixels square window for a thermometer.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void SortinBigWindow()
+   {
+      PA_Rect   r = {30, 30, 530, 530};
+      PA_SetThermometerRect(r);
+      MySortALotOfRecords();
+   // Give back hand to 4D to manipulate the window
+      r.fTop = r.fLeft = r.fBottom = r.fRight = 0;
+      PA_SetThermometerRect(r);
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84872.HTM">
+    PA_GetMessagesStatus
+   </a>
+   ,
+   <a href="CMU84869.HTM">
+    PA_Rect
+   </a>
+   ,
+   <a href="CMU84871.HTM">
+    PA_SetMessagesStatus
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred.
+  </p>
+ </body>
+</html>

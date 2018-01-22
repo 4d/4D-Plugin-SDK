@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   The API gives the plug-in developer routines to build and perform a search within a table.
+  </p>
+  <p>
+   To perform a search, the developer will use 3 steps.
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="7%">
+     </td>
+     <td align="LEFT" valign="TOP" width="93%">
+      1/ Prepare the search by calling
+      <code>
+       PA_OpenQuery
+      </code>
+      ,
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="7%">
+     </td>
+     <td align="LEFT" valign="TOP" width="93%">
+      2/ Build it by calling PA_QueryXxx, where Xxx is the kind of the field to search (String, integer, Date, long integer) for each line that the the searching operation request
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="7%">
+     </td>
+     <td align="LEFT" valign="TOP" width="93%">
+      3/ Launch the search by calling
+      <code>
+       PA_CloseQuery
+      </code>
+      and checking its result.
+     </td>
+    </tr>
+   </table>
+  </p>
+  <p>
+   You can have up to 32000 lines of search. Beyond this limit, an error is returned.
+  </p>
+  <p>
+   To dispatch the standard 4th Dimension Search dialog box, use
+   <code>
+    <a href="CMU84720.HTM">
+     PA_QueryDialog
+    </a>
+   </code>
+   .
+  </p>
+  <u>
+   <p>
+    Building the search definition
+   </p>
+  </u>
+  <p>
+   The plug-in first initiates the query by calling
+   <code>
+    PA_OpenQuery(tNum)
+   </code>
+   , specifying the table where the search must be done. This call tells the API to perform private initialization before receiving the lines of the search.
+  </p>
+  <p>
+   Then it calls
+   <code>
+    PA_Query
+   </code>
+   Xxx (up to 20 times), where Xxx is a kind of field, for each fields it needs to make the search. The API gives the developer accessors for  every field that can be searched:
+   <code>
+    <a href="CMU84777.HTM">
+     PA_QueryString
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84774.HTM">
+     PA_QueryDate
+    </a>
+   </code>
+   ,
+   <code>
+    PA_QueryBoolean (blob
+   </code>
+   and Pictures field cannot be searched). The first added line must have the query operator constant
+   <code>
+    eQO_NoOperator
+   </code>
+   (see below).
+  </p>
+  <p>
+   At the end, the plug-in calls
+   <code>
+    <a href="CMU84770.HTM">
+     PA_CloseQuery
+    </a>
+   </code>
+   , which starts the search and de-initializes any private data.
+  </p>
+  <u>
+   <p>
+    The Query Operator (of type PA_QueryOperator)
+   </p>
+  </u>
+  <p>
+   The
+   <code>
+    <a href="CMU84849.HTM">
+     PA_QueryOperator
+    </a>
+   </code>
+   parameter of
+   <code>
+    PA_Query
+   </code>
+   Xxx indicates the logical connection between a line of search definition and the temporarily result brought by the previous line(s). The possible values for this field are defined in PublicTypes.h C header file:
+  </p>
+  <pre><code>// Values for the field fOperator of LineBlock data structure
+// These values define the logical connection between the lines of a query definition
+typedef enum
+{
+   eQO_NoOperator = 0,   // Always 1st line of a query definition
+   eQO_LogicalAND,   // AND     (&amp; operator)
+   eQO_LogicalOR,   // OR      (| operator)
+   eQO_Except   // EXCEPT  (# operator)
+} PA_QueryOperator;
+ 
+</code></pre>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   The
+   <code>
+    <a href="CMU84849.HTM">
+     PA_QueryOperator
+    </a>
+   </code>
+   parameter must always be set to
+   <code>
+    eQO_NoOperator
+   </code>
+   for the first line of a search definition. The API takes handles this and always sets the first operator to
+   <code>
+    eQO_NoOperator
+   </code>
+   .
+  </p>
+  <u>
+   <p>
+    Table and Field
+   </p>
+  </u>
+  <p>
+   The 4D plug-in passes to
+   <code>
+    PA_Query
+   </code>
+   Xxx the table and field numbers on which the search will be performed. Automatic many-to-one relations can be used during a search.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   Picture, BLOB, and SubTable Fields cannot be searched. If this is attempted the line will be ignored and no error will be returned.
+  </p>
+  <u>
+   <p>
+    The Comparison operator (of type PA_QueryComparison)
+   </p>
+  </u>
+  <p>
+   The
+   <code>
+    <a href="CMU84848.HTM">
+     PA_QueryComparison
+    </a>
+   </code>
+   parameter of the
+   <code>
+    PA_QueryXxx
+   </code>
+   routines indicates the comparison operator for the line. The possible values for this field are defined in the PublicTypes.h C header file:
+  </p>
+  <pre><code>// Values for the field fComparison of LineBlock data structure
+// These values define the comparison operator for the line of query definition   
+typedef enum
+{
+   eQC_NoOperation = 0,      // No query line can have this value
+   eQC_IsEqual,      // Is equal to
+   eQC_IsDifferent,      // Is not equal to
+   eQC_IsGreater,      // Is greater than
+   eQC_IsGreaterOrEqual,      // Is greater or equal to
+   eQC_IsLess,      // Is less than
+   eQC_IsLessOrEqual,      // Is less or equal to
+   eQC_Contains,      // Contains
+   eQC_NotContains      // Does not contains
+} PA_QueryComparison;
+</code></pre>
+  <p>
+   Depending on the type of the Field for the line, certain operations are not permitted. The table below summarizes the possible operations for each Field type:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      Field Type
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      Valid search operator
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+      &gt;,  &gt;=
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      &lt;, &lt;=
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+      Contains
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+      =, #
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+      Doesn't contain
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      Alphanumeric
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      Text
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      Real
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      Integer
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      Long Integer
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      Date
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      Time
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      Boolean
+     </td>
+     <td align="LEFT" valign="TOP" width="18%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="13%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="27%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   If the 4D plug-in specifies another logical operator for the first line or specifies
+   <pre><code>eQC_NoOperation</code></pre>
+   or an unknown logical operator for the any other line the search result will be unpredictable and no error will be returned.
+  </p>
+  <u>
+   <p>
+    Search value
+   </p>
+  </u>
+  <p>
+   Depending on the type of the Field for a line the 4D plug-in calls the appropriate PA_QueryXxx routine ((
+   <code>
+    <a href="CMU84777.HTM">
+     PA_QueryString
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84774.HTM">
+     PA_QueryDate
+    </a>
+   </code>
+   )
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   - Although alphanumeric fields may contain up to 80 characters, and text fields may contains up to 32000 characters, the 4D plug-in can only specify up to 40 characters per line in a search definition.
+  </p>
+  <p>
+   - Time expressions are expressed as a sum of seconds. For example a delay of 1 hour 1 MN 1 sec is represented by 4th Dimension as the numeric value 3600 + 60 + 1 = 3661 seconds.
+  </p>
+  <u>
+   <p>
+    Thermometer, user interaction and testing the success of the search
+   </p>
+  </u>
+  <p>
+   During the search operation, and depending on previous calls to
+   <code>
+    PA_Get/Set/MessagesStatus
+   </code>
+   , the thermometer window may be displayed. If it is displayed, then the user may interrupt the operation by clicking on the
+   <b>
+    Cancel
+   </b>
+   button. In such case,
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   () returns
+   <code>
+    eER_NoErr
+   </code>
+   to signal that the search was correctly started even though it may have been interrupted. In addition
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   () also returns
+   <code>
+    eER_NoErr
+   </code>
+   when the user clicks on the "
+   <b>
+    Cancel
+   </b>
+   " button of the search dialog (
+   <code>
+    PA_QueryEditor
+   </code>
+   ).
+  </p>
+  <p>
+   Consequently to check if a search operation has been successfully completed,
+   <code>
+    thePlugin
+   </code>
+   must test both the
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   () and the 4th Dimension
+   <b>
+    OK
+   </b>
+   System Variable (Note that if the thermometer window is not displayed, you can just check
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   ). This can be accomplished using
+   <code>
+    <a href="CMU84717.HTM">
+     PA_GetVariable
+    </a>
+   </code>
+   . If the search correctly completed, the
+   <code>
+    OK System Variable
+   </code>
+   is set equal to 1. If the search was not corrected the
+   <code>
+    OK System Variable
+   </code>
+   is set equal to 0.
+  </p>
+  <p>
+   The code of a utility routine that returns the current value of OK is shown later.
+  </p>
+  <u>
+   <p>
+    Example of search definition
+   </p>
+  </u>
+  <p>
+   Given a database whose second Table is  [Pizzas], whose fourth field is the date of  creation of the record. To search all Pizzas created during the year 2000, you could use this code (which assumes that there is no invisible Field) that returns an error number and set
+   <code>
+    *recFound
+   </code>
+   to the number of found records:
+  </p>
+  <pre><code> 
+short FindY2KPizzas (long *recFound)
+{
+   short   err;
+   PA_QueryRef ref;
+ 
+// Initialize the number of founded records
+   *recFound = 0L;
+ 
+// Prepare the query
+   ref = PA_OpenQuery(2);
+ 
+// Serach [Pizzas] during year 2000
+   // IMPORTANT: FIRST LINE USES eQO_NoOperator
+   PA_QueryDate(ref, 2, 4, eQO_NoOperator, eQC_IsGreaterOrEqual, 1, 1, 2000);
+   PA_QueryDate(ref, 2, 4, eQO_LogicalAND, eQC_IsLessOrEqual, 31, 12, 2000);
+ 
+// Start the search
+   PA_CloseQuery(ref);
+ 
+// get the result
+   err = PA_GetLastError();
+   if(!err)
+   {
+   // No error in the search. Check if the user cancelled the search
+   // by checking the value of the System Variable OK
+      if(GetOK()) // The search was not cancelled
+         *recFound = PA_RecordsInSelection(2);
+   }
+ 
+   return err;
+   
+</code></pre>
+  <p>
+   } //
+   <pre><code>FindY2KPizzas
+ 
+char GetOK ()
+{
+   PA_Variable   ok;
+   char         okValue = (char) 0;
+   
+// Note that in interpreted mode, OK may be undefined
+   ok = PA_GetVariable("OK"); // using C strings here
+ 
+   if(PA_GetLastError() == eER_NoErr)
+   {
+      switch (PA_GetVariableKind(ok))
+      {
+         case eVK_Real:
+            if (PA_GetRealVariable(ok) != 0.0 )
+               okValue = 1;
+            break;
+         case eVK_Longint:
+            if (PA_GetLongintVariable(ok) != 0)
+               okValue = 1;
+            break;
+      }
+   }
+   
+   return okValue;
+}</code></pre>
+  </p>
+ </body>
+</html>

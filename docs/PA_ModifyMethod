@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// ---------------------------------------------------------------
+// 4D Application Methods and functions
+// ---------------------------------------------------------------
+//
+void    PA_ModifyMethod    (PA_Unichar* methodName, PA_Unistring* methodCode );
+//
+
+
+</body></html>

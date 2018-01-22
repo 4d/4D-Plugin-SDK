@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   Every routine in this section works exactly like its corresponding 4th Dimension command:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      PA_CopyNamedSelection
+     </td>
+     <td align="LEFT" valign="TOP" width="78%">
+      <code>
+       COPY NAMED SELECTION
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      PA_CutNamedSelection
+     </td>
+     <td align="LEFT" valign="TOP" width="78%">
+      <code>
+       CUT NAMED SELECTION
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      PAUseNamedSelection
+     </td>
+     <td align="LEFT" valign="TOP" width="78%">
+      <code>
+       USE NAMED SELECTION
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+      PA_ClearNamedSelection
+     </td>
+     <td align="LEFT" valign="TOP" width="78%">
+      <code>
+       CLEAR NAMED SELECTION
+      </code>
+     </td>
+    </tr>
+   </table>
+  </p>
+  <p>
+   Please refer to 4th Dimension documentation to learn more about named selection.
+  </p>
+  <p>
+   In addition to the information in the documentation:
+  </p>
+  <p>
+   - A named selection is an ordered list of records for a table in a process. This ordered list can be given a name and kept in memory. Named selections offer a simple means of preserving the order of the selection and the current record of the selection in memory .
+  </p>
+  <p>
+   - Named selections can be process or interprocess in scope.
+  </p>
+  <p>
+   - Named selections require 4 bytes for each record in the selection.
+  </p>
+  <p>
+   - Named selections exist in memory. Remember to free this memory once you have finished with a named selection. A selection created by
+   <code>
+    <a href="CMU84796.HTM">
+     PA_CopyNamedSelection
+    </a>
+   </code>
+   must be cleared with
+   <code>
+    PA_ClearSelection
+   </code>
+   . A named selection created by
+   <code>
+    <a href="CMU84795.HTM">
+     PA_CutNamedSelection
+    </a>
+   </code>
+   is cleared when calling
+   <code>
+    PA_UseSelection
+   </code>
+   .
+  </p>
+  <p>
+   - If a named selection is created during a transaction, it may contain addresses that will no longer be valid when the transaction is validated or cancelled.  The records will receive their final, and actual, address after the transaction is validated.
+  </p>
+  <pre><code></code></pre>
+ </body>
+</html>

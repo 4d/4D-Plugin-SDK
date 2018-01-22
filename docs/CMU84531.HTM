@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_OpenPluginWindow
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_OpenPluginWindow
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_OpenPluginWindow (areaName; wTitle; wRect) → PA_PluginRef
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      areaName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the external area
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      wTitle
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Window title
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      wRect
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Rect
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Window coordinates
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginRef
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Reference to the plug-in window
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_OpenPluginWindow
+    </font>
+   </code>
+   creates and opens an external window for the plug-in named
+   <code>
+    areaName
+   </code>
+   and returns a reference to that plug-in area, just like the
+   <code>
+    <a href="CMU00309.HTM">
+     Open external window
+    </a>
+   </code>
+   4th Dimension function does.
+  </p>
+  <p>
+   Pass the name of the external area  in
+   <code>
+    areaName
+   </code>
+   (starting with an underscore) and the title of the window in
+   <code>
+    wTitle
+   </code>
+   .
+  </p>
+  <p>
+   Pass the coordinates (in global system coordinates) of the window in
+   <code>
+    wRect
+   </code>
+   . 4D uses those coordinates to size the window once created.
+  </p>
+  <p>
+   Depending on default settings or on previous calls to
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84816.HTM">
+     PA_UseCStrings
+    </a>
+   </code>
+   ,
+   <code>
+    areaName
+   </code>
+   and
+   <code>
+    wTitle
+   </code>
+   must be Pascal or an ANSI C strings.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   The plug-in must call
+   <code>
+    <a href="CMU84530.HTM">
+     PA_ClosePluginWindow
+    </a>
+   </code>
+   to properly close the window. This can also be done from within 4D by calling
+   <code>
+    <a href="CMU00154.HTM">
+     CLOSE WINDOW
+    </a>
+   </code>
+   , passing the
+   <code>
+    PA_PluginRef
+   </code>
+   as a long to this 4D command.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Launch a 4D Write area in an external window.
+  </p>
+  <p>
+  </p>
+  <pre><code>   PA_Handle      _4WRZone;
+   PA_Rect      r = {50, 50, 450, 450};
+ 
+   _4WRZone = PA_OpenPluginWindow("_4D Write", "New 4D Write zone", r);
+ 
+   /* . . . some code . . . */
+   PA_ClosePluginWindow(_4WRZone);
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU00154.HTM">
+    CLOSE WINDOW
+   </a>
+   ,
+   <a href="CMU00309.HTM">
+    Open external window
+   </a>
+   ,
+   <a href="CMU84530.HTM">
+    PA_ClosePluginWindow
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

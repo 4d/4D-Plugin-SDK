@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SetPackedRecord
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SetPackedRecord
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SetPackedRecord (tNum; buffer; bufferSize)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      buffer
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Buffer to the memory block containing data
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      bufferSize
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Buffer size in bytes
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_SetPackedRecord
+    </font>
+   </code>
+   fills all the fields of the current record of the table number
+   <code>
+    tNum
+   </code>
+   , using the data passed in
+   <code>
+    buffer
+   </code>
+   of size
+   <code>
+    bufferSize
+   </code>
+   .
+  </p>
+  <p>
+   The routine does nothing if there is no current record when the call is made.
+  </p>
+  <p>
+   The buffer to the block of data containing the concatenation of all fields of a record must have been previously obtained using
+   <code>
+    <a href="CMU84768.HTM">
+     PA_GetPackedRecord
+    </a>
+   </code>
+   . The table used when calling
+   <code>
+    <a href="CMU84768.HTM">
+     PA_GetPackedRecord
+    </a>
+   </code>
+   and
+   <code>
+    <font color="#CF0000">
+     PA_SetPackedRecord
+    </font>
+   </code>
+   must have an identical table definition. Passing a buffer to an other type of data may provoke unexpected results.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See
+   <code>
+    <a href="CMU84768.HTM">
+     PA_GetPackedRecord
+    </a>
+   </code>
+   for an example of use
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84768.HTM">
+    PA_GetPackedRecord
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (bad table number, not enough memory, etc.).
+  </p>
+ </body>
+</html>

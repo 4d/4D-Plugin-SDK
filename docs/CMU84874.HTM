@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Get4DVersion
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Get4DVersion
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Get4DVersion  → unsigned long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Version number of the running application
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_Get4DVersion
+    </font>
+   </code>
+   returns the version number of the running application.
+  </p>
+  <p>
+   The returned value is of type unsigned long and should be read in hexadecimal value,  in 7 nibbles numbered from right to left:
+  </p>
+  <p>
+   Nibble #7 Equal to 0xF or 0xB (0xF means Final version; 0xB means Beta version)
+  </p>
+  <p>
+   Nibble #6 thru #4:  a 12-bit number containing a version number internally used by 4D,
+  </p>
+  <p>
+   Nibble #3 thru #2: a byte containing the version number,
+  </p>
+  <p>
+   Nibble #1 Contains the update/upgrade number,
+  </p>
+  <p>
+   Nibble #0 Contains the revision number.
+  </p>
+  <p>
+   Example:
+  </p>
+  <p>
+   · 0xB0090670 means 9th beta version of 4th Dimension 6.7
+  </p>
+  <p>
+   · 0xF0010683 means 1st final version of 4th Dimension 6.8.3
+  </p>
+  <p>
+   . 0xF0010700 means 1st final version of 4th Dimension 2003
+  </p>
+  <p>
+   You can use macros (or in-lined functions) to retrieve information.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   We do not want to launch if the version is less than 6.7.3.
+  </p>
+  <p>
+  </p>
+  <pre><code>   // somewhere in a header file
+   #define kMINIMAL_4DVERSION   0x00000673
+   . . .
+   // Function called at InitPackage
+   char Is4DVersionOK ()
+   {
+      if ( ( PA_Get4DVersion() &amp; 0x0000FFFF ) &lt; kMINIMAL_4DVERSION )
+      {
+         PA_Alert( "This plug-in needs at least a version 6.7.3 of 4D" );
+         return 0;
+      }
+      else
+         return 1;
+   }
+</code></pre>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

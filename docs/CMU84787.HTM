@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetFieldProperties
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetFieldProperties
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetFieldProperties (tNum; fNum; fieldKind; stringLength; isIndexed; fAttributes)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fieldKind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_FieldKind *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind of field
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      stringLength
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of the string field
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      isIndexed
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 = Indexed field
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fAttributes
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field attributes
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetFieldProperties
+    </font>
+   </code>
+   returns different information about the given field.
+  </p>
+  <u>
+   <p>
+    fieldKind
+   </p>
+  </u>
+  is the kind of the field, a returned value from the
+  <code>
+   <a href="CMU84851.HTM">
+    PA_FieldKind
+   </a>
+  </code>
+  enum, defined as this:
+ </body>
+</html>
+<pre><code><table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">typedef enum</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="55%"></td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">{</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="55%"></td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_InvalidFieldKind</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= -1,</td><td align="LEFT" valign="TOP" width="55%"></td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_AlphaField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 0,</td><td align="LEFT" valign="TOP" width="55%">//  Alphanumeric field (from 2 to 80 characters)</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_RealField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 1,</td><td align="LEFT" valign="TOP" width="55%">//  Numeric field (Double or Extended value)</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_TextField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 2,</td><td align="LEFT" valign="TOP" width="55%">//  Text field (up to 32000 characters)</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_PictureField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 3,</td><td align="LEFT" valign="TOP" width="55%">//  Picture field (virtually any block of data)</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_DateField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 4,</td><td align="LEFT" valign="TOP" width="55%">//  Date field </td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_BooleanField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 6,</td><td align="LEFT" valign="TOP" width="55%">//  Boolean field</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_SubfileField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 7,</td><td align="LEFT" valign="TOP" width="55%">//  Subfile field</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_IntegerField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 8,</td><td align="LEFT" valign="TOP" width="55%">//  Integer field (-32768..32767)</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_LongintField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 9,</td><td align="LEFT" valign="TOP" width="55%">//  Long Integer field (-2^31..(2^31)-1)</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_TimeField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 11,</td><td align="LEFT" valign="TOP" width="55%">// Time field</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">  eFK_BlobField</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%">= 30</td><td align="LEFT" valign="TOP" width="55%">// BLOB field</td></tr> 
+<tr><td align="LEFT" valign="TOP" width="7%"></td><td align="LEFT" valign="TOP" width="26%">} PA_FieldKind;</td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="6%"></td><td align="LEFT" valign="TOP" width="55%"></td></tr> 
+</table> 
+ 
+</code></pre>
+<u>
+ <p>
+  stringLength
+ </p>
+</u>
+is the length of the field expressed in characters. It may vary from 2 to 80 characters. The length is significant only for alphanumeric fields and can be ignored for all other types of fields.
+<u>
+ <p>
+  isIndexed
+ </p>
+</u>
+is 1 if the field is indexed, otherwise it is 0. Note that for non-indexable fields (text, Pictures, blobs, subtables), this value can be ignored
+<u>
+ <p>
+  fAttributes
+ </p>
+</u>
+are the attributes of the Field (such as Mandatory), returned bit field coded on the Low Word of fAttributes.
+<p>
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    <b>
+     Bit number
+    </b>
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    <b>
+     Set to 1 if the Field
+    </b>
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    <b>
+     Can be ignored if
+    </b>
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    15
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Is Indexed
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    Text, Picture or SubTable
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    14
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Is Indexed unique
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    SubTable Boolean, Text, Picture, or if bit
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    15 is not set
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    13
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Is Mandatory
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    SubTable
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    12
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Is Modifiable
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    Picture or SubTable
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    11
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Is Mandatory
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    SubTable
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    10
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Is Modifiable
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    SubTable
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    8
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Is Invisible
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    SubTable
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    6
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Has an Automatic
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    Text, Picture or SubTable
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Many to One relation*
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    5
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Has an Automatic
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    Text, Picture or SubTable
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    One to Many relation*
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    2 and 1
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Has an Automatic One to Many
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    Allow Deletion Control in the
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    relation* whose "Deletion Control"
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    Preferences Dialog box is not checked,
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    option is:
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    (equivalent to Leave Related Many
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    00 Relational Integrity database
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    intact)
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    option is not active
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    01 Leave related many intact
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    10 Delete related many
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    11 Can't delete related many
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    0
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    Has an automatic One to Many
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    Text, Picture, or SubTable, or if bit 5 is
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    relation* whose "Auto assign
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+    not set
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="40%">
+    related value" attribute is set
+   </td>
+   <td align="LEFT" valign="TOP" width="38%">
+   </td>
+  </tr>
+ </table>
+</p>
+<p>
+ *The relation starts from this Field.
+</p>
+<p>
+ Note that the definition of a field may change during a session if the database is not compiled a user may edit field definitions in the Design environment while the 4D Extension is running in another process.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Get the visible of a field
+</p>
+<p>
+</p>
+<pre><code>   #define kINVISIBLE_MASK      0x00000100
+   
+   char IsFieldVisible (short tNum, short fNum)
+   {
+      PA_FieldKind   kind;
+      short         len;
+      char         isIndexed;
+      long         attrs;
+      
+      PA_GetFieldProperties(tNum, fNum, &amp;kind, &amp;len, &amp;isIndexed, &amp;attrs);
+      if(PA_GetLastError())
+         return 0; // or error code ?
+      
+      return (char) ( (attrs &amp; kINVISIBLE_MASK) ? 1 : 0 );
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84785.HTM">
+  PA_GetFieldList
+ </a>
+ ,
+ <a href="CMU84788.HTM">
+  PA_GetFieldName
+ </a>
+ ,
+ <a href="CMU84786.HTM">
+  PA_GetFieldRelation
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (bad table/field numbers).
+</p>

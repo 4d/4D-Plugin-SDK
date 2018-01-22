@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_RelateMany
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_RelateMany
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_RelateMany (tableNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_RelateMany
+    </font>
+   </code>
+   establishes all One-to-Many relations for the table
+   <code>
+    tableNum
+   </code>
+   .
+  </p>
+  <p>
+   It changes the current selection for each table that has a One-to-Many relation to the table
+   <code>
+    tableNum
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Activate all relations after using
+   <code>
+    <a href="CMU84898.HTM">
+     PA_GotoRecord
+    </a>
+   </code>
+   .
+  </p>
+  <pre><code>   void GotoRecordAndRelations(short tableNum, long recordNum)
+   {
+      PA_GotoRecord(tableNum, recordNum)
+      if(PA_GetLastError() == eER_NoErr)
+      {
+         PA_RelateOne(tableNum);
+         PA_RelateMany(tableNum);
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84798.HTM">
+    PA_RelateOne
+   </a>
+   ,
+   <a href="CMU84837.HTM">
+    PA_UseAutomaticRelations
+   </a>
+   ,
+   <a href="CMU00262.HTM">
+    RELATE MANY
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (bad table number)
+  </p>
+ </body>
+</html>

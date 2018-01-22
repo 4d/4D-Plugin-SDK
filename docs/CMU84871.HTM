@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SetMessagesStatus
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SetMessagesStatus
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SetMessagesStatus (showMessage)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      showMessage
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Show thermometer
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_SetMessagesStatus
+    </font>
+   </code>
+   controls the display of the thermometer shown during time- consuming operations such as sorts and searches for the current process.
+  </p>
+  <p>
+   Displaying the thermometer is local to each process and, by default,  the thermometer will be shown in the process when a new process is started.
+  </p>
+  <p>
+   If a thermometer should not be shown during the next execution of a time-consuming operation, pass 0 in
+   <code>
+    messagesOn
+   </code>
+   . If the thermometer should be used, pass 1 in
+   <code>
+    showMessage
+   </code>
+   .
+  </p>
+  <p>
+   To find out if the thermometer is to be displayed or not, use
+   <code>
+    <a href="CMU84872.HTM">
+     PA_GetMessagesStatus
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   To control where the thermometer will appear on the screen, use
+   <code>
+    <a href="CMU84870.HTM">
+     PA_SetThermometerRect
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84872.HTM">
+    PA_GetMessagesStatus
+   </a>
+   ,
+   <a href="CMU84870.HTM">
+    PA_SetThermometerRect
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

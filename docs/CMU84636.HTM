@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPictureField
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPictureField
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetPictureField (tNum; fNum; picture; info) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      picture
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to picture data
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      info
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PictureInfo*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to picture info
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Picture size in bytes
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetPictureField
+    </font>
+   </code>
+   puts the content of the picture field number
+   <code>
+    fNum
+   </code>
+   of the current record of the table number
+   <code>
+    tNum
+   </code>
+   , in the data pointed to by
+   <code>
+    picture
+   </code>
+   , and returns its size in bytes. In addition, it returns the picture info in
+   <code>
+    info
+   </code>
+   (used when the picture is displayed as a background picture).
+  </p>
+  <p>
+   If the field is not a picture field, the routine leaves
+   <code>
+    picture
+   </code>
+   and
+   <code>
+    info
+   </code>
+   unchanged, returns 0 and an error code in
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   If the picture size is unknown, call the function a first time with
+   <code>
+    picture
+   </code>
+   equal to zero. The returned value will be the size of the needed buffer. Allocate the buffer and call the function again with the correct buffer.
+  </p>
+  <p>
+   4th Dimension uses Macintosh pictures internally. You can get a handle to the picture by calling
+   <code>
+    <a href="CMU84628.HTM">
+     PA_GetPictureHandleField
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   Get a picture field.
+  </p>
+  <p>
+  </p>
+  <pre><code>   char            *thePict;
+   PA_PictureInfo   theInfo;
+   long            pictSize;
+ 
+   // First call the routine with a nil pointer to get the BLOB size
+   pictSize = PA_GetPictureField(tNum, fNum, 0, 0 );
+   // Then allocate the buffer
+   thePict = malloc( pictSize );
+   // If it is ok, get a copy of picture data
+   if ( thePict )
+   {
+      pictSize = PA_GetPictureField( tNum, fNum, thePict, &amp;theInfo );
+   // Work with it
+      /* . . . */
+   // Cleanup
+      free( thePict );
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84628.HTM">
+    PA_GetPictureHandleField
+   </a>
+   ,
+   <a href="CMU84624.HTM">
+    PA_SetPictureField
+   </a>
+   ,
+   <a href="CMU84616.HTM">
+    PA_SetPictureHandleField
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (
+   <code>
+    eER_InvalidFileNumber
+   </code>
+   ,
+   <code>
+    eER_InvalidFieldNumber
+   </code>
+   ).
+  </p>
+ </body>
+</html>

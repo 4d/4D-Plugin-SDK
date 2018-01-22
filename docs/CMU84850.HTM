@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <a href="XKALPUSA.HTM">
+   Alphabetical command list
+  </a>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <pre><code>typedef enum
+{
+   eVK_Real   = 1,   // Variable declared using C_REAL
+   eVK_Text   = 2,   // Variable declared using C_TEXT
+   eVK_Date   = 4,   // Variable declared using C_DATE
+   eVK_Undefined   = 5,   // Undefined variable
+   eVK_Boolean   = 6,   // Variable declared using C_BOOLEAN
+   eVK_Longint   = 9,   // Variable declared using C_LONGINT
+   eVK_Picture   = 10,   // Variable declared using C_PICTURE
+   eVK_Time   = 11,   // Variable declared using C_TIME
+   eVK_ArrayOfArray   = 13,   // Any two-dimensional array
+   eVK_ArrayReal   = 14,   // One dimension array declared using ARRAY REAL
+   eVK_ArrayInteger   = 15,   // One dimension array declared using ARRAY INTEGER
+   eVK_ArrayLongint   = 16,   // One dimension array declared using ARRAY LONGINT
+   eVK_ArrayDate   = 17,   // One dimension array declared using ARRAY DATE
+   eVK_ArrayText   = 18,   // One dimension array declared using ARRAY TEXT
+   eVK_ArrayPicture   = 19,   // One dimension array declared using ARRAY PICTURE
+   eVK_ArrayString   = 21,   // One dimension array declared using ARRAY STRING
+   eVK_ArrayBoolean   = 22,   // One dimension array declared using ARRAY BOOLEAN
+   eVK_String   = 24,   // Variable declared using C_STRING
+   eVK_Blob   = 30   // Variable declared using C_BLOB
+} PA_VariableKind;</code></pre>
+ </body>
+</html>

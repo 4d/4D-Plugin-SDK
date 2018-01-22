@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetResourceNameList
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetResourceNameList
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetResourceNameList (resFile; kind; nameList) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resFile
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      File reference number of the file to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      kind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind (4 Bytes type) of resources
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      nameList
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      List of resource names of a type
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Number of names returned
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetResourceNameList
+    </font>
+   </code>
+   fills the buffer pointed to by
+   <code>
+    nameList
+   </code>
+   with all the resource names of type
+   <code>
+    kind
+   </code>
+   present in the file referenced by
+   <code>
+    resFile
+   </code>
+   , and returns the number of names.
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE
+   </p>
+   <code>
+   </code>
+  </b>
+  <p>
+   <font color="#CF0000">
+    PA_GetResourceNameList
+   </font>
+  </p>
+ </body>
+</html>
+returns the number of names, not the size of the buffer
+<code>
+ kindList
+</code>
+.
+<code>
+ <p>
+  kindList
+ </p>
+</code>
+is an array of char[32], starting at element 0 and ending at element (returned value - 1).
+<p>
+ If
+ <code>
+  resFile
+ </code>
+ is invalid then there is no resource name for resources of type
+ <code>
+  kind
+ </code>
+ ,
+ <code>
+  <font color="#CF0000">
+   PA_GetResourceNameList
+  </font>
+ </code>
+ returns 0.
+</p>
+<p>
+ First call the routine passing 0L in
+ <code>
+  kindList
+ </code>
+ to get the count of kinds. Then, allocate a buffer of (thisCount * 32) and call the routine again.
+</p>
+<p>
+ Depending on default settings or on previous calls to
+ <code>
+  <a href="CMU84817.HTM">
+   PA_UsePStrings
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84816.HTM">
+   PA_UseCStrings
+  </a>
+ </code>
+ ,
+ <code>
+  nameList
+ </code>
+ will be filled with a Pascal or an ANSI C string.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Loading the name list of resource type 'toto'.
+</p>
+<p>
+</p>
+<pre><code>   long         count, i;
+   char         *names, *oneName;
+   #define kNAMES_LENGTH   ((char) 32)
+ 
+   // First, call the routine with a null nameList to get the number of names
+   count = PA_GetResourceNameList(resFile, 'toto', 0L);
+   if(count)
+   {
+   // Then, allocate a buffer and call the routine again
+      names = malloc(count * kNAMES_LENGTH);
+      count = PA_GetResourceNameList(resFile, 'toto', names);
+   // Do something with the names
+      for(i = 0; i &lt; count; i++)
+      {
+         oneName = &amp;names[i];
+      /* . . . do something with this name . . . */
+      }
+   }
+ 
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84558.HTM">
+  PA_GetResourceName
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

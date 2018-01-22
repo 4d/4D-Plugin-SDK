@@ -1,0 +1,15 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// ---------------------------------------------------------------
+// 4D Application Methods and functions
+// ---------------------------------------------------------------
+//
+
+void    PA_CreateMethod (
+                 PA_Unichar* methodName,
+                 PA_MethodFlags ref,
+                 PA_Unistring* methodCode,
+                 PA_Unichar* folderName );
+
+//
+
+
+</body></html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Request
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Request
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Request (message; value; okButton; cancelButton) → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      message
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Unichar*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Message to display in the request dialog box
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      value
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Unichar*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Default data for the enterable text area
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Value entered by user
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      okButton
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Unichar*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      OK button title
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      cancelButton
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Unichar*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Cancel button title
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 if the user validated the dialog
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Request
+    </font>
+   </code>
+   displays a request dialog box composed of a message, a text input area, an
+   <b>
+    OK
+   </b>
+   button, and a
+   <b>
+    Cancel
+   </b>
+   Button.
+  </p>
+  <p>
+   This is like the
+   <code>
+    <a href="CMU00163.HTM">
+     Request
+    </a>
+   </code>
+   function. See the 4D Language Reference manual for more information on the routine.
+  </p>
+  <p>
+   The differences between the 4D command and the routine are:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="13%">
+     </td>
+     <td align="LEFT" valign="TOP" width="87%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+      <code>
+       value
+      </code>
+      holds both the default data entry and the string entered by the user
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="13%">
+     </td>
+     <td align="LEFT" valign="TOP" width="87%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+      The routine returns 1 if the user clicks clicks you do not have to test the
+      <b>
+       OK
+      </b>
+      variable.
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   Each parameter is either Pascal or C strings, up to 255 characters.
+  </p>
+  <p>
+   Use Pascal or C strings depending on the previous call to
+   <code>
+    PA_UseCString
+   </code>
+   ,
+   <code>
+    PA_UsePString
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Requesting the user name:
+  </p>
+  <pre><code>   char   response{256];
+   response[0] = (char) 0;
+   if(PA_Request("enter your name : ", response, "OK", "Do not want to"))
+   {
+      /* . . . */
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84725.HTM">
+    PA_Alert
+   </a>
+   ,
+   <a href="CMU84724.HTM">
+    PA_Confirm
+   </a>
+   ,
+   <a href="CMU00163.HTM">
+    Request
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

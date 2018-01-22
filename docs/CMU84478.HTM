@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2004.1 (Modified)
+  </p>
+  <hr/>
+  <p>
+   A plug-in area is an area (in a form or in its own window) that belongs to the plug-in.
+  </p>
+  <p>
+   Once created, 4th Dimension send it all the necessary messages and events to deal with the user: mouse clicks, keystrokes, menu selection,  drag and drop, idle, etc
+  </p>
+  <p>
+   To create an external area, you use the PluginWizard, selecting the necessary options. An area can exist only within a form (its name starts with a "%"), or it can run within a form and in its own window (its name starts with an underscore, it then is listed in the "Plug-ins" menu of the User mode).
+  </p>
+  <p>
+   Here are the subjects that will be discussed in this section:
+  </p>
+  <p>
+   - brief look at the skeleton of the code of an external area
+  </p>
+  <p>
+   - Area events
+  </p>
+  <p>
+   - Area Reference
+  </p>
+  <p>
+   - GrafPort and DeviceContext
+  </p>
+  <p>
+   - Using properties and Advanced properties
+  </p>
+  <p>
+   - build a sample area that demonstrates the basic way to code an external area.
+  </p>
+  <b>
+   <u>
+    <p>
+     Overview of external areas
+    </p>
+   </u>
+  </b>
+ </body>
+</html>
+<p>
+ An external area receives events that are passed to it by 4th Dimension. Its main routine usually consist of a dispatch of the events the plug-in wants to respond.
+</p>
+<p>
+ When 4th Dimension wants to interact with the area, it calls the
+ <code>
+  PluginMain
+ </code>
+ routine with the appropriate selector value (as usual, it is the index of the routine in the STR# resource of the plug-in  PluginWizard takes care of that). 4D passes the plug-in the standard pointer
+ <code>
+  PA_PluginParameters
+ </code>
+ , which contains different kind of data depending of the event that has to be managed.
+</p>
+<p>
+ Those events are listed in an enum of type
+ <code>
+  AE_AreaEvent
+ </code>
+ that is defined in the "PublicTypes.h" header file of this API.
+</p>
+<pre><code>typedef enum
+{
+   eAE_Idle         = 0,
+   eAE_MouseDown   = 1,
+   eAE_MouseUp   = 2,
+   eAE_KeyDown   = 3,
+   eAE_KeyUp   = 4,
+   . . .
+   . . .
+   eAE_DesignInit   = 605
+} PA_AreaEvent;
+</code></pre>
+<p>
+ For each event, the plug-in can do about whatever it wants. Some events are critical for the plug-in, such as initialization/de-initialization of private data.
+</p>
+<p>
+ Basically, there are 3 kinds of events.
+</p>
+<p>
+ - Design environment events: customizing the area (especially with the Advanced Properties Dialog), draw it in the form editor.
+</p>
+<p>
+ - Initialization/De-initialization events at Runtime: the plug-in allocates memory, get some default values from the Advanced Properties.
+</p>
+<p>
+ - Runtime events: mouse events, key strokes, drag and drop
+</p>
+<p>
+ So, here is a skeleton of the code of a plug-in area:
+</p>
+<pre><code>void PluginMain( long selector, PA_PluginParameters params )
+{
+// Dispatch selector
+   switch ( selector )
+   {
+      case kInitPlugin :
+         // Enter some initialization code for the plug-in
+         break;
+</code></pre>
+<pre><code>      case kDeinitPlugin :
+         // enter some de-initialization code here if needed
+         break;
+      
+      case 1 :
+         // enter code for first  routine  here
+         break;
+</code></pre>
+<pre><code>      case 2 :
+         // enter code for second routine here
+         break;
+      . . .
+      . . .
+      case 11 : // in this sample, the 11th selector is an external  area
+      // Call  the dispatcher
+         DoMyPluginArea( params );
+         break;
+</code></pre>
+<pre><code>   }
+}
+</code></pre>
+<pre><code>void DoMyPluginArea ( PA_PluginParameters params )
+{
+   /* . . . local variables . . . */
+   PA_AreaEvent      event;
+</code></pre>
+<pre><code>// Get the event
+   event = PA_GetAreaEvent( params );
+//  to dispatch it:
+   switch ( event )
+   {
+// =========================initialization/DE-INITIALIzATION AT RUNTIME
+      case eAE_Init :
+   // If any, get the advanced properties.
+   // Allocate some private data (4th Dimension will give back this data at each call)
+         . . .
+         break;
+</code></pre>
+<pre><code>      case eAE_Deinit :
+   // If any, get our private data and dispose of it
+         . . .
+         break;
+      
+// ========================= Runtime EVENTS
+   // 4D wants to know if our area is able to be focused   
+      case eAE_IsFocusable :
+         . . .
+         break;
+</code></pre>
+<pre><code>   // 4D tells us it is time to redraw our area
+      case eAE_Update :
+         . . .
+         break;
+</code></pre>
+<pre><code>   // We've got a mousedown in our area
+      case eAE_MouseDown:
+         . . .
+         break;
+</code></pre>
+<pre><code>   // and so on with other Runtime events
+         . . .
+</code></pre>
+<pre><code>// ========================= DESIGN MODE EVENTS
+   // First time the form is opened in Design Mode
+      case eAE_DesignInit :
+         . . .
+         break;
+</code></pre>
+<pre><code>   // 4D wants to redraw the area in a form, in design mode
+      case eAE_DesignUpdate :
+         . . .
+         break;
+</code></pre>
+<pre><code>   // 4D asks us if we want to use the AdvancedProperties Dialog button
+      case eAE_AreAdvancedPropertiesEditable :
+         . . .
+         break;
+</code></pre>
+<pre><code>   // We edit the properties
+      case eAE_EditAdvancedProperties :
+         . . .
+         break;
+</code></pre>
+<pre><code>   // 4D has finish with the properties and has stored them with the form
+   // we can now dispose of it.
+      case eAE_DisposeAdvancedProperties :
+         . . .
+         break;
+</code></pre>
+<pre><code>// ========================= OTHER EVENTS ARE IGNORED
+      default :
+         PA_DontTakeEvent(params);
+         break;
+   }
+</code></pre>
+<pre><code>}
+</code></pre>
+<b>
+ <u>
+  <p>
+   Area events
+  </p>
+ </u>
+</b>
+<p>
+ The different events an area can manage are listed in a
+ <code>
+  PA_AreaEvent
+ </code>
+ enumeration, in the "PublicTypes.h" header file.
+</p>
+<p>
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_Init
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    initialization at Runtime. Area can initialize itself, read properties
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    (
+    <code>
+     PA_GetPluginProperties
+    </code>
+    ,
+    <code>
+     PA_GetAdvancedProperties
+    </code>
+    ), set values using
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    advanced properties.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_Deinit
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    De-initialization at Runtime (release memory if necessary).
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_Idle
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    The user does nothing. The plug-in could, as an example, draw a clock.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    A polite plug-in should not take too much time on this event. Area
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    can call
+    <code>
+     PA_CallPluginAreaMethod
+    </code>
+    .
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_MouseDown
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    The mouse button is down. Area can call
+    <code>
+     PA_CallPluginAreaMethod
+    </code>
+    .
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_MouseUp
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    The mouse button is up.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_KeyDown
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    A key is pressed. Area can call
+    <code>
+     PA_CallPluginAreaMethod
+    </code>
+    .
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_Update
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    Area must be updated, redrawn.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     aAE_Cursor
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    Mouse has moved (even if the area is not selected) over the area.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_IsFocusable
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    4D wants to know if the plug-in can get the focus by tab (use
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    <code>
+     PA_SetAreaFocusable
+    </code>
+    to answer).
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_Select
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    The user wants to select the area (
+    <code>
+     PA_AcceptSelect
+    </code>
+    ).
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_Deselect
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    The user wants to leave the area (
+    <code>
+     PA_AcceptDeselect
+    </code>
+    ).
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_Scroll
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    Area rect has changed, call
+    <code>
+     PA_GetAreaRect
+    </code>
+    .
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_TestPrintSize
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_GetPrintSize
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_PrintBand
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_UndoCommand
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    User selects "Undo" in the Edit menu.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_CutCommand
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    User selects "Cut" in the Edit menu.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_CopyCommand
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    User selects "Copy" in the Edit menu.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_PasteCommand
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    User selects "Paste" in the Edit menu.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_SelectAllCommand
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    User selects "Select all" in the Edit menu.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_SelectDeselect
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_UpdateEditCommands
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    4D asks the plug in to redraw the Edit menu (
+    <code>
+     PA_UpdateEditMenu
+    </code>
+    ).
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_LoadRecord
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    A record of the table of the form that owns the area is loaded. The area
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    can get a field of this record (ie, a field whose name is
+    <code>
+     areaName_
+    </code>
+    , like
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    4DWrite).
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_SaveRecord
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    The record of the table that owns the area is saved. The area can save
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    its content back to a field.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_AllowDrop
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    Area accepts a drop ? (call
+    <code>
+     PA_AllowDrop
+    </code>
+    ). If it accepts, it can get
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    information about the drop (
+    <code>
+     PA_GetDragAndDropInfo
+    </code>
+    ,
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    <code>
+     PA_GetDragAndDropKind
+    </code>
+    ,
+    <code>
+     PA_GetDragAndDropVariable
+    </code>
+    ,
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    <code>
+     PA_GetDragAndDropField
+    </code>
+    ).
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_Drag
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    An object is dragged over the area. Get info about the dragging position
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    of the object (
+    <code>
+     PA_GetDragPositions
+    </code>
+    ). Tell 4D the area will handle itself
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    the way it will show that something is dragging over
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    (
+    <code>
+     PA_CustomizeDragOver
+    </code>
+    ).
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_Drop
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    Something is dropped, get its value (
+    <code>
+     PA_GetDragAndDropInfo
+    </code>
+    ,
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    <code>
+     PA_GetDragAndDropKind
+    </code>
+    ,
+    <code>
+     PA_GetDragAndDropVariable
+    </code>
+    ,
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    <code>
+     PA_GetDragAndDropField
+    </code>
+    ).
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_GetMenuIcon
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    4D requests the ID of the 'cicn' resources used in plug-in menu of the
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    tools palette in the Form Editor.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_EndExecutionCycle
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    End of an execution cycle in the form. Use
+    <code>
+     PA_RequestRedraw
+    </code>
+    to refresh
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    the area.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_PageChange
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    The current form page has changed. Use
+    <code>
+     PA_GetCurrentPage
+    </code>
+    .
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_DesignInit
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    Layout is opened in Design Mode
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_DesignUpdate
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    Area must be redrawn in Design Mode. Can use
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    <code>
+     PA_GetPluginProperties
+    </code>
+    .
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_AreAdvancedPropertiesEditable
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    4D wants to know if the Area uses the "Advanced
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    Properties. Area answers with
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    <code>
+     PA_SetAdvancedPropertiesEditable
+    </code>
+    .
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_EditAdvancedProperties
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    User clicks on "Edit" button of the Advanced Properties.
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    Call
+    <code>
+     PA_SetAdvancedProperties
+    </code>
+    .
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+    <code>
+     eAE_DisposeAdvancedProperties
+    </code>
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    4D has stored the advanced properties in the form
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    properties, you can now dispose this data
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="28%">
+   </td>
+   <td align="LEFT" valign="TOP" width="72%">
+    (
+    <code>
+     PA_GetAdvancedPropertiesToDispose
+    </code>
+    ).
+   </td>
+  </tr>
+ </table>
+</p>
+<u>
+ <p>
+  Calling Area object method
+ </p>
+</u>
+<p>
+ It is possible for the area to call its own 4D object method. In order to do this,  the area must have the
+ <code>
+  On plug in area
+ </code>
+ event checked. If this event is set, then the area can call its own object method by calling
+ <code>
+  <a href="CMU84471.HTM">
+   PA_CallPluginAreaMethod
+  </a>
+ </code>
+ .
+</p>
+<p>
+ This call is available for only 3 events :
+ <code>
+  eAE_MouseDown
+ </code>
+ ,
+ <code>
+  eAE_KeyDown
+ </code>
+ , and
+ <code>
+  eAE_Idle
+ </code>
+ .
+</p>
+<p>
+ The example of uses are numerous :
+</p>
+<p>
+ - Let the 4D developer filter each key pressed
+</p>
+<p>
+ - we can imagine an area that makes some hard math calculation during its idle time, and, once done, it calls its object method to inform the user the operation is done.
+</p>
+<p>
+ - An other example could be a time-bombed plug-in, in which an area is available only for x seconds or minutes in a form.
+</p>
+<p>
+ - . . .
+</p>
+<u>
+ <p>
+  Ignoring events
+ </p>
+</u>
+<p>
+ We have seen that a typical area code consists of a dispatch of the received event. It is a good habit to use the "
+ <code>
+  default
+ </code>
+ " keyword of the
+ <code>
+  switch
+ </code>
+ operator, and to call
+ <code>
+  <a href="CMU84472.HTM">
+   PA_DontTakeEvent
+  </a>
+ </code>
+ at this time. This way, 4D can handle the event for itself if necessary.
+</p>
+<b>
+ <u>
+  <p>
+   Area Reference
+  </p>
+ </u>
+</b>
+<p>
+ Usually, an area will need to have some private data, handling miscellaneous information about itself. To get and retrieve this data, the plug-in should follow those instructions :
+</p>
+<p>
+ - allocate a block of memory at initialization time (
+ <code>
+  eAE_AreaInit
+ </code>
+ ), and fill it with the desired values. Once initialized, the area calls
+ <code>
+  <a href="CMU84497.HTM">
+   PA_SetAreaReference
+  </a>
+ </code>
+ , passing it a pointer to the allocated memory, and its size. This "links" this particular pointer  to this particular area.
+</p>
+<p>
+ - Each time the area is called, whatever the event is, it can get back a pointer to its private data by calling
+ <code>
+  <a href="CMU84496.HTM">
+   PA_GetAreaReference
+  </a>
+ </code>
+ .
+</p>
+<p>
+ Here is a sample code using this. The area stores the number of time it has been called with a
+ <code>
+  eAE_Idle
+ </code>
+ event and a
+ <code>
+  eAE_Update
+ </code>
+ event. When the user clicks in the area, the area displays an alert given those number. An area can use whatever it wants as private data, just remember that this data is stored in RAM.
+</p>
+<pre><code>typedef struct
+{
+   long   idleCount;
+   long   updateCount;
+}AREA;
+</code></pre>
+<pre><code>void DoMyArea (PA_PluginParameters params)
+{
+   AREA   *privateData; // the pointer to our data
+   PA_AreaEvent   event;
+   
+   event = PA_GetAreaEvent(params);
+   switch(event)
+   {
+      case eAE_AreaInit:
+   // So, we allocate our data
+         privateData = (AREA *) malloc(sizeof(AREA));
+   // we initialize it (no error check here)
+         privateData-&gt;idleCount = 0;
+         privateData-&gt; updateCount = 0;
+   // Then, we link it to the area
+         PA_SetAreaReference(params, privateData, sizeof(AREA));
+         break
+         
+// =========================================================
+// From now, each time we call PA_GetAreaReference, we get
+// our pointer to the AREA private structure allocated
+// =========================================================
+      case kAE_AreaDeinit: // Free the memory used
+         privateData = (AREA *) PA_GetAreaReference(params);
+         free(privateData);
+         break;
+</code></pre>
+<pre><code>      case kAE_Idle:
+         privateData = (AREA *) PA_GetAreaReference(params);
+         privateData-&gt; idleCount ++
+         break;
+</code></pre>
+<pre><code>      case kAE_Update:
+         privateData = (AREA *) PA_GetAreaReference(params);
+         privateData-&gt; updateCount ++;
+         break;
+</code></pre>
+<pre><code>      case kAE_MouseDown:
+         DisplayData(params);
+         break;
+</code></pre>
+<pre><code>      default:
+         PA_DontTakeEvent();
+         break;
+   }
+}
+</code></pre>
+<b>
+ <p>
+  NOTE
+ </p>
+</b>
+<p>
+ Although the private data is usually allocated at
+ <code>
+  eAE_AreaInit
+ </code>
+ event, it can be allocated at any time, provided that a previously allocated data is disposed before.
+</p>
+<b>
+ <u>
+  <p>
+   Where to draw (GrafPtr, HDC, rectangle) ?
+  </p>
+ </u>
+</b>
+<p>
+ To draw its area, the plug-in must have a valid GrafPort under MacOS or a valid DeviceContext under Windows (again, if the developer uses Altura under Windows, GrafPorts should be used). The drawing region is already clipped for you, limited to the plug-in area.
+</p>
+<p>
+ - Under MacOS, the port is already fixed by 4th Dimension to the current window that holds the area. If you want to draw in the area from another place, you usually get the port at initialization phase.
+</p>
+<p>
+ - Under Windows, you use the
+ <code>
+  <a href="CMU84487.HTM">
+   PA_GetUpdateHDC
+  </a>
+ </code>
+ routine to get a handle to the current device context, already prepared to draw only in the area.
+</p>
+<p>
+ So, under Windows, at
+ <code>
+  eAE_Update
+ </code>
+ event, the code will looks like:
+</p>
+<pre><code>   /*previous switch*/
+   case eAE_Update:
+   {
+      HDC         hdc;
+      HBRUSH      hbrush;
+      RECT         rect;
+      HGDIOBJ   old;
+      PA_Rect   areaRect;
+   // Get the current HDC
+      hdc = (HDC) PA_GetUpdateHDC();
+      rect = PA_GetAreaRect( params );
+   // transfer areaRect in the "regular" RECT
+      MyPA_RectToRECT(areaRect, &amp;rect);
+   // Paint something
+      hbrush = CreateSolidBrush( 0 );
+      old = SelectObject( hdc, hbrush );
+      FrameRect( hdc, &amp;rect, hbrush );
+      SelectObject( hdc, old );
+   }
+      break;
+</code></pre>
+<pre><code>   /* .  . . next switch . . . */
+</code></pre>
+<p>
+ The area coordinates in the window, its rectangle, is updated if the user used the scrollbars. This rectangle is expressed in local coordinates to the window, and, when drawing or writing code that uses this rectangle, the developer should always call
+ <code>
+  <a href="CMU84500.HTM">
+   PA_GetAreaRect
+  </a>
+ </code>
+ .
+</p>
+<p>
+ Note that it is also possible to save the port/device that holds the area at
+ <code>
+  eAE_AreaInit
+ </code>
+ , by reading the appropriate fields of the
+ <code>
+  <a href="CMU84867.HTM">
+   PA_PluginProperties
+  </a>
+ </code>
+ structure (
+ <code>
+  fMacWindow
+ </code>
+ ,
+ <code>
+  fMacPort
+ </code>
+ ,
+ <code>
+  fWinHWND
+ </code>
+ , and
+ <code>
+  fWinHDC
+ </code>
+ ).
+</p>
+<b>
+ <u>
+  <p>
+   Using properties and Advanced properties
+  </p>
+ </u>
+</b>
+<u>
+ <p>
+  Plug-in properties
+ </p>
+</u>
+(defined in the
+<code>
+ <a href="CMU84867.HTM">
+  PA_PluginProperties
+ </a>
+</code>
+structure) are settings that the 4D developer has selected in Design Mode for the area. Using that information, the area can act according to the user choices:
+<p>
+ - font (ID, fac, size, color),
+</p>
+<p>
+ - colors (fore and back),
+</p>
+<p>
+ - justification,
+</p>
+<p>
+ - owning table
+</p>
+<p>
+ - area is draggable/droppable
+</p>
+<p>
+ - platform
+</p>
+<p>
+ - The plug-in properties contains also some information updated depending on the context: the area is being printed
+</p>
+<u>
+ <p>
+  The advanced properties
+ </p>
+</u>
+are a fast way to customize, at Runtime, an area. The 4D developer can set different values or settings of an area in Design Mode. At Runtime, the area get those settings and apply them. This is much easy-to-use for the 4D developer than calling long sequences of "plug_Set This", "plug_Set that" routines at "On load" form event.
+<p>
+ In order to manage the advanced properties, 4D and the plug-in will talk each others. The scheme of use is this one.
+</p>
+<i>
+ <p>
+  o In Design mode
+ </p>
+</i>
+<p>
+ - 4D asks the area if it wants to use AdvancedProperties, calling the area with the event
+ <code>
+  eAE_AreAdvancedPropertiesEditable
+ </code>
+ . It the area answers "yes" (
+ <code>
+  PA_SetAdvancedPropertiesEditable(params, 1)
+ </code>
+ ), 4D enables the "Edit" button of the "Advanced properties", in the properties palette.
+</p>
+<p>
+ - When the user clicks this button, 4D calls the area with the
+ <code>
+  eAE_EditAdvancedProperties
+ </code>
+ event. The area interacts with the user (it can use the Dialogs routines of this API), and then call
+ <code>
+  <a href="CMU84481.HTM">
+   PA_SetAdvancedProperties
+  </a>
+ </code>
+ to 4D, so they will be stored with the form and 4D can give back those properties at Runtime.
+</p>
+<p>
+ - Once 4D has stored the advanced properties, it calls the plug-in with the
+ <code>
+  eAE_DisposeAdvancedProperties
+ </code>
+ event. The plug-in gets back a pointer to its advanced properties data by calling
+ <code>
+  <a href="CMU84480.HTM">
+   PA_GetAdvancedPropertiesToDispose
+  </a>
+ </code>
+ . It can then dispose of it.
+</p>
+<i>
+ <p>
+  o At Runtime
+ </p>
+</i>
+<p>
+ If the plug-in has some advanced properties, it can can get them back at initialization time, by calling first
+ <code>
+  <a href="CMU84498.HTM">
+   PA_GetPluginProperties
+  </a>
+ </code>
+ , passing those properties as a parameter to
+ <code>
+  <a href="CMU84356.HTM">
+   PA_GetAdvancedProperties
+  </a>
+ </code>
+ . This routine extracts the advanced properties from the plug-in properties.
+</p>
+<b>
+ <p>
+  IMPORTANT NOTE
+ </p>
+</b>
+<p>
+ The
+ <code>
+  <a href="CMU84867.HTM">
+   PA_PluginProperties
+  </a>
+ </code>
+ (and, so, the AdvancedProperties) are available
+ <u>
+  ONLY AT
+  <code>
+   eAE_AreaInit
+  </code>
+ </u>
+</p>
+at Runtime (or at update in the form editor). If the plug-in needs to use later some information handled by those structures, it MUST read them at initialization time and duplicate them in its private data structure.
+<p>
+ If
+ <code>
+  <a href="CMU84498.HTM">
+   PA_GetPluginProperties
+  </a>
+ </code>
+ is called for an other event,
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ returns an error.
+</p>
+<p>
+ Since the AdvancedProperties are passed as a pointer to a block of memory, using
+ <code>
+  <a href="CMU84498.HTM">
+   PA_GetPluginProperties
+  </a>
+ </code>
+ (without checking the
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ ) and
+ <code>
+  <a href="CMU84356.HTM">
+   PA_GetAdvancedProperties
+  </a>
+ </code>
+ when it is not the time can lead to a system crash, since the received pointer is a fool pointer.
+</p>
+<p>
+ To avoid this problem, and if the area needs to use later some information stored in the properties or in the advanced properties, it should duplicate the structures (or some fields of those structure) in its private data, as shown in the following sample (no error checking shown) :
+</p>
+<pre><code>// Structure used by the advanced properties
+typedef struct
+{
+   long   field1;
+   long   field2;
+   char   string1[256];
+   /* . . . */
+} ADVANCED;
+</code></pre>
+<pre><code>// Structure used as private data of the area
+typedef struct
+{
+   PA_PluginProperties      props;
+   ADVANCED            advanced;
+   /* . . . */
+} AREA;
+</code></pre>
+<pre><code>// Main routine of the area
+void DoMyArea (PA_PluginParameters params)
+{
+   AREA         *areaData;
+   AE_AreaEvent   event;
+   long         size;
+   
+   event = PA_GetAreaEvent(params);
+   switch (event)
+   {
+// initialization.
+      case eAE_AreaInit:
+// We allocate an AREA structure
+         areaData = (AREA *) malloc(sizeof(AREA));
+// We save the properties
+         PA_GetPluginProperties(params, &amp;areaData-&gt;props);
+// We save the advanced properties
+         areaData-&gt;advanced = PA_GetAdvancedProperties(areaData-&gt;props);
+// Link areaData to this area
+         PA_SetAreaReference(params, areaData, sizeof(AREA);
+         break;
+ 
+      case eAE_AreaDeinit;
+// Free memory
+         areaData = (AREA *) PA_GetAreaReference(params);
+         free(areaData);
+         break;
+ 
+/*
+   From now, each time we need to use the properties (to draw using
+   font, face, size, color set by the 4DE developer) or
+   the advanced properties, we just have to use:
+      areaData = (AREA *) PA_GetAreaReference(params);
+   and to access the different fields.
+*/
+   }
+}
+</code></pre>

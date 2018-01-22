@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_EndSelection
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_EndSelection
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_EndSelection (tableNum) → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 if the end of selection is reached, otherwise 0
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_EndSelection
+    </font>
+   </code>
+   returns 1 if the current record pointer is positioned after the last record of the selection for the Table number
+   <code>
+    tableNum
+   </code>
+   . Otherwise, it returns 0.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_EndSelection
+    </font>
+   </p>
+  </code>
+  also returns 1 if the selection is empty.
+ </body>
+</html>
+<p>
+ A 4D plug-in would typically call
+ <code>
+  <font color="#CF0000">
+   PA_EndSelection
+  </font>
+ </code>
+ to detect whether the record pointer had moved to a point after the last record of a selection following a call to
+ <code>
+  <a href="CMU84885.HTM">
+   PA_NextRecord
+  </a>
+ </code>
+ .
+</p>
+<b>
+ <p>
+  WARNING
+ </p>
+</b>
+<p>
+ This routine does not use virtual structure
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ See
+ <code>
+  <a href="CMU84885.HTM">
+   PA_NextRecord
+  </a>
+ </code>
+ for an example of use.
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84880.HTM">
+  PA_BeforeSelection
+ </a>
+ ,
+ <a href="CMU84885.HTM">
+  PA_NextRecord
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (invalid table number).
+</p>
+<b>
+ <p>
+  Current Selections and Records
+ </p>
+</b>
+<p>
+ No change. If
+ <code>
+  <font color="#CF0000">
+   PA_EndSelection
+  </font>
+ </code>
+ returns 1, there is no current record.
+</p>

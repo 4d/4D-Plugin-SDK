@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Get4DPreferencesFilename
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Get4DPreferencesFilename
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Get4DPreferencesFilename (prefsName)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      prefsName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to a char buffer
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the 4D Preferences file
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Get4DPreferencesFilename
+    </font>
+   </code>
+   fills the string pointed to by
+   <code>
+    prefName
+   </code>
+   with the name of the 4th Dimension preference file name (located in the 4D Folder).
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+   <code>
+   </code>
+  </b>
+  <p>
+   prefName
+  </p>
+ </body>
+</html>
+can contain up to 255 characters.
+<p>
+ Be sure to leave enough room for the path. It is a good habit to always use 255 length strings (declared as Str255 under MacOS or char[256] under Windows).
+</p>
+<b>
+ <p>
+  WARNING
+ </p>
+</b>
+<p>
+ Modifying the 4th Dimension preferences file is not recommended. A plug-in should create and use its own preferences file.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Get the full path of the 4D preferences file.
+</p>
+<p>
+</p>
+<pre><code>   void Get4DPrefsFullPath
+   {
+      char folder[256], pref[256];
+      PA_Get4Dfolder( folder );
+      PA_Get4DPreferencesFilename( pref );
+      strcat( folder, pref );
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84660.HTM">
+  PA_Close4DPreferences
+ </a>
+ ,
+ <a href="CMU84661.HTM">
+  PA_Open4DPreferencesMacResFile
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+always returns
+<code>
+ eER_NoErr
+</code>

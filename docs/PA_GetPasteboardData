@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// -----------------------------------------------------
+// manage the pasteboard
+// -----------------------------------------------------
+
+PA_Handle		PA_GetPasteboardData			
+                       ( PA_PasteboardRef pasteboard, PA_Unichar *kind );
+
+</body></html>

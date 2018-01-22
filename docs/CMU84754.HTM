@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_YieldAbsolute
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_YieldAbsolute
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_YieldAbsolute
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_YieldAbsolute
+    </font>
+   </code>
+   tells the 4D scheduler to execute one time-slice of all other running processes even though one 60 th of a second may not have elapsed since the last scheduler execution cycle.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_YieldAbsolute
+    </font>
+   </p>
+  </code>
+  must be called repeatedly (at least three times) at the beginning of external process code.
+ </body>
+</html>
+<p>
+ Another usual situation where
+ <code>
+  <font color="#CF0000">
+   PA_YieldAbsolute
+  </font>
+ </code>
+ is required is when interprocess communications are performed between a 4D Plug-in and another process. No matter which is used to "send a message to another process" and then "wait for a reply", it is faster to call
+ <code>
+  <font color="#CF0000">
+   PA_YieldAbsolute
+  </font>
+ </code>
+ than
+ <code>
+  <a href="CMU84755.HTM">
+   PA_Yield
+  </a>
+ </code>
+ in the waiting loop.
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84751.HTM">
+  PA_NewProcess
+ </a>
+ ,
+ <a href="CMU84755.HTM">
+  PA_Yield
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+always returns
+<code>
+ eER_NoErr
+</code>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ReturnTime
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ReturnTime
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ReturnTime (params; value)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      value
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Time to be returned (in seconds)
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ReturnTime
+    </font>
+   </code>
+   sets the returned value of a plug-in function to
+   <code>
+    value
+   </code>
+   , received by the calling 4D Method.
+  </p>
+  <p>
+   See
+   <code>
+    Create a new plug-in
+   </code>
+   for a description of returned values accessors.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   The 2nd routine of a plug-in is declared for the 4D developer as:
+  </p>
+  <pre><code>   GetATime -&gt; aTime
+</code></pre>
+  <p>
+   Called in the 4D method as:
+  </p>
+  <pre><code>   $myTime:=GetATime</code></pre>
+  <pre><code>   void PluginMain(selector, PluginParameters params)
+   {
+      switch (selector)
+      {
+         /* . . . case kInitPlugin, kDeinitPlugin . . .*/
+         case 1:
+            /* . . . code for first routine . . .*/
+            break;
+         case 2:
+            GetATimeRoutine(params);
+            break;
+      }
+   }
+ 
+   void GetATimeRoutine(PluginParameters params)
+   {
+      PA_ReturnDate(params,  (11*3600) + 30*(60));  // return 11:30:00
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84821.HTM">
+    Create a new plugin
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

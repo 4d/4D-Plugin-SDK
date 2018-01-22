@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   4D PluginAPI provides the developer with routines to handle drag and drop within 4th Dimension (the routines are internal to 4D, you can't use them to drag/drop objects into other applications).
+  </p>
+  <b>
+   <p>
+    Drag from the area
+   </p>
+  </b>
+  <p>
+   To let the user drag something from the area, call
+   <code>
+    <a href="CMU84518.HTM">
+     PA_DragAndDrop
+    </a>
+   </code>
+   when the area receives the event
+   <code>
+    eAE_MouseDown
+   </code>
+   . Be sure that you respect the 4D developer settings in the Design environment. If the "draggable" property of the area is not checked then you should not let the user drag anything.
+  </p>
+  <p>
+   To see if it is draggable, the area can look at the
+   <code>
+    fDraggable
+   </code>
+   field of the
+   <code>
+    <a href="CMU84867.HTM">
+     PA_PluginProperties
+    </a>
+   </code>
+   structure, received at
+   <code>
+    eAE_Init
+   </code>
+   time.
+  </p>
+  <p>
+   Once the area receives the
+   <code>
+    eAE_MouseDown
+   </code>
+   event, it calls
+   <code>
+    <a href="CMU84490.HTM">
+     PA_GetClick
+    </a>
+   </code>
+   to get the mouse coordinates. It translates those coordinates to global (they are received as local to the window/device that owns the area), and then uses
+   <code>
+    <a href="CMU84518.HTM">
+     PA_DragAndDrop
+    </a>
+   </code>
+   , passing it the global mouse coordinates and the local coordinates of the area rectangle.
+  </p>
+  <p>
+   See the sample below.
+  </p>
+  <b>
+   <p>
+    Managing a drag and receiving a drop
+   </p>
+  </b>
+  <p>
+   If the area is droppable, it can receive 3 kinds of events : eAE
+   <code>
+    _AllowDrop
+   </code>
+   ,
+   <code>
+    eAE_Drag
+   </code>
+   , and
+   <code>
+    eAE_Drop
+   </code>
+   .
+  </p>
+  <p>
+   - 4D first calls the area with the
+   <code>
+    eAE_AllowDrop
+   </code>
+   event. The area gets the dragging object information by calling
+   <code>
+    <a href="CMU84486.HTM">
+     PA_GetDragAndDropInfo
+    </a>
+   </code>
+   . If the area is compatible with the object kind, then the area tells 4D that it accepts the drag by calling
+   <code>
+    PA_AllowDrop,
+   </code>
+   passing it 1 as second the parameter. If it does not want this object to be dropped onto it, 0 is passed.
+  </p>
+  <p>
+   - If the drop is allowed, 4D calls the area repetitively while the object is dragged within its rectangle. It the plug-in wants to handle itself the way something droppable being dragged is displayed, it calls
+   <code>
+    <a href="CMU84483.HTM">
+     PA_CustomizeDragOver
+    </a>
+   </code>
+   . If this routine is not called, 4D draws the user interface for it. By handling the interface itself, the plug-in could, for example, highlight only parts of its content according to the type of data being dragged.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   Even if the area does not manage its own user interface, the dispatch of the event type must catch
+   <code>
+    eAE_Drag
+   </code>
+   . If it does not, and
+   <code>
+    <a href="CMU84472.HTM">
+     PA_DontTakeEvent
+    </a>
+   </code>
+   is called in the "default" of the switch (as is desire, and is done in all the samples of this API), 4D will not draw the user interface.
+  </p>
+  <p>
+   - When the user drops the object, 4th Dimension calls the area with the event
+   <code>
+    eAE_Drop
+   </code>
+   . The area obtains the information by calling
+   <code>
+    <a href="CMU84486.HTM">
+     PA_GetDragAndDropInfo
+    </a>
+   </code>
+   , then it retrieves the object kind and value, by calling one of the accessor routine of this API (
+   <code>
+    <a href="CMU84717.HTM">
+     PA_GetVariable
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84639.HTM">
+     PA_GetStringField
+    </a>
+   </code>
+   ).
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   The coordinates received in the
+   <code>
+    PA_DragAndDropInfo
+   </code>
+   structure are locals to the owning Window/Device.
+  </p>
+  <b>
+   <p>
+    Tips
+   </p>
+  </b>
+  <p>
+   At
+   <code>
+    eAE_AreaInit
+   </code>
+   , the plug-in should keep track of
+   <code>
+    <a href="CMU84867.HTM">
+     PA_PluginProperties
+    </a>
+   </code>
+   fields, such as the
+   <code>
+    fTable
+   </code>
+   field (which give the table number of the table that owns the form), and the
+   <code>
+    fWinHDC
+   </code>
+   for Windows programmers.
+  </p>
+  <p>
+   Getting the
+   <code>
+    fTable
+   </code>
+   field is mandatory because when the object being dragged is a field of the current table in the form, the
+   <code>
+    PA_GetDragAndDropField
+   </code>
+   returns 0 as table number (and the correct field number). In order to check the kind of field (
+   <code>
+    <a href="CMU84787.HTM">
+     PA_GetFieldProperties
+    </a>
+   </code>
+   ) or to get the value of the field (
+   <code>
+    PA_GetxxxField
+   </code>
+   ), the area must pass a valid table number  to those routines.
+  </p>
+  <b>
+   <p>
+    Sample Drag and Drop code
+   </p>
+   <pre><code>/* ------------------------------------------------- 
+   Sample plug-in written using the 4D Plug-in API. 
+ 
+   Using Drag and Drop in an area. Each time a 
+   string (variable or field) is dropped, the 
+   area draws it at the mouse location. 
+ 
+   So: 
+   - At eAE_AllowDrop, the plug-in check the type 
+   of data being dragged.  If it is a string 
+   (variable or field), the drop is allowed. 
+    <br/>
+   - at eAE_Drag, we do nothing (see below) 
+    <br/>
+   - at eAE_Drop, the plug-in gets the value of 
+   the object, and draws it at the mouse location 
+    <br/>
+   The area is also draggable (if this property is set 
+   in design environment). Once a 4D object receives a drop 
+   from the area, it calls the routine GetDraggedString. 
+------------------------------------------------- */
+/*   -------------------------------------------------- 
+   Cross platform common source. 
+   -------------------------------------------------- */ 
+#define _USE_MAC_APIs_   (_ASIPORT_ || VERSIONMAC) 
+</code></pre>
+   <pre><code>/*   -------------------------------------------------- <br/>
+   includes <br/>
+   -------------------------------------------------- */ <br/>
+#include "4DPluginApi.h"
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#if VERSIONWIN &amp;&amp; (!_USE_MAC_APIs_)
+   #include &lt;windows.h&gt;
+#endif
+</code></pre>
+   <pre><code>//   -------------------------------------------------------
+//   List of plug-in routines (usually built with PluginWizard)
+//   -------------------------------------------------------
+enum {
+   kSuperArea   = 1,    // defined as "%AreaDragDrop"
+   kGetAreaString   = 2   // GetDraggedString:S
+   // . . .
+};
+</code></pre>
+   <pre><code>//   -------------------------------------------------------
+//   CONSTANTS
+//   -------------------------------------------------------
+#define kPluginID   17458
+// Default sentence if nothing is modified by the user
+#define kPROMPT   "Drag-Drop a string in this area"
+</code></pre>
+   <pre><code>//   -------------------------------------------------------
+//   STRUCTURES
+//   -------------------------------------------------------
+typedef struct
+{
+// if the area is not draggable we'll do nothing on mouseDown:
+   short   isDraggable;
+// Table number of the table that owns the form
+   short   table;
+// where to draw the string:
+   short   offsetX;
+   short   offsetY;
+// sample thing to draw:
+   char   toDraw[256];
+#if VERSIONWIN
+   HWND   hwnd; // HDC of the window that holds the area
+#endif
+} AREA;
+</code></pre>
+   <pre><code>//   -------------------------------------------------------
+//   GLOBALS
+//   -------------------------------------------------------
+char      gToDraw[256]; // to fill when the area is dragged out
+</code></pre>
+   <pre><code>//   -------------------------------------------------------
+//   PROTOTYPES
+//   -------------------------------------------------------
+void DragDropArea   ( PA_PluginParameters params );
+void Area_Init   ( PA_PluginParameters params );
+void Area_Deinit   ( PA_PluginParameters params );
+void Area_Update   ( PA_PluginParameters params );
+void Area_AllowDrop   ( PA_PluginParameters params );
+void Area_Drop   ( PA_PluginParameters params );
+void Area_DragOut   ( PA_PluginParameters params );
+</code></pre>
+   <pre><code>/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*   ROUTINES            *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+</code></pre>
+   <pre><code>/*   =================================================================
+   Main routine of the plug-in
+   ================================================================= */
+void PluginMain( long selector, PA_PluginParameters params )
+{
+   switch ( selector )
+   {
+      case kInitPlugin :
+   // initialize the string returned after a drag out
+         gToDraw[0] = (char) 0;
+         break;
+</code></pre>
+   <pre><code>      case kDeinitPlugin :
+      // enter some de-initialization code here if needed
+         break;
+</code></pre>
+   <pre><code>      case kSuperArea :
+         DragDropArea( params );
+         break;
+      
+      case kGetAreaString :
+      // A drag out is over. User wants the data
+         PA_ReturnString(params, gToDraw);
+         gToDraw[0] = (char) 0;
+         break;
+   }
+}
+</code></pre>
+   <pre><code>/*   =================================================================
+   Main routine of the area
+   ================================================================= */
+void DragDropArea (PA_PluginParameters params)
+{
+   AE_AreaEvent      event;
+   
+// Get the event and dispatch it
+   event = PA_GetAreaEvent( params );
+</code></pre>
+   <pre><code>   switch ( event )
+   {
+//   -------------------------------------------------------------------
+//               INITIALIZATION / DE-INITIALIZATION
+//   -------------------------------------------------------------------
+      case eAE_Init :
+         Area_Init(params);
+         break;
+</code></pre>
+   <pre><code>      case eAE_Deinit :
+         Area_Deinit(params);
+         break;
+</code></pre>
+   <pre><code>//   -------------------------------------------------------------------
+//               RUNTIME EVENTS
+//   This basic sample demonstrates only some DragAndDrop bases.
+//   -------------------------------------------------------------------
+      case eAE_AllowDrop :
+         Area_AllowDrop( params );
+         break;
+         
+   // Even if we do nothing with it in this sample, eAE_Drag
+   // must be "taken". If we do not do that, the switch will go
+   // to "default", where PA_DontTakeEvent is called. In this
+   // case, the user interface will not be drawn by 4D.
+      case eAE_Drag:
+         break;
+      
+      case eAE_Drop :
+         Area_Drop (params);
+         break;
+</code></pre>
+   <pre><code>      case eAE_MouseDown :
+         Area_DragOut (params);
+         break;
+         
+      case eAE_Update :
+         Area_Update(params);
+         break;
+      
+      default :
+         PA_DontTakeEvent (params);
+         break;
+   }
+</code></pre>
+   <pre><code>} /* DragDropArea */
+</code></pre>
+   <pre><code>/*   =================================================================
+   Initialization of the area
+   
+   We initialize an AREA structure.
+   
+   IMPORTANT: the plug-in properties (and the AdvancedProperties) can only be
+   read at initialization time during  Runtime.
+   ================================================================= */
+void Area_Init (PA_PluginParameters params)
+{
+   AREA   *privateData = 0L;
+   PA_PluginProperties props;
+   PA_Rect   r;
+   
+// Allocate the area private data.
+   privateData = (AREA *) malloc (sizeof(AREA));
+   if(privateData)
+   {
+      r = PA_GetAreaRect(params);
+      PA_GetPluginProperties(params, &amp;props);
+      privateData-&gt;isDraggable = props.fDraggable;
+// It is the only event from witch we can get this info
+      privateData-&gt;table = props.fTable;
+// default values for the string
+      privateData-&gt;offsetX = 5;
+      privateData-&gt;offsetY = 35;
+      privateData-&gt;toDraw[0] = (char) 0;
+#if VERSIONWIN
+      privateData-&gt;hwnd = (HWND) props.fWinHWND;
+#endif
+   }
+// Save our data. 4D will give it back to us later.
+   PA_SetAreaReference( params,  (char *) privateData );
+   
+} /* Area_Init */
+</code></pre>
+   <pre><code>/*   =================================================================
+   De-initialization of the area
+</code></pre>
+   <pre><code>   Free our data. If we do not, the memory used
+   will be lost, using space in heap for nothing.
+   ================================================================= */
+void Area_Deinit (PA_PluginParameters params)
+{
+   AREA   *privateData;
+   
+// Get our data...
+   privateData = (AREA *) PA_GetAreaReference( params );
+// ... release it.
+   if(privateData)
+   {
+      free( (char *) privateData );
+      PA_SetAreaReference(params, 0L);
+   }
+   
+} /* Area_Deinit */
+</code></pre>
+   <pre><code>/*   =================================================================
+   Something is coming over the area
+</code></pre>
+   <pre><code>   We only allow the drop if the object is a string.
+</code></pre>
+   <pre><code>   So, we check the kind of the drag.
+      - if it is a variable, we check its kind, using PA_GetVariableKind
+      - if it is a field, we check its type using PA_GetFieldProperties
+   ================================================================= */
+void Area_AllowDrop (PA_PluginParameters params)
+{
+   PA_DragAndDropInfo   info;
+   PA_DragKind         kind;
+   char            allow = (char) 0;
+   AREA            *privateData;
+   
+// Get the info
+   info = PA_GetDragAndDropInfo ( params );
+   if(PA_GetLastError() == eER_NoErr)
+   {
+// Get the kind of object : variable or field
+      kind = PA_GetDragAndDropKind( info );
+// Check if it is a string
+      switch(kind)
+      {
+         case eDK_DragVariable :
+         {
+            PA_Variable         var;
+            PA_VariableKind      varKind;
+            var = PA_GetDragAndDropVariable( info, 0 );
+            varKind = PA_GetVariableKind(var);
+            if( (varKind == eVK_String) || (varKind == eVK_ArrayString) )
+               allow = (char) 1;
+               
+         }
+            break;
+            
+         case eDK_DragField :
+         {
+            short         table, field;
+            PA_FieldKind   fieldKind;
+</code></pre>
+   <pre><code>            PA_GetDragAndDropTableField( info, &amp;table, &amp;field );
+         // If table is 0, it means that a field of the table that
+         // owns the form is being dragged. We must use the table number
+         // stored at kInitArea
+            if(table == 0)
+            {
+               privateData = (AREA *) PA_GetAreaReference(params);
+               if(privateData)
+                  table = privateData-&gt;table;
+            }
+            if(table)
+            {
+               PA_GetFieldProperties(table, field, &amp;fieldKind, 0L, 0L, 0L);
+               if( fieldKind == eFK_AlphaField )
+                  allow = (char) 1;
+            }
+         }
+            break;
+      }
+   }
+   
+// Now, tell 4D if we allow the drop or not
+   PA_AllowDrop(params, allow);
+   
+} /* Area_AllowDrop */
+</code></pre>
+   <pre><code>/*   =================================================================
+   The dragged object is dropped
+</code></pre>
+   <pre><code>   We get its value and draw the new string.
+   We do not have to check the kind of variable or field, we know it
+   is OK since PA_AllowDrop has been called once.
+   ================================================================= */
+void Area_Drop (PA_PluginParameters params)
+{
+   AREA         *privateData;
+   PA_DragAndDropInfo   info;
+   PA_DragKind      kind;
+   PA_Rect         areaRect;
+   
+// Get the info
+   info = PA_GetDragAndDropInfo ( params );
+   if(PA_GetLastError() == eER_NoErr)
+   {
+// Get our privateData
+      privateData = (AREA *) PA_GetAreaReference(params);
+      if(privateData)
+      {
+   // Get the kind of object : variable or field
+         kind = PA_GetDragAndDropKind( info );
+   // Get its value
+         switch(kind)
+         {
+            case eDK_DragVariable :
+            {
+               PA_Variable   var;
+               var = PA_GetDragAndDropVariable( info, 0 );
+               PA_GetStringVariable(var, privateData-&gt;toDraw);
+                  
+            }
+               break;
+               
+            case eDK_DragField :
+            {
+               short   table, field;
+</code></pre>
+   <pre><code>               PA_GetDragAndDropTableField( info, &amp;table, &amp;field );
+         // If table is 0, it means that a field of the table that
+         // owns the form is being dragged. We must use the table number
+         // stored at kInitArea
+               if(table == 0)
+               {
+                  privateData = (AREA *) PA_GetAreaReference(params);
+                  if(privateData)
+                     table = privateData-&gt;table;
+               }
+               if(table)
+                  PA_GetStringField(table, field, privateData-&gt;toDraw);
+            }
+               break;
+         }
+// Prepare for drawing.
+// We must convert the global coordinate to local in order
+// to properly draw the string at the mouse location.
+// Then, we calculate the offset from the area rectangle
+         areaRect = PA_GetAreaRect(params);
+#if _USE_MAC_APIs_
+{
+         Point   p;
+         p.h = info.fToWhereH;
+         p.v = info.fToWhereV;
+         GlobalToLocal(&amp;p);
+         privateData-&gt;offsetX = (p.h - areaRect.fLeft);
+         privateData-&gt;offsetY = (p.v - areaRect.fTop);
+}
+#else
+{
+         POINT   p;
+         p.x = info.fToWhereH;
+         p.y = info.fToWhereV;
+         ScreenToClient(privateData-&gt;hwnd, &amp;p);
+         privateData-&gt;offsetX = (short) (p.x - areaRect.fLeft);
+         privateData-&gt;offsetY = (short) (p.y - areaRect.fTop);
+}
+#endif
+</code></pre>
+   <pre><code>// At least, let's draw the string
+         Area_Update(params);
+      } // if (privateData)
+   }
+   
+} /* Area_Drop */
+</code></pre>
+   <pre><code>/*   =================================================================
+   Drag the area itself
+   ================================================================= */
+void Area_DragOut   (PA_PluginParameters params)
+{
+   PA_Rect      areaRect;
+   short      x, y;
+   AREA      *privateData;
+   
+   privateData = (AREA *) PA_GetAreaReference(params);
+   if(!privateData)
+      return;
+   
+// we do not start a drag if the area is not draggable
+   if( !privateData-&gt;isDraggable)
+      return;
+   
+   PA_GetClic(params, &amp;x, &amp;y);
+   if(PA_GetLastError() == eER_NoErr)
+   {
+// We must convert those local coordinates to global
+#if _USE_MAC_APIs_
+      Point   p;
+      p.h = x;
+      p.v = y;
+      LocalToGlobal(&amp;p);
+      x = p.h;
+      y = p.v;
+#else
+      POINT   p;
+      
+      p.x = x;
+      p.y = y;
+      ClientToScreen( privateData-&gt;hwnd, &amp;p);
+      x = (short) p.x;
+      y = (short) p.y;
+#endif
+// prepare the returned string
+      PA_MoveBlock(privateData-&gt;toDraw, gToDraw, 256);
+// Start the drag
+      areaRect = PA_GetAreaRect(params);
+      PA_DragAndDrop(x, y, areaRect);
+   }
+   
+} /* Area_DragOut */
+</code></pre>
+   <pre><code>/*   =================================================================
+   Draw the area
+   ================================================================= */
+void Area_Update   (PA_PluginParameters params)
+{
+   PA_Rect      areaRect;
+   AREA      *privateData;
+   
+// Get our data
+   privateData = (AREA *) PA_GetAreaReference( params );
+   if(!privateData)
+      return;
+      
+// Get area rect
+   areaRect = PA_GetAreaRect(params);
+   
+// ----------------------------------------- Draw things under MacOS - Windows+Altura
+#if _USE_MAC_APIs_
+   {   
+   // on Mac, the PA_Rect is a regular Rect      
+      EraseRect( (Rect *) &amp;areaRect);
+</code></pre>
+   <pre><code>   // Draw the prompt
+      MoveTo(areaRect.fLeft + 5, areaRect.fTop + 20);
+      DrawText(kPROMPT, 0, strlen(kPROMPT));
+   // Draw the string, if any
+      if(privateData-&gt;toDraw[0])
+      {
+         MoveTo(   areaRect.fLeft + privateData-&gt;offsetX,
+               areaRect.fTop + privateData-&gt;offsetY );
+         DrawText(privateData-&gt;toDraw, 0, strlen(privateData-&gt;toDraw));
+      }
+   }
+//------------------------------------------- Draw things under Windows
+#else
+   {
+      HDC      hdc;
+      RECT   r;
+      
+      hdc = (HDC) PA_GetUpdateHDC();
+</code></pre>
+   <pre><code>   // On window, a RECT is made with long, not shorts
+      r.top = areaRect.fTop;
+      r.left = areaRect.fLeft;
+      r.bottom = areaRect.fBottom;
+      r.right = areaRect.fRight;
+      
+   // Draw the prompt
+      TextOut(hdc, r.left + 5, r.top+20, kPROMPT, strlen(kPROMPT));
+   // Draw the string if any
+      if(privateData-&gt;toDraw[0])
+         TextOut(   hdc,
+                  (int) r.left + privateData-&gt;offsetX,
+                  (int) r.top + privateData-&gt;offsetY,
+                  (const char *) privateData-&gt;toDraw,
+                  strlen(privateData-&gt;toDraw) );
+   }
+#endif
+   
+} /* Area_Update */
+</code></pre>
+  </b>
+ </body>
+</html>

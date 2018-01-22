@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_NextRecord
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_NextRecord
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_NextRecord (tableNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_NextRecord
+    </font>
+   </code>
+   moves the current record pointer to the record following the current record in the table number
+   <code>
+    tableNum
+   </code>
+   . After the 4D plug-in calls
+   <code>
+    <font color="#CF0000">
+     PA_NextRecord
+    </font>
+   </code>
+   it should use
+   <code>
+    <a href="CMU84881.HTM">
+     PA_EndSelection
+    </a>
+   </code>
+   to determine if the current record pointer has passed the end of the selection for the table passed into
+   <code>
+    tableNum
+   </code>
+   .
+  </p>
+  <p>
+   Before calling
+   <code>
+    <font color="#CF0000">
+     PA_NextRecord
+    </font>
+   </code>
+   the 4D plug-in should indicate if the many-to-one and one-to many relations should be activated by using
+   <code>
+    <a href="CMU84837.HTM">
+     PA_UseAutomaticRelations
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   This routine does not use virtual structure
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Do something with a selection of records.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void DoSomethingWithTheSelection (short tableNum)
+   {
+   // we do not want to activate the relations
+      PA_AutomaticRelation(0, 0);
+   // Start to the first record of the selection
+      PA_FirstRecord(tableNum);
+   // While the end of selection not reached...
+      while(!PA_EndSelection(tableNum))
+      {
+         PA_Yield();   // Give time to other tasks
+      /*
+         ...do something with the record (PA_SaveRecord can be called here).
+      */
+      // Time to go to the next record
+         PA_NextRecord(tableNum);
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84881.HTM">
+    PA_EndSelection
+   </a>
+   ,
+   <a href="CMU84883.HTM">
+    PA_FirstRecord
+   </a>
+   ,
+   <a href="CMU84884.HTM">
+    PA_PreviousRecord
+   </a>
+   ,
+   <a href="CMU84837.HTM">
+    PA_UseAutomaticRelations
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+  <b>
+   <p>
+    Current Selections and Records
+   </p>
+  </b>
+  <p>
+   The current record is changed to the next one in the selection, or none if
+   <code>
+    <font color="#CF0000">
+     PA_NextRecord
+    </font>
+   </code>
+   is called for the last record (
+   <code>
+    <a href="CMU84881.HTM">
+     PA_EndSelection
+    </a>
+   </code>
+   returns 1).
+  </p>
+ </body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ExecuteTokensAsFunction
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ExecuteTokensAsFunction
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ExecuteTokensAsFunction (tokens; len) → PA_Variable
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tokens
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Tokens to execute
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of the tokens' buffer
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Function result
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteTokensAsFunction
+    </font>
+   </code>
+   allows the 4D Extension to evaluate any pre-tokenized 4D statement that returns a result, in other words, a pre-tokenized 4th Dimension expression. For pre-tokenized statements that do not return a result, use
+   <code>
+    <a href="CMU84732.HTM">
+     PA_ExecuteTokens
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   Pass a pointer to the buffer that holds the tokens in
+   <code>
+    tokens
+   </code>
+   and its length in
+   <code>
+    len
+   </code>
+   before the call.
+  </p>
+  <p>
+   Once 4th Dimension has evaluated and executed the expression, it returns the result in a structure of type
+   <code>
+    <a href="CMU84858.HTM">
+     PA_Variable
+    </a>
+   </code>
+   . This API gives the developer accessors to
+   <code>
+    PA_Variables
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE:
+   </p>
+  </b>
+  <p>
+   After the call, it is the 4D Plug-in's responsibility to dispose of the result if its type is Text, Picture or BLOB. Use
+   <code>
+    <a href="CMU84692.HTM">
+     PA_ClearVariable
+    </a>
+   </code>
+   for this purpose.
+  </p>
+  <p>
+   The types of uses for
+   <code>
+    PA_ExecuteTokensAsFunction,
+   </code>
+   as well as re-entrance precaustions, are identical to those of
+   <code>
+    <a href="CMU84737.HTM">
+     PA_ExecuteFunction
+    </a>
+   </code>
+   . For more information, refer to the entry point
+   <code>
+    <a href="CMU84737.HTM">
+     PA_ExecuteFunction
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84737.HTM">
+    PA_ExecuteFunction
+   </a>
+   ,
+   <a href="CMU84732.HTM">
+    PA_ExecuteTokens
+   </a>
+   ,
+   <a href="CMU84736.HTM">
+    PA_Tokenize
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred.
+  </p>
+ </body>
+</html>

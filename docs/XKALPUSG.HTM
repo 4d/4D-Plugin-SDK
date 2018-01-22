@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <h3 align="CENTER">
+   <a href="XKALPUSA.HTM">
+    A
+   </a>
+   <a href="XKALPUSB.HTM">
+    B
+   </a>
+   <a href="XKALPUSC.HTM">
+    C
+   </a>
+   <a href="XKALPUSD.HTM">
+    D
+   </a>
+   <a href="XKALPUSE.HTM">
+    E
+   </a>
+   <a href="XKALPUSF.HTM">
+    F
+   </a>
+   G H
+   <a href="XKALPUSI.HTM">
+    I
+   </a>
+   J
+   <a href="XKALPUSK.HTM">
+    K
+   </a>
+   <a href="XKALPUSL.HTM">
+    L
+   </a>
+   <a href="XKALPUSM.HTM">
+    M
+   </a>
+   <a href="XKALPUSN.HTM">
+    N
+   </a>
+   <a href="XKALPUSO.HTM">
+    O
+   </a>
+   <a href="XKALPUSP.HTM">
+    P
+   </a>
+   <a href="XKALPUSQ.HTM">
+    Q
+   </a>
+   <a href="XKALPUSR.HTM">
+    R
+   </a>
+   <a href="XKALPUSS.HTM">
+    S
+   </a>
+   <a href="XKALPUST.HTM">
+    T
+   </a>
+   <a href="XKALPUSU.HTM">
+    U
+   </a>
+   <a href="XKALPUSV.HTM">
+    V
+   </a>
+   <a href="XKALPUSW.HTM">
+    W
+   </a>
+   X
+   <a href="XKALPUSY.HTM">
+    Y
+   </a>
+   Z
+  </h3>
+  <br/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84812.HTM">
+      PA_Get4Dfolder
+     </a>
+    </b>
+    (FolderPath)
+    <li>
+     <b>
+      <a href="CMU84651.HTM">
+       PA_Get4DHInstance
+      </a>
+     </b>
+     → long
+     <li>
+      <b>
+       <a href="CMU84662.HTM">
+        PA_Get4DPreferencesFilename
+       </a>
+      </b>
+      (prefsName)
+      <li>
+       <b>
+        <a href="CMU84543.HTM">
+         PA_Get4DPreferencesFolder
+        </a>
+       </b>
+       (folderPath)
+       <li>
+        <b>
+         <a href="CMU84874.HTM">
+          PA_Get4DVersion
+         </a>
+        </b>
+        → unsigned long
+        <li>
+         <b>
+          <a href="CMU84657.HTM">
+           PA_Get4DWinMacOSGlobals
+          </a>
+         </b>
+         → void *
+         <li>
+          <b>
+           <a href="CMU84356.HTM">
+            PA_GetAdvancedProperties
+           </a>
+          </b>
+          (properties; dataSize) → void*
+          <li>
+           <b>
+            <a href="CMU84480.HTM">
+             PA_GetAdvancedPropertiesToDispose
+            </a>
+           </b>
+           (params) → void*
+           <li>
+            <b>
+             <a href="CMU84822.HTM">
+              PA_GetApplicationFullPath
+             </a>
+            </b>
+            (applicationPath)
+            <li>
+             <b>
+              <a href="CMU84501.HTM">
+               PA_GetAreaEvent
+              </a>
+             </b>
+             (params) → PA_AreaEvent
+             <li>
+              <b>
+               <a href="CMU84499.HTM">
+                PA_GetAreaName
+               </a>
+              </b>
+              (params; name)
+              <li>
+               <b>
+                <a href="CMU84500.HTM">
+                 PA_GetAreaRect
+                </a>
+               </b>
+               (params) → PA_Rect
+               <li>
+                <b>
+                 <a href="CMU84496.HTM">
+                  PA_GetAreaReference
+                 </a>
+                </b>
+                (params) → void*
+                <li>
+                 <b>
+                  <a href="CMU84689.HTM">
+                   PA_GetArrayCurrent
+                  </a>
+                 </b>
+                 (array) → long
+                 <li>
+                  <b>
+                   <a href="CMU84349.HTM">
+                    PA_GetArrayInArray
+                   </a>
+                  </b>
+                  (array; index) → PA_Variable
+                  <li>
+                   <b>
+                    <a href="CMU84691.HTM">
+                     PA_GetArrayNbElements
+                    </a>
+                   </b>
+                   (array) → long
+                   <li>
+                    <b>
+                     <a href="CMU84687.HTM">
+                      PA_GetArrayStringSize
+                     </a>
+                    </b>
+                    (array) → short
+                    <li>
+                     <b>
+                      <a href="CMU84587.HTM">
+                       PA_GetBackupStatus
+                      </a>
+                     </b>
+                     → char
+                     <li>
+                      <b>
+                       <a href="CMU84637.HTM">
+                        PA_GetBlobField
+                       </a>
+                      </b>
+                      (tNum; fNum; blob) → long
+                      <li>
+                       <b>
+                        <a href="CMU84629.HTM">
+                         PA_GetBlobHandleField
+                        </a>
+                       </b>
+                       (tNum; field) → PA_Handle
+                       <li>
+                        <b>
+                         <a href="CMU84748.HTM">
+                          PA_GetBlobHandleParameter
+                         </a>
+                        </b>
+                        (params; index) → PA_Handle
+                        <li>
+                         <b>
+                          <a href="CMU84712.HTM">
+                           PA_GetBlobHandleVariable
+                          </a>
+                         </b>
+                         (aVariable) → PA_Handle
+                         <li>
+                          <b>
+                           <a href="CMU84827.HTM">
+                            PA_GetBlobParameter
+                           </a>
+                          </b>
+                          (params; index; blob) → long
+                          <li>
+                           <b>
+                            <a href="CMU84713.HTM">
+                             PA_GetBlobVariable
+                            </a>
+                           </b>
+                           (aVariable; theBlob) → long
+                           <li>
+                            <b>
+                             <a href="CMU84630.HTM">
+                              PA_GetBooleanField
+                             </a>
+                            </b>
+                            (tNum; fNum) → char
+                            <li>
+                             <b>
+                              <a href="CMU84678.HTM">
+                               PA_GetBooleanInArray
+                              </a>
+                             </b>
+                             (array; index) → char
+                             <li>
+                              <b>
+                               <a href="CMU84705.HTM">
+                                PA_GetBooleanVariable
+                               </a>
+                              </b>
+                              (aVariable) → char
+                              <li>
+                               <b>
+                                <a href="CMU84345.HTM">
+                                 PA_GetCarbonPageFormat
+                                </a>
+                               </b>
+                               → void*
+                               <li>
+                                <b>
+                                 <a href="CMU84344.HTM">
+                                  PA_GetCarbonPrintSettings
+                                 </a>
+                                </b>
+                                → void*
+                                <li>
+                                 <b>
+                                  <a href="CMU84383.HTM">
+                                   PA_GetCenturyInfo
+                                  </a>
+                                 </b>
+                                 (pivotYear; defaultCentury)
+                                 <li>
+                                  <b>
+                                   <a href="CMU84490.HTM">
+                                    PA_GetClick
+                                   </a>
+                                  </b>
+                                  (params; x; y)
+                                  <li>
+                                   <b>
+                                    <a href="CMU84519.HTM">
+                                     PA_GetCurrentPage
+                                    </a>
+                                   </b>
+                                   → short
+                                   <li>
+                                    <b>
+                                     <a href="CMU84759.HTM">
+                                      PA_GetCurrentProcessNumber
+                                     </a>
+                                    </b>
+                                    → long
+                                    <li>
+                                     <b>
+                                      <a href="CMU84512.HTM">
+                                       PA_GetCurrentTEHandle
+                                      </a>
+                                     </b>
+                                     → PA_Handle
+                                     <li>
+                                      <b>
+                                       <a href="CMU84541.HTM">
+                                        PA_GetCurrentUserID
+                                       </a>
+                                      </b>
+                                      → long
+                                      <li>
+                                       <b>
+                                        <a href="CMU84565.HTM">
+                                         PA_GetDatabaseResfile
+                                        </a>
+                                       </b>
+                                       → short
+                                       <li>
+                                        <b>
+                                         <a href="CMU84666.HTM">
+                                          PA_GetDataName
+                                         </a>
+                                        </b>
+                                        (dataName)
+                                        <li>
+                                         <b>
+                                          <a href="CMU84631.HTM">
+                                           PA_GetDateField
+                                          </a>
+                                         </b>
+                                         (tNum; fNum; day; month; year)
+                                         <li>
+                                          <b>
+                                           <a href="CMU84683.HTM">
+                                            PA_GetDateInArray
+                                           </a>
+                                          </b>
+                                          (month; year; array; day; index)
+                                          <li>
+                                           <b>
+                                            <a href="CMU84825.HTM">
+                                             PA_GetDateParameter
+                                            </a>
+                                           </b>
+                                           (params; index; day; month; year)
+                                           <li>
+                                            <b>
+                                             <a href="CMU84706.HTM">
+                                              PA_GetDateVariable
+                                             </a>
+                                            </b>
+                                            (aVariable; day; month; year)
+                                            <li>
+                                             <b>
+                                              <a href="CMU84830.HTM">
+                                               PA_GetDoubleParameter
+                                              </a>
+                                             </b>
+                                             (params; index) → double
+                                             <li>
+                                              <b>
+                                               <a href="CMU84486.HTM">
+                                                PA_GetDragAndDropInfo
+                                               </a>
+                                              </b>
+                                              (params) → PA_DragAndDropInfo
+                                              <li>
+                                               <b>
+                                                <a href="CMU84476.HTM">
+                                                 PA_GetDragAndDropKind
+                                                </a>
+                                               </b>
+                                               (dragInfo) → PA_DragKind
+                                               <li>
+                                                <b>
+                                                 <a href="CMU84474.HTM">
+                                                  PA_GetDragAndDropTableField
+                                                 </a>
+                                                </b>
+                                                (info; tNum; fNum)
+                                                <li>
+                                                 <b>
+                                                  <a href="CMU84475.HTM">
+                                                   PA_GetDragAndDropVariable
+                                                  </a>
+                                                 </b>
+                                                 (info; index) → PA_Variable
+                                                 <li>
+                                                  <b>
+                                                   <a href="CMU84484.HTM">
+                                                    PA_GetDragPositions
+                                                   </a>
+                                                  </b>
+                                                  (params; rect; x; y)
+                                                  <li>
+                                                   <b>
+                                                    <a href="CMU84615.HTM">
+                                                     PA_GetExportFilter
+                                                    </a>
+                                                   </b>
+                                                   → char *
+                                                   <li>
+                                                    <b>
+                                                     <a href="CMU84785.HTM">
+                                                      PA_GetFieldList
+                                                     </a>
+                                                    </b>
+                                                    (tNum; fNum; listName)
+                                                    <li>
+                                                     <b>
+                                                      <a href="CMU84788.HTM">
+                                                       PA_GetFieldName
+                                                      </a>
+                                                     </b>
+                                                     (tableNum; fieldNum; fieldName)
+                                                     <li>
+                                                      <b>
+                                                       <a href="CMU84787.HTM">
+                                                        PA_GetFieldProperties
+                                                       </a>
+                                                      </b>
+                                                      (tNum; fNum; fieldKind; stringLength; isIndexed; fAttributes)
+                                                      <li>
+                                                       <b>
+                                                        <a href="CMU84786.HTM">
+                                                         PA_GetFieldRelation
+                                                        </a>
+                                                       </b>
+                                                       (tNum; fNum; relatedTable; relatedField)
+                                                       <li>
+                                                        <b>
+                                                         <a href="CMU84757.HTM">
+                                                          PA_GetFrontWindowProcess
+                                                         </a>
+                                                        </b>
+                                                        (withPalette) → long
+                                                        <li>
+                                                         <b>
+                                                          <a href="CMU84807.HTM">
+                                                           PA_GetHandleSize
+                                                          </a>
+                                                         </b>
+                                                         (handle) → long
+                                                         <li>
+                                                          <b>
+                                                           <a href="CMU84386.HTM">
+                                                            PA_GetHandleState
+                                                           </a>
+                                                          </b>
+                                                          (handle) → char
+                                                          <li>
+                                                           <b>
+                                                            <a href="CMU84522.HTM">
+                                                             PA_GetHWND
+                                                            </a>
+                                                           </b>
+                                                           (windowRef) → long
+                                                           <li>
+                                                            <b>
+                                                             <a href="CMU84614.HTM">
+                                                              PA_GetImportFilter
+                                                             </a>
+                                                            </b>
+                                                            → char*
+                                                            <li>
+                                                             <b>
+                                                              <a href="CMU84564.HTM">
+                                                               PA_GetIndexedResource
+                                                              </a>
+                                                             </b>
+                                                             (resfile; kind; index; data) → long
+                                                             <li>
+                                                              <b>
+                                                               <a href="CMU84563.HTM">
+                                                                PA_GetIndexedResourceKind
+                                                               </a>
+                                                              </b>
+                                                              (resfile; index) → unsigned long
+                                                              <li>
+                                                               <b>
+                                                                <a href="CMU84537.HTM">
+                                                                 PA_GetIndGroupName
+                                                                </a>
+                                                               </b>
+                                                               (index; userKind; groupName)
+                                                               <li>
+                                                                <b>
+                                                                 <a href="CMU84539.HTM">
+                                                                  PA_GetIndUserName
+                                                                 </a>
+                                                                </b>
+                                                                (index; userKind; userName)
+                                                                <li>
+                                                                 <b>
+                                                                  <a href="CMU84633.HTM">
+                                                                   PA_GetIntegerField
+                                                                  </a>
+                                                                 </b>
+                                                                 (tNum; fNum) → short
+                                                                 <li>
+                                                                  <b>
+                                                                   <a href="CMU84686.HTM">
+                                                                    PA_GetIntegerInArray
+                                                                   </a>
+                                                                  </b>
+                                                                  (array; index) → short
+                                                                  <li>
+                                                                   <b>
+                                                                    <a href="CMU84489.HTM">
+                                                                     PA_GetKey
+                                                                    </a>
+                                                                   </b>
+                                                                   (params) → char
+                                                                   <li>
+                                                                    <b>
+                                                                     <a href="CMU84896.HTM">
+                                                                      PA_GetLastError
+                                                                     </a>
+                                                                    </b>
+                                                                    → lastError
+                                                                    <li>
+                                                                     <b>
+                                                                      <a href="CMU84583.HTM">
+                                                                       PA_GetLogField
+                                                                      </a>
+                                                                     </b>
+                                                                     (logtag; field; logdata; len; string)
+                                                                     <li>
+                                                                      <b>
+                                                                       <a href="CMU84355.HTM">
+                                                                        PA_GetLogFieldKind
+                                                                       </a>
+                                                                      </b>
+                                                                      (logtag; field; logData; len) → PA_FieldKind
+                                                                      <li>
+                                                                       <b>
+                                                                        <a href="CMU84584.HTM">
+                                                                         PA_GetLogInfo
+                                                                        </a>
+                                                                       </b>
+                                                                       (logInfo)
+                                                                       <li>
+                                                                        <b>
+                                                                         <a href="CMU84665.HTM">
+                                                                          PA_GetLogName
+                                                                         </a>
+                                                                        </b>
+                                                                        (logName)
+                                                                        <li>
+                                                                         <b>
+                                                                          <a href="CMU84634.HTM">
+                                                                           PA_GetLongintField
+                                                                          </a>
+                                                                         </b>
+                                                                         (tNum; fNum) → long
+                                                                         <li>
+                                                                          <b>
+                                                                           <a href="CMU84685.HTM">
+                                                                            PA_GetLongintInArray
+                                                                           </a>
+                                                                          </b>
+                                                                          (array; index) → long
+                                                                          <li>
+                                                                           <b>
+                                                                            <a href="CMU84708.HTM">
+                                                                             PA_GetLongintVariable
+                                                                            </a>
+                                                                           </b>
+                                                                           (aVariable) → long
+                                                                           <li>
+                                                                            <b>
+                                                                             <a href="CMU84831.HTM">
+                                                                              PA_GetLongParameter
+                                                                             </a>
+                                                                            </b>
+                                                                            (params; index) → long
+                                                                            <li>
+                                                                             <b>
+                                                                              <a href="CMU84536.HTM">
+                                                                               PA_GetMaxAllowedUsers
+                                                                              </a>
+                                                                             </b>
+                                                                             → long
+                                                                             <li>
+                                                                              <b>
+                                                                               <a href="CMU84872.HTM">
+                                                                                PA_GetMessagesStatus
+                                                                               </a>
+                                                                              </b>
+                                                                              → char
+                                                                              <li>
+                                                                               <b>
+                                                                                <a href="CMU84730.HTM">
+                                                                                 PA_GetMethodID
+                                                                                </a>
+                                                                               </b>
+                                                                               (methodName) → long
+                                                                               <li>
+                                                                                <b>
+                                                                                 <a href="CMU84768.HTM">
+                                                                                  PA_GetPackedRecord
+                                                                                 </a>
+                                                                                </b>
+                                                                                (tNum; packRec) → long
+                                                                                <li>
+                                                                                 <b>
+                                                                                  <a href="CMU84338.HTM">
+                                                                                   PA_GetPageChange
+                                                                                  </a>
+                                                                                 </b>
+                                                                                 (params; *pageFrom; *pageTo)
+                                                                                 <li>
+                                                                                  <b>
+                                                                                   <a href="CMU84636.HTM">
+                                                                                    PA_GetPictureField
+                                                                                   </a>
+                                                                                  </b>
+                                                                                  (tNum; fNum; picture; info) → long
+                                                                                  <li>
+                                                                                   <b>
+                                                                                    <a href="CMU84628.HTM">
+                                                                                     PA_GetPictureHandleField
+                                                                                    </a>
+                                                                                   </b>
+                                                                                   (tNum; fNum; info) → PA_Handle
+                                                                                   <li>
+                                                                                    <b>
+                                                                                     <a href="CMU84681.HTM">
+                                                                                      PA_GetPictureHandleInArray
+                                                                                     </a>
+                                                                                    </b>
+                                                                                    (array; index; info) → PA_Handle
+                                                                                    <li>
+                                                                                     <b>
+                                                                                      <a href="CMU84747.HTM">
+                                                                                       PA_GetPictureHandleParameter
+                                                                                      </a>
+                                                                                     </b>
+                                                                                     (params; index; info) → PA_Handle
+                                                                                     <li>
+                                                                                      <b>
+                                                                                       <a href="CMU84710.HTM">
+                                                                                        PA_GetPictureHandleVariable
+                                                                                       </a>
+                                                                                      </b>
+                                                                                      (aVariable; pictInfo) → PA_Handle
+                                                                                      <li>
+                                                                                       <b>
+                                                                                        <a href="CMU84682.HTM">
+                                                                                         PA_GetPictureInArray
+                                                                                        </a>
+                                                                                       </b>
+                                                                                       (array; index; picture; info) → long
+                                                                                       <li>
+                                                                                        <b>
+                                                                                         <a href="CMU84581.HTM">
+                                                                                          PA_GetPictureLogField
+                                                                                         </a>
+                                                                                        </b>
+                                                                                        (logtag; field; logdata; logdatalen; picture; infos) → long
+                                                                                        <li>
+                                                                                         <b>
+                                                                                          <a href="CMU84826.HTM">
+                                                                                           PA_GetPictureParameter
+                                                                                          </a>
+                                                                                         </b>
+                                                                                         (params; index; picture; pictInfo) → long
+                                                                                         <li>
+                                                                                          <b>
+                                                                                           <a href="CMU84711.HTM">
+                                                                                            PA_GetPictureVariable
+                                                                                           </a>
+                                                                                          </b>
+                                                                                          (aVariable; thePicture; pictInfo) → long
+                                                                                          <li>
+                                                                                           <b>
+                                                                                            <a href="CMU84835.HTM">
+                                                                                             PA_GetPlatformInterface
+                                                                                            </a>
+                                                                                           </b>
+                                                                                           → PA_PlatformInterface
+                                                                                           <li>
+                                                                                            <b>
+                                                                                             <a href="CMU84498.HTM">
+                                                                                              PA_GetPluginProperties
+                                                                                             </a>
+                                                                                            </b>
+                                                                                            (params; props)
+                                                                                            <li>
+                                                                                             <b>
+                                                                                              <a href="CMU84348.HTM">
+                                                                                               PA_GetPointerInArray
+                                                                                              </a>
+                                                                                             </b>
+                                                                                             (array; index) → PointerBlock
+                                                                                             <li>
+                                                                                              <b>
+                                                                                               <a href="CMU84745.HTM">
+                                                                                                PA_GetPointerKind
+                                                                                               </a>
+                                                                                              </b>
+                                                                                              (pointer) → PA_PointerKind
+                                                                                              <li>
+                                                                                               <b>
+                                                                                                <a href="CMU84746.HTM">
+                                                                                                 PA_GetPointerParameter
+                                                                                                </a>
+                                                                                               </b>
+                                                                                               (params; index) → PA_Pointer
+                                                                                               <li>
+                                                                                                <b>
+                                                                                                 <a href="CMU84744.HTM">
+                                                                                                  PA_GetPointerTableField
+                                                                                                 </a>
+                                                                                                </b>
+                                                                                                (pointer; table; field)
+                                                                                                <li>
+                                                                                                 <b>
+                                                                                                  <a href="CMU84341.HTM">
+                                                                                                   PA_GetPointerValue
+                                                                                                  </a>
+                                                                                                 </b>
+                                                                                                 (pointer) → PA_Variable
+                                                                                                 <li>
+                                                                                                  <b>
+                                                                                                   <a href="CMU84743.HTM">
+                                                                                                    PA_GetPointerVariable
+                                                                                                   </a>
+                                                                                                  </b>
+                                                                                                  (pointer; index) → PA_Variable
+                                                                                                  <li>
+                                                                                                   <b>
+                                                                                                    <a href="CMU84764.HTM">
+                                                                                                     PA_GetProcessInfo
+                                                                                                    </a>
+                                                                                                   </b>
+                                                                                                   (pNum; pName; pState; pTime)
+                                                                                                   <li>
+                                                                                                    <b>
+                                                                                                     <a href="CMU84635.HTM">
+                                                                                                      PA_GetRealField
+                                                                                                     </a>
+                                                                                                    </b>
+                                                                                                    (tNum; fNum) → double
+                                                                                                    <li>
+                                                                                                     <b>
+                                                                                                      <a href="CMU84684.HTM">
+                                                                                                       PA_GetRealInArray
+                                                                                                      </a>
+                                                                                                     </b>
+                                                                                                     (array; index) → double
+                                                                                                     <li>
+                                                                                                      <b>
+                                                                                                       <a href="CMU84709.HTM">
+                                                                                                        PA_GetRealVariable
+                                                                                                       </a>
+                                                                                                      </b>
+                                                                                                      (aVariable) → double
+                                                                                                      <li>
+                                                                                                       <b>
+                                                                                                        <a href="CMU84534.HTM">
+                                                                                                         PA_GetRegisteredUserCompany
+                                                                                                        </a>
+                                                                                                       </b>
+                                                                                                       (company)
+                                                                                                       <li>
+                                                                                                        <b>
+                                                                                                         <a href="CMU84533.HTM">
+                                                                                                          PA_GetRegisteredUserName
+                                                                                                         </a>
+                                                                                                        </b>
+                                                                                                        (name)
+                                                                                                        <li>
+                                                                                                         <b>
+                                                                                                          <a href="CMU84562.HTM">
+                                                                                                           PA_GetResource
+                                                                                                          </a>
+                                                                                                         </b>
+                                                                                                         (resfile; kind; resID; resData) → long
+                                                                                                         <li>
+                                                                                                          <b>
+                                                                                                           <a href="CMU84561.HTM">
+                                                                                                            PA_GetResourceHandle
+                                                                                                           </a>
+                                                                                                          </b>
+                                                                                                          (resfile; kind; resID) → PA_Handle
+                                                                                                          <li>
+                                                                                                           <b>
+                                                                                                            <a href="CMU84560.HTM">
+                                                                                                             PA_GetResourceIDList
+                                                                                                            </a>
+                                                                                                           </b>
+                                                                                                           (resFile; kind; IDlist) → long
+                                                                                                           <li>
+                                                                                                            <b>
+                                                                                                             <a href="CMU84559.HTM">
+                                                                                                              PA_GetResourceKindList
+                                                                                                             </a>
+                                                                                                            </b>
+                                                                                                            (resFile; kindList) → long
+                                                                                                            <li>
+                                                                                                             <b>
+                                                                                                              <a href="CMU84558.HTM">
+                                                                                                               PA_GetResourceName
+                                                                                                              </a>
+                                                                                                             </b>
+                                                                                                             (resFile; kind; resID; name)
+                                                                                                             <li>
+                                                                                                              <b>
+                                                                                                               <a href="CMU84557.HTM">
+                                                                                                                PA_GetResourceNameList
+                                                                                                               </a>
+                                                                                                              </b>
+                                                                                                              (resFile; kind; nameList) → long
+                                                                                                              <li>
+                                                                                                               <b>
+                                                                                                                <a href="CMU84556.HTM">
+                                                                                                                 PA_GetResourceSize
+                                                                                                                </a>
+                                                                                                               </b>
+                                                                                                               (resFile; kind; resID) → long
+                                                                                                               <li>
+                                                                                                                <b>
+                                                                                                                 <a href="CMU84555.HTM">
+                                                                                                                  PA_GetResourceTimeStamp
+                                                                                                                 </a>
+                                                                                                                </b>
+                                                                                                                (resFile; kind; resID) → long
+                                                                                                                <li>
+                                                                                                                 <b>
+                                                                                                                  <a href="CMU84532.HTM">
+                                                                                                                   PA_GetSerialKey
+                                                                                                                  </a>
+                                                                                                                 </b>
+                                                                                                                 → long
+                                                                                                                 <li>
+                                                                                                                  <b>
+                                                                                                                   <a href="CMU84832.HTM">
+                                                                                                                    PA_GetShortParameter
+                                                                                                                   </a>
+                                                                                                                  </b>
+                                                                                                                  (params; index) → short
+                                                                                                                  <li>
+                                                                                                                   <b>
+                                                                                                                    <a href="CMU84639.HTM">
+                                                                                                                     PA_GetStringField
+                                                                                                                    </a>
+                                                                                                                   </b>
+                                                                                                                   (tNum; fNum; string)
+                                                                                                                   <li>
+                                                                                                                    <b>
+                                                                                                                     <a href="CMU84679.HTM">
+                                                                                                                      PA_GetStringInArray
+                                                                                                                     </a>
+                                                                                                                    </b>
+                                                                                                                    (array; index; string)
+                                                                                                                    <li>
+                                                                                                                     <b>
+                                                                                                                      <a href="CMU84829.HTM">
+                                                                                                                       PA_GetStringParameter
+                                                                                                                      </a>
+                                                                                                                     </b>
+                                                                                                                     (params; index; string)
+                                                                                                                     <li>
+                                                                                                                      <b>
+                                                                                                                       <a href="CMU84715.HTM">
+                                                                                                                        PA_GetStringVariable
+                                                                                                                       </a>
+                                                                                                                      </b>
+                                                                                                                      (aVariable)
+                                                                                                                      <li>
+                                                                                                                       <b>
+                                                                                                                        <a href="CMU84668.HTM">
+                                                                                                                         PA_GetStructureFullPath
+                                                                                                                        </a>
+                                                                                                                       </b>
+                                                                                                                       (structurePath)
+                                                                                                                       <li>
+                                                                                                                        <b>
+                                                                                                                         <a href="CMU84667.HTM">
+                                                                                                                          PA_GetStructureName
+                                                                                                                         </a>
+                                                                                                                        </b>
+                                                                                                                        (structName)
+                                                                                                                        <li>
+                                                                                                                         <b>
+                                                                                                                          <a href="CMU84789.HTM">
+                                                                                                                           PA_GetTableAndFieldNumbers
+                                                                                                                          </a>
+                                                                                                                         </b>
+                                                                                                                         (tableFieldNames; tableNumPtr; fieldNumPtr)
+                                                                                                                         <li>
+                                                                                                                          <b>
+                                                                                                                           <a href="CMU84791.HTM">
+                                                                                                                            PA_GetTableName
+                                                                                                                           </a>
+                                                                                                                          </b>
+                                                                                                                          (tableNum; tableName)
+                                                                                                                          <li>
+                                                                                                                           <b>
+                                                                                                                            <a href="CMU84638.HTM">
+                                                                                                                             PA_GetTextField
+                                                                                                                            </a>
+                                                                                                                           </b>
+                                                                                                                           (tNum; fNum; text) → long
+                                                                                                                           <li>
+                                                                                                                            <b>
+                                                                                                                             <a href="CMU84680.HTM">
+                                                                                                                              PA_GetTextInArray
+                                                                                                                             </a>
+                                                                                                                            </b>
+                                                                                                                            (array; index; text) → long
+                                                                                                                            <li>
+                                                                                                                             <b>
+                                                                                                                              <a href="CMU84582.HTM">
+                                                                                                                               PA_GetTextLogField
+                                                                                                                              </a>
+                                                                                                                             </b>
+                                                                                                                             (logtag; field; logdata; logdatalen; text)
+                                                                                                                             <li>
+                                                                                                                              <b>
+                                                                                                                               <a href="CMU84828.HTM">
+                                                                                                                                PA_GetTextParameter
+                                                                                                                               </a>
+                                                                                                                              </b>
+                                                                                                                              (params; index; text) → long
+                                                                                                                              <li>
+                                                                                                                               <b>
+                                                                                                                                <a href="CMU84714.HTM">
+                                                                                                                                 PA_GetTextVariable
+                                                                                                                                </a>
+                                                                                                                               </b>
+                                                                                                                               (aVariable; theText) → long
+                                                                                                                               <li>
+                                                                                                                                <b>
+                                                                                                                                 <a href="CMU84632.HTM">
+                                                                                                                                  PA_GetTimeField
+                                                                                                                                 </a>
+                                                                                                                                </b>
+                                                                                                                                (tNum; fNum) → long
+                                                                                                                                <li>
+                                                                                                                                 <b>
+                                                                                                                                  <a href="CMU84824.HTM">
+                                                                                                                                   PA_GetTimeParameter
+                                                                                                                                  </a>
+                                                                                                                                 </b>
+                                                                                                                                 (params; index) → long
+                                                                                                                                 <li>
+                                                                                                                                  <b>
+                                                                                                                                   <a href="CMU84707.HTM">
+                                                                                                                                    PA_GetTimeVariable
+                                                                                                                                   </a>
+                                                                                                                                  </b>
+                                                                                                                                  (aVariable) → long
+                                                                                                                                  <li>
+                                                                                                                                   <b>
+                                                                                                                                    <a href="CMU84811.HTM">
+                                                                                                                                     PA_GetTipsEnabled
+                                                                                                                                    </a>
+                                                                                                                                   </b>
+                                                                                                                                   → char
+                                                                                                                                   <li>
+                                                                                                                                    <b>
+                                                                                                                                     <a href="CMU84834.HTM">
+                                                                                                                                      PA_GetToolBarInfo
+                                                                                                                                     </a>
+                                                                                                                                    </b>
+                                                                                                                                    (displayed; toolbarHeight)
+                                                                                                                                    <li>
+                                                                                                                                     <b>
+                                                                                                                                      <a href="CMU84842.HTM">
+                                                                                                                                       PA_GetTrueFieldNumber
+                                                                                                                                      </a>
+                                                                                                                                     </b>
+                                                                                                                                     (virtualTable; virtuelField; trueTable; trueField)
+                                                                                                                                     <li>
+                                                                                                                                      <b>
+                                                                                                                                       <a href="CMU84843.HTM">
+                                                                                                                                        PA_GetTrueTableNumber
+                                                                                                                                       </a>
+                                                                                                                                      </b>
+                                                                                                                                      (trueNb) → short
+                                                                                                                                      <li>
+                                                                                                                                       <b>
+                                                                                                                                        <a href="CMU84554.HTM">
+                                                                                                                                         PA_GetUniqueResID
+                                                                                                                                        </a>
+                                                                                                                                       </b>
+                                                                                                                                       (resFile; kind) → short
+                                                                                                                                       <li>
+                                                                                                                                        <b>
+                                                                                                                                         <a href="CMU84487.HTM">
+                                                                                                                                          PA_GetUpdateHDC
+                                                                                                                                         </a>
+                                                                                                                                        </b>
+                                                                                                                                        → long
+                                                                                                                                        <li>
+                                                                                                                                         <b>
+                                                                                                                                          <a href="CMU84459.HTM">
+                                                                                                                                           PA_GetUserCharSet
+                                                                                                                                          </a>
+                                                                                                                                         </b>
+                                                                                                                                         → PA_CharSet
+                                                                                                                                         <li>
+                                                                                                                                          <b>
+                                                                                                                                           <a href="CMU84542.HTM">
+                                                                                                                                            PA_GetUserName
+                                                                                                                                           </a>
+                                                                                                                                          </b>
+                                                                                                                                          (userName)
+                                                                                                                                          <li>
+                                                                                                                                           <b>
+                                                                                                                                            <a href="CMU84470.HTM">
+                                                                                                                                             PA_GetUserStringKind
+                                                                                                                                            </a>
+                                                                                                                                           </b>
+                                                                                                                                           → PA_StringKind
+                                                                                                                                           <li>
+                                                                                                                                            <b>
+                                                                                                                                             <a href="CMU84717.HTM">
+                                                                                                                                              PA_GetVariable
+                                                                                                                                             </a>
+                                                                                                                                            </b>
+                                                                                                                                            (vName) → PA_Variable
+                                                                                                                                            <li>
+                                                                                                                                             <b>
+                                                                                                                                              <a href="CMU84716.HTM">
+                                                                                                                                               PA_GetVariableKind
+                                                                                                                                              </a>
+                                                                                                                                             </b>
+                                                                                                                                             (aVariable) → PA_VariableKind
+                                                                                                                                             <li>
+                                                                                                                                              <b>
+                                                                                                                                               <a href="CMU84823.HTM">
+                                                                                                                                                PA_GetVariableParameter
+                                                                                                                                               </a>
+                                                                                                                                              </b>
+                                                                                                                                              (params; index) → PA_Variable
+                                                                                                                                              <li>
+                                                                                                                                               <b>
+                                                                                                                                                <a href="CMU84840.HTM">
+                                                                                                                                                 PA_GetVirtualFieldNumber
+                                                                                                                                                </a>
+                                                                                                                                               </b>
+                                                                                                                                               (trueTable; trueField; virtualTable; virtualField)
+                                                                                                                                               <li>
+                                                                                                                                                <b>
+                                                                                                                                                 <a href="CMU84841.HTM">
+                                                                                                                                                  PA_GetVirtualTableNumber
+                                                                                                                                                 </a>
+                                                                                                                                                </b>
+                                                                                                                                                (trueTable) → short
+                                                                                                                                                <li>
+                                                                                                                                                 <b>
+                                                                                                                                                  <a href="CMU84357.HTM">
+                                                                                                                                                   PA_GetWebDataToDispose
+                                                                                                                                                  </a>
+                                                                                                                                                 </b>
+                                                                                                                                                 (params) → void*
+                                                                                                                                                 <li>
+                                                                                                                                                  <b>
+                                                                                                                                                   <a href="CMU84507.HTM">
+                                                                                                                                                    PA_GetWebServerInfo
+                                                                                                                                                   </a>
+                                                                                                                                                  </b>
+                                                                                                                                                  (webServerProcess; TCPport)
+                                                                                                                                                  <li>
+                                                                                                                                                   <b>
+                                                                                                                                                    <a href="CMU84504.HTM">
+                                                                                                                                                     PA_GetWebTimeOut
+                                                                                                                                                    </a>
+                                                                                                                                                   </b>
+                                                                                                                                                   → long
+                                                                                                                                                   <li>
+                                                                                                                                                    <b>
+                                                                                                                                                     <a href="CMU84527.HTM">
+                                                                                                                                                      PA_GetWindowFocused
+                                                                                                                                                     </a>
+                                                                                                                                                    </b>
+                                                                                                                                                    → PA_WindowRef
+                                                                                                                                                    <li>
+                                                                                                                                                     <b>
+                                                                                                                                                      <a href="CMU84758.HTM">
+                                                                                                                                                       PA_GetWindowProcess
+                                                                                                                                                      </a>
+                                                                                                                                                     </b>
+                                                                                                                                                     (wRef) → long
+                                                                                                                                                     <li>
+                                                                                                                                                      <b>
+                                                                                                                                                       <a href="CMU84521.HTM">
+                                                                                                                                                        PA_GetWindowPtr
+                                                                                                                                                       </a>
+                                                                                                                                                      </b>
+                                                                                                                                                      (windowRef) → long
+                                                                                                                                                      <li>
+                                                                                                                                                       <b>
+                                                                                                                                                        <a href="CMU84343.HTM">
+                                                                                                                                                         PA_GetWindowsPRINTDLG
+                                                                                                                                                        </a>
+                                                                                                                                                       </b>
+                                                                                                                                                       → void*
+                                                                                                                                                       <li>
+                                                                                                                                                        <b>
+                                                                                                                                                         <a href="CMU84342.HTM">
+                                                                                                                                                          PA_GetWindowsPrintingDC
+                                                                                                                                                         </a>
+                                                                                                                                                        </b>
+                                                                                                                                                        <li>
+                                                                                                                                                         <b>
+                                                                                                                                                          <a href="CMU84515.HTM">
+                                                                                                                                                           PA_GotoArea
+                                                                                                                                                          </a>
+                                                                                                                                                         </b>
+                                                                                                                                                         (variableName)
+                                                                                                                                                         <li>
+                                                                                                                                                          <b>
+                                                                                                                                                           <a href="CMU84366.HTM">
+                                                                                                                                                            PA_GotoNextField
+                                                                                                                                                           </a>
+                                                                                                                                                          </b>
+                                                                                                                                                          (params)
+                                                                                                                                                          <li>
+                                                                                                                                                           <b>
+                                                                                                                                                            <a href="CMU84364.HTM">
+                                                                                                                                                             PA_GotoPreviousField
+                                                                                                                                                            </a>
+                                                                                                                                                           </b>
+                                                                                                                                                           (params)
+                                                                                                                                                           <li>
+                                                                                                                                                            <b>
+                                                                                                                                                             <a href="CMU84898.HTM">
+                                                                                                                                                              PA_GotoRecord
+                                                                                                                                                             </a>
+                                                                                                                                                            </b>
+                                                                                                                                                            (tableNum; recordNum)
+                                                                                                                                                            <li>
+                                                                                                                                                             <b>
+                                                                                                                                                              <a href="CMU84878.HTM">
+                                                                                                                                                               PA_GoToSelectedRecord
+                                                                                                                                                              </a>
+                                                                                                                                                             </b>
+                                                                                                                                                             (tableNum; selRecNum)
+                                                                                                                                                            </li>
+                                                                                                                                                           </li>
+                                                                                                                                                          </li>
+                                                                                                                                                         </li>
+                                                                                                                                                        </li>
+                                                                                                                                                       </li>
+                                                                                                                                                      </li>
+                                                                                                                                                     </li>
+                                                                                                                                                    </li>
+                                                                                                                                                   </li>
+                                                                                                                                                  </li>
+                                                                                                                                                 </li>
+                                                                                                                                                </li>
+                                                                                                                                               </li>
+                                                                                                                                              </li>
+                                                                                                                                             </li>
+                                                                                                                                            </li>
+                                                                                                                                           </li>
+                                                                                                                                          </li>
+                                                                                                                                         </li>
+                                                                                                                                        </li>
+                                                                                                                                       </li>
+                                                                                                                                      </li>
+                                                                                                                                     </li>
+                                                                                                                                    </li>
+                                                                                                                                   </li>
+                                                                                                                                  </li>
+                                                                                                                                 </li>
+                                                                                                                                </li>
+                                                                                                                               </li>
+                                                                                                                              </li>
+                                                                                                                             </li>
+                                                                                                                            </li>
+                                                                                                                           </li>
+                                                                                                                          </li>
+                                                                                                                         </li>
+                                                                                                                        </li>
+                                                                                                                       </li>
+                                                                                                                      </li>
+                                                                                                                     </li>
+                                                                                                                    </li>
+                                                                                                                   </li>
+                                                                                                                  </li>
+                                                                                                                 </li>
+                                                                                                                </li>
+                                                                                                               </li>
+                                                                                                              </li>
+                                                                                                             </li>
+                                                                                                            </li>
+                                                                                                           </li>
+                                                                                                          </li>
+                                                                                                         </li>
+                                                                                                        </li>
+                                                                                                       </li>
+                                                                                                      </li>
+                                                                                                     </li>
+                                                                                                    </li>
+                                                                                                   </li>
+                                                                                                  </li>
+                                                                                                 </li>
+                                                                                                </li>
+                                                                                               </li>
+                                                                                              </li>
+                                                                                             </li>
+                                                                                            </li>
+                                                                                           </li>
+                                                                                          </li>
+                                                                                         </li>
+                                                                                        </li>
+                                                                                       </li>
+                                                                                      </li>
+                                                                                     </li>
+                                                                                    </li>
+                                                                                   </li>
+                                                                                  </li>
+                                                                                 </li>
+                                                                                </li>
+                                                                               </li>
+                                                                              </li>
+                                                                             </li>
+                                                                            </li>
+                                                                           </li>
+                                                                          </li>
+                                                                         </li>
+                                                                        </li>
+                                                                       </li>
+                                                                      </li>
+                                                                     </li>
+                                                                    </li>
+                                                                   </li>
+                                                                  </li>
+                                                                 </li>
+                                                                </li>
+                                                               </li>
+                                                              </li>
+                                                             </li>
+                                                            </li>
+                                                           </li>
+                                                          </li>
+                                                         </li>
+                                                        </li>
+                                                       </li>
+                                                      </li>
+                                                     </li>
+                                                    </li>
+                                                   </li>
+                                                  </li>
+                                                 </li>
+                                                </li>
+                                               </li>
+                                              </li>
+                                             </li>
+                                            </li>
+                                           </li>
+                                          </li>
+                                         </li>
+                                        </li>
+                                       </li>
+                                      </li>
+                                     </li>
+                                    </li>
+                                   </li>
+                                  </li>
+                                 </li>
+                                </li>
+                               </li>
+                              </li>
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+ </body>
+</html>

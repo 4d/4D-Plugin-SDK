@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+// ---------------------------------------------------------------
+// pictures manipulations 
+// ---------------------------------------------------------------
+
+PA_Picture   PA_CreatePicture( void* buffer, long len );
+
+
+</body></html>

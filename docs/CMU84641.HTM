@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CompareStrings
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CompareStrings
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CompareStrings (text1; text1Length; text2; text2Length; diacritic) → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      text1
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The text to compare to text2
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      text1Length
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Number of chars in text1
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      text2
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The text to be compared with text1
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      text2Length
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Number of chars in text2
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      diacritic
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 = Use diacritic compare
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Result of the comparison (0, 1 or 2)
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_CompareStrings
+    </font>
+   </code>
+   compares 2 texts and returns 0 if they are equals, 1 if text 1 is greater than text2, and 2 if text1 is less than text2.
+  </p>
+  <p>
+   Pass in
+   <code>
+    text1
+   </code>
+   a pointer to the text to be compared to
+   <code>
+    text2
+   </code>
+   , and its length in
+   <code>
+    text1length
+   </code>
+   .
+  </p>
+  <p>
+   Pass in
+   <code>
+    text2
+   </code>
+   a pointer to the text to be compared at
+   <code>
+    text1
+   </code>
+   , and its length in
+   <code>
+    text2length
+   </code>
+   .
+  </p>
+  <p>
+   Pass 0 (no diacritical comparison) or 1 (diacritical comparison) in
+   <code>
+    diacritical
+   </code>
+   .
+  </p>
+  <p>
+   A diacritical comparison means that the comparison is case sensitive.
+  </p>
+  <p>
+   Depending on default settings or on previous calls to
+   <code>
+    <a href="CMU84815.HTM">
+     PA_UseMacCharacters
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84814.HTM">
+     PA_UseANSICharacters
+    </a>
+   </code>
+   ,
+   <code>
+    text1
+   </code>
+   and
+   <code>
+    text2
+   </code>
+   may use Macintosh or ANSI characters.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Some comparisons.
+  </p>
+  <p>
+  </p>
+  <pre><code>   PA_CompareStrings( "ABC", 3, "abc", 3, 0 ) returns 0 in non diacritical mode (strings are equals)
+   PA_CompareStrings( "ABC", 3, "abc", 3, 1 ) returns 2 in diacritical mode  (ABC is before abc)
+   PA_CompareStrings( "bbb", 3, "aaa", 3, 0 ) returns 1 (bbb is after aaa in alphabetical order)   
+   PA_CompareStrings( "aaa", 3, "bbb", 3, 0 ) returns 2 (aaa is before bbb in alphabetical order)
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84640.HTM">
+    PA_ConvertStrings
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

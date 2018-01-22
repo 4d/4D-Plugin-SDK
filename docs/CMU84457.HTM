@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_NewDialog
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_NewDialog
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <p>
+   PA_NewDialog  → PA_Dial4D
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_NewDialog
+    </font>
+   </code>
+   creates a new dialog context and returns a reference to that context. This context will be used in any subsequent call referring to this dialog.
+  </p>
+  <p>
+   A dialog context handles the dialog variables so that the dialog can be used in compiled mode.
+  </p>
+  <p>
+   Calling this routine should be the first thing done when using a 4D Dialog.
+  </p>
+  <p>
+   In the improbable case where it could not allocate the context,
+   <code>
+    <font color="#CF0000">
+     PA_NewDialog
+    </font>
+   </code>
+   returns 0L.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Display a dialog saved in plugin resource named "SuperDialog"
+  </p>
+  <p>
+  </p>
+  <pre><code>   void DisplaySuperDialog ()
+   {
+      PA_Dial4D   dial;
+      char      cancelOrValidate;
+      char      lastVar[256];
+ 
+   // Create the dialog context
+      dial = PA_NewDialog();
+   // Open the dialog stored in plugin resource
+      PA_OpenDialog(dial, "SuperDialog", 0);
+   // Loop
+      do {
+         cancelOrValidate = PA_ModalDialog( dial, lastVar );
+ 
+         if (  0 == strcmp( lastVar, "aVar1" ) )
+         {
+            // user hits variable "aVar1"
+            /* . . . */
+         }
+         else if ( 0 == strcmp( lastVar, "aVar2" ) )
+         {
+            // user hits variable "aVar2"
+            /* . . . */
+         }
+      } while ( cancelOrValidate == 0 );
+ 
+      if ( cancelOrValidate == 1 )
+      {
+         // User validates the dialog
+         /* . . . */
+      }
+      else if ( cancelOrValidate == 2 )
+      {
+         // User cancels the dialog
+         /* . . . */
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84454.HTM">
+    PA_CloseDialog
+   </a>
+   ,
+   <a href="CMU84455.HTM">
+    PA_ModalDialog
+   </a>
+   ,
+   <a href="CMU84456.HTM">
+    PA_OpenDialog
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

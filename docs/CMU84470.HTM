@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetUserStringKind
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetUserStringKind
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetUserStringKind  → PA_StringKind
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_StringKind
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind of string being used
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetUserStringKind
+    </font>
+   </code>
+   returns the kind of string (Pascal or ANSI C) being used. It returns a result of type
+   <code>
+    PA_StringKind
+   </code>
+   , defined in the "PublicTypes.c" header file as :
+  </p>
+  <pre><code>typedef enum
+{
+   eSK_CString = 0,
+   eSK_PString
+} PA_StringKind;</code></pre>
+  <p>
+   By default, the API's setting is ANSI C strings. For special purposes and for generic routines, the developer will need to know what kind of strings are used to change/restore it.
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   (1) Generic concatenation
+  </p>
+  <p>
+  </p>
+  <pre><code>   void ConcatStrings (char *srce, char *toAppend)
+   {
+      if(PA_GetUserStringKind() == eSK_CString)
+         MyConcatCStrings(srce, toAppend);
+      if(PA_GetUserStringKind() == eSK_PString)
+         MyConcatPStrings( (unsigned char *) srce, (unsigned char *)toAppend);
+   }
+</code></pre>
+  <p>
+   (2) Generic strlen
+  </p>
+  <p>
+  </p>
+  <pre><code>   short my_strlen (char *s)
+   {
+      if(PA_GetUserStringKind() == eSK_CString)
+         return (short) strlen( s );
+      if(PA_GetUserStringKind() == eSK_PString)
+         return (short) s[0];
+   }
+ 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84816.HTM">
+    PA_UseCStrings
+   </a>
+   ,
+   <a href="CMU84817.HTM">
+    PA_UsePStrings
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

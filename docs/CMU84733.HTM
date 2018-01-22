@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ByteSwapTokens
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ByteSwapTokens
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ByteSwapTokens (tokens; len)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tokens
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Tokens to byteswap
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of the tokens' buffer
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ByteSwapTokens
+    </font>
+   </code>
+   allows the 4D plug-in to byte swap a line of 4th Dimension code that has been tokenized (using
+   <code>
+    <a href="CMU84736.HTM">
+     PA_Tokenize
+    </a>
+   </code>
+   ) on a platform whose byte ordering is different than the platform where the 4D plug-in is running.
+  </p>
+  <p>
+   Before the call, pass the text of the tokens in
+   <code>
+    Tokens
+   </code>
+   and its length in
+   <code>
+    len
+   </code>
+   .
+  </p>
+  <p>
+   After the call,
+   <code>
+    Tokens
+   </code>
+   holds the byte swapped tokens.
+  </p>
+  <p>
+   A 4D plug-in should call this routine before detokenizing or executing tokens that have been built on another platform.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   For example, a plug-in could save the tokens in a structure that holds private data, such as a platform flag (say, 'ABCD' under MacOS). Before detokenizing or executing the tokens, the plug-in checks the signature, and byteswaps the tokens if necessary.
+  </p>
+  <p>
+  </p>
+  <pre><code>   #define      TOKENS_FLAG            'ABCD'
+   #define      BYTESWAPPED_TOKENS_FLAG   'DCBA'
+      
+   void SaveTokens ( Stream* stream, char* tokens, long len )
+   {
+      myWriteLongToStream( stream, TOKENS_FLAG );
+      myWriteLongToStream( stream, len );
+      myWriteBufferToStream( stream, tokens, len );
+   }
+   
+   char* LoadTokens( Stream* stream,  )
+   {
+      long byteswap, len;
+      char*tokens = 0;
+      
+      byteswap = myReadLongInStream( stream );
+      len = myReadLongInStream( stream );
+      if ( byteswap == BYTESWAPPED_TOKENS_FLAG )
+         ByteSwapLong( &amp;len );
+      tokens = malloc( len );
+      if  ( tokens )
+      {
+         myReadBufferInStream( stream, tokens, len );
+         if ( byteswap == BYTESWAPPED_TOKENS_FLAG )   // byteswap the tokens if needed
+            PA_ByteSwapTokens( loadedTokens.fTokens, loadedTokens.fLen );
+      }
+      return tokens;
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84732.HTM">
+    PA_ExecuteTokens
+   </a>
+   ,
+   <a href="CMU84731.HTM">
+    PA_ExecuteTokensAsFunction
+   </a>
+   ,
+   <a href="CMU84736.HTM">
+    PA_Tokenize
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

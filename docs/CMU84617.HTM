@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SetBlobHandleField
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SetBlobHandleField
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SetBlobHandleField (tNum; fNum; newHBlob)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      newHBlob
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      New handle for the BLOB field
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_SetBlobHandleField
+    </font>
+   </code>
+   sets the handle of the BLOB field number
+   <code>
+    fNum
+   </code>
+   of the current record of table number
+   <code>
+    tNum
+   </code>
+   to
+   <code>
+    newHBlob
+   </code>
+   .
+  </p>
+  <p>
+   If the field is not a BLOB field, the routine does nothing and sets an error in
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   ().
+  </p>
+  <p>
+   This is useful for memory optimisation:
+   <code>
+    <a href="CMU84625.HTM">
+     PA_SetBlobField
+    </a>
+   </code>
+   duplicates the BLOB, since
+   <code>
+    <font color="#CF0000">
+     PA_SetBlobHandleField
+    </font>
+   </code>
+   changes only the value of the handle to the BLOB field.
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE
+   </p>
+  </b>
+  <p>
+   After the call, the handle belongs to 4th Dimension.
+   <b>
+    <u>
+     Never dispose of it.
+    </u>
+   </b>
+  </p>
+ </body>
+</html>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Give a new handle to a field.
+</p>
+<p>
+</p>
+<pre><code>   PA_Handle   h;
+   h = PA_NewHandle(ONE_MILLION_BYTES); // a large one
+   /* . . . work with h . . . */
+   PA_SetBlobHandleField(tNum, fNum, h);
+   // Now, h belongs to 4D. Never call PA_DisposeHandle on it.
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84629.HTM">
+  PA_GetBlobHandleField
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (
+ <code>
+  eER_InvalidFileNumber
+ </code>
+ ,
+ <code>
+  eER_InvalidFieldNumber
+ </code>
+ )
+</p>

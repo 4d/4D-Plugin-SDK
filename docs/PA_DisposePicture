@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+// ---------------------------------------------------------------
+// pictures manipulations 
+// ---------------------------------------------------------------
+
+
+void         PA_DisposePicture( PA_Picture picture );
+
+
+</body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetWindowFocused
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetWindowFocused
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetWindowFocused  → PA_WindowRef
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_WindowRef
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Reference of the current window with focus
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetWindowFocused
+    </font>
+   </code>
+   returns a reference to the window that has the focus when the call is made.
+  </p>
+  <p>
+   Only focusable windows can receive the keyboard focus. A focusable window is a window that can receive keyboard events ("get the focus"), even if it is a floating window. When a focusable window receives a keyboard event, it becomes focused. For example, the tool palette of the Form Editor is not focusable. When the user clicks on it, it does not get the focus, which remains in the Editor. On the other hand, the properties palette is focusable. When the user clicks in an editable field (to set a variable name, an object name) of this palette, it takes the focus and the keyboard events.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Force the focus to change.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void ForceFocus(PA_WindowRef aWindow)
+   {
+      if(PA_FetWindowFocused() != aWindow)
+      {
+         PA_SetWindowFocusable(aWindow);
+         PA_SetWindowFocused(aWindow);
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84528.HTM">
+    PA_IsWindowFocusable
+   </a>
+   ,
+   <a href="CMU84525.HTM">
+    PA_IsWindowFocused
+   </a>
+   ,
+   <a href="CMU84529.HTM">
+    PA_SetWindowFocusable
+   </a>
+   ,
+   <a href="CMU84529.HTM">
+    PA_SetWindowFocusable
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

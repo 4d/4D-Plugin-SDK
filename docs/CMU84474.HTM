@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetDragAndDropTableField
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetDragAndDropTableField
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetDragAndDropTableField (info; tNum; fNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      info
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_DragAndDropInfo
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Current dragged object information
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Dragged field table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number being drag/dropped
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetDragAndDropTableField
+    </font>
+   </code>
+   returns in
+   <code>
+    *tNum
+   </code>
+   and in
+   <code>
+    *fNum
+   </code>
+   the number of the table and of the field the user has drag/dropped onto the area.
+  </p>
+  <p>
+   If the dragged object is not a field, both values are returned null.
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE
+   </p>
+  </b>
+  <p>
+   If the object is a field of the table that owns the form, *tNum will be 0. To get the table number of the owning table, the plug-in MUST call
+   <code>
+    <a href="CMU84498.HTM">
+     PA_GetPluginProperties
+    </a>
+   </code>
+   at
+   <code>
+    kInitArea
+   </code>
+   event, and then it must store the
+   <code>
+    fTabble
+   </code>
+   field in its private data, to retreive later.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See the sample in
+   <code>
+    <a href="CMU84473.HTM">
+     Drag and drop with a plugin area
+    </a>
+   </code>
+   .
+  </p>
+  <code>
+  </code>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84473.HTM">
+    Drag and drop with a plugin area
+   </a>
+   ,
+   <a href="CMU84476.HTM">
+    PA_GetDragAndDropKind
+   </a>
+   ,
+   <a href="CMU84475.HTM">
+    PA_GetDragAndDropVariable
+   </a>
+   .
+  </p>
+ </body>
+</html>

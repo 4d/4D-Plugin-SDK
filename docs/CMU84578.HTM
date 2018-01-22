@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SendDocumentToServer
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SendDocumentToServer
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SendDocumentToServer (docName; data; dataSize; docType; docCreator)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      docName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the file to send
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      data
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Content of the document
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dataSize
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Size of data in bytes
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      docType
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      4 bytes FileType of the file to create
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      docCreator
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      4 bytes FileCreator of the file to create
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   While running under 4D Client, the routine
+   <code>
+    <font color="#CF0000">
+     PA_SendDocumentToServer
+    </font>
+   </code>
+   allows the 4D plug-in to save a document on the server machine.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  :
+ </body>
+</html>
+<p>
+ This routine is available only with 4D Client. To detect if the 4D plug-in is running on 4D Client, use
+ <code>
+  <a href="CMU84887.HTM">
+   PA_Is4DClient
+  </a>
+ </code>
+ .
+</p>
+<p>
+ Before the call the 4D plug-in passes in
+ <code>
+  docName
+ </code>
+ the name of the document to save. The 4D plug-in MUST pass the short name of the document, NOT the pathname to the document. The document will  be located in the same folder/directory than the structure.
+</p>
+<b>
+ <p>
+  NOTE
+ </p>
+</b>
+:
+<p>
+ 4D Server creates the document or replaces an existing document with the same name if it exists.
+</p>
+<p>
+ Before the call the 4D plug-in also passes:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ The File Type in
+ <code>
+  docType
+ </code>
+ , and File Creator in
+ <code>
+  docCreator
+ </code>
+ for the document. Under Windows this information is mapped to the Windows file Extensions declared within the database using the 4D command
+ <code>
+  <a href="CMU00366.HTM">
+   MAP FILE TYPES
+  </a>
+ </code>
+ or by a ExtW resource located in the .RSR file of a 4D plug-in available for the database.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ A pointer in
+ <code>
+  data
+ </code>
+ to a memory block holding the contents of the document.
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ The size in
+ <code>
+  dataSize
+ </code>
+ of the data referenced by
+ <code>
+  data
+ </code>
+ .
+</p>
+<b>
+ <p>
+  IMPORTANT NOTE:
+ </p>
+ <code>
+ </code>
+</b>
+<p>
+ <font color="#CF0000">
+  PA_SendDocumentToServer
+ </font>
+</p>
+or
+<code>
+ <font color="#CF0000">
+  PA_SendDocumentToServer
+ </font>
+</code>
+deal only with the data fork of a document when used on a Macintosh platform.
+<b>
+ <p>
+  NOTE
+ </p>
+</b>
+:
+<p>
+ Documents stored on a server machine and accessed using
+ <code>
+  <font color="#CF0000">
+   PA_SendDocumentToServer
+  </font>
+ </code>
+ or
+ <code>
+  <font color="#CF0000">
+   PA_SendDocumentToServer
+  </font>
+ </code>
+ are sent over the network and must fit into the memory of the workstation. It is therefore a good idea to refrain from using these entry points in small or medium size documents.
+</p>
+<p>
+ If it is the developer's goal to make large documents available to all 4D Clients connected to a particular server the developer may want to choose an alternative solution such as combining 4D Server with a File Server which the developer can access using the 4D command such as
+ <b>
+  Open
+ </b>
+ <b>
+  Document
+ </b>
+ .
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Saving a private preference structure on the server.
+</p>
+<p>
+</p>
+<pre><code>   typedef struct
+   {
+      long   something;
+      char   otherThing[256];
+      short   someMore;
+   } MyPrefs;
+ 
+   void SavePrefToServer(MyPrefs *prefs, char *prefsFileName)
+   {
+      PA_SendDocumentToServer(prefsFileName, prefs, sizeof(MyPrefs), 'TITI', 'TOTO');
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84577.HTM">
+  PA_DocumentExistOnServer
+ </a>
+ ,
+ <a href="CMU84579.HTM">
+  PA_receiveDocumentFromServer
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

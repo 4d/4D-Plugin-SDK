@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetTextInArray
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetTextInArray
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetTextInArray (array; index; text) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      array
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Array to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      index
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Index of the element to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      text
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the text
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Size of text in bytes
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetTextInArray
+    </font>
+   </code>
+   fills the data pointed to by
+   <code>
+    text
+   </code>
+   with the text data of the
+   <code>
+    index
+   </code>
+   element of the text array
+   <code>
+    array
+   </code>
+   , and returns the size of the text.
+  </p>
+  <p>
+   First, pass zero in
+   <code>
+    text
+   </code>
+   to get the size of the text, then allocate a buffer with the correct size and again call the routine passing it this buffer. See the example below.
+  </p>
+  <p>
+   If the array is not a
+   <code>
+    eVK_ArrayText
+   </code>
+   or if
+   <code>
+    index
+   </code>
+   is out of range, the routine returns 0 and leaves
+   <code>
+    text
+   </code>
+   unchanged.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_GetTextInArray
+    </font>
+   </p>
+  </code>
+  fills the data with Macintosh characters on Macintosh and ANSI characters under Windows, unless you have previously called the
+  <code>
+   <a href="CMU84815.HTM">
+    PA_UseMacCharacters
+   </a>
+  </code>
+  or
+  <code>
+   <a href="CMU84814.HTM">
+    PA_UseAnsiCharacters
+   </a>
+  </code>
+  function.
+ </body>
+</html>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Get the value of the current element (no error check in this sample).
+</p>
+<p>
+</p>
+<pre><code>   char   *buffer;
+   long   size;
+ 
+   size = PA_GetTextInArray( arr, PA_GetArrayCurrent( arr ), 0L );
+   buffer = malloc( size );
+   size = PA_GetTextInArray( arr, PA_GetArrayCurrent( arr ), buffer );
+   /* . . . work with text buffer . . . */
+   free( buffer );
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84672.HTM">
+  PA_SetTextInArray
+ </a>
+ ,
+ <a href="CMU84814.HTM">
+  PA_UseAnsiCharacters
+ </a>
+ ,
+ <a href="CMU84815.HTM">
+  PA_UseMacCharacters
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ None.
+</p>

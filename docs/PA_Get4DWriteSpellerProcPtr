@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+// -----------------------------------------
+//	4D Application SpellCheckers
+// -----------------------------------------
+
+
+void* PA_Get4DWriteSpellerProcPtr ( );
+
+</body></html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetBlobHandleVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetBlobHandleVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetBlobHandleVariable (aVariable) → PA_Handle
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      aVariable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Variable to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The handle to the BLOB data in the variable
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetBlobHandleVariable
+    </font>
+   </code>
+   returns a handle to the BLOB data. If the variable is not a
+   <code>
+    eVK_Blob
+   </code>
+   variable, the routine returns 0.
+  </p>
+  <p>
+   To get a copy of the data, use
+   <code>
+    <a href="CMU84713.HTM">
+     PA_GetBlobVariable
+    </a>
+   </code>
+   . It can be useful to only get the handle for saving memory , especially if the plug-in just want to "read-only" the BLOB content.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  :
+ </body>
+</html>
+<p>
+ The handle belongs to the variable. Do not dispose of it.
+</p>
+<p>
+ To clear a BLOB variable, use
+ <code>
+  <a href="CMU84692.HTM">
+   PA_ClearVariable
+  </a>
+ </code>
+ .
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Searching in a BLOB :  we do not need a copy of the BLOB for this. The handle is ok.
+</p>
+<p>
+</p>
+<pre><code>   long MySearchInBlob(PA_Variable  aBlobVar, char *toFind, long toFindLength)
+   {
+      long   pos = -1L;
+      PA_Handle   h = 0L;
+      char   *pt;
+ 
+      h = PA_GetBlobHandleVariable(aBlobVar);
+      if(h)
+      {
+         pt = PA_LockHandle(h);
+         pos = SuperSearchRoutine(pt, toFind, toFindLength);
+         PA_UnlockHandle(h);
+      }
+ 
+      return pos;
+   // No cleanup of h here !
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84713.HTM">
+  PA_GetBlobVariable
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+keeps the last error that occurred
+<u>
+ before
+</u>
+calling the routine.

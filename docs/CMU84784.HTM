@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_TableAndFieldPopup
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_TableAndFieldPopup
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_TableAndFieldPopup (x; y; tNum; fNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      x
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Global horizontal coordinate of pop-up top left corner
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      y
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Global vertical coordinate of pop-up top left corner
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number of selected Table
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number of selected Field
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_TableAndFieldPopup
+    </font>
+   </code>
+   draws a hierarchical pop-up menu built with all tables and their fields names. If the user chooses a field name,
+   <code>
+    tNum
+   </code>
+   and
+   <code>
+    fNum
+   </code>
+   are set to those table and field numbers. If the user makes no choice (he releases the mouse out of the pop-up menu),
+   <code>
+    tNum
+   </code>
+   and
+   <code>
+    fNum
+   </code>
+   are set to 0.
+  </p>
+  <p>
+   The
+   <code>
+    x
+   </code>
+   and
+   <code>
+    y
+   </code>
+   coordinates are relative to the main screen, or the MDI window.
+  </p>
+  <p>
+   Usually, this call is made from an object which launch its method when the mouse is down on it (but it is the
+   <code>
+    On mouse up
+   </code>
+   event that is sent to the method), such as invisible buttons, arrays, hierarchical list.
+  </p>
+  <p>
+   This routine uses the virtual structure if it is on (
+   <code>
+    <a href="CMU84846.HTM">
+     PA_UseVirtualStructure
+    </a>
+   </code>
+   ).
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   The routine is declared as xx_PopupTableAndFields(1I;&amp;I;&amp;I&amp;;I) in the STR# resource (this is done for you by the Plug-in Wizard)
+  </p>
+  <p>
+   In your PluginMain routine:
+  </p>
+  <pre><code>   void PluginMain( long selector, PA_PluginParameters params )
+   {
+      switch ( selector )
+      {
+         case kInitPlugin :
+      /* . . . code . . . */
+ 
+         case kPopupTablesAndFields :
+            PA_TableAndFieldPopup(
+               PA_GetShortParameter(params, 1),   // horizontal global
+               PA_GetShortParameter(params, 2),   // vertical global
+               ( ( (short**) params-&gt;fParameters ) [ 2 ] ),
+               ( ( (short**) params-&gt;fParameters ) [ 3 ] )   );
+            break;
+      } // switch (selector)
+   }
+</code></pre>
+  <p>
+   The method object of an invisible button:
+  </p>
+  <p>
+  </p>
+  <pre><code>   <b>If</b>( <b><a href="CMU00388.HTM">Form event</a></b> = <u>On mouse up</u>)
+       <b><a href="CMU00468.HTM">GET MOUSE</a></b> ($x;$y;$button;*)  ` * to get globals coordinates
+        <b><i>xx_PopupTableAndFields</i></b></code></pre>
+ </body>
+</html>
+($x;$y;$t;$f)
+<b>
+ If
+</b>
+( ($t # 0) &amp; ($f # 0) )
+         ` Do something for this field
+<b>
+ End if
+</b>
+<b>
+ End if
+</b>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84783.HTM">
+  PA_FieldPopup
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred.
+</p>

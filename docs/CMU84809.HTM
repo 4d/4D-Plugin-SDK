@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_NewHandle
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_NewHandle
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_NewHandle (len) → PA_Handle
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Size in bytes of the PA_Handle
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Returns the allocated handle
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_NewHandle
+    </font>
+   </code>
+   allocates
+   <code>
+    handleSize
+   </code>
+   bytes in memory and returns a handle (of type
+   <code>
+    PA_Handle
+   </code>
+   ). If an error occurred,
+   <code>
+    <font color="#CF0000">
+     PA_NewHandle
+    </font>
+   </code>
+   returns 0.
+  </p>
+  <b>
+   <p>
+    NOTE for MacOS developers
+   </p>
+  </b>
+  <p>
+   The allocated handle can be manipulated like a "regular" Macintosh handle.
+  </p>
+  <code>
+   <p>
+    PA_Handle
+   </p>
+  </code>
+  is defined as char** in PublicTypes.h, and this structure is used internally by the API (Pictures, BLOBs, etc.).
+ </body>
+</html>
+<p>
+ For example, once the plug-in received a
+ <code>
+  PA_Handle
+ </code>
+ from a BLOB, it can use
+ <code>
+  <a href="CMU84807.HTM">
+   PA_GetHandleSize
+  </a>
+ </code>
+ to get its size and the * symbol on that handle to access the pointer:
+</p>
+<pre><code>   PA_Handle   myBlob;
+   char   *copied;
+   long   size;
+ 
+// get the handle
+   myBlob = PA_GetBlobHandleParameter(params, 1);
+// get its size
+   size = GetHandleSize(myBlob);
+// allocate the buffer
+   copied = malloc(size);
+// use the * operator to give a valid argument to memmove
+   memmove( (char *) copied, (char *) *myBlob, size); 
+   </code></pre>
+<p>
+ The routines of the "4D Handles" theme are given to help the developer manipulate the PA_Handle returned by some entry points (Pictures, BLOB, etc.). They should not be used as a replacement for MemoryManager's OS routines (malloc, NewHandle, etc.)
+</p>
+<p>
+ Thus, as demonstrated in an example below, using those routines can be useful in some cases.
+</p>
+<p>
+ As it is defined as char**, developers have to use double-dereferencing to access the data :
+</p>
+<p>
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+    (*handle)-&gt;
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+    or
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+    (**handle).
+   </td>
+  </tr>
+ </table>
+</p>
+<p>
+ Once the handle is no longer needed, the developer should dispose of it by using
+ <code>
+  <a href="CMU84808.HTM">
+   PA_DisposeHandle
+  </a>
+ </code>
+ . If the code that uses the handle can move memory, the developer should lock the handle using
+ <code>
+  <a href="CMU84805.HTM">
+   PA_LockHandle
+  </a>
+ </code>
+ , run its code, and then unlock the handle by calling
+ <code>
+  <a href="CMU84804.HTM">
+   PA_UnlockHandle
+  </a>
+ </code>
+ .
+</p>
+<p>
+ To get the actual size of a handle, call
+ <code>
+  <a href="CMU84807.HTM">
+   PA_GetHandleSize
+  </a>
+ </code>
+ , and to resize it use
+ <code>
+  <a href="CMU84806.HTM">
+   PA_SetHandleSize
+  </a>
+ </code>
+ .
+</p>
+<p>
+ As with any calls that allocate or touch memory, an error check should be conducted immediately after calling
+ <code>
+  <font color="#CF0000">
+   PA_NewHandle
+  </font>
+ </code>
+ to see if the call failed (insufficient memory, etc).
+</p>
+<b>
+ <p>
+  Examples
+ </p>
+</b>
+<p>
+ (1) Allocating a new block of 1024 bytes in memory.
+</p>
+<p>
+</p>
+<pre><code>   aHandle = PA_NewHandle(1024);
+   if(aHandle == 0L)
+   {
+   // we've got a problem...
+   }
+   else
+   {
+      ...
+   }
+</code></pre>
+<p>
+ (2) Allocate a buffer and dispose of it after use.
+</p>
+<p>
+</p>
+<pre><code>   aHandle = PA_NewHandle(MY_BUFFER_SIZE);
+   if(aHandle == 0L)
+   {
+   // we've got a problem...
+   }
+   else
+   {
+      /*. . . working with the buffer . . .*/
+   // free the memory:
+      PA_DisposeHandle(aHandle);
+   }
+</code></pre>
+<p>
+ (3) Initialize a handle with 0s.
+</p>
+<p>
+</p>
+<pre><code>   PA_Handle myNewHandleClear (long size)
+   {
+      PA_Handle      h = 0L;
+      register long   i;
+      char*         pt;
+ 
+      h = PA_NewHandle(size);
+      if ( h )
+      {
+         pt = *h;
+         for ( i = 0; i &lt; size; i++ )
+            *pt++ = 0;
+      }
+         
+      return h;
+   }
+</code></pre>
+<p>
+ (4) Initialize the data used by an external area.
+</p>
+<p>
+</p>
+<pre><code>   // Structure used by each area
+   typedef struct
+   {
+      char      docName[256];   // Current document name
+      char      isDirty;         // document was modified (need to be saved)
+      /* . . . other fields . . . */
+   } AreaData, *AreaDataPtr, **AreaDataHandle;
+ 
+   short InitMyArea(AreaDataHandle *data)
+   {
+      short         err;
+      AreaDataPtr   p;
+   // Allocate the memory
+      *data = PA_NewHandle( sizeof(AreaData) );
+   // if no error, initialize it
+      if(*data)
+      {
+         p = PA_LockHandle(*data);
+         p-&gt;docName[0] = (char) 0;
+         p-&gt;iDirty = (char) 0;
+         /* . . . initialize the other fields . . . */
+         PA_UnlockHandle(*data);
+         
+      }
+      return PA_GetLastError();
+   }
+ 
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84808.HTM">
+  PA_DisposeHandle
+ </a>
+ ,
+ <a href="CMU84807.HTM">
+  PA_GetHandleSize
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (insufficient memory, etc.).
+</p>

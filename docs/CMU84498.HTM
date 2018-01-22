@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPluginProperties
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPluginProperties
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetPluginProperties (params; props)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      props
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginProperties*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer the the area properties
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetPluginProperties
+    </font>
+   </code>
+   returns the area settings in the
+   <code>
+    <a href="CMU84867.HTM">
+     PA_PluginProperties
+    </a>
+   </code>
+   pointed to by
+   <code>
+    props
+   </code>
+   .
+  </p>
+  <code>
+   <p>
+    params
+   </p>
+  </code>
+  is the
+  <code>
+   PA_PluginParameters
+  </code>
+  the plug-in received in its
+  <code>
+   PluginMain
+  </code>
+  routine.
+ </body>
+</html>
+<code>
+ <p>
+  props
+ </p>
+</code>
+points to a structure of type
+<code>
+ <a href="CMU84867.HTM">
+  PA_PluginProperties
+ </a>
+</code>
+. This structure holds various information concerning the area: the font, size, face, color set by the user in the Design environment, drag and drop availability, and information while the area is printed.
+<b>
+ <p>
+  IMPORTANT NOTE
+ </p>
+</b>
+<p>
+ This routine can be called only at initialization, when
+ <code>
+  <a href="CMU84501.HTM">
+   PA_GetAreaEvent
+  </a>
+ </code>
+ returns
+ <code>
+  eAE_Init
+ </code>
+ or
+ <code>
+  eAE_DesignUpdate
+ </code>
+ . Otherwise,
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ () returns
+ <code>
+  eER_BadEventCall
+ </code>
+ . If the plug-in needs to use the properties at any other time (MouseDown, update) it must duplicate the properties in a private structure.
+</p>
+<p>
+ This structure is defined in the "PublicTypes.h" header file as:
+</p>
+<pre><code>typedef struct PA_PluginProperties
+{
+   short   fVersion;
+   short   fFontID;   // Macintosh font ID
+   short   fJustification;
+   char   fFontSize;
+   char   fFontFace;
+   long   fForeColor;
+   long   fBackColor;
+   void*   fAdvancedProperties;
+   long   fAdvancedPropertiesSize;
+   char   fPageMode;
+   char   fPrintingMode;
+   short   fPage;
+   short   fTable;
+   long   fUnused;
+   char   fDraggable;
+   char   fDroppable;
+   short   fLook;
+   void*   fMacWindow;
+   void*   fMacPort;
+   void*   fWinHWND;
+   void*   fWinHDC;
+   char   fInterProcessVariable;
+} PA_PluginProperties;</code></pre>
+<b>
+ <p>
+  Examples
+ </p>
+</b>
+<p>
+ (1) Is the area an interprocess ?
+</p>
+<p>
+</p>
+<pre><code>   char IsAreaInterprocess(PA_PluginParams params)
+   {
+      PA_PluginProperties   props;
+      PA_GetPluginProperties(params, &amp;props);
+      
+      return props.fInterProcessVariable;
+   }
+ 
+</code></pre>
+<p>
+ (2) Save the properties at initialization
+</p>
+<p>
+</p>
+<pre><code>   typedef struct {
+      PA_PluginProperties   props;
+      /* . . . other fields of this private structure . . . */
+   } AREA, *AREAPTR;
+ 
+   void PluginMain (long selector, PA_PluginParameters params)
+   {
+      switch (selector)
+      {
+         /* . . . */
+         case 11: // in this sample, the area is 11th routine
+            MyArea(params);
+            break;
+         /* . . . */
+      }
+   }
+ 
+   void MyArea(PA_PluginParameters params)
+   {
+      AE_AreaEvent   event;
+      event = PA_GetAreaEvent( params );
+ 
+      switch ( event )
+      {
+         /* . . . */
+         case eAE_Init :
+         {
+      // Allocate our private data
+            AREA   area = malloc(sizeof(AREA);
+            if(area)
+            {
+      // Get the properties. At Runtime, the properties can only be
+      // retrieved at initialization 
+               PA_GetPluginProperties(params, &amp;area.props);
+ 
+               /* . . . initialize the other fields . . . */
+            }
+      // "link" the reference to our private data
+            PA_SetPluginReference(params, area);
+         }
+            break;
+ 
+         /* . . . next code . . .*/
+      
+   }
+   
+</code></pre>
+<p>
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84478.HTM">
+  Create and use an external area
+ </a>
+ ,
+ <a href="CMU84501.HTM">
+  PA_GetAreaEvent
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

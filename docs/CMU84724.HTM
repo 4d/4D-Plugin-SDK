@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Confirm
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Confirm
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <p>
+   PA_Confirm (message; WindowRef) → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      message
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Unichar*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Message to display in the confirmation dialog box
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      WindowRef
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      Long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Link to windows that called the command
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 if the user accepts the dialog box.
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Confirm
+    </font>
+   </code>
+   displays a confirmation dialog box composed of a note icon, a message, an
+   <b>
+    OK
+   </b>
+   button, and a
+   <b>
+    Cancel
+   </b>
+   Button.
+  </p>
+  <p>
+   Pass the message to be displayed in
+   <code>
+    message
+   </code>
+   (Pascal or C strings up to 255 characters).
+  </p>
+  <p>
+   If the user accepts the dialog box,
+   <code>
+    <font color="#CF0000">
+     PA_Confirm
+    </font>
+   </code>
+   returns 1. Otherwise it returns 0.
+  </p>
+  The new parameter is used on Macintosh to link the PA_Confirm to the window that generates the dialog. If you don't care or if the plugin only runs on windows, you can pass 0.
+  <p>
+   This is just like the
+   <code>
+    <a href="CMU00162.HTM">
+     CONFIRM
+    </a>
+   </code>
+   command, but you cannot customize the titles of the
+   <b>
+    OK
+   </b>
+   /
+   <b>
+    Cancel
+   </b>
+   buttons. See the 4th Dimension Language Reference manual for more information on this dialog box.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Sample confirm (using ANSI string)
+  </p>
+  <p>
+  </p>
+  <pre><code>   if(PA_Confirm("Do you _really_ want to quit this wonderful area ?";0))
+   {
+      myDoSaveTheAreaContent(. . .);
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU00162.HTM">
+    CONFIRM
+   </a>
+   ,
+   <a href="CMU84725.HTM">
+    PA_Alert
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

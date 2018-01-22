@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetLogInfo
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetLogInfo
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetLogInfo (logInfo)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      logInfo
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_LogHeader *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Information on the current backup log
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetLogInfo
+    </font>
+   </code>
+   returns information on the current logfile in the
+   <code>
+    <a href="CMU84857.HTM">
+     PA_LogHeader
+    </a>
+   </code>
+   structure pointed to by
+   <code>
+    logInfo
+   </code>
+   .
+  </p>
+  <p>
+   The
+   <code>
+    <a href="CMU84857.HTM">
+     PA_LogHeader
+    </a>
+   </code>
+   structure is defined in the header file "PublicTypes.h":
+  </p>
+  <pre><code>// a logfile starts with this structure,
+// then is followed by the number of PA_LogTag
+// described in fNbOperations.
+typedef struct PA_LogHeader
+{
+   long      fNbOperations;
+   long      fLastFlush;
+   PA_long64      fLastAction; // a PA_Long64 is a __int64 or a long long
+   PA_long64      fFirstAction;
+   long      fLogNumber;
+   long      fFiller;
+   long      fLastPos;
+} PA_LogHeader;</code></pre>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Do something only if there are more than 1000 operations logged on the database.
+  </p>
+  <p>
+  </p>
+  <pre><code>   PA_LogHeader   lh;
+   PA_GetLogInfo(&amp;lh);
+   if(lh.NbOperations &gt; 1000
+   {
+      /* . . . do something . . .*/
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84583.HTM">
+    PA_GetLogField
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

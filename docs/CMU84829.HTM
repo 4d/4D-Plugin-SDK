@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Unistring*
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Unistring*
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Unistring* PA_GetStringParameter (params; index)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      index
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Index of the parameter in params
+     </td>
+    </tr>
+    <b>
+     <p>
+      Description
+     </p>
+    </b>
+    <p>
+     The routine
+     <code>
+      <font color="#CF0000">
+       PA_GetStringParameter
+      </font>
+     </code>
+     returns a PA_Unistring pointer that you can access using PA_GetUnistring or PA_SetUnistring to read or write the content of the string of the
+     <code>
+      index
+     </code>
+     parameter in
+     <code>
+      params
+     </code>
+     .
+    </p>
+    <p>
+     See
+     <code>
+      <a href="CMU84821.HTM">
+       Create a new plugin
+      </a>
+     </code>
+     for a description of parameter accessors.
+    </p>
+    <b>
+     <p>
+      NOTE
+     </p>
+    </b>
+    :
+   </table>
+  </p>
+  <p>
+   The first parameter starts at
+   <code>
+    index
+   </code>
+   1.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Compare 2 strings.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void PluginMain( long selector, PA_PluginParameters params )
+   {
+      switch ( selector )
+      {
+         . . .kInitPlugin, kDeinitPlugin ...
+ 
+         case kMyRoutine :
+            MyCompare(params);
+            break;
+      }
+   }
+ 
+   // Declared as expecting a string, a string and returning a long (-1,0,1 for smaller, equal or bigger)
+   void MyCompare (PA_PluginParameters params)
+   {
+      PA_Unistring   *first, *second;
+      char   result = 0;
+ 
+   // get the parameters
+      first = PA_GetStringParameter(params, 1);
+      second = PA_GetStringParameter(params, 2);
+   // Compare them
+      result = PA_CompareUnistrings( first, second, true, false );
+ 
+      PA_ReturnLong(params, result);
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84818.HTM">
+    About strings and characters
+   </a>
+   ,
+   <a href="CMU84821.HTM">
+    Create a new plugin
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  keeps the last error that occurred
+  <u>
+   before
+  </u>
+  calling the routine.
+ </body>
+</html>

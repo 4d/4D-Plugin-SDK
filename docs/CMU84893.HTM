@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CreateEmptySet
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CreateEmptySet
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CreateEmptySet (tableNum; setName)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      setName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the set
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_CreateEmptySet
+    </font>
+   </code>
+   creates a new empty set (of name
+   <code>
+    setName
+   </code>
+   ) for the table number
+   <code>
+    tableNum
+   </code>
+   . You can add records to this set with the
+   <code>
+    <a href="CMU84892.HTM">
+     PA_AddToSet
+    </a>
+   </code>
+   . If a set with the same name already exists, the existing set is cleared by the new set.
+  </p>
+  <code>
+   <p>
+    setName
+   </p>
+  </code>
+  can be a standard C string null terminated or a Pascal string, depending on previous calls to
+  <code>
+   <a href="CMU84817.HTM">
+    PA_USePStrings
+   </a>
+  </code>
+  or
+  <code>
+   <a href="CMU84816.HTM">
+    PA_UseCStrings
+   </a>
+  </code>
+  .
+ </body>
+</html>
+<b>
+ <p>
+  Note:
+ </p>
+</b>
+You do not need to use
+<code>
+ <font color="#CF0000">
+  PA_CreateEmptySet
+ </font>
+</code>
+before using
+<code>
+ <a href="CMU84895.HTM">
+  PA_CreateSet
+ </a>
+</code>
+.
+<p>
+ This is the same as the
+ <code>
+  <a href="CMU00140.HTM">
+   CREATE EMPTY SET
+  </a>
+ </code>
+ command, except for the table number, which is not required by the 4D command. 4th Dimension expects the table number of the table passed to
+ <code>
+  tableNum
+ </code>
+ to be the table number that owns the set.
+</p>
+<p>
+ Once a set has been created using
+ <code>
+  <font color="#CF0000">
+   PA_CreateEmptySet
+  </font>
+ </code>
+ , the 4D plug-in can:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Reuse the set to create a selection for the Table using
+ <code>
+  <a href="CMU84894.HTM">
+   PA_UseSet
+  </a>
+ </code>
+ .
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Add records to the set using the entry point
+ <code>
+  <a href="CMU84892.HTM">
+   PA_AddToSet
+  </a>
+ </code>
+ .
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Delete the set when it is no longer needed using
+ <code>
+  <a href="CMU84891.HTM">
+   PA_DeleteSet
+  </a>
+ </code>
+ .
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU00140.HTM">
+  CREATE EMPTY SET
+ </a>
+ ,
+ <a href="CMU84892.HTM">
+  PA_AddToSet
+ </a>
+ ,
+ <a href="CMU84895.HTM">
+  PA_CreateSet
+ </a>
+ ,
+ <a href="CMU84894.HTM">
+  PA_UseSet
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+can be called to see if an error occurred

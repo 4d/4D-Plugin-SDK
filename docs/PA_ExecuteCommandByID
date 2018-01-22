@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// ---------------------------------------------------------------
+// 4D Application Methods and functions
+// ---------------------------------------------------------------
+//
+
+PA_Variable    PA_ExecuteCommandByID
+              ( long id, 
+                PA_Variable* parameters, 
+                short nbParameters );
+
+//
+
+</body></html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CreateResFile
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CreateResFile
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CreateResFile (fullPath) → short
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fullPath
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Full path of a new resource file
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      File reference number of the created file
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_CreateResFile
+    </font>
+   </code>
+   creates and opens a new Internal Resource File at location
+   <code>
+    fullPath
+   </code>
+   , and returns its file reference number. If the file could not been created (bad path, file open, etc.),
+   <code>
+    <font color="#CF0000">
+     PA_CreateResFile
+    </font>
+   </code>
+   returns -1.
+  </p>
+  <p>
+   If another file of the same name exists at the same path, and if it not already open, the routine opens it and returns its file reference number.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   If the file could neither be created nor opened, it is possible that
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   will return
+   <code>
+    eER_NoErr
+   </code>
+   . Thus, to check if the file has been created, it is better to check the returned value of
+   <code>
+    <font color="#CF0000">
+     PA_CreateResFile
+    </font>
+   </code>
+   .
+  </p>
+  <p>
+   The created file has the same kind as a structure file (.4DB under Windows), and contains basic resources that 4D creates by default. It has a basic resource fork as well (for MacOS-based resources). 4th Dimension does all the necessary work in order to use the file as an internal resource file:  it creates an index of resources, a bitmap, etc.
+  </p>
+  <b>
+   <p>
+    For Windows users
+   </p>
+  </b>
+  <p>
+   4th Dimension adds the necessary .4DB file extension to the file name. Pass  only the name of the new file.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Create a new resource file under Windows.
+  </p>
+  <p>
+  </p>
+  <pre><code>   resFile = PA_CreateResFile("C:\Folder1\Folder2\NewResFile");
+   if(resFile # -1)
+      . . .
+ 
+</code></pre>
+  <p>
+   Create a new resource file under MacOS.
+  </p>
+  <p>
+  </p>
+  <pre><code>   resFile = PA_CreateResFile("Disk:Folder1:Folder2:NewResFile");
+   if(resFile # -1)
+      . . .
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84572.HTM">
+    PA_CloseResfile
+   </a>
+   ,
+   <a href="CMU84551.HTM">
+    PA_OpenResFile
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPictureHandleInArray
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPictureHandleInArray
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetPictureHandleInArray (array; index; info) → PA_Handle
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      array
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Array to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      index
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Index of the element to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      info
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PictureInfo*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the picture information
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Handle to the picture data
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetPictureHandleInArray
+    </font>
+   </code>
+   returns the handle to a Macintosh Picture handle of the
+   <code>
+    index
+   </code>
+   element of the picture array
+   <code>
+    array
+   </code>
+   . In addition, it fills
+   <code>
+    *info
+   </code>
+   with the picture information (used when the picture is in the background).
+  </p>
+  <p>
+   This function is useful in memory optimization if you need the picture as read-only (save it to disk, draw it in a window, etc.), since the actual picture data is not duplicated, as it is with
+   <code>
+    <a href="CMU84682.HTM">
+     PA_GetPictureInArray
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   Note that the
+   <code>
+    <a href="CMU84813.HTM">
+     PA_PictureInfo
+    </a>
+   </code>
+   are stored in 4th Dimension at the end of the picture handle. The function returns them so as to give you an easy way to access them, but they are NOT removed from the end of the picture handle because the picture still belongs to the array variable requiring that information.
+  </p>
+  <p>
+   A Macintosh Picture starts with 5 short values that gives the size and the rectangle of the picture respectively. Under Windows, these 5 short values are byte swapped to Windows byte order. All Mac2Win commands that accept a Macintosh Picture expect these values to be on the Windows byte order. You need not be concerned about this point, for example, if you only call the DrawPicture command. But you must be aware of this if you write the picture to the disk, or if you send the picture to a Macintosh. In those cases you need to byte swap those values back to the Macintosh byte order.
+  </p>
+  <p>
+   If the array is not a
+   <code>
+    eVK_ArrayPicture
+   </code>
+   or if
+   <code>
+    index
+   </code>
+   is out of range, the routine returns 0 and leaves *
+   <code>
+    info
+   </code>
+   unchanged.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Draw a picture using MacOS or Mac2Win under Windows.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void MyDrawAPictureArray( PA_Variable pArr, long index )
+   {
+      PicHandle   h;
+      Rect   r = {0, 0, 100, 100};
+      h = (PicHandle) PA_GetPictureHandleInArray( pArr, index, 0L );
+      if ( h )
+      {   
+         DrawPicture( h, &amp;r );
+         // Do NOT dispose handle, it belongs to the variable !
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84682.HTM">
+    PA_GetPictureInArray
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

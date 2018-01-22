@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CreateTip
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CreateTip
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CreateTip (tipContent; posX; posY; objectRect)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tipContent
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Content of the tip to draw
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      posX
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Left local coordinate of the tip (window)
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      posY
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Top local coordinate of the tip
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      objectRect
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Rect
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Rectangle(local) where the tip is valid
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_CreateTip
+    </font>
+   </code>
+   creates a tip window.
+  </p>
+  <code>
+   <p>
+    tipContent
+   </p>
+  </code>
+  is the string that will be displayed.
+ </body>
+</html>
+<p>
+ If
+ <code>
+  posX
+ </code>
+ and
+ <code>
+  posY
+ </code>
+ are both equal to zero, the tip window will be at 16 pixels South East from mouse position by default.
+</p>
+<code>
+ <p>
+  objectRect
+ </p>
+</code>
+is the area of the object described by the tip. If the user moves the mouse outside of this rectangle, the tip window will be closed.
+<p>
+ The tip window will also close after a certain delay. If a tip was opened before this call, it will be closed.
+</p>
+<p>
+ All coordinates are expressed in local coordinates of the window.
+</p>
+<p>
+ Depending on default settings or on previous calls to
+ <code>
+  <a href="CMU84817.HTM">
+   PA_UsePStrings
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84816.HTM">
+   PA_UseCStrings
+  </a>
+ </code>
+ ,
+ <code>
+  tipContent
+ </code>
+ will be a Pascal or an ANSI C string.
+</p>
+<b>
+ <p>
+  NOTE
+ </p>
+</b>
+<p>
+ The tip is "temporary" and not saved in the structure like a "regular" tip created in the Design environment.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+</p>
+<pre><code>   PA_Rect   r = {100, 100, 120, 185}; // Local coordinates of a "Save" button
+   PA_CreateTip("Close the window, saving changes", 0, 0, r);
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ No reference.
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+always returns
+<code>
+ eER_NoErr
+</code>

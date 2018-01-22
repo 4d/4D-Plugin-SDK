@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <b>
+   <u>
+    <p>
+     The 4D Language
+    </p>
+   </u>
+  </b>
+ </body>
+</html>
+<p>
+ Both 4th Dimension and 4D Server are platform independent, graphical, relational database managers that provide flexible and powerful development tools integrated into the database environment. A common and easy to learn high-level language called 4D Language is used to manipulate both database objects (Tables, Selections, Records, Fields) and User Interface objects (Windows, Forms, Menu Bars, Buttons).
+</p>
+<p>
+ The 4D Language is a modern, structured programming language whose features are fully detailed in the 4th Dimension Language Reference manual.
+</p>
+<p>
+ 4th Dimension can manage a database (create, search, sort records) and create user interface components (windows, menus, splitters) using very few numbers of lines, regardless of the platform (Windows or MacOS). Implementing the same tasks a native language such as C/C++ can be done using thousand of lines of code, taking months instead of minutes.
+</p>
+<b>
+ <u>
+  <p>
+   Why the need  for a plug-in ?
+  </p>
+ </u>
+</b>
+<p>
+ Although 4th Dimension provides hundred of commands used to manipulate records and implement user interface, some special use or feature (sometimes platform dependant) may be needed: one may need OLE or DDE under Windows, another may need AppleEvents under MacOS, while yet another may want to implement specific Statistics tools, file access over the network,  a special user interface, or a private picture structure.
+</p>
+<p>
+ It is obvious that covering all areas of both the Macintosh and Windows operating systems by way of 4th Dimension commands would certainly lead to a product with thousands of commands, and at the same time, most users would have no need for such a large set of capabilities. Also, creating such an all-encompassing tool would make the 4th Dimension environment incredibly complex and would take most users months of study before useful results could be expected.
+</p>
+<p>
+ 4D SA Productivity and Connectivity Modules such as 4D Write, 4D Draw, 4D Open (which are based on the 4D Plug-in architecture) provide an open, elegant solution that is irrespective of the particular user's needs. The modular nature of the 4th Dimension environment allows the creation of basic applications but does not preclude the development of highly complex systems. The 4th Dimension Plug-in architecture opens the 4D environment to any type of application or user. 4D Plug-ins multiply that application or user's power and productivity.
+</p>
+<b>
+ <u>
+  <p>
+   What is a plug-in and what can it do ?
+  </p>
+ </u>
+</b>
+<p>
+ A plug-in is a piece of code (
+ <i>
+  DLL
+ </i>
+ under Windows and
+ <i>
+  Shared Library
+ </i>
+ under MacOS) that 4th Dimension launches at start up. It adds functionality to 4th Dimension and thus increases its capacity.
+</p>
+<p>
+ Usually, a plug-in does things that:
+</p>
+<p>
+ - 4th Dimension cannot do (ie, specific platform technology),
+</p>
+<p>
+ - will be very hard to write just using 4th Dimension,
+</p>
+<p>
+ - are only available as Plug-in Entrypoint
+</p>
+<p>
+ In the past, a plug-in (referred to as an "External Procedure" or a "Package") could be written for speed improvement (long loops, statistics). This has no longer been the case for several years, in fact ever since the release of 4D Compiler.
+</p>
+<p>
+ A plug-in usually contains a set of routines given to the 4D Developer. It can handle an External Area and run an external process.
+</p>
+<p>
+ A
+ <i>
+  plug-in routine
+ </i>
+ is a routine written in native language (usually C or C++) that causes an action.
+</p>
+<p>
+ An
+ <i>
+  external area
+ </i>
+ is a part of a form that can display almost everything and interact with the user when necessary
+</p>
+<p>
+ An
+ <i>
+  external process
+ </i>
+ is a process that runs alone, usually in a loop, doing almost everything it wants. All process code belongs to the plug-in, 4th Dimension is simply present to receive/send events to the process.
+</p>
+<b>
+ <u>
+  <p>
+   Important note
+  </p>
+ </u>
+</b>
+<p>
+ A plug-in can be very simple, with just one routine performing a very small task, or it can be very complex, involving hundred of routines and areas. There is virtually no limit to what a plug-in can do, however
+ <u>
+  every plug-in developer should remember that a plug-in
+ </u>
+ is a "sample" piece of code, DLL or Shared Library. It is the plug-in that runs within 4th Dimension, not the opposite. As a piece of code,
+ <u>
+  it is the host of 4th Dimension; it is not a stand-alone application
+ </u>
+ . It shares CPU time and memory with 4th Dimension and other plug-ins, thus, it should be a polite code, using just what is necessary to run. For example, in long loops, a plug-in should call
+ <code>
+  PA_Yield()
+ </code>
+ to give time to the 4th Dimension scheduler unless its task is critical for both it and the database.
+</p>

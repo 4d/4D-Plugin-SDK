@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_UpdateResFile
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_UpdateResFile
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_UpdateResFile (resfile)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resfile
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      File reference number of the file to access
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_UpdateResFile
+    </font>
+   </code>
+   writes all changed resource data to disk and updates the necessary index and resource map.
+  </p>
+  <p>
+   This routine should be called to force "disk write" of modified or newly created resources.
+  </p>
+  <p>
+   It can be called every time a resource is modified or after many changes. Updating the resource file ensures that it will maintain its integrity in the event of a disk crash (just like the
+   <code>
+    WRITE BUFFER
+   </code>
+   command that flushes data).
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Create three resources and update the file immediately.
+  </p>
+  <p>
+  </p>
+  <pre><code>   typedef struct {
+      short   f1;
+      short   f2;
+      short   f3;
+   }FOO, *FOOptr, **FOOhdle;
+ 
+   FOO   aStruct = {1, 2, 3};
+ 
+   // Add the resources...
+   PA_CreateResource(resFile, 'FOO ', -1, (char *) &amp;aStruct, sizeof(FOO));
+   aStruct.f1 += 10;
+   aStruct.f2 += 10;
+   aStructf.f3 += 10;
+   PA_CreateResource(resFile, 'FOO ', -1, (char *) &amp;aStruct, sizeof(FOO));
+   aStruct.f1 += 100;
+   aStruct.f2 += 100;
+   aStructf.f3 += 100;
+   PA_CreateResource(resFile, 'FOO ', -1, (char *) &amp;aStruct, sizeof(FOO));
+ 
+   // ... update the file
+   PA_UpdateResFile(resFile);
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   No reference.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

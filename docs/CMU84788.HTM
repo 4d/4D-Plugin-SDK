@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetFieldName
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetFieldName
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetFieldName (tableNum; fieldNum; fieldName)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fieldNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fieldName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field name
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetFieldName
+    </font>
+   </code>
+   returns in
+   <code>
+    fieldName
+   </code>
+   the name of the field whose table and field number are
+   <code>
+    tableNum
+   </code>
+   and
+   <code>
+    fieldNum
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    NOTE:
+   </p>
+  </b>
+  This entry point cannot be used for SubFields.
+ </body>
+</html>
+<code>
+ <p>
+  tableFieldNames
+ </p>
+</code>
+is a  C or a Pascal string, depending of previous call to
+<code>
+ <a href="CMU84817.HTM">
+  PA_UsePStrings
+ </a>
+</code>
+or
+<code>
+ <a href="CMU84816.HTM">
+  PA_UseCStrings
+ </a>
+</code>
+.
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Build an array of field names for a table.
+</p>
+<pre><code>   void BuildFieldNamesArray (short tNum, PA_Variable *aNames)
+   {
+      Str255      name; // USING Mac Pascal STRINGS IN THIS SAMPLE
+      register long   i;
+      short         count;
+      
+   // Do nothing if the array has a bad type
+      if(theArray-&gt;fType != eVK_ArrayString)
+         return;
+   // Get the number of fields
+      count = PA_CountFields(tNum);
+      if(PA_GetLastError() != eER_NoErr)
+         return;
+   // Resize the array
+      PA_SetArrayNbElements(*aNames, count);
+   // Fill it with field names
+      for(i = 1; i &lt;= count)
+      {
+         PA_GetFieldName(tNum, i, name);
+         PA_SetStringInArray(*aNames, i, name);
+      }
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84889.HTM">
+  PA_CountFields
+ </a>
+ ,
+ <a href="CMU84791.HTM">
+  PA_GetTableName
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (bad table number, bad field number).
+</p>

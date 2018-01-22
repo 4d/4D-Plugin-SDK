@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetBlobParameter
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetBlobParameter
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetBlobParameter (params; index; blob) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      index
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Index of the parameter in params
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      blob
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Value (buffer) of the index parameter (a BLOB)
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      BLOB size
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetBlobParameter
+    </font>
+   </code>
+   fills
+   <code>
+    blob
+   </code>
+   with the value (of type BLOB) of the
+   <code>
+    index
+   </code>
+   parameter in
+   <code>
+    params
+   </code>
+   and returns its size.
+  </p>
+  <p>
+   First call the routine with
+   <code>
+    blob
+   </code>
+   as 0L to retrieve the size of the buffer you should allocate. Then, allocate the buffer and call the routine again with the allocated buffer.
+  </p>
+  <p>
+   After using
+   <code>
+    blob
+   </code>
+   , you can dispose of it as it does not belong to 4th Dimension, it is a copy of the parameter. As usual, it is a good habit to dispose of memory that is no longer needed.
+  </p>
+  <p>
+   If you do not want to receive a copy of the BLOB (for memory optimization), you can use the
+   <code>
+    <a href="CMU84748.HTM">
+     PA_GetBlobHandleParameter
+    </a>
+   </code>
+   routine, which returns a handle to the BLOB. In this case, remember that the handle belongs to 4th Dimension and you must not dispose of it.
+  </p>
+  <p>
+   See
+   <code>
+    Create a new plug-in
+   </code>
+   for a description of parameter accessors.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  :
+ </body>
+</html>
+<p>
+ The first parameter starts at
+ <code>
+  index
+ </code>
+ 1.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ The 3rd routine of the plug-in is named "pi_DoWithBlob".
+</p>
+<p>
+ The 4D developer is told to use it this way:
+</p>
+<pre><code>   <b><i>pi_DoWithBlob</i></b></code></pre>
+($blob);// or BLOB, or &lt;&gt;BLOB, or [Table1]BlobField
+<p>
+</p>
+<pre><code> 
+   void PluginMain( long selector, PA_PluginParameters params )
+   {
+      switch ( selector )
+      {
+         . . .kInitPlugin, kDeinitPlugin
+ 
+         case kMyRoutine : // declared as DoWithBob(&amp;O) in the STR# resource
+            DoWithABlob(params);
+            break;
+ 
+      }
+   }
+ 
+   void DoWithABlob (PA_PluginParameters params )
+   {
+         char   *blob;
+         long   blobSize;
+ 
+         blob = 0L;
+         blobSize = PA_GetBlobParameter(params, 1, 0L);
+ 
+         blob = malloc(textSize);
+         blobSize = PA_GetBlobParameter(params, 1, blob);
+ 
+      // Let's work with the blob
+         DoSomethingWithThisBlob(blob);
+      // We can now release the received copy 
+         free(blob);
+      }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84821.HTM">
+  Create a new plugin
+ </a>
+ ,
+ <a href="CMU84860.HTM">
+  PA_Blob
+ </a>
+ ,
+ <a href="CMU84748.HTM">
+  PA_GetBlobHandleParameter
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  PA_GetLastError()
+ </p>
+</code>
+keeps the last error that occurred
+<u>
+ before
+</u>
+calling the routine.

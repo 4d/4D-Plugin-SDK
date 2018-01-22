@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ClearNamedSelection
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ClearNamedSelection
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ClearNamedSelection (selName)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      selName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the named selection to be cleared
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ClearNamedSelection
+    </font>
+   </code>
+   clears
+   <code>
+    selName
+   </code>
+   from memory and frees the memory used by it. It does not affect tables, selections, or records. Since named selections use memory, it is good idea to clear named selections when they are no longer needed.
+  </p>
+  <p>
+   If  the name was created using the
+   <code>
+    <a href="CMU84795.HTM">
+     PA_CutNamedSelection
+    </a>
+   </code>
+   command and then manipulated using the
+   <code>
+    <a href="CMU84794.HTM">
+     PA_UseNamedSelection
+    </a>
+   </code>
+   command,
+   <code>
+    selName
+   </code>
+   no longer exists in memory. In this case,
+   <code>
+    <font color="#CF0000">
+     PA_ClearNamedSelection
+    </font>
+   </code>
+   does not need to be used.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See
+   <code>
+    <a href="CMU84795.HTM">
+     PA_CutNamedSelection
+    </a>
+   </code>
+   for an example of use.
+  </p>
+  <p>
+  </p>
+  <pre><code> 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU00333.HTM">
+    CLEAR NAMED SELECTION
+   </a>
+   ,
+   <a href="CMU84792.HTM">
+    Named selections and 4DPluginAPI
+   </a>
+   ,
+   <a href="CMU84796.HTM">
+    PA_CopyNamedSelection
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

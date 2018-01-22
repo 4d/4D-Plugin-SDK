@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   4th Dimension uses its own resource management scheme in the datafork of structure files. This Internal Resource Manager brings some abilities that the MacOS Resource Manager (used by Altura Mac2Win on the Window version of 4D) has not, especially the ability to have more than 2700 resources per kind of resource.
+  </p>
+  <p>
+   The theme "Resources" of the 4D Language reference refers to the standard MacOS-based resources, that are in resource forks of files (
+   <code>
+    <a href="CMU00497.HTM">
+     Open resource file
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU00496.HTM">
+     Create resource file
+    </a>
+   </code>
+   ,
+   <code>
+    READ RESOURCE
+   </code>
+   )
+  </p>
+  <p>
+   The Internal Resource Manager routines of the API that are referenced in this documentation refer to the "4D based" resources, stored in the datafork of files. Those routines have no equivalent in the 4th Dimension language in this version of 4D (currently 6.7)
+  </p>
+  <p>
+   These Internal Resources will continually be referred to in all the following documentation of this theme. All terms used (ID, Kinds, Names) refer only to those resources, not to any MacOS-based resources that could be in resource forks.
+  </p>
+  <p>
+   As MacOS-based resources, 4D-based resources have a type (a 4-bytes type, such as 'TEXT", 'PICT'), an unique ID, and optionally a name. You can use whatever type you want as an ID, into the range of a short.
+  </p>
+  <p>
+   Since it is an "internal" manager, there is no way to edit resources. A particular way to edit resource is by using the Structure Mode of 4th Dimension : it can be seen as an Internal Resource Editor of structure resources (such as forms, menus,  or methods).
+  </p>
+  <p>
+   The developer can creates his own resources in his own format.
+  </p>
+  <p>
+   The developer can create a resource file (
+   <code>
+    <a href="CMU84569.HTM">
+     PA_CreateResFile
+    </a>
+   </code>
+   ), open a resource file (
+   <code>
+    <a href="CMU84551.HTM">
+     PA_OpenResFile
+    </a>
+   </code>
+   ), close a resource file (
+   <code>
+    <a href="CMU84572.HTM">
+     PA_CloseResFile
+    </a>
+   </code>
+   ), or get the reference number of the current database to access its resources.
+  </p>
+  <p>
+   When the plug-in wants to access a resource, it first pass a short to the routine used (
+   <code>
+    <a href="CMU84562.HTM">
+     PA_GetResource
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84556.HTM">
+     PA_GetResourceSize
+    </a>
+   </code>
+   ). This short is the file reference number returned by the Internal Resources file management routines (
+   <code>
+    PA_Create/OpenResFile
+   </code>
+   ). It tells 4D which file to use.
+  </p>
+  <p>
+   You can have more than one resource file opened at the same time.
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   As previously stated, the routines of this theme deal with internal resources. By using them, you can manipulate the structure resources of the database, such as forms, methods or menus.  We strongly recommend that the plug-in act very carefully if it wants to change those resources in the structure file, since their format is not documented and many of these resources interact one with another.
+  </p>
+  <p>
+   It is recommended that the plug-in creates and uses new resources types and new resources in a file other than the structure file.
+  </p>
+  <b>
+   <p>
+    Locking-unlocking resources and resource handles
+   </p>
+  </b>
+  <p>
+   Before modifying a resource, the developer must lock it over the network, so no one can modify it at the same time. To lock a resource over the network, use
+   <code>
+    <a href="CMU84553.HTM">
+     PA_LockResource
+    </a>
+   </code>
+   . If
+   <code>
+    <a href="CMU84553.HTM">
+     PA_LockResource
+    </a>
+   </code>
+   returns 1, then the resource is locked for you and you can safely change its content and rewrite it on disk (
+   <code>
+    <a href="CMU84548.HTM">
+     PA_SetResource
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84479.HTM">
+     PA_WriteResourceHandle
+    </a>
+   </code>
+   ). Once this is done, remember to unlock the resource by calling
+   <code>
+    <a href="CMU84546.HTM">
+     PA_UnlockResource
+    </a>
+   </code>
+   . If
+   <code>
+    <a href="CMU84553.HTM">
+     PA_LockResource
+    </a>
+   </code>
+   returns 0, then the resource is already in use on an other client.
+  </p>
+  <p>
+   If you want to read the resource content, it is not necessary to lock it before.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84553.HTM">
+     PA_LockResource
+    </a>
+   </p>
+  </code>
+  always returns 1 on 4D single-user machines. It is the plug-in's responsibility to build a way to avoid multi access to the same resource (which could happen in a multiprocess environment).
+ </body>
+</html>
+<p>
+ On the other hand,
+ <code>
+  <a href="CMU84552.HTM">
+   PA_LockResourceHandle
+  </a>
+ </code>
+ does two things:
+</p>
+<p>
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td align="LEFT" valign="TOP" width="8%">
+   </td>
+   <td align="LEFT" valign="TOP" width="92%">
+    - It locks the handle of the resource, so it can't be moved, purged from memory (like
+    <code>
+     PA_LockHandle
+    </code>
+    )
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="8%">
+   </td>
+   <td align="LEFT" valign="TOP" width="92%">
+    - It sets the "locked" property of the resource to "lock": the next time it is load, it will be loaded locked.
+   </td>
+  </tr>
+ </table>
+</p>
+<p>
+ Please note that
+ <code>
+  <a href="CMU84552.HTM">
+   PA_LockResourceHandle
+  </a>
+ </code>
+ does not deal with the network (the resource handle is not a shared).
+</p>
+<p>
+ Here are some basic examples of its use:
+</p>
+<pre><code>// --------------------------------------------
+// Sample set resource</code></pre>
+<pre><code>if(PA_LockResource(resFile, 'toto', 128))
+{
+   PA_SetResource(resFile, 'toto', 128, newData, dataSize);
+   PA_UnlockResource(resFile, 'toto', 128);
+}
+ 
+// --------------------------------------------
+// Use a resource handle, and modify this handle without changing
+// its size
+typedef struct {
+   short   field1;
+   short   field2;
+   . . .
+   short   fieldN;
+}TOTO, *TOTOptr, **TOTOhdle;
+ 
+if(PA_LockResource(resFile, 'toto', 128))
+{
+  h = (TOTOhdle) PA_GetResourceHandle(resFile, 'toto', 128);
+  if(h)
+  {
+    pt = PA_LockHandle(h);
+    pt-&gt;field1 = ...;
+    pt-&gt;field2 = ...;
+    PA_UnlockHandle(h);
+    PA_WriteResourceHandle(h);
+  }
+  PA_UnlockResource(resFile, 'toto', 128);
+}
+ 
+ 
+// --------------------------------------------
+// Use the resource handle, and resize it
+ 
+if(PA_LockResource(resFile, 'toto', 128))
+{
+  h = PA_GetResourceHandle(resFile, 'toto', 128);
+  if(h)
+  {
+    PA_SetHandleSize(h, 300);
+    pt = PA_LockHandle(h);
+    /* change the content */
+    PA_UnlockHandle(h);
+    PA_WriteResourceHandle(h);
+  }
+  PA_UnlockResource(resFile, 'toto', 128);
+}
+ 
+ 
+// --------------------------------------------
+// Lock the resource handle, so it will be loaded locked
+// the next time
+if(PA_LockResource(resFile, 'toto', 128))
+{
+  h = PA_GetResourceHandle(resFile, 'toto', 128);
+  if(h)
+    PA_LockResourceHandle(h);
+  // The resource will be locked the next time it is used
+  PA_UnlockResource(resFile, 'toto', 128);
+}</code></pre>

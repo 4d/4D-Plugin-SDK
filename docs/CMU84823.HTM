@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetVariableParameter
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetVariableParameter
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetVariableParameter (params; index) → PA_Variable
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameter
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      index
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Index of the parameter in params
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Value (of type PA_Variable) of the index parameter
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetVariableParameter
+    </font>
+   </code>
+   returns the
+   <code>
+    <a href="CMU84858.HTM">
+     PA_Variable
+    </a>
+   </code>
+   that is pointed to by the
+   <code>
+    index
+   </code>
+   parameter in
+   <code>
+    params
+   </code>
+   .
+  </p>
+  <p>
+   Refer to
+   <code>
+    <a href="CMU84858.HTM">
+     PA_Variable
+    </a>
+   </code>
+   and
+   <code>
+    <a href="CMU84864.HTM">
+     PA_Array
+    </a>
+   </code>
+   to see how those structures are declared.
+  </p>
+  <p>
+   See
+   <code>
+    <a href="CMU84821.HTM">
+     Create a new plugin
+    </a>
+   </code>
+   for a description of parameter accessors.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  : The first parameter starts at
+  <code>
+   index
+  </code>
+  1
+ </body>
+</html>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Sum a Long integer array. Returns -1 if the array is not of this type.
+</p>
+<p>
+</p>
+<pre><code>   // Somewhere:
+   double SumArrayLong(PA_Variable array);
+ 
+   void PluginMain( long selector, PA_PluginParameter params)
+   {
+      switch ( selector )
+      {
+         . . .kInitPlugin, kDeinitPlugin ...
+         
+         case kMyRoutine : // declared in STR# as SumLongArray(&amp;Y):8
+         {
+            PA_Variable   array;
+            array = PA_GetVariableParameter(params, 1);
+            SumArrayLong(array);
+         }
+            break;
+      }
+   }
+ 
+   double SumArrayLong(PA_Variable array)
+   {
+      double         result;
+      register long   i;
+ 
+   // First, check if we have an array of type long
+      if (array.fType != eArrayLongint)
+         result = -1.0;
+      else
+      {
+   // Then, sum the array.
+   // As we have already checked the type of the PA_Variable, we know 
+   // that PA_GetArrayNbElements and PA_GetLongintInArray will be ok.
+         result = 0.0;
+         for(i = 1; i &lt;= PA_GetArrayNbElements(array); i++)
+            result = result + PA_GetLongintInArray(array, i);
+      
+      }
+ 
+      PA_ReturnDouble(params, result);
+   }
+ 
+ 
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84821.HTM">
+  Create a new plugin
+ </a>
+ ,
+ <a href="CMU84858.HTM">
+  PA_Variable
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+keeps the last error that occurred
+<u>
+ before
+</u>
+calling the routine.

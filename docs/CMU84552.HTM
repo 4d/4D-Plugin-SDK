@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_LockResourceHandle
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_LockResourceHandle
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_LockResourceHandle (resfile; rHandle)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resfile
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      File reference number of the file to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      rHandle
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Handle to the resource to lock
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_LockResourceHandle
+    </font>
+   </code>
+   locks the resource handle
+   <code>
+    rHandle
+   </code>
+   . After the call, the handle cannot be purged, released or resized.
+   <code>
+    rHandle
+   </code>
+   references a resource of the file
+   <code>
+    resFile
+   </code>
+   .
+  </p>
+  <p>
+   In addition, the resource's "locked"  attribute is saved, even after the file has been closed.  At the next opening, the resource will be locked until the plug-in calls
+   <code>
+    <a href="CMU84545.HTM">
+     PA_UnlockResourceHandle
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   Please note that
+   <code>
+    <font color="#CF0000">
+     PA_LockresourceHandle
+    </font>
+   </code>
+   has a very different effect than
+   <code>
+    <a href="CMU84553.HTM">
+     PA_LockResource
+    </a>
+   </code>
+   .
+   <code>
+    <a href="CMU84553.HTM">
+     PA_LockResource
+    </a>
+   </code>
+   locks the resource over the network so that no one can modify it, it does not concern the handle of the resource.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   We do not want a resource to be modified.
+  </p>
+  <p>
+  </p>
+  <pre><code>   PA_Handle   h;
+   h = PA_GetResourceHandle(resFile, 'xxxx', 128);
+   if(h)
+      PA_LockResourceHandle(resFile, h);
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84573.HTM">
+    About the internal resource manager
+   </a>
+   ,
+   <a href="CMU84561.HTM">
+    PA_GetResourceHandle
+   </a>
+   ,
+   <a href="CMU84553.HTM">
+    PA_LockResource
+   </a>
+   ,
+   <a href="CMU84545.HTM">
+    PA_UnlockResourceHandle
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

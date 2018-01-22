@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SaveRecord
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SaveRecord
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SaveRecord (tableNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_SaveRecord
+    </font>
+   </code>
+   saves the current record of the table number
+   <code>
+    tableNum
+   </code>
+   , in the current process. If there is no current record, then
+   <code>
+    <font color="#CF0000">
+     PA_SaveRecord
+    </font>
+   </code>
+   does nothing.
+  </p>
+  <p>
+   This routine does the same as the 4D command
+   <code>
+    <a href="CMU00053.HTM">
+     SAVE RECORD
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   A call to
+   <code>
+    <font color="#CF0000">
+     PA_SaveRecord
+    </font>
+   </code>
+   is usually performed after a call to
+   <code>
+    <a href="CMU84899.HTM">
+     PA_CreateRecord
+    </a>
+   </code>
+   , or after having modified a record by using an other 4D PluginAPI routine such as
+   <code>
+    PA_SetxxxField
+   </code>
+   (where xxx is Integer, String, Boolean).
+  </p>
+  <p>
+   If the current record is locked by an other user or process,
+   <code>
+    <font color="#CF0000">
+     PA_SaveRecord
+    </font>
+   </code>
+   does nothing. It is the 4D plug-in's responsibility to test the lock status of the record using the entry point
+   <code>
+    PA_IsLocked
+   </code>
+   before attempting to modify it.
+  </p>
+  <p>
+   The error checking is made by calling
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   immediately after a call to
+   <code>
+    <a href="CMU84899.HTM">
+     PA_CreateRecord
+    </a>
+   </code>
+   . Usually, if an error occurs, it will be because
+   <code>
+    tableNum
+   </code>
+   is out of range (
+   <code>
+    eInvalidFileNumber
+   </code>
+   ).
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   (1) Creating and saving a record.
+  </p>
+  <p>
+  </p>
+  <pre><code>   // ... some code ...
+   PA_CeateRecord(tableNum);
+   err = PA_GetLastError();
+   if(!err)
+   {
+      // ...Modifying fields values ...
+      PA_SaveRecord(tableNum);
+      err = PA_GetLastError();
+   }
+   return err;
+</code></pre>
+  <p>
+   (2) Modifying an existing record:
+  </p>
+  <p>
+  </p>
+  <pre><code>   // ... some code ...
+   if(PA_IsRecordLocked(tableNum))
+   {
+      //return an error, alert user, do something, ...
+   }
+   else // The record is free, we can modify it
+   {
+      // ...Modifying fields values ...
+      PA_SaveRecord(tableNum);
+      err = PA_GetLastError();
+   }
+   return err;
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84899.HTM">
+    PA_CreateRecord
+   </a>
+   ,
+   <a href="CMU84618.HTM">
+    PA_SetBooleanField
+   </a>
+   ,
+   <a href="CMU84626.HTM">
+    PA_SetTextField
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (most often
+   <code>
+    eInvalidFileNumber
+   </code>
+   ).
+  </p>
+ </body>
+</html>

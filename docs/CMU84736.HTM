@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Tokenize
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Tokenize
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Tokenize (toTokenize; len; tokens) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      toTokenize
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Line of code to be tokenized
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of toTokenize
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tokens
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Tokens of toTokenize, or 0 to read the tokens size
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of tokens (0 if an error occured)
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Tokenize
+    </font>
+   </code>
+   allows the 4D plug-in to tokenize any 4th Dimension statement or expression.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_Tokenize
+    </font>
+   </p>
+  </code>
+  allows the 4D plug-in to tokenize only one line of code.
+  <code>
+   toTokenize
+  </code>
+  cannot contain several lines, such as a "Case of" or a "For" block. If you need to tokenize several lines of 4th Dimension code, write the code as a 4th Dimension global method or function, then tokenize a call to this method or function.
+ </body>
+</html>
+<p>
+ After the call,
+ <code>
+  tokens
+ </code>
+ contains the tokenized statement or expression. If the code to be tokenized is incorrect (contains a syntax error), the functions returns 0, an empty string in
+ <code>
+  tokens
+ </code>
+ and an error code in
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ .
+</p>
+<p>
+ Pre-tokenization of a 4D formula optimizes in terms of execution time. Let's look at the following examples:
+</p>
+<p>
+ - A user inserts a formula into a 4D Write document such as Substring ([aTable]aField;1;5).  This formula stays the same, as long as the user does not change it. During this time, 4D Write may need to evaluate the expression several times (document is reflowed, updated, current record has changed, etc.). For each of these calls, the tokenization phase prior to evaluation can be saved because the syntax of the expression has not changed. This is exactly what
+ <code>
+  <font color="#CF0000">
+   PA_Tokenize
+  </font>
+ </code>
+ allows the 4D plug-in to do -- it pre-tokenizes the statement or the expression; then the 4D plug-in calls the
+ <code>
+  <a href="CMU84732.HTM">
+   PA_ExecuteTokens
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84731.HTM">
+   PA_ExecuteTokensAsFunction
+  </a>
+ </code>
+ each time it is needed for execution or evaluation.
+</p>
+<p>
+ Consequently, if the developer knows that he will need to execute or evaluate a 4th Dimension statement or expression whose syntax does not change several times, he can use
+ <code>
+  <font color="#CF0000">
+   PA_Tokenize
+  </font>
+ </code>
+ and then
+ <code>
+  <a href="CMU84732.HTM">
+   PA_ExecuteTokens
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84731.HTM">
+   PA_ExecuteTokensAsFunction
+  </a>
+ </code>
+ instead of
+ <code>
+  <a href="CMU84738.HTM">
+   PA_ExecuteMethod
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84737.HTM">
+   PA_ExecuteFunction
+  </a>
+ </code>
+ . For example, if the 4D plug-in calls a 4th Dimension formula 100 times, this allows the 4D plug-in to save the time expended for ninety-nine identical tokenizations.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Tokenize a calculation using project methods.
+</p>
+<p>
+</p>
+<pre><code> 
+   char   toTokenize[] = "(3.14 * MySinus(1, 2, 3)) / (MyRealRandom(0.1, 0.5))\0"; // as C String
+   long   len;
+   char*   tokens;
+   
+   len = PA_Tokenize( toTokenize, strlen( toTokenize ), 0 );
+   tokens = malloc( len );
+   PA_Tokenize( toTokenize, strlen( toTokenize ), tokens );
+ 
+</code></pre>
+<p>
+ We can compute this expression faster elsewhere in the code:
+</p>
+<pre><code>   /* . . . some code . . . */
+   PA_ExecuteTokens( tokens, len );
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84734.HTM">
+  PA_Detokenize
+ </a>
+ ,
+ <a href="CMU84732.HTM">
+  PA_ExecuteTokens
+ </a>
+ ,
+ <a href="CMU84731.HTM">
+  PA_ExecuteTokensAsFunction
+ </a>
+ ,
+ <a href="CMU84723.HTM">
+  PA_FormulaEditor
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_TryToOpenPrinterSession
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_TryToOpenPrinterSession
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_TryToOpenPrinterSession  → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1:Take printer, 0:Printer already in use
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_TryToOpenPrinterSession
+    </font>
+   </code>
+   allows the 4D Extension to have exclusive access to the printer.
+  </p>
+  <p>
+   If the printer (or hardware/software printing device) is not currently used by any of the processes running within the 4D work session, the routine returns 1, and gives your plug-in exclusive access to the printer. If a process within the 4th Dimension work session is currently printing, the routine returns 0.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   A Plug-in cannot perform any print operation until it has exclusive access to the printer.
+  </p>
+  <p>
+   The plug-in developer MUST "take" the printer before printing.
+  </p>
+  <p>
+   Another routine of this API,
+   <code>
+    PA_OpenPrinterSession,
+   </code>
+   waits until the printer is not used by any other process;
+   <code>
+    <font color="#CF0000">
+     PA_TryToOpenPrinterSession
+    </font>
+   </code>
+   returns immediately, even if the printer is in use.
+  </p>
+  <p>
+   If the 4D Plug-in directly performs print operations, it must:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="10%">
+     </td>
+     <td align="LEFT" valign="TOP" width="90%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+      Tell 4D to give it the printer by using
+      <code>
+       PA_TryToOpenPrinterSession
+      </code>
+      or
+      <code>
+       PA_OpenPrinterSession
+      </code>
+      ,
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="10%">
+     </td>
+     <td align="LEFT" valign="TOP" width="90%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+      Perform the actual print operations once the 4D plug-in has exclusive access to the Print Manager,
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="10%">
+     </td>
+     <td align="LEFT" valign="TOP" width="90%">
+      <font face="Geneva,Arial" size="2">
+       
+      </font>
+      Release the printer using the
+      <code>
+       PA_ClosePrinterSession
+      </code>
+      once printing is finished. This cancels the 4D plug-in's exclusive access to the PrintManager.
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE:
+   </p>
+  </b>
+  <p>
+   A successful (routine returns 0) call to
+   <code>
+    <font color="#CF0000">
+     PA_TryToOpenPrinterSession
+    </font>
+   </code>
+   must be counter-balanced by a call to
+   <code>
+    <a href="CMU84740.HTM">
+     PA_ClosePrinterSession
+    </a>
+   </code>
+   . If this is not done, the PrintManager will be unavailable to all the other processes for the duration of the active 4th Dimension session.
+  </p>
+  <p>
+   On Macintosh, this routine will call internally PrOpen, so you won't have to call it yourself.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Do not print if the printer is already in use.
+  </p>
+  <p>
+  </p>
+  <pre><code> 
+   void PrintIfFree()
+   {
+      if ( PA_TryToOpenPrinterSession() )
+      {
+         /* . . . printing operations . . . */
+ 
+         PA_ClosePrinterSession();
+      }
+      else
+         PA_Alert("PrinterIn use, try later.");
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84740.HTM">
+    PA_ClosePrinterSession
+   </a>
+   ,
+   <a href="CMU84741.HTM">
+    PA_OpenPrinterSession
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always return
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

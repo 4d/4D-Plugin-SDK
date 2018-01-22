@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_OrderByDialog
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_OrderByDialog
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_OrderByDialog (defaultTable)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      defaultTable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Default table
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_OrderByDialog
+    </font>
+   </code>
+   displays the standard Order By Dialog for the
+   <code>
+    defaultTable
+   </code>
+   . If the user fills the search area and clicks
+   <b>
+    OK
+   </b>
+   , 4D sorts the current selection.
+  </p>
+  <p>
+   As the routine does not return any information on the sort result, the plug-in should check the "OK" global variable (see the example given in the "
+   <code>
+    <a href="CMU84769.HTM">
+     Building a query with the API
+    </a>
+   </code>
+   " chapter).
+  </p>
+  <p>
+   This is like the
+   <code>
+    <a href="CMU00049.HTM">
+     ORDER BY
+    </a>
+   </code>
+   command when it is used with just one parameter -- the table. See the 4th Dimension Language reference for more information.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Display the Order By dialog for table 1, saving the selection before the sort.
+  </p>
+  <p>
+  </p>
+  <pre><code>   PA_CopyNamedSelection(1, "\pTheSel");
+   PA_OrderBy(1);
+   if(!GetOK())
+      PA_UseNamedSelection("\pTheSel");
+   PA_ClearNamedSelection("\pTheSel");
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU00049.HTM">
+    ORDER BY
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

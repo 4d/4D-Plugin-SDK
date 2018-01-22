@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ExecuteTokens
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ExecuteTokens
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ExecuteTokens (tokens; len)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tokens
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Tokens to execute
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of the tokens' buffer
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteTokens
+    </font>
+   </code>
+   allows the 4D Extension to execute any pre-tokenized 4th Dimension statement that does not return a result. Use the
+   <code>
+    <a href="CMU84731.HTM">
+     PA_ExecuteTokensAsFunction
+    </a>
+   </code>
+   for pre-tokenized statements that return a result.
+  </p>
+  <p>
+   Pass the text of the tokens in
+   <code>
+    tokens
+   </code>
+   and its length in
+   <code>
+    len
+   </code>
+   prior to the call.
+  </p>
+  <p>
+   The type of uses for
+   <code>
+    PA_ExecuteTokens,
+   </code>
+   as well as re-entrance precautions, are identical to those of
+   <code>
+    <a href="CMU84738.HTM">
+     PA_ExecuteMethod
+    </a>
+   </code>
+   . For more information on these topics, refer to the entry point
+   <code>
+    <a href="CMU84738.HTM">
+     PA_ExecuteMethod
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   Remember that if you know the statement will be executed just once or twice per working session, you can immediatly execute it without using tokens. On the other hand, if it will be executed often, it is faster to tokenize it and to execute the tokens. It is also important to store tokens instead of text expressions since, in this case, the tokens can run in a 4D that uses a different localized set of commands. As an example, the expression ALERT(aString) will not work on a French version of 4D, because the French 4D language requires ALERTE(aString), but the tokens will work on both French and English versions of 4D.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Executing a formula 100 times. This code is faster than calling
+   <code>
+    <a href="CMU84738.HTM">
+     PA_ExecuteMethod
+    </a>
+   </code>
+   instead of
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteTokens
+    </font>
+   </code>
+   .
+  </p>
+  <p>
+  </p>
+  <pre><code>   void UserFormulaHundredTimes ()
+   {
+      char   formula[ 32000 ];
+      long   len = 0;
+      long   i;
+      char*   tokens = 0;
+ 
+      if ( PA_FormulaEditor( 0, formula, &amp;len ) )
+      {
+         len = PA_Tokenize( formula, len, 0 );
+         if ( len &gt; 0 )
+            tokens = malloc( len );
+ 
+         if ( tokens )
+         {
+            PA_Tokenize( formula, len, tokens );
+            for ( i = 1; i &lt;= 100; i++ )
+            {
+               PA_ExecuteTokens( tokens, len );
+               if ( PA_GetLastError() )
+                  break;
+            }
+            free( tokens );
+         }
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84733.HTM">
+    PA_ByteSwapTokens
+   </a>
+   ,
+   <a href="CMU84734.HTM">
+    PA_Detokenize
+   </a>
+   ,
+   <a href="CMU84731.HTM">
+    PA_ExecuteTokensAsFunction
+   </a>
+   ,
+   <a href="CMU84736.HTM">
+    PA_Tokenize
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

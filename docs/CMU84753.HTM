@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_UpdateProcessVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_UpdateProcessVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_UpdateProcessVariable (pNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Process number to update
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_UpdateProcessVariable
+    </font>
+   </code>
+   tells the (4D created) process number
+   <code>
+    pNum
+   </code>
+   to perform an outside call execution cycle of the form method for the form that is currently displayed.
+  </p>
+  <p>
+   If -1 is passed
+   <code>
+    fNum
+   </code>
+   , calling this entry point provokes the on screen update of all interprocess variables displayed in all open Forms (for use, not design) for all executing processes.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_UpdateProcessVariable
+    </font>
+   </p>
+  </code>
+  is equivalent to the 4D command
+  <code>
+   <a href="CMU00329.HTM">
+    CALL PROCESS
+   </a>
+  </code>
+  . For more information, refer to the 4th Dimension Language Reference manual.
+ </body>
+</html>
+<p>
+ If interprocess communication is required between several external processes the 4D extension should use a method based on private data or based upon the entry point
+ <code>
+  PA_PostEvent
+ </code>
+ .
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Force 4D to update all interprocess variables in every currently displayed form.
+</p>
+<p>
+</p>
+<pre><code>   PA_UpdateInterprocessVariables(-1);
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU00329.HTM">
+  CALL PROCESS
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

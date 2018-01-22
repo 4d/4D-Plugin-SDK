@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CustomizeDesignMode
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CustomizeDesignMode
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CustomizeDesignMode (params)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_CustomizeDesignMode
+    </font>
+   </code>
+   tells 4th Dimension that the area wants to draw itself in the form editor. If the area does not call
+   <code>
+    <font color="#CF0000">
+     PA_CustomizeDesignMode
+    </font>
+   </code>
+   at
+   <code>
+    eAE_DesignUpdate
+   </code>
+   event, 4th Dimension will draw the standard plug-in area picture.
+  </p>
+  <code>
+   <p>
+    params
+   </p>
+  </code>
+  is the
+  <code>
+   PA_PluginParameters
+  </code>
+  the plug-in received in its
+  <code>
+   PluginMain
+  </code>
+  routine.
+ </body>
+</html>
+<p>
+ This routine must be called when
+ <code>
+  <a href="CMU84501.HTM">
+   PA_GetAreaEvent
+  </a>
+ </code>
+ returns
+ <code>
+  eAE_DesignUpdate
+ </code>
+ . Otherwise, it does nothing and
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ returns
+ <code>
+  eER_BadEventCall
+ </code>
+ .
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Draw a picture resource (with Altura under Windows) in the form editor.
+</p>
+<p>
+</p>
+<pre><code>   if(PA_GeAreatEvent(params) == eAE_DesignUpdate)
+   {
+      PA_Rect   r = PA_GetAreaRect(params);
+      PicHandle   myPict = GetResource('PICT', 15678);
+      if(myPict)
+      {
+         DrawPicture(myPict, (Rect *) &amp;r);
+      }
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84478.HTM">
+  Create and use an external area
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (
+ <code>
+  eER_BadEventCall
+ </code>
+ )
+</p>

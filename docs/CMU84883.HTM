@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   PA_FirstRecord (tableNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_FirstRecord
+    </font>
+   </code>
+   moves the current record pointer to the first record of the selection for the Table number
+   <code>
+    tableNum
+   </code>
+   . If the current selection is empty,
+   <code>
+    <font color="#CF0000">
+     PA_FirstRecord
+    </font>
+   </code>
+   has no effect.
+  </p>
+  <p>
+   Before calling
+   <code>
+    <font color="#CF0000">
+     PA_FirstRecord
+    </font>
+   </code>
+   the4D plug-in should indicate if the many-to-one and one-to-many relations should be activated by using
+   <code>
+    <a href="CMU84837.HTM">
+     PA_UseAutomaticRelations
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   This routine does not use virtual structure
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See
+   <code>
+    <a href="CMU84885.HTM">
+     PA_NextRecord
+    </a>
+   </code>
+   for an example.
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84885.HTM">
+    PA_NextRecord
+   </a>
+   ,
+   <a href="CMU84884.HTM">
+    PA_PreviousRecord
+   </a>
+   ,
+   <a href="CMU84837.HTM">
+    PA_UseAutomaticRelations
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+  <b>
+   <p>
+    Current Selections and Records
+   </p>
+  </b>
+  <p>
+   The current record is changed to the first of the selection.
+  </p>
+ </body>
+</html>

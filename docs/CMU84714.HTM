@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetTextVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetTextVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetTextVariable (aVariable; theText) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      aVariable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Variable to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      theText
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Content of the text
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of theText. 0 if the variable is not text kind
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetTextVariable
+    </font>
+   </code>
+   puts the content of the variable
+   <code>
+    aVariable
+   </code>
+   in the data pointed to by
+   <code>
+    theText
+   </code>
+   and returns its length (max 32000).
+  </p>
+  <p>
+   If
+   <code>
+    aVariable
+   </code>
+   has not the kind
+   <code>
+    eVK_Text
+   </code>
+   , the routine returns 0 and
+   <code>
+    theText
+   </code>
+   is returned unchanged.
+  </p>
+  <p>
+   If text size is unknown, call the function a first time with
+   <code>
+    theText
+   </code>
+   equal to zero. The returned value will be the size of the needed buffer. Allocate the buffer and call the function again with the correct buffer.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  :
+ </body>
+</html>
+<p>
+ Depending of default settings or of previous calls to
+ <code>
+  <a href="CMU84815.HTM">
+   PA_UseMacCharacters
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84814.HTM">
+   PA_UseANSICharacters
+  </a>
+ </code>
+ ,
+ <code>
+  theText
+ </code>
+ will contain Macintosh or ANSI characters.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Get a text variable.
+</p>
+<p>
+</p>
+<pre><code>   char   *theText;
+   long   textSize;
+ 
+   // First call the routine with a nil pointer to get the text size
+      textSize = PA_GetTextVariable(aVariable, 0L);
+   // Then allocate the buffer
+      theText = malloc(textSize);
+   // If it is ok, get the text value
+      textSize = PA_GetTextVariable(aVariable, theText);
+   // Work with the text
+      /* . . . */
+   // Cleanup
+      free(theText);
+</code></pre>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+keeps the last error that occurred
+<u>
+ before
+</u>
+calling the routine.

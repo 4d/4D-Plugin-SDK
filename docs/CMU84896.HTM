@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetLastError
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetLastError
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetLastError  → lastError
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      lastError
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The last error that occured
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetLastError
+    </font>
+   </code>
+   returns the error code of the most recent error coming from a 4D PluginAPI routine call.
+  </p>
+  <p>
+   Almost every API routine can generate an error code, however some always return 0 (
+   <code>
+    eER_NoErr
+   </code>
+   ).
+  </p>
+  <p>
+   Error codes are listed in the header file PublicTypes.h and in this documentation, see
+   <code>
+    <a href="CMU84847.HTM">
+     PA_ErrorCode
+    </a>
+   </code>
+  </p>
+ </body>
+</html>
+<code>
+ <p>
+  eER_NoErr
+ </p>
+</code>
+means no error, its value is 0.
+<p>
+ It is a good habit to always call
+ <code>
+  <font color="#CF0000">
+   PA_GetLastError
+  </font>
+ </code>
+ after a call to any API routine to check if a problem occurred.
+</p>
+<b>
+ <p>
+  NOTE
+ </p>
+</b>
+<p>
+ When called,
+ <code>
+  <font color="#CF0000">
+   PA_GetLastError
+  </font>
+ </code>
+ does not reset the last error.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Allocating and initializing a
+ <code>
+  PA_Handle
+ </code>
+ .
+</p>
+<p>
+</p>
+<pre><code>   Somewhere in a header file:
+   typedef struct{
+      long   magicNumber;
+      long   dataSize;
+      char   data[1];
+   } MyStruct, *MyStructPtr, **MyStructHdle;
+ 
+   MyStructHdle NewMyStructHandle()
+   {
+      short   err = eER_NoErr;
+      MyStructHdle   h;
+   // Allocate the handle
+      h = (MyStructHdle) PA_NewHandle(sizeof(MyStruct));
+   // Check the error
+      err = PA_GetLastError();
+      if(!err)
+      {
+      // OK, the handle was allocated. We can initialize it.
+         (*h)-&gt;magicNumber = 'TITI';
+         (*h)-&gt;dataSize = 1;
+         (*h)-&gt;data[0] = 0;
+      }
+ 
+      return h;
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84847.HTM">
+  PA_ErrorCode
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Since this is the routine for error handling, it does not generate any error itself.
+</p>

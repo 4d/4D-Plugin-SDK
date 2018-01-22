@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>long PA_ConvertCharsetToCharset ( 
+               char* fromString, 
+               long fromSize, 
+               PA_4DCharSet fromCharset,
+               char* toString,
+               long toSize,
+               PA_4DCharSet toCharset);
+</body></html>

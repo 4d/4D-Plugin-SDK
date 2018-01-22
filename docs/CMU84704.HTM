@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_SetVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_SetVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_SetVariable (vName; aVariable; clearOldValue)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      vName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the variable to modify
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      aVariable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Content to put in vName
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      clearOldValue
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 = Dispose previous content of the variable
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_SetVariable
+    </font>
+   </code>
+   changes the content of the 4D variable, whose name is
+   <code>
+    vName,
+   </code>
+   to the content of
+   <code>
+    aVariable
+   </code>
+   . If
+   <code>
+    clearOldValue
+   </code>
+   is 1, then the previous content of the variable is properly cleared.
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE
+   </p>
+  </b>
+  <p>
+   In compiled mode, it is the plug-in's responsibility to
+   <u>
+    not change the kind of the variable
+   </u>
+   . If
+   <code>
+    <font color="#CF0000">
+     PA_SetVariable
+    </font>
+   </code>
+   modifies the kind of a variable, unpredictable result may occur.
+  </p>
+  <p>
+   For sample variables, the values are duplicated in the 4D variable, and
+   <code>
+    <a href="CMU84692.HTM">
+     PA_ClearVariable
+    </a>
+   </code>
+   can be used on
+   <code>
+    aVariable
+   </code>
+   . On the other hand, for BLOBs, Text and picture variables, it is the handle to their data which is duplicated, not the data itself. So, as a rule, remember that once
+   <code>
+    <font color="#CF0000">
+     PA_SetVariable
+    </font>
+   </code>
+   is called for Text, BLOB or picture variable, its handle belongs to 4th Dimension, and you must not call
+   <code>
+    <a href="CMU84692.HTM">
+     PA_ClearVariable
+    </a>
+   </code>
+   for the source variable
+   <code>
+    aVariable
+   </code>
+   .
+  </p>
+  <p>
+   If you have get a "complex" a variable using
+   <code>
+    <a href="CMU84717.HTM">
+     PA_GetVariable
+    </a>
+   </code>
+   and then you call
+   <code>
+    <font color="#CF0000">
+     PA_SetVariable
+    </font>
+   </code>
+   on it, there are 2 choices:
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   If you modified the data of the handle (
+   <code>
+    <a href="CMU84806.HTM">
+     PA_SetHandleSize
+    </a>
+   </code>
+   ,
+   <code>
+    PA_MoveBlock),
+   </code>
+   pass 0 in
+   <code>
+    clearOldValue
+   </code>
+   , since the handle to the data is still valid, an,d you surely do not want to dispose of it.
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   If you have already a new handle ready for this variable, then you must set
+   <code>
+    clearOldValue
+   </code>
+   to 1 so that 4D can properly dispose of the memory used by the previous handle.
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   (1) Setting the OK system variable. This can be useful after a time consuming operation, to tell the user that the operation has succeed or not, since 4D Developers have the habit to use the
+   <b>
+    OK
+   </b>
+   variable in such case.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void SetOK (char newValue)
+   {
+      PA_Variable   ok;
+      
+   // Note that in interpreted mode, OK may be undefined
+   // In compiled mode, its kind must not be changed, so we
+   // GetVariable and do not touch to it's field kind.
+      ok = PA_GetVariable((char *) "\pOK"); // using P strings under MacOS
+ 
+      if(PA_GetLastError() == eER_NoErr)
+      {
+         switch (PA_GetVariableKind(ok))
+         {
+            case eVK_Real:
+               if(newValue)
+                  PA_SetRealVariable(ok, 1.0);
+               else
+                  PA_SetRealVariable(ok, 0.0);
+               break;
+            case eVK_Longint:
+               if(newValue)
+                  PA_SetLongintVariable(ok, 1);
+               else
+                  PA_SetLongintVariable(ok, 0);
+               break;
+         }
+      // Now, change the value of the "OK" variable in 4D
+         PA_SetVariable((char *) "\pOK", ok, 1);
+      }
+   }
+ 
+</code></pre>
+  <p>
+   (2) Modify a BLOB variable data (don't clear its old value) by filling it with 0s
+  </p>
+  <p>
+  </p>
+  <pre><code>   void PutZerosInBlobVar (char *vName)
+   {
+      PA_Variable   blob = PA_GetVariable(vName);
+      PA_Handle      h;
+      char         *pt;
+      long         i, size;
+ 
+      if(PA_VariableKind(blob) == eVK_Blob)
+      {
+         h = PA_GetBlobHandleVariable(blob);
+         if(h)
+         {
+         // Some work on that handle
+            size = PA_GetHandleSize(h);
+            pt = PA_LockHandle(h);
+            for(i = 0; i &lt; size; i++)
+               *pt++ = (char) 0;
+            PA_UnlockHandle(h);
+ 
+         // Now, tell 4D we changed this variable
+         // As we worked on the original variable handle, we MUST NOT DISPOSE of the "old content"
+            PA_SetVariable(vName, blob, 0);
+         }
+      }
+   }
+ 
+</code></pre>
+  <p>
+   (3) Modify a BLOB variable by changing its handle.
+  </p>
+  <p>
+  </p>
+  <pre><code>   void InitializeMyBlob (char *vName)
+   {
+      PA_Variable   blob;
+      PA_Handle      h;
+      char         *pt;
+ 
+      h = PA_NewHandle(4);
+      if(h)
+      {
+      // Some work on that handle
+         pt = PA_LockHandle(h);
+         * (long *) pt = 'ABCD';
+         PA_UnlockHandle(h);
+      // SetBlobHandleVariable sets the kind of the variable to eVK_Blob for us
+         PA_SetBlobHandleVariable(blob, h);
+      // Now, put this handle in the variable
+      // As we worked on a new handle, we MUST DISPOSE of the old one
+         PA_SetVariable(vName, blob, 1);
+      // Now, h belongs to 4th Dimension,, we must not dispose of it.
+      }
+   }
+ 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   No reference.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  keeps the last error that occurred
+  <u>
+   before
+  </u>
+  calling the routine.
+ </body>
+</html>

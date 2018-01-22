@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Detokenize
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Detokenize
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Detokenize (tokens; len; text) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tokens
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Tokens to be detokenized
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of the tokens buffer
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      text
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Detokenized formula, or 0 to read the text size
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of the detokenized text
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Detokenize
+    </font>
+   </code>
+   allows the 4D Plug-in to retrieve the text of the 4D statement or expression corresponding to the tokenized 4D formula that has been passed.
+  </p>
+  <p>
+   Before the call, pass the tokenized 4D statement or expression in
+   <code>
+    tokens
+   </code>
+   (which the 4D Plug-in obtains using the
+   <code>
+    <a href="CMU84736.HTM">
+     PA_Tokenize
+    </a>
+   </code>
+   ) and its length in
+   <code>
+    len
+   </code>
+   .
+  </p>
+  <p>
+   After the call, the routine returns the length of the detokenized text, and the text itself in
+   <code>
+    text
+   </code>
+   . You can pass a null pointer to receive the length of the buffer to allocate and then call the function again with the allocated buffer.
+  </p>
+  <p>
+   Unlike
+   <code>
+    <a href="CMU84735.HTM">
+     PA_DetokenizeInTEHandle
+    </a>
+   </code>
+   which is MacOS or Windows+Mac2Win specific,
+   <code>
+    <font color="#CF0000">
+     PA_Detokenize
+    </font>
+   </code>
+   allows the developer to manipulate the detokenized text regardless of the platform.
+  </p>
+  <code>
+   <u>
+    <p>
+     <font color="#CF0000">
+      PA_Detokenize
+     </font>
+    </p>
+   </u>
+  </code>
+ </body>
+</html>
+benefits
+<p>
+ See
+ <code>
+  <a href="CMU84735.HTM">
+   PA_DetokenizeInTEHandle
+  </a>
+ </code>
+ for an example of use.
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84735.HTM">
+  PA_DetokenizeInTEHandle
+ </a>
+ ,
+ <a href="CMU84736.HTM">
+  PA_Tokenize
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

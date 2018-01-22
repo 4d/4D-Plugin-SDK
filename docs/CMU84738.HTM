@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ExecuteMethod
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ExecuteMethod
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ExecuteMethod (toExecute; len)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      toExecute
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Text of the statement to execute
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of toExecute
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteMethod
+    </font>
+   </code>
+   executes the expression
+   <code>
+    toExecute
+   </code>
+   , given its length in
+   <code>
+    len
+   </code>
+   .
+  </p>
+  <p>
+   This works exactly like the 4th Dimension command
+   <code>
+    <a href="CMU00063.HTM">
+     EXECUTE
+    </a>
+   </code>
+   . See the 4th Dimension Language Reference manual  (one line of code, etc.).
+  </p>
+  <p>
+   Any valid expression can be executed, provided that it is a command (4D command, project method, statement). For statements that return a result, use
+   <code>
+    <a href="CMU84737.HTM">
+     PA_ExecuteFunction
+    </a>
+   </code>
+   .
+  </p>
+  <u>
+   <p>
+    Examples of 4D statements
+   </p>
+  </u>
+  <p>
+   1. This line of code is a valid statement, calling a valid 4D command, passing a valid parameter :
+  </p>
+  <pre><code><b>   <a href="CMU00041.HTM">ALERT</a></b> ("I've been called from an Extension")
+</code></pre>
+  <p>
+   2. The line of code below is a valid 4D statement as well:
+  </p>
+  <pre><code>   ` This will call the 4D project Method provided that it exists
+<i>   TheProjectMethod</i> (1;"abc")
+</code></pre>
+  <p>
+   3. The line of code below is
+   <b>
+    not
+   </b>
+   a valid 4D statement:
+  </p>
+  <pre><code><i>   TheProjectMethod</i> (1,"abc")
+</code></pre>
+  <p>
+   The line contains a syntax error: a comma instead of a semi-colon. In this case, the 4D syntax error code will be returned by
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   .
+  </p>
+  <u>
+   <p>
+    When to use
+    <code>
+     <font color="#CF0000">
+      PA_ExecuteMethod
+     </font>
+    </code>
+   </p>
+  </u>
+ </body>
+</html>
+<code>
+ <p>
+  <font color="#CF0000">
+   PA_ExecuteMethod
+  </font>
+ </p>
+</code>
+allows the 4D plug-in to call any piece of 4th Dimension code. The 4D plug-ins can, for example, use
+<code>
+ <font color="#CF0000">
+  PA_ExecuteMethod
+ </font>
+</code>
+to call a 4th Dimension command that is not available in the 4DPluginAPI.
+<p>
+ A plug-in can ask the user to execute its own formula, using the
+ <code>
+  <a href="CMU84723.HTM">
+   PA_FormulaEditor
+  </a>
+ </code>
+ routine (see example below).
+</p>
+<p>
+ A more powerful use of this entry point is the implementation of callbacks to 4th Dimension project Methods written by the 4D developers using the plug-in. This entry point as well as the other "Execute" entry points are used by 4D plug-ins such as 4D Write.
+</p>
+<p>
+ While using 4D Write, a user may want to customize the behavior of a 4D Write menu item. 4D Write provides a way to do this using the
+ <code>
+  <a href="CMU89498.HTM">
+   WR ON COMMAND
+  </a>
+ </code>
+ command. This 4D Write command expects two parameters, the address of the 4D plug-in area, and the name of the 4D Method to be called when a menu is chosen.
+</p>
+<p>
+ If the 4D Write area is named
+ <code>
+  wrArea
+ </code>
+ and the Menu Method is named
+ <code>
+  wrMenuProc
+ </code>
+ , the Method would be called as:
+</p>
+<code>
+ <b>
+  <i>
+   <p>
+    <a href="CMU89498.HTM">
+     WR ON COMMAND
+    </a>
+   </p>
+  </i>
+ </b>
+</code>
+<code>
+</code>
+(wrArea;"wrMenuProc")
+<p>
+ Once this call is made, the 4D Write module internally keeps track of the name passed for this particular area. Then, each time a menu item is selected in this area, 4D Write calls the 4D Method using
+ <code>
+  <font color="#CF0000">
+   PA_ExecuteMethod
+  </font>
+ </code>
+ .
+</p>
+<p>
+ In addition, the 4D Write documentation indicates that the 4D Method receives two parameters: a long integer specifying the area and a long integer specifying the menu item. If the value of the 4D plug-in area address for wrArea is, for example, 25405088 and the Open menu item is chosen from the File menu, 4D Write executes the following 4D statement: wrMenuProc(25405088;102). In this statement, the values are received in the parameters $1 and $2 that are declared accordingly.
+</p>
+<u>
+ <p>
+  When not to use
+  <code>
+   <font color="#CF0000">
+    PA_ExecuteMethod
+   </font>
+  </code>
+ </p>
+</u>
+<p>
+ Before executing the method statement, 4th Dimension needs to check that its syntax is valid, otherwise unpredictable results may occur. In other words 4D invokes its interpreter to parse, validate, and tokenize the text. Then, if it is valid, the tokenized form is executed. Consequently, even if the database is running compiled, it will execute the statement call at the speed of an interpreted database. If a 4th Dimension Method is called, the method will run compiled, but the call itself is interpreted.
+</p>
+<p>
+ In the above 4D Write example, this is not really important since the interpreted execution time is very short compared to the time the user spent choosing the menu item. On the other hand, if it is used to call a formula several hundred or thousands of times inside a loop, the interpreted execution time will become significantly greater than that of a similar compiled execution.
+</p>
+<p>
+ Consequently, when using this routine, the 4D plug-in developer must try to balance the functionality it adds with the inefficiency it introduces when compared to compiled code. In this regard, there are other ways of executing 4th Dimension code from within 4D plug-ins, such as pre-tokenizing the statement, execute a method by its ID, etc.
+</p>
+<u>
+ <p>
+  Is the 4D plug-in routine re-entrant when calling
+  <code>
+   <font color="#CF0000">
+    PA_ExecuteMethod
+   </font>
+  </code>
+  ?
+ </p>
+</u>
+<p>
+ When calling
+ <code>
+  <font color="#CF0000">
+   PA_ExecuteMethod
+  </font>
+ </code>
+ the 4D plug-in must be ready for anything. Let's look at an example.
+</p>
+<p>
+ A 4D plug-in is written which implements the following features:
+</p>
+<p>
+ · A 4D plug-in area called %X AREA,
+</p>
+<p>
+ · A 4D plug-in routine called X ON CLICK,
+</p>
+<p>
+ · A 4D plug-in function called X Get contents.
+</p>
+<p>
+ As an example
+ <code>
+  X ON CLICK
+ </code>
+ will allow the user to specify a 4D Project Method to be called each time a click occurs in an X area. The syntax of
+ <code>
+  X ON CLICK
+ </code>
+ would be:
+ <code>
+  X ON CLICK
+ </code>
+ (Which X Area ; Method to be called)
+</p>
+<p>
+ The routine
+ <code>
+  X Get contents
+ </code>
+ returns the contents of an X area, whatever these contents may be.
+</p>
+<p>
+ For this example we will call it text. The syntax of
+ <code>
+  X Get contents
+ </code>
+ would be: X Get contents (Which X Area) -&gt; Text expression
+</p>
+<p>
+ Once this is implemented we can imagine a situation in which a 4D Form contains two X areas,
+ <code>
+  Xa
+ </code>
+ and
+ <code>
+  Xb
+ </code>
+ .We can also imagine a 4D Project Method associated with a click on
+ <code>
+  Xa
+ </code>
+ written as:
+</p>
+<p>
+ X ON CLICK (Xa;"X DO SOMETHING")
+</p>
+<p>
+ Finally, it is not forbidden to use a 4th Dimension project Method such as:
+</p>
+<pre><code>   ` X DO SOMETHING global Method
+<b>   <a href="CMU00041.HTM">ALERT</a></b> (<b><i>X Get contents </i></b></code></pre>
+(Xa) +
+<b>
+ <i>
+  X Get contents
+ </i>
+</b>
+(Xb))
+<p>
+ With this configuration in mind, if
+ <code>
+  Xa
+ </code>
+ contains "Hello " and Xb "World!" the user would get an Alert with "Hello World!" for each click on
+ <code>
+  Xa
+ </code>
+ . This is as expected.
+</p>
+<p>
+ New functionality is added after a few weeks. The 4D plug-in now saves the location and the time of a previous click in the private data of each X area. Also a new routine is added. We will call it X ON DOUBLE CLICK. At this point the user discovers that the 4D plug-in no longer works. Either the double-clicks are not reported when they should be or they are reported when they should not be.
+</p>
+<p>
+ The plug-in developer starts tracing the code and discovers that "occasionally" the click information is saved in an X area that is different than the area expected. In addition, the developer finds that in the example described above, the information on the click in
+ <code>
+  Xa
+ </code>
+ is always saved in the private data of Xb! Finally the developer finds the culprit: all of the Extension code was relying on a 4D plug-in area address copied by a package routine into a Pascal or C global variable (
+ <code>
+  myArea
+ </code>
+ for example).
+</p>
+<p>
+ The sequence of events:
+</p>
+<p>
+ 1. A click occurs in
+ <code>
+  Xa
+ </code>
+ , 4th Dimension calls %X Area (and the 4D plug-in sets the global variable
+ <code>
+  myArea
+ </code>
+ equal to
+ <code>
+  Xa
+ </code>
+ ).
+</p>
+<p>
+ 2. The Extension calls the subroutine in charge of the X Area's.
+</p>
+<p>
+ 3. The 4D plug-in detects
+ <code>
+  Xa
+ </code>
+ has a click-initiated Method named X DO SOMETHING.
+</p>
+<p>
+ 4. The 4th Dimension Method calls the 4D plug-in to get the contents of Xa (and the 4D plug-in sets the global variable
+ <code>
+  myArea
+ </code>
+ equal to
+ <code>
+  Xa
+ </code>
+ ).
+</p>
+<p>
+ 5. The 4th Dimension Method calls the 4D plug-in a second time to get the contents of
+ <code>
+  Xb
+ </code>
+ (and the 4D plug-in sets the global variable
+ <code>
+  myArea
+ </code>
+ equal to
+ <code>
+  Xb
+ </code>
+ ).
+</p>
+<p>
+ 6. Finally the 4D Plugin saves the click information in the current area referenced by the global variable
+ <code>
+  myArea
+ </code>
+ , which is incorrectly set to
+ <code>
+  Xb
+ </code>
+ because of a re-entrant call.
+</p>
+<u>
+ <p>
+  Conclusion
+ </p>
+</u>
+<p>
+ Although the multi-tasking environment of 4th Dimension already forces the 4D plug-in to be re-entrant, the use of
+ <code>
+  <font color="#CF0000">
+   PA_ExecuteMethod
+  </font>
+ </code>
+ enforces this point.
+</p>
+<b>
+ <p>
+  Examples
+ </p>
+</b>
+<p>
+ (1) Execute a 4D command, a project method, and a valid expression :
+</p>
+<p>
+</p>
+<pre><code>   void SampleExecuteSomething ()
+   {
+      char   aCommand[] = "CLEAR CLIPBOARD"; // using C strings here
+      char   aMethod[] = "MySupermethod(1, 2, 3)"; // this is a valid method of the database
+      char   anExpression[] = "aValidVariable:=10";
+ 
+      PA_ExecuteMethod(aCommand, strlen(toExecute));
+      PA_ExecuteMethod(aMethod, strlen(aMethod));
+      PA_ExecuteMethod(anExpression, strlen(anExpression));
+   }
+ 
+</code></pre>
+<p>
+ (2) Execute a user specific formula:
+</p>
+<p>
+</p>
+<pre><code>   void UserFormula ()
+   {
+      char   *formula;
+      long   len = 0;
+ 
+      formula = malloc(32000);
+      if(PA_FormulaEditor(0, formula, &amp;len))
+         PA_ExecuteMethod(formula);
+      free(formula);
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84737.HTM">
+  PA_ExecuteFunction
+ </a>
+ ,
+ <a href="CMU84729.HTM">
+  PA_ExecuteMethodByID
+ </a>
+ ,
+ <a href="CMU84732.HTM">
+  PA_ExecuteTokens
+ </a>
+ ,
+ <a href="CMU84723.HTM">
+  PA_FormulaEditor
+ </a>
+ ,
+ <a href="CMU84730.HTM">
+  PA_GetMethodID
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Dial4DDisposeEmptyDialog
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Dial4DDisposeEmptyDialog
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Dial4DDisposeEmptyDialog (dialog)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dialog
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Dial4D
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Dialog reference
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Dial4DDisposeEmptyDialog
+    </font>
+   </code>
+   disposes of any dialog
+   <code>
+    dialog
+   </code>
+   created by the
+   <code>
+    <a href="CMU84457.HTM">
+     PA_NewDialog
+    </a>
+   </code>
+   routine that was not opened by the
+   <code>
+    <a href="CMU84456.HTM">
+     PA_OpenDialog
+    </a>
+   </code>
+   routine.
+  </p>
+  <p>
+   If the dialog is opened using
+   <code>
+    <a href="CMU84456.HTM">
+     PA_OpenDialog
+    </a>
+   </code>
+   , it should be closed using the
+   <code>
+    <a href="CMU84454.HTM">
+     PA_CloseDialog
+    </a>
+   </code>
+   that internally disposes the dialog, so you do not need to call
+   <code>
+    <font color="#CF0000">
+     PA_Dial4DDisposeEmptyDialog
+    </font>
+   </code>
+   in this case.
+  </p>
+  <p>
+   This can be useful if, for example, insufficient memory forces the dialogue to be disposed of prior to being opened and after being created.
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84454.HTM">
+    PA_CloseDialog
+   </a>
+   ,
+   <a href="CMU84457.HTM">
+    PA_NewDialog
+   </a>
+   ,
+   <a href="CMU84456.HTM">
+    PA_OpenDialog
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

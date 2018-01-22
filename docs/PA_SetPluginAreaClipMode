@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>/*
+	On Windows 4D allocates an offscreen port and ask form objects,
+	including plugins, to draw inside. Then the offscreen is blittered on screen.
+
+	This may be a problem for plugin areas that cannot draw themselves in 
+        an offscreen. These plugins should inform 4D so that the offscreen is
+        not blittered over their area, by calling PA_SetPluginAreaClipMode( ref, 1);
+	
+	pluginRef is your plugin data handle you provided at plugin area creation.
+	set clipChildren to 1 to ask 4D not to draw over your plugin area.
+	set clipChildren to 0 to restore normal behavior
+	fError is non-zero if no plugin area with specified ref could be found.
+*/
+
+//
+void  PA_SetPluginAreaClipMode ( PA_PluginRef pluginRef, char clipChildren );
+//
+
+
+
+
+</body></html>

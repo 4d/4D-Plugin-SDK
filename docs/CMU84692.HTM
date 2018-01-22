@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ClearVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ClearVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ClearVariable (aVariable)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      aVariable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the variable to clear
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ClearVariable
+    </font>
+   </code>
+   clear the variable pointed to by
+   <code>
+    aVariable
+   </code>
+   , and all its content (data of text, BLOB and picture variables).
+  </p>
+  <p>
+   After the call, the kind of the variable pointed to by
+   <code>
+    aVariable
+   </code>
+   is set to
+   <code>
+    eVK_Undefined
+   </code>
+   , and the variable can be re-initialized to another kind (
+   <code>
+    <a href="CMU84718.HTM">
+     PA_CreateVariable
+    </a>
+   </code>
+   ,
+   <code>
+    PA_SetxxxVariable
+   </code>
+   ).
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE
+   </p>
+  </b>
+  <p>
+   Do NOT dispose of a variable that belongs to 4th Dimension after a call to
+   <code>
+    <a href="CMU84717.HTM">
+     PA_GetVariable
+    </a>
+   </code>
+   ie.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Create, use, and dispose of a longint array
+  </p>
+  <p>
+  </p>
+  <pre><code>   PA_Variable arr;
+   arr = PA_CreateVariable(eVK_ArrayLongint, 0);
+   PA_SetArrayNbElements(arr, 100);// make an array of 100 elements
+   /* . . . do something with this array . . . */
+   // Cleanup
+   PA_CearVariable(&amp;arr); 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   No reference.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Dial4DGetArrayString
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Dial4DGetArrayString
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Dial4DGetArrayString (dialog; variable; string; index)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dialog
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Dial4D
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Dialog reference
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      variable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the array to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      string
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Value of the element
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      index
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Element to access
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Dial4DGetArrayString
+    </font>
+   </code>
+   retrieves a string from a string/text array .
+  </p>
+  <code>
+   <p>
+    variable
+   </p>
+  </code>
+  is the name of the array. This array can be created externally using
+  <code>
+   <a href="CMU84430.HTM">
+    PA_Dial4DNewArrayString
+   </a>
+  </code>
+  , or it can be created using 4th Dimension code in the form.
+ </body>
+</html>
+<p>
+ By default,
+ <code>
+  variable
+ </code>
+ and
+ <code>
+  string
+ </code>
+ are null terminated C strings. If you have previously called
+ <code>
+  <a href="CMU84817.HTM">
+   PA_UsePStrings
+  </a>
+ </code>
+ you must pass and you will receive a Pascal string from the command.
+</p>
+<p>
+ By default,
+ <code>
+  varName
+ </code>
+ and
+ <code>
+  string
+ </code>
+ use Macintosh characters set on Macintosh, and ANSI characters set under Windows. You can call
+ <code>
+  <a href="CMU84815.HTM">
+   PA_UseMacCharacters
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84814.HTM">
+   PA_UseAnsiCharacters
+  </a>
+ </code>
+ to specifically use Macintosh or ANSI characters.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Get the current value of a string array.
+</p>
+<p>
+</p>
+<pre><code>   void Dial4D_GetCurrentStringElement( PA_Dial4D ref, char *variable, char *value )
+   {
+      long   index = PA_Dial4DGetLong( ref, variable );
+      return PA_Dial4DGetArrayReal( ref, variable, value, index );
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84430.HTM">
+  PA_Dial4DNewArrayString
+ </a>
+ ,
+ <a href="CMU84429.HTM">
+  PA_Dial4DSetArrayString
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ None.
+</p>

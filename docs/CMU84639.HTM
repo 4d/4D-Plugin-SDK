@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetStringField
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetStringField
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetStringField (tNum; fNum; string)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      string
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Value of the field
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetStringField
+    </font>
+   </code>
+   returns in
+   <code>
+    string
+   </code>
+   the value of the field
+   <code>
+    fNum
+   </code>
+   of the current record of table
+   <code>
+    tNum
+   </code>
+   . Make sure that you have enough room to receive the string (usually, 4D developers use 256 chars buffers).
+  </p>
+  <p>
+   If the field is not a string field, the routine leaves
+   <code>
+    string
+   </code>
+   unchanged and returns an error code in
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   By default,
+   <code>
+    <font color="#CF0000">
+     PA_GetStringField
+    </font>
+   </code>
+   fills
+   <code>
+    string
+   </code>
+   with a null terminated C string, unless you have previously called the
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   functions.
+  </p>
+  <p>
+   By default,
+   <code>
+    <font color="#CF0000">
+     PA_GetStringField
+    </font>
+   </code>
+   fills
+   <code>
+    string
+   </code>
+   with Macintosh characters on Macintosh and ANSI characters under Windows, except if you have previously called the
+   <code>
+    <a href="CMU84815.HTM">
+     PA_UseMacCharacters
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84814.HTM">
+     PA_UseAnsiCharacters
+    </a>
+   </code>
+   function
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   User alert with the value of a string field.
+  </p>
+  <p>
+  </p>
+  <pre><code>   char value[256];
+ 
+   PA_GetStringField( 1, 2, value ); // Assuming field 2 of table 1 is a string field
+   if ( PA_GetLastError() == eER_NoErr )
+      PA_Alert( value );
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84627.HTM">
+    PA_SetStringField
+   </a>
+   ,
+   <a href="CMU84814.HTM">
+    PA_UseAnsiCharacters
+   </a>
+   ,
+   <a href="CMU84816.HTM">
+    PA_UseCStrings
+   </a>
+   ,
+   <a href="CMU84815.HTM">
+    PA_UseMacCharacters
+   </a>
+   ,
+   <a href="CMU84817.HTM">
+    PA_UsePStrings
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (
+   <code>
+    eER_InvalidFileNumber
+   </code>
+   ,
+   <code>
+    eER_InvalidFieldNumber
+   </code>
+   )
+  </p>
+ </body>
+</html>

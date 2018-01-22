@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_DetokenizeInTEHandle
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_DetokenizeInTEHandle
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_DetokenizeInTEHandle (tokens; len) → PA_Handle
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tokens
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Tokens to be detokenized
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of theTokens
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      The TEHandle to the detokenized text
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_DetokenizeInTEHandle
+    </font>
+   </code>
+   allows the 4D plug-in to retrieve the text of the 4D statement or expression corresponding to the tokenized 4D formula that has been passed.
+  </p>
+  <p>
+   Before the call, pass the tokenized 4D statement or expression in
+   <code>
+    Tokens
+   </code>
+   (which the 4D plug-in obtains using the
+   <code>
+    <a href="CMU84736.HTM">
+     PA_Tokenize
+    </a>
+   </code>
+   ) and its length in
+   <code>
+    len
+   </code>
+   . After the call, the 4D plug-in receives a TEHandle (a handle to a Text Edit record and
+   <b>
+    not
+   </b>
+   a CharsHandle). The
+   <code>
+    hText
+   </code>
+   field of the Text Edit record points to the detokenized text.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   As the
+   <code>
+    TEHandle
+   </code>
+   structure is specific to MacOS calls, this routine is useful only when compiling for MacOS or Windows using Mac2Win. If the plug-in is compiled for Windows without Mac2Win, the handle is still a "valid" Mac2Win Handle, but it should not be used in this case.
+  </p>
+  <p>
+   To detokenize in a "regular" text, use
+   <code>
+    <a href="CMU84734.HTM">
+     PA_Detokenize
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE
+   </p>
+  </b>
+  <p>
+   It is the plug in's responsibility to dispose of the
+   <code>
+    TEHandle
+   </code>
+   when it is no longer needed.
+  </p>
+  <code>
+   <u>
+    <p>
+     <font color="#CF0000">
+      PA_DetokenizeInTEHandle
+     </font>
+    </p>
+   </u>
+  </code>
+  benefits
+ </body>
+</html>
+<p>
+ Suppose a developer writes a plug-in that implements callbacks of 4D formulas, for example, 4D formulas inserted in 4D plug-in areas. Because these formulas may need to be evaluated several times, the developer uses the pre-tokenization scheme provided by
+ <code>
+  <a href="CMU84736.HTM">
+   PA_Tokenize
+  </a>
+ </code>
+ in order to optimize the execution time. Therefore, the developer will probably implement a dialog box where the user can enter the formula to be inserted. If the developer wants to allow the user to later modify an already inserted formula, he needs to keep  the text of the formula in memory (and on disk if the 4D plug-in areas generate data or documents) or be able to retrieve it from its tokenized form. The entry point
+ <code>
+  <font color="#CF0000">
+   PA_DetokenizeInTEHandle
+  </font>
+ </code>
+ allows the developer to do this. The developer does not need to maintain both the text and the tokens of the formula, only to keep the tokenized form of the formula in memory and on disk. In doing so, both memory and disk space are saved.
+</p>
+<p>
+ In addition, localization is much easier. For example, an English-speaking 4th Dimension user inserts the formula String (Year of (Current date )) in a 4D plug-in area. Then the area contents are saved into a record or a document on disk . If this record or document is reused by a French-speaking user (using a French version of 4th Dimension) and if the formula was saved as text, the user would be presented a syntax error from 4th Dimension as soon as the formula is evaluated for the first time. In addition, the French user would be a little bit puzzled by the English formulas displayed on the screen. If the formulas are saved as tokens, whatever the country version is, 4th Dimension will have no problem in executing them. In addition, a French user will see Chaine (Annee de (Date du jour )) on the screen as would be expected.
+</p>
+<p>
+ Using the tokenized form of 4D formulas not only optimizes execution time and saves space but also makes the 4D plug-in international.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Detokenize and use the TEHandle
+</p>
+<p>
+</p>
+<pre><code>   void UseDetokenizedText (char *tokens, long len)
+   {
+      TEHandle   teh = 0L;
+ 
+      teh = PA_DetokenizeInTEHandle(tokens, len);
+      if(teh &amp;&amp; (PA_GetLastError() == eER_NoErr))
+      {
+         /* . . . use the text in (*teh)-&gt;hText . . .*/
+ 
+      // Cleanup
+         TEDispose(teh);
+      }
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84734.HTM">
+  PA_Detokenize
+ </a>
+ ,
+ <a href="CMU84732.HTM">
+  PA_ExecuteTokens
+ </a>
+ ,
+ <a href="CMU84731.HTM">
+  PA_ExecuteTokensAsFunction
+ </a>
+ ,
+ <a href="CMU84736.HTM">
+  PA_Tokenize
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

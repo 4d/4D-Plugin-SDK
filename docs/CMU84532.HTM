@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetSerialKey
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetSerialKey
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetSerialKey  → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Unique 4th Dimension number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetSerialKey
+    </font>
+   </code>
+   returns the unique ID of the 4D kernel serial number.
+  </p>
+  <p>
+   The plug-in can create its own serial number, based on the unique number returned by
+   <code>
+    <font color="#CF0000">
+     PA_GetSerialKey
+    </font>
+   </code>
+   and check it at the
+   <code>
+    kInitiPlugin
+   </code>
+   event at startup.
+  </p>
+  <p>
+   The developer can also use the other information of this chapter to serialize its plug-in, linking it  closer to one 4D application.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Basic Serialization scheme.
+  </p>
+  <p>
+   Store the serial number in a preference file.
+  </p>
+  <pre><code> 
+   char   gIsRegistered;
+   void PluginMain( long selector, PA_PluginParameters params )
+   {
+      switch ( selector )
+      {
+         case kInitPlugin :
+            gIsRegistered = IsRegistered();
+            if(!gIsRegistered)
+               gIsRegistered = RegisterMyPlugin();
+            break;
+ 
+         case kDeinitPlugin :
+            // enter some de-initialization code here if needed
+            break;
+         
+         case 1 :
+            // enter code for first command here
+            break;
+         
+         case 2 :
+            // enter code for second command here
+            break;
+ 
+         case 3 :
+            // enter code for third command here
+            break;
+         .
+         .
+         .
+      }
+   } // PluginMain
+ 
+ 
+   char IsRegistered()
+   {
+      long   currentKey, thisKey;
+   
+   // read the "old" key, stored in our prefs file
+      serialKey = ReadKeyFromPrefs();
+      
+   // build a key for this app
+      thisKey = BuildSuperNumber(PA_GetSerialKey());
+   
+   // Compare the 2 keys
+      return (char) currentKey == thisKey ? 1 : 0;
+      
+   }
+   
+   char RegisterMyPlugin ()
+   {
+      char   sNum[256];
+      char   result;
+      long   thisKey, key;
+   
+   // ask the user to entry the key
+      sNum[0] = (char) 0;
+      result = PA_Request("Enter the plug-in serial number:", sNum, "OK", "Cancel");
+      if(result &amp;&amp; sNum[0])
+      {
+         MyStringToNum(sNum, key);
+   // build a key for this app
+         thisKey = BuildSuperNumber(PA_GetSerialKey());
+   // Compare both keys
+         result = (char) key == thisKey ? 1 : 0;
+   // OK, this is a good number -&gt; save it in the prefs
+         if(result)
+            SaveKeyInPrefs(key);
+      }
+      
+      return result;
+   }
+ 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84534.HTM">
+    PA_GetRegisteredUserCompany
+   </a>
+   ,
+   <a href="CMU84533.HTM">
+    PA_GetRegisteredUserName
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetFieldRelation
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetFieldRelation
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetFieldRelation (tNum; fNum; relatedTable; relatedField)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      relatedTable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Related table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      relatedField
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Related field number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   If a relation begins at the Field being accessed,
+   <code>
+    <font color="#CF0000">
+     PA_GetFieldRelation
+    </font>
+   </code>
+   will return the number of the related table and field in *
+   <code>
+    relatedTable
+   </code>
+   and *
+   <code>
+    relatedField
+   </code>
+   .
+  </p>
+  <p>
+   If there is no relations starting from the field, or if an error occurred,
+   <code>
+    *relatedTable
+   </code>
+   and
+   <code>
+    *relatedField
+   </code>
+   are set to 0.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Get the name of a related field:
+  </p>
+  <pre><code>   void GetRelatedFieldName (short tNum, short fNum, char *name)
+   {
+      short rT, rF;
+ 
+      name[0] = (char) 0;// initialize file name at "" (error)
+      PA_GetFieldRelation(tNum, fNum, &amp;rT, &amp;rF);
+      if( (PA_GetLastError() == eER_NoErr) &amp;&amp; (rT != 0) &amp;&amp; (rF != 0) )
+         PA_GetFieldName(rT, rN, name);
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84785.HTM">
+    PA_GetFieldList
+   </a>
+   ,
+   <a href="CMU84788.HTM">
+    PA_GetFieldName
+   </a>
+   ,
+   <a href="CMU84787.HTM">
+    PA_GetFieldProperties
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (bad table/field numbers).
+  </p>
+ </body>
+</html>

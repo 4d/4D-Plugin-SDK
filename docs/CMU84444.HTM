@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Dial4DSetPictureHandle
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Dial4DSetPictureHandle
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Dial4DSetPictureHandle (dialog; variable; newPicture; info)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dialog
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Dial4D
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Dialog reference
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      variable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the variable to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      newPicture
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Handle to the picture data
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      info
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PictureInfo
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Picture information
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Dial4DSetPictureHandle
+    </font>
+   </code>
+   sets the variable
+   <code>
+    variable
+   </code>
+   to the picture referenced by the
+   <code>
+    PA_Handle
+   </code>
+   <code>
+    newPicture
+   </code>
+   . 4th Dimension handles Macintosh Pictures internally, so you must give a valid Macintosh Picture handle to this routine.
+  </p>
+  <p>
+   Note that there is no command to get a picture. You can get a picture in a dialog variable using
+   <code>
+    <a href="CMU84452.HTM">
+     PA_Dial4DGetVariable
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE
+   </p>
+  </b>
+  <p>
+   The
+   <code>
+    PA_Handle
+   </code>
+   belongs to 4th Dimension after the call. You must not dispose of it.
+  </p>
+  <p>
+   By default,
+   <code>
+    variable
+   </code>
+   needs to be a null terminated C string. If you have previously called
+   <code>
+    PA_UsePStrings,
+   </code>
+   you must pass a Pascal string to the command.
+  </p>
+  <p>
+   By default,
+   <code>
+    variable
+   </code>
+   needs to use Macintosh characters set on Macintosh, and ANSI characters set under Windows. You can call
+   <code>
+    <a href="CMU84815.HTM">
+     PA_UseMacCharacters
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84814.HTM">
+     PA_UseAnsiCharacters
+    </a>
+   </code>
+   to specifically use Macintosh or ANSI characters.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <a href="XKALPUSA.HTM">
+   Alphabetical command list
+  </a>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <pre><code>typedef enum
+{
+  // 4D database engine errors codes
+  eER_IdxPgOutOfRange   = -10004,   // Index page is out of range
+  eER_RecOutOfRange   = -10003,   // Record is out of range (*)
+  eER_InvalidRecStruct   = -10002,   // Invalid record structure (*)
+      // ( data file needs to be repaired )
+  eER_InvalidIdxPage   = -10001,   // Invalid index page (*)
+      // ( index needs to be repaired or rebuilt )
+      // (*) if 4D Client, maybe due to error
+      // of connection reported by network component.
+  eER_BadRecordAddress   = -10000,   // Bad record address
+  eER_NoMoreSpaceToSave   = -9999,   // No more space available to save the record
+  eER_DuplicateKeyIndex   = -9998,   // Duplicated index key
+  eER_MaxNumberOfRecords   = -9997,   // Maximum number of records has been reached
+  eER_StackIsFull   = -9996,   // Stack is full
+  eER_DemoVersionLimit   = -9995,   // Limits of demo version have been reached
+  eER_CommInterruptedByUser   = -9994,   // Serial communication interrupted by user
+  eER_NoEnoughPrivilege   = -9991,   // Access privileges error
+  eER_TimeOut   = -9990,   // Time-out error
+  eER_InvalidStruture   = -9989,   // Invalid structure
+      // ( database needs to be repaired )
+  eER_RelatedRecords   = -9987,   // Other records are related to this record
+  eER_RecordLockedDuringDel   = -9986,   // Record(s) locked during an automatic deletion action
+  eER_RecursiveIntegrity   = -9985,   // Recursive integrity
+  eER_DuplicatedKeyInTrans   = -9984,   // Transaction cancelled because of a dup. index key 
+  eER_RecordNotInSelection   = -9982,   // Record not in selection and could not be loaded
+  eER_BadFileFieldTable   = -9981,   // Invalid Field/File definition table sent
+  eER_StructureIsLocked   = -9980,   // File cannot be created because structure is locked
+  eER_BadUserName   = -9979,   // Unknown User
+  eER_BadPassword   = -9978,   // Invalid Password
+  eER_BadSelection   = -9977,   // The selection does not exist
+  eER_BackupInProgress   = -9976,   // Backup in progress, no modifications are allowed
+  eER_CannotLoadTrIdxPage   = -9975,   // Transaction index page could not be loaded
+  eER_RecordAlreadyDeleted   = -9974,   // The record has already been deleted
+  eER_BadTRIC   = -9973,   // TRIC resources are not the same
+  eER_BadFileNumber   = -9972,   // File number is out of range
+  eER_BadFieldNumber   = -9971,   // Field number is out of range
+  eER_FieldNotIndexed   = -9970,   // Field is not indexed
+  eER_BadFieldType   = -9969,   // Invalid field type requested
+  eER_BadSelectedRecordNumber   = -9968,   // Invalid selected record number requested
+  eER_RecordNotLoaded   = -9967,   // The record was not modified because
+      // it could not be loaded
+  eER_IncompatibleTypes   = -9966,   // Invalid type requested
+  eER_BadSearchDefinition   = -9965,   // Bad search definition table sent
+  eER_BadSortDefinition   = -9964,   // Bad sort definition table sent
+  eER_BadRecordNumber   =  -9963,   // Invalid record number requested
+  eER_BackupCannotLaunched   = -9962,   // The backup cannot be launched because
+      // the server is shutting down
+  eER_BackupNotRunning   = -9961,   // The backup process is currently not running
+  eER_BackupNotInstalled   = -9960,   // 4D Backup is not installed on the server
+  eER_BackupAlreadyRunning   = -9959,   // the backup process has already been started
+      // by another user or process
+  eER_ProcessNotStarted   = -9958,   // Process could not be started
+  eER_ListIsLocked   = -9957,   // The list is locked
+  eER_QTNotInstalled   = -9955,   // QuickTime is not installed
+  eER_SNoCurrentRecord   = -9954,   // There is no current record
+  eER_NoLogFile   = -9953,   // There is no Log file
+  eER_BadDataSegmentHeader   = -9952,   // Invalid data segment
+  eER_NotRelatedField   = -9951,   // Field is not related to another one
+  eER_BadDataSegmentNumber   = -9950,   // Invalid data segment number
+  eER_NamedSelNotExist   = -9946,   // Unable to clear the named selection because 
+      // it does not exist
+  eER_CDROMvers   = -9945,   // CD-ROM 4D Runtime error, 
+      // writing operations are not allowed
+  eER_Passportvers   = -9943,   // 4D Passport version error
+  eER_LicensingError   = -9942,   // 4D Client Licensing scheme is incompatible 
+      // with this version of 4D Server
+  eER_UnknownGestaltSelector   = -9941,   // Unknown EX_GESTALT selector
+  eER_ExtInitFailed   = -9940,   // 4D Extension initialization failed
+  eER_ExtNotFound   = -9939,   // External routine not found
+  eER_NotEnoughMemory   = -108,   // Not enough Memory
+ 
+  eER_NoErr   = 0,
+ 
+  // Additional entry points errors codes
+  eER_CallNotImplemented   = -1,   // Entry point is not implemented
+  eER_InvalidFileNumber   = 4001,   // Invalid file number
+  eER_InvalidRecordNumber   = 4002,   // Invalid record number
+  eER_InvalidFieldNumber   = 4003,   // Invalid field number
+  eER_NoCurrentRecord   = 4004,   // There is no current record
+  eER_BadEventCall   = 4005, 
+  eER_InvalidOrderByRef   = 4006,
+  eER_InvalidQueryRef   = 4007,
+  eER_TooManyOrderBy   = 4008,
+  eER_TooManyQueries   = 4009,
+  eER_InvalidCreateTableRef   = 4010,
+  eER_TooManyFields   = 4011
+ 
+} PA_ErrorCode;</code></pre>
+ </body>
+</html>

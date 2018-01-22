@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Locked
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Locked
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Locked (tableNum) → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      True (1) if current record is locked
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Locked
+    </font>
+   </code>
+   woks like the 4th Dimension function
+   <code>
+    <a href="CMU00147.HTM">
+     Locked
+    </a>
+   </code>
+   : it returns 1 if the current record of table number
+   <code>
+    tableNum
+   </code>
+   is locked. Otherwise, it returns 0.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Waiting for a record to be unlocked.
+  </p>
+  <p>
+  </p>
+  <pre><code>   short InfiniteLoadingLoop (short tableNum)
+   {
+      char   isLocked = 1;
+   // First check if there is no error (bad table number)
+      isLocked = PA_Locked(tableNum);
+      if(PA_GetLastError())
+         return PA_GetLastError();
+   // Then, here is an infinite loop. As an example.  Do not do that in your plug-in !
+      // while the record is locked.
+      do
+      {
+      // generic C function to delay a process
+         MyDelayCurrentProcess(10); // 10 ticks
+      // Load the record
+         PA_LoadRecord(tableNum);
+      } while(PA_Locked(tableNum));
+      
+      return eER_NoErr;
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU00147.HTM">
+    Locked
+   </a>
+   ,
+   <a href="CMU84799.HTM">
+    PA_LoadRecord
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (bad table number).
+  </p>
+ </body>
+</html>

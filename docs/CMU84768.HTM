@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPackedRecord
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPackedRecord
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetPackedRecord (tNum; packRec) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      packRec
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Buffer to store the record data
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Buffer size
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetPackedRecord
+    </font>
+   </code>
+   fills the memory block pointed to by
+   <code>
+    packRec
+   </code>
+   with data that contains the concatenation of all the fields of the current record of the table whose number is passed in
+   <code>
+    tNum
+   </code>
+   , and returns its size. If there is no current record when the call is made, the routine returns 0. If
+   <code>
+    packRec
+   </code>
+   is nil, the routine returns the actual size of the record, so the developer can allocate a buffer of the correct size before filling it.
+  </p>
+  <p>
+   First, the 4D Plug-in usually calls the routine passing
+   <code>
+    packRec
+   </code>
+   to nil, then allocates the buffer, and finally recalls the routine with the buffer.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   4th Dimension uses a private data format for concatenating fields into one block. It is impossible for the 4D Plug-in to extract one particular Field from this block. The 4D Plug-in should never modify this data.
+  </p>
+  <p>
+   4th Dimension takes care of the data from one platform to another, and the 4D Plug-in can transparently get a packed record on a platform and use it on another.
+  </p>
+  <p>
+   The buffer returned in
+   <code>
+    packRec
+   </code>
+   can be reused with the routine
+   <code>
+    <a href="CMU84767.HTM">
+     PA_SetPackedRecord
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   For example, if the 4D plug-in requires record duplication, this can be accomplished by first making the desired record the current record for the table and calling
+   <code>
+    <font color="#CF0000">
+     PA_GetPackedRecord
+    </font>
+   </code>
+   to get a copy of all the record's fields. Once the packed record has been copied, the 4D plug-in should call
+   <code>
+    <a href="CMU84899.HTM">
+     PA_CreateRecord
+    </a>
+   </code>
+   and then
+   <code>
+    <a href="CMU84767.HTM">
+     PA_SetPackedRecord
+    </a>
+   </code>
+   to fill out all the fields of the new record. Finally, the 4D plug-in should save the new record by calling
+   <code>
+    <a href="CMU84900.HTM">
+     PA_SaveRecord
+    </a>
+   </code>
+   and dispose of the buffer.
+  </p>
+  <p>
+   This method can also be used to export and import records from one database to another provided the source and destination files have an identical table definition. The use of the routines
+   <code>
+    <font color="#CF0000">
+     PA_GetPackedRecord
+    </font>
+   </code>
+   and
+   <code>
+    <a href="CMU84767.HTM">
+     PA_SetPackedRecord
+    </a>
+   </code>
+   however are not restricted to the duplication or export/import of records.
+   <code>
+    <a href="CMU84767.HTM">
+     PA_SetPackedRecord
+    </a>
+   </code>
+   can be called on existing records in order to insure data synchronization between databases, provided the source and destination files have an identical table definition.
+  </p>
+  <p>
+   If new records are created, it is up to the 4D plug-in to handle the unity of field(s) if necessary.
+  </p>
+  <p>
+   If the 4D plug-in sends or receives record data returned by
+   <code>
+    <font color="#CF0000">
+     PA_GetPackedRecord
+    </font>
+   </code>
+   over a phone line, a software or hardware protocol should be used, such as XOn/XOff, as record data may contain ASCII codes which interferes with a standard protocol.
+  </p>
+  <b>
+   <p>
+    Examples
+   </p>
+  </b>
+  <p>
+   (1) Duplicate the current record.
+  </p>
+  <p>
+  </p>
+  <pre><code>   short DuplicateRecord (short tNum)
+   {
+      long   size = 0;
+      char   *buffer;
+      
+   // Get the size of the packed record
+      size = PA_GetPackedRecord(tNum, 0L);
+   // Continue only if no error occurred and if there were a current record
+      if( (PA_GetLastError() == eER_NoErr) &amp;&amp; (size &gt; 0) )
+      {
+   // Allocate the buffer
+         buffer = malloc(size);
+   // Fill it
+         if(buffer)
+         {
+            size = PA_GetPackedRecord(tNum, buffer);
+   // Create and fill a new record
+            if(PA_GetLastError() == eER_NoErr)
+            {
+               PA_CreateRecord(tNum);
+               PA_SetPackedRecord(tNum, buffer, size);
+               PA_SaveRecord(tNum);
+            }
+         }
+      }
+      
+      return PA_GetLastError();
+   }
+ 
+</code></pre>
+  <p>
+   (2) BLOB and unBLOB a record as routines given to the 4D programer. The documentation of the Plug-in will look like this:
+  </p>
+  <p>
+   &lt;&lt;
+  </p>
+  <p>
+   To BLOB the current record of a table, use:
+  </p>
+  <code>
+   <p>
+    $error:=myplug_BlobRecord(tNum;blob)
+   </p>
+  </code>
+  <p>
+   where
+   <code>
+    tNum
+   </code>
+   is an integer (the number of the table) and
+   <code>
+    blob
+   </code>
+   is a BLOB in witch you want to store the record. $error is a long integer containing an error code, 0 = no error.
+  </p>
+  <p>
+   To unBLOB a record previously BLOBed with
+   <code>
+    myplug_BlobRecord
+   </code>
+   , use:
+  </p>
+  <code>
+   <p>
+    $error:=myplug_UnblobRecord(tNum;blob)
+   </p>
+  </code>
+  <p>
+   where
+   <code>
+    tNum
+   </code>
+   is an integer (the number of the table) and
+   <code>
+    blob
+   </code>
+   is a valid BLOB containing the record. The Plug-in does not save the record for you.
+  </p>
+  <p>
+   &gt;&gt;
+  </p>
+  <pre><code>   void PluginMain( long selector, PA_PluginParameters params )
+   {
+      switch ( selector )
+      {
+         case kInitPlugin :
+            // enter initialization code here if needed
+            break;
+ 
+         case kDeinitPlugin :
+            // enter de-initialization code here if needed
+            break;
+         
+         case kBLOB_RECORD :
+            BlobTheRecord(params);
+            break;
+         
+         case kUNBLOB_RECORD :
+            UnblobTheRecord(params);
+            break;
+ 
+         case 3 :
+            // enter code for third command here
+            break;
+         .
+         .
+         .
+      }
+   } // PluginMain
+ 
+   // Declared for the 4D Developer as expecting:
+   //            - a short (table number),
+   //            - a BLOB
+   //            - and return a long (error)
+   void BlobTheRecord (PA_PluginParameters params)
+   {
+      long   size = 0;
+      char   *buffer;
+      short   tNum = 0;
+      short   err = 0;
+      
+   // Get the table number (first parameter)
+      tNum = PA_GetShortParameter(params, 1);
+      
+   // Get the size of the packed record
+      size = PA_GetPackedRecord(tNum, 0L);
+   // error check
+      err = PA_GetLastError();
+      if( (!err) &amp;&amp; (size &gt; 0) )
+      {
+         buffer = malloc(size);
+         if(buffer)
+         {
+            size = PA_GetPackedRecord(tNum, buffer);
+            if( (!err) &amp;&amp; (size &gt; 0) )
+            {
+      // The BLOB to fill is the second parameter
+               PA_SetBlobParameter(params, 2, buffer, size);
+               err = PA_GetLastError();
+            }
+         }
+      }
+      
+      PA_ReturnLong(params, (long) err);
+   } // BlobTheRecord
+   
+ 
+   // Declared for the 4D Developer as expecting:
+   //            - a short (table number),
+   //            - a BLOB
+   //            - and return a long (error)
+   void BlobTheRecord (PA_PluginParameters params)
+   {
+      long      size = 0;
+      PA_Handle   theBlob;
+      char      *theBlobPtr;
+      
+   // Get the table number (first parameter)
+      tNum = PA_GetShortParameter(params, 1);
+   // transfer the data. In this case, it is more
+   // simple to just use the handle to the BLOB,
+   // since we do not have to modify it.
+      theBlob = PA_GetBlobHandleParameter(params, 2);
+      if(theBlob)
+      {
+         size = PA_GetHandleSize(theBlob);
+         theBlobPtr = PA_LockHandle(theBlob);// because perhaps 4D does things that may move memory?
+         PA_SetPackedRecord(tNum, theBlobPtr, size);
+         PA_UnlockHandle(theBlob);
+      }
+      
+      PA_ReturnLong(params, (long) PA_GetLastError());
+   } // BlobTheRecord
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84767.HTM">
+    PA_SetPackedRecord
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (bad table number, insufficient memory, etc.).
+  </p>
+ </body>
+</html>

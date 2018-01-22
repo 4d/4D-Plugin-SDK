@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetPictureHandleVariable
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetPictureHandleVariable
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetPictureHandleVariable (aVariable; pictInfo) → PA_Handle
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      aVariable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Variable to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pictInfo
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PictureInfo *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Picture info
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      A handle to the picture data of the variable
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetPictureHandleVariable
+    </font>
+   </code>
+   returns a handle to the picture data of the variable
+   <code>
+    aVariable
+   </code>
+   . It fills
+   <code>
+    *pictInfo
+   </code>
+   with the picture information. If the variable is not a
+   <code>
+    eVK_Picture
+   </code>
+   variable, the routine returns 0 and leaves
+   <code>
+    pictInfo
+   </code>
+   unchanged.
+  </p>
+  <p>
+   To get a copy of the data, use
+   <code>
+    <a href="CMU84711.HTM">
+     PA_GetPictureVariable
+    </a>
+   </code>
+   . It can be useful to only get the Handle for saving memory , especially if the plug-in just want to "read-only" the picture content (sample drawing).
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  :
+ </body>
+</html>
+<p>
+ The handle belongs to the variable. Do not dispose of it.
+</p>
+<p>
+ To clear a picture variable, use
+ <code>
+  <a href="CMU84692.HTM">
+   PA_ClearVariable
+  </a>
+ </code>
+ .
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Draw a picture on Macintosh (and Windows + Altura) :  the received handle is a regular PicHandle.
+</p>
+<p>
+</p>
+<pre><code>   void DrawPictureVariable(PA_Variable aVar, Rect *r)
+   {
+      PA_Handle         h =0L;
+      PA_PictureInfo   info;
+ 
+      h = PA_GetPictureHandleVariable(aVar, &amp;info);
+ 
+      DrawPicture(h, &amp;r);
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84711.HTM">
+  PA_GetPictureVariable
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+keeps the last error that occurred
+<u>
+ before
+</u>
+calling the routine.

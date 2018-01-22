@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CreateSet
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CreateSet
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CreateSet (tableNum; setName)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      setName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the set
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_CreateSet
+    </font>
+   </code>
+   creates a new set of name
+   <code>
+    setName
+   </code>
+   for table number
+   <code>
+    tableNum
+   </code>
+   , and places the current selection in
+   <code>
+    setName
+   </code>
+   .
+  </p>
+  <code>
+   <p>
+    setName
+   </p>
+  </code>
+  can be a standard C string null terminated or a Pascal string, depending on previous calls to
+  <code>
+   <a href="CMU84817.HTM">
+    PA_USePStrings
+   </a>
+  </code>
+  or
+  <code>
+   <a href="CMU84816.HTM">
+    PA_UseCStrings
+   </a>
+  </code>
+  .
+ </body>
+</html>
+<p>
+ This is the same as the
+ <code>
+  <a href="CMU00116.HTM">
+   CREATE SET
+  </a>
+ </code>
+ command. The current record pointer for the table is saved with
+ <code>
+  setName
+ </code>
+ . If set is used with
+ <code>
+  <a href="CMU84894.HTM">
+   PA_UseSet
+  </a>
+ </code>
+ , the current selection and current record are restored. As with all sets, there is no sorted order; when
+ <code>
+  setName
+ </code>
+ is used, the default order is used. If a set with the same name already exists, the existing set is cleared by the new set.
+</p>
+<p>
+ Once a set has been created using
+ <code>
+  <font color="#CF0000">
+   PA_CreateSet
+  </font>
+ </code>
+ , the 4D plug-in can:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Reuse the set to create a selection for the Table using
+ <code>
+  <a href="CMU84894.HTM">
+   PA_UseSet
+  </a>
+ </code>
+ .
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Add records to the set using the entry point
+ <code>
+  <a href="CMU84892.HTM">
+   PA_AddToSet
+  </a>
+ </code>
+ .
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Delete the set when it is no longer needed, using
+ <code>
+  <a href="CMU84891.HTM">
+   PA_DeleteSet
+  </a>
+ </code>
+ .
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU00116.HTM">
+  CREATE SET
+ </a>
+ ,
+ <a href="CMU84892.HTM">
+  PA_AddToSet
+ </a>
+ ,
+ <a href="CMU84891.HTM">
+  PA_DeleteSet
+ </a>
+ ,
+ <a href="CMU84817.HTM">
+  PA_UsePStrings
+ </a>
+ ,
+ <a href="CMU84894.HTM">
+  PA_UseSet
+ </a>
+ .
+</p>

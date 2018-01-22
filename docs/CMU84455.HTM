@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ModalDialog
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ModalDialog
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ModalDialog (dialog; lastVarName) → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dialog
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Dial4D
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Dialog reference
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      lastVarName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the last modified variable
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 = User accepts the dialog,
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      2 = User cancels the dialog,
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      0 = A variable has been modified
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ModalDialog
+    </font>
+   </code>
+   is called repetitively in a loop after having displayed a dialog (by calling
+   <code>
+    <a href="CMU84457.HTM">
+     PA_NewDialog
+    </a>
+   </code>
+   and then
+   <code>
+    <a href="CMU84456.HTM">
+     PA_OpenDialog
+    </a>
+   </code>
+   ). It provides information on the last user action. If the user validates the dialog,
+   <code>
+    <font color="#CF0000">
+     PA_ModalDialog
+    </font>
+   </code>
+   returns 1. If the user cancels the dialog,
+   <code>
+    <font color="#CF0000">
+     PA_ModalDialog
+    </font>
+   </code>
+   return 2. If the user modifies any variable that does not validate or cancel the dialog,
+   <code>
+    <font color="#CF0000">
+     PA_ModalDialog
+    </font>
+   </code>
+   returns 0.
+  </p>
+  <code>
+   <p>
+    dialog
+   </p>
+  </code>
+  is the dialog reference, as returned by
+  <code>
+   <a href="CMU84457.HTM">
+    PA_NewDialog
+   </a>
+  </code>
+  or
+  <code>
+   <a href="CMU84456.HTM">
+    PA_OpenDialog
+   </a>
+  </code>
+  .
+ </body>
+</html>
+<code>
+ <p>
+  lastVarName
+ </p>
+</code>
+is the name of the last modified variable.
+<p>
+ By default,
+ <code>
+  <font color="#CF0000">
+   PA_ModalDialog
+  </font>
+ </code>
+ fills
+ <code>
+  lastVarName
+ </code>
+ with a null terminated C string, unless you have previously called the
+ <code>
+  <a href="CMU84817.HTM">
+   PA_UsePStrings
+  </a>
+ </code>
+ functions.
+</p>
+<p>
+ By default,
+ <code>
+  <font color="#CF0000">
+   PA_ModalDialog
+  </font>
+ </code>
+ fills
+ <code>
+  lastVarName
+ </code>
+ with Macintosh characters on Macintosh and ANSI characters under Windows, except if you have previously called the
+ <code>
+  <a href="CMU84815.HTM">
+   PA_UseMacCharacters
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84814.HTM">
+   PA_UseAnsiCharacters
+  </a>
+ </code>
+ function.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ See
+ <code>
+  <a href="CMU84457.HTM">
+   PA_NewDialog
+  </a>
+ </code>
+ and
+ <code>
+  4th Dimension Dialogs : using a Form as a dialog
+ </code>
+ for an example of use.
+</p>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84454.HTM">
+  PA_CloseDialog
+ </a>
+ ,
+ <a href="CMU84457.HTM">
+  PA_NewDialog
+ </a>
+ ,
+ <a href="CMU84456.HTM">
+  PA_OpenDialog
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ None.
+</p>

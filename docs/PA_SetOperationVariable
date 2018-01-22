@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// those functions are usefull to pass parameters to 4D Commands,
+   using PA_ExecuteCommandByID
+
+   // op can be '*', '<', '>'...
+   void PA_SetOperationVariable   ( PA_Variable* variable, char op );		
+</body></html>

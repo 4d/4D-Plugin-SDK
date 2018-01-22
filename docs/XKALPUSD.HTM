@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <h3 align="CENTER">
+   <a href="XKALPUSA.HTM">
+    A
+   </a>
+   <a href="XKALPUSB.HTM">
+    B
+   </a>
+   <a href="XKALPUSC.HTM">
+    C
+   </a>
+   D
+   <a href="XKALPUSE.HTM">
+    E
+   </a>
+   <a href="XKALPUSF.HTM">
+    F
+   </a>
+   <a href="XKALPUSG.HTM">
+    G
+   </a>
+   H
+   <a href="XKALPUSI.HTM">
+    I
+   </a>
+   J
+   <a href="XKALPUSK.HTM">
+    K
+   </a>
+   <a href="XKALPUSL.HTM">
+    L
+   </a>
+   <a href="XKALPUSM.HTM">
+    M
+   </a>
+   <a href="XKALPUSN.HTM">
+    N
+   </a>
+   <a href="XKALPUSO.HTM">
+    O
+   </a>
+   <a href="XKALPUSP.HTM">
+    P
+   </a>
+   <a href="XKALPUSQ.HTM">
+    Q
+   </a>
+   <a href="XKALPUSR.HTM">
+    R
+   </a>
+   <a href="XKALPUSS.HTM">
+    S
+   </a>
+   <a href="XKALPUST.HTM">
+    T
+   </a>
+   <a href="XKALPUSU.HTM">
+    U
+   </a>
+   <a href="XKALPUSV.HTM">
+    V
+   </a>
+   <a href="XKALPUSW.HTM">
+    W
+   </a>
+   X
+   <a href="XKALPUSY.HTM">
+    Y
+   </a>
+   Z
+  </h3>
+  <br/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84473.HTM">
+      Drag and drop with a plugin area
+     </a>
+    </b>
+    <li>
+     <b>
+      <a href="CMU84863.HTM">
+       PA_Date
+      </a>
+     </b>
+     <li>
+      <b>
+       <a href="CMU84882.HTM">
+        PA_DeleteSelection
+       </a>
+      </b>
+      (tableNum)
+      <li>
+       <b>
+        <a href="CMU84891.HTM">
+         PA_DeleteSet
+        </a>
+       </b>
+       (setName)
+       <li>
+        <b>
+         <a href="CMU84566.HTM">
+          PA_DetachResource
+         </a>
+        </b>
+        (resFile; resourceHandle)
+        <li>
+         <b>
+          <a href="CMU84734.HTM">
+           PA_Detokenize
+          </a>
+         </b>
+         (tokens; len; text) → long
+         <li>
+          <b>
+           <a href="CMU84735.HTM">
+            PA_DetokenizeInTEHandle
+           </a>
+          </b>
+          (tokens; len) → PA_Handle
+          <li>
+           <b>
+            <a href="CMU84380.HTM">
+             PA_Dial4DAllowXResize
+            </a>
+           </b>
+           (dialog; allowXResize)
+           <li>
+            <b>
+             <a href="CMU84379.HTM">
+              PA_Dial4DAllowYResize
+             </a>
+            </b>
+            (dialog; allowYResize)
+            <li>
+             <b>
+              <a href="CMU84432.HTM">
+               PA_Dial4DBeginUpdateVariables
+              </a>
+             </b>
+             (dialog)
+             <li>
+              <b>
+               <a href="CMU84370.HTM">
+                PA_Dial4DCancelValidate
+               </a>
+              </b>
+              (dialog; cancel)
+              <li>
+               <b>
+                <a href="CMU84415.HTM">
+                 PA_Dial4DDeleteArrayElements
+                </a>
+               </b>
+               (dialog; variable; position; amount)
+               <li>
+                <b>
+                 <a href="CMU84404.HTM">
+                  PA_Dial4DDial4DFromWindow
+                 </a>
+                </b>
+                (window) → PA_Dial4D
+                <li>
+                 <b>
+                  <a href="CMU84392.HTM">
+                   PA_Dial4DDisposeEmptyDialog
+                  </a>
+                 </b>
+                 (dialog)
+                 <li>
+                  <b>
+                   <a href="CMU84422.HTM">
+                    PA_Dial4DDisposeHList
+                   </a>
+                  </b>
+                  (dialog; variable)
+                  <li>
+                   <b>
+                    <a href="CMU84431.HTM">
+                     PA_Dial4DEndUpdateVariables
+                    </a>
+                   </b>
+                   (dialog)
+                   <li>
+                    <b>
+                     <a href="CMU84376.HTM">
+                      PA_Dial4DFindArrayLong
+                     </a>
+                    </b>
+                    (dialog; variable; value; startPosition) → long
+                    <li>
+                     <b>
+                      <a href="CMU84375.HTM">
+                       PA_Dial4DFindArrayReal
+                      </a>
+                     </b>
+                     (dialog; variable; value; startPosition) → long
+                     <li>
+                      <b>
+                       <a href="CMU84439.HTM">
+                        PA_Dial4DGetArrayLong
+                       </a>
+                      </b>
+                      (dialog; variable; index) → long
+                      <li>
+                       <b>
+                        <a href="CMU84441.HTM">
+                         PA_Dial4DGetArrayReal
+                        </a>
+                       </b>
+                       (dialog; variable; index) → double
+                       <li>
+                        <b>
+                         <a href="CMU84416.HTM">
+                          PA_Dial4DGetArraySize
+                         </a>
+                        </b>
+                        (dialog; variable) → long
+                        <li>
+                         <b>
+                          <a href="CMU84440.HTM">
+                           PA_Dial4DGetArrayString
+                          </a>
+                         </b>
+                         (dialog; variable; string; index)
+                         <li>
+                          <b>
+                           <a href="CMU84393.HTM">
+                            PA_Dial4DGetArrayText
+                           </a>
+                          </b>
+                          (dialog; variable; text; index) → long
+                          <li>
+                           <b>
+                            <a href="CMU84424.HTM">
+                             PA_Dial4DGetCurrentPage
+                            </a>
+                           </b>
+                           (dialog) → short
+                           <li>
+                            <b>
+                             <a href="CMU84427.HTM">
+                              PA_Dial4DGetDate
+                             </a>
+                            </b>
+                            (dialog; variable; day; month; year)
+                            <li>
+                             <b>
+                              <a href="CMU84421.HTM">
+                               PA_Dial4DGetDragInfo
+                              </a>
+                             </b>
+                             (dialog; dropVariable; dropX; dropY; dragDialog; dragVariable; dragY; dragX)
+                             <li>
+                              <b>
+                               <a href="CMU84374.HTM">
+                                PA_Dial4DGetLastObject
+                               </a>
+                              </b>
+                              (dialog; lastObjectName)
+                              <li>
+                               <b>
+                                <a href="CMU84450.HTM">
+                                 PA_Dial4DGetLong
+                                </a>
+                               </b>
+                               (dialog; variable) → long
+                               <li>
+                                <b>
+                                 <a href="CMU84448.HTM">
+                                  PA_Dial4DGetReal
+                                 </a>
+                                </b>
+                                (dialog; variable) → double
+                                <li>
+                                 <b>
+                                  <a href="CMU84446.HTM">
+                                   PA_Dial4DGetString
+                                  </a>
+                                 </b>
+                                 (dialog; variable; string)
+                                 <li>
+                                  <b>
+                                   <a href="CMU84420.HTM">
+                                    PA_Dial4DGetTableFieldHListCurrent
+                                   </a>
+                                  </b>
+                                  (dialog; variable; table; field)
+                                  <li>
+                                   <b>
+                                    <a href="CMU84400.HTM">
+                                     PA_Dial4DGetText
+                                    </a>
+                                   </b>
+                                   (dialog; variable; text) → long
+                                   <li>
+                                    <b>
+                                     <a href="CMU84389.HTM">
+                                      PA_Dial4DGetTime
+                                     </a>
+                                    </b>
+                                    (dialog; variable) → long
+                                    <li>
+                                     <b>
+                                      <a href="CMU84406.HTM">
+                                       PA_Dial4DGetUserData
+                                      </a>
+                                     </b>
+                                     (dialog) → void*
+                                     <li>
+                                      <b>
+                                       <a href="CMU84452.HTM">
+                                        PA_Dial4DGetVariable
+                                       </a>
+                                      </b>
+                                      (dialog; variable) → PA_Variable
+                                      <li>
+                                       <b>
+                                        <a href="CMU84436.HTM">
+                                         PA_Dial4DGetVariableRect
+                                        </a>
+                                       </b>
+                                       (dialog; variable; rect)
+                                       <li>
+                                        <b>
+                                         <a href="CMU84378.HTM">
+                                          PA_Dial4DGetWindowMinMaxInfo
+                                         </a>
+                                        </b>
+                                        (dialog; minXResize; maxXResize; minYResize; maxYResize)
+                                        <li>
+                                         <b>
+                                          <a href="CMU84425.HTM">
+                                           PA_Dial4DGotoPage
+                                          </a>
+                                         </b>
+                                         (dialog; pageNum)
+                                         <li>
+                                          <b>
+                                           <a href="CMU84371.HTM">
+                                            PA_Dial4DGotoVariable
+                                           </a>
+                                          </b>
+                                          (dialog; variable)
+                                          <li>
+                                           <b>
+                                            <a href="CMU84368.HTM">
+                                             PA_Dial4DHighlightText
+                                            </a>
+                                           </b>
+                                           (dialog; variable; startSelection; endSelection)
+                                           <li>
+                                            <b>
+                                             <a href="CMU84419.HTM">
+                                              PA_Dial4DNewArrayLong
+                                             </a>
+                                            </b>
+                                            (dialog; variable)
+                                            <li>
+                                             <b>
+                                              <a href="CMU84413.HTM">
+                                               PA_Dial4DNewArrayPicture
+                                              </a>
+                                             </b>
+                                             (dialog; variable)
+                                             <li>
+                                              <b>
+                                               <a href="CMU84399.HTM">
+                                                PA_Dial4DNewArrayReal
+                                               </a>
+                                              </b>
+                                              (dialog; variable)
+                                              <li>
+                                               <b>
+                                                <a href="CMU84430.HTM">
+                                                 PA_Dial4DNewArrayString
+                                                </a>
+                                               </b>
+                                               (dialog; variable)
+                                               <li>
+                                                <b>
+                                                 <a href="CMU84395.HTM">
+                                                  PA_Dial4DNewArrayText
+                                                 </a>
+                                                </b>
+                                                (dialog; variable)
+                                                <li>
+                                                 <b>
+                                                  <a href="CMU84423.HTM">
+                                                   PA_Dial4DNewTableFieldHList
+                                                  </a>
+                                                 </b>
+                                                 (dialog; variable; table; showRelatedTables; showRelatedFields; useIcons; sorted)
+                                                 <li>
+                                                  <b>
+                                                   <a href="CMU84414.HTM">
+                                                    PA_Dial4DRedrawExternalArea
+                                                   </a>
+                                                  </b>
+                                                  (dialog; areaName)
+                                                  <li>
+                                                   <b>
+                                                    <a href="CMU84442.HTM">
+                                                     PA_Dial4DRestoreVariables
+                                                    </a>
+                                                   </b>
+                                                   (dialog; dialEnvironment)
+                                                   <li>
+                                                    <b>
+                                                     <a href="CMU84443.HTM">
+                                                      PA_Dial4DSaveVariables
+                                                     </a>
+                                                    </b>
+                                                    (dialog) → void*
+                                                    <li>
+                                                     <b>
+                                                      <a href="CMU84405.HTM">
+                                                       PA_Dial4DSet3StatesCheckBox
+                                                      </a>
+                                                     </b>
+                                                     (dialog; variable; threeStates)
+                                                     <li>
+                                                      <b>
+                                                       <a href="CMU84437.HTM">
+                                                        PA_Dial4DSetAreaHandler
+                                                       </a>
+                                                      </b>
+                                                      (dialog; areaName; handler; privateData)
+                                                      <li>
+                                                       <b>
+                                                        <a href="CMU84418.HTM">
+                                                         PA_Dial4DSetArrayLong
+                                                        </a>
+                                                       </b>
+                                                       (dialog; arrayName; value; index)
+                                                       <li>
+                                                        <b>
+                                                         <a href="CMU84412.HTM">
+                                                          PA_Dial4DSetArrayPicture
+                                                         </a>
+                                                        </b>
+                                                        (dialog; arrayName; picture; len; infos; index)
+                                                        <li>
+                                                         <b>
+                                                          <a href="CMU84411.HTM">
+                                                           PA_Dial4DSetArrayPictureFromResources
+                                                          </a>
+                                                         </b>
+                                                         (dialog; arrayName; idArray; nb)
+                                                         <li>
+                                                          <b>
+                                                           <a href="CMU84363.HTM">
+                                                            PA_Dial4DSetArrayPictureHandle
+                                                           </a>
+                                                          </b>
+                                                          (dialog; variable; picture; info; index)
+                                                          <li>
+                                                           <b>
+                                                            <a href="CMU84398.HTM">
+                                                             PA_Dial4DSetArrayReal
+                                                            </a>
+                                                           </b>
+                                                           (dialog; variable; value; index)
+                                                           <li>
+                                                            <b>
+                                                             <a href="CMU84429.HTM">
+                                                              PA_Dial4DSetArrayString
+                                                             </a>
+                                                            </b>
+                                                            (dialog; variable; string; indice)
+                                                            <li>
+                                                             <b>
+                                                              <a href="CMU84394.HTM">
+                                                               PA_Dial4DSetArrayText
+                                                              </a>
+                                                             </b>
+                                                             (dialog; variable; text; len; index)
+                                                             <li>
+                                                              <b>
+                                                               <a href="CMU84433.HTM">
+                                                                PA_Dial4DSetArrayTextFromFieldList
+                                                               </a>
+                                                              </b>
+                                                              (dialog; variable; table)
+                                                              <li>
+                                                               <b>
+                                                                <a href="CMU84435.HTM">
+                                                                 PA_Dial4DSetArrayTextFromResource
+                                                                </a>
+                                                               </b>
+                                                               (dialog; arrayName)
+                                                               <li>
+                                                                <b>
+                                                                 <a href="CMU84434.HTM">
+                                                                  PA_Dial4DSetArrayTextFromTableList
+                                                                 </a>
+                                                                </b>
+                                                                (dialog; arrayName)
+                                                                <li>
+                                                                 <b>
+                                                                  <a href="CMU84417.HTM">
+                                                                   PA_Dial4DSetArrayTextFromTTR
+                                                                  </a>
+                                                                 </b>
+                                                                 (text; len; dialog; varName)
+                                                                 <li>
+                                                                  <b>
+                                                                   <a href="CMU84428.HTM">
+                                                                    PA_Dial4DSetDate
+                                                                   </a>
+                                                                  </b>
+                                                                  (dialog; variable; day; month; year)
+                                                                  <li>
+                                                                   <b>
+                                                                    <a href="CMU84396.HTM">
+                                                                     PA_Dial4DSetDisplayFormat
+                                                                    </a>
+                                                                   </b>
+                                                                   (dialog; variable; newFormat)
+                                                                   <li>
+                                                                    <b>
+                                                                     <a href="CMU84453.HTM">
+                                                                      PA_Dial4DSetEnable
+                                                                     </a>
+                                                                    </b>
+                                                                    (dialog; variable; enabled)
+                                                                    <li>
+                                                                     <b>
+                                                                      <a href="CMU84410.HTM">
+                                                                       PA_Dial4DSetEnterable
+                                                                      </a>
+                                                                     </b>
+                                                                     (dialog; variable; enterable)
+                                                                     <li>
+                                                                      <b>
+                                                                       <a href="CMU84397.HTM">
+                                                                        PA_Dial4DSetEntryFilter
+                                                                       </a>
+                                                                      </b>
+                                                                      (dialog; variable; newFilter)
+                                                                      <li>
+                                                                       <b>
+                                                                        <a href="CMU84449.HTM">
+                                                                         PA_Dial4DSetLong
+                                                                        </a>
+                                                                       </b>
+                                                                       (dialog; variable; newValue)
+                                                                       <li>
+                                                                        <b>
+                                                                         <a href="CMU84408.HTM">
+                                                                          PA_Dial4DSetMax
+                                                                         </a>
+                                                                        </b>
+                                                                        (dialog; variable; maxValue)
+                                                                        <li>
+                                                                         <b>
+                                                                          <a href="CMU84365.HTM">
+                                                                           PA_Dial4DSetMaxDate
+                                                                          </a>
+                                                                         </b>
+                                                                         (dialog; variable; day; month; year)
+                                                                         <li>
+                                                                          <b>
+                                                                           <a href="CMU84409.HTM">
+                                                                            PA_Dial4DSetMin
+                                                                           </a>
+                                                                          </b>
+                                                                          (dialog; variable; minValue)
+                                                                          <li>
+                                                                           <b>
+                                                                            <a href="CMU84367.HTM">
+                                                                             PA_Dial4DSetMinDate
+                                                                            </a>
+                                                                           </b>
+                                                                           (dialog; variable; day; month; year)
+                                                                           <li>
+                                                                            <b>
+                                                                             <a href="CMU84388.HTM">
+                                                                              PA_Dial4DSetObjectTitle
+                                                                             </a>
+                                                                            </b>
+                                                                            (dialog; objectName; newTitle)
+                                                                            <li>
+                                                                             <b>
+                                                                              <a href="CMU84444.HTM">
+                                                                               PA_Dial4DSetPictureHandle
+                                                                              </a>
+                                                                             </b>
+                                                                             (dialog; variable; newPicture; info)
+                                                                             <li>
+                                                                              <b>
+                                                                               <a href="CMU84447.HTM">
+                                                                                PA_Dial4DSetReal
+                                                                               </a>
+                                                                              </b>
+                                                                              (dialog; variable; newValue)
+                                                                              <li>
+                                                                               <b>
+                                                                                <a href="CMU84445.HTM">
+                                                                                 PA_Dial4DSetString
+                                                                                </a>
+                                                                               </b>
+                                                                               (dialog; variable; newValue)
+                                                                               <li>
+                                                                                <b>
+                                                                                 <a href="CMU84402.HTM">
+                                                                                  PA_Dial4DSetTableFieldHListCurrent
+                                                                                 </a>
+                                                                                </b>
+                                                                                (dialog; variable; table; field)
+                                                                                <li>
+                                                                                 <b>
+                                                                                  <a href="CMU84401.HTM">
+                                                                                   PA_Dial4DSetText
+                                                                                  </a>
+                                                                                 </b>
+                                                                                 (dialog; variable; text; textLength)
+                                                                                 <li>
+                                                                                  <b>
+                                                                                   <a href="CMU84390.HTM">
+                                                                                    PA_Dial4DSetTime
+                                                                                   </a>
+                                                                                  </b>
+                                                                                  (dialog; variable; newValue)
+                                                                                  <li>
+                                                                                   <b>
+                                                                                    <a href="CMU84407.HTM">
+                                                                                     PA_Dial4DSetUserData
+                                                                                    </a>
+                                                                                   </b>
+                                                                                   (dialog; userData)
+                                                                                   <li>
+                                                                                    <b>
+                                                                                     <a href="CMU84451.HTM">
+                                                                                      PA_Dial4DSetVariable
+                                                                                     </a>
+                                                                                    </b>
+                                                                                    (dialog; variable; newVarValue)
+                                                                                    <li>
+                                                                                     <b>
+                                                                                      <a href="CMU84381.HTM">
+                                                                                       PA_Dial4DSetVariableRect
+                                                                                      </a>
+                                                                                     </b>
+                                                                                     (dialog; variable; rect)
+                                                                                     <li>
+                                                                                      <b>
+                                                                                       <a href="CMU84377.HTM">
+                                                                                        PA_Dial4DSetWindowSize
+                                                                                       </a>
+                                                                                      </b>
+                                                                                      (dialog; width; height)
+                                                                                      <li>
+                                                                                       <b>
+                                                                                        <a href="CMU84391.HTM">
+                                                                                         PA_Dial4DShowHideObject
+                                                                                        </a>
+                                                                                       </b>
+                                                                                       (dialog; objectName; visible)
+                                                                                       <li>
+                                                                                        <b>
+                                                                                         <a href="CMU84426.HTM">
+                                                                                          PA_Dial4DShowHideVariable
+                                                                                         </a>
+                                                                                        </b>
+                                                                                        (dialog; variable; visible)
+                                                                                        <li>
+                                                                                         <b>
+                                                                                          <a href="CMU84387.HTM">
+                                                                                           PA_Dial4DUpdateObjectTitle
+                                                                                          </a>
+                                                                                         </b>
+                                                                                         (dialog; objectName)
+                                                                                         <li>
+                                                                                          <b>
+                                                                                           <a href="CMU84403.HTM">
+                                                                                            PA_Dial4DWindowFromDial4D
+                                                                                           </a>
+                                                                                          </b>
+                                                                                          (dialog) → PA_WindowRef
+                                                                                          <li>
+                                                                                           <b>
+                                                                                            <a href="CMU84808.HTM">
+                                                                                             PA_DisposeHandle
+                                                                                            </a>
+                                                                                           </b>
+                                                                                           (handle)
+                                                                                           <li>
+                                                                                            <b>
+                                                                                             <a href="CMU84577.HTM">
+                                                                                              PA_DocumentExistOnServer
+                                                                                             </a>
+                                                                                            </b>
+                                                                                            (docName; fileType; fileCreator) → char
+                                                                                            <li>
+                                                                                             <b>
+                                                                                              <a href="CMU84472.HTM">
+                                                                                               PA_DontTakeEvent
+                                                                                              </a>
+                                                                                             </b>
+                                                                                             (params)
+                                                                                             <li>
+                                                                                              <b>
+                                                                                               <a href="CMU84518.HTM">
+                                                                                                PA_DragAndDrop
+                                                                                               </a>
+                                                                                              </b>
+                                                                                              (startX; startY; useCustomRect; customRect)
+                                                                                              <li>
+                                                                                               <b>
+                                                                                                <a href="CMU84464.HTM">
+                                                                                                 PA_DragKind
+                                                                                                </a>
+                                                                                               </b>
+                                                                                              </li>
+                                                                                             </li>
+                                                                                            </li>
+                                                                                           </li>
+                                                                                          </li>
+                                                                                         </li>
+                                                                                        </li>
+                                                                                       </li>
+                                                                                      </li>
+                                                                                     </li>
+                                                                                    </li>
+                                                                                   </li>
+                                                                                  </li>
+                                                                                 </li>
+                                                                                </li>
+                                                                               </li>
+                                                                              </li>
+                                                                             </li>
+                                                                            </li>
+                                                                           </li>
+                                                                          </li>
+                                                                         </li>
+                                                                        </li>
+                                                                       </li>
+                                                                      </li>
+                                                                     </li>
+                                                                    </li>
+                                                                   </li>
+                                                                  </li>
+                                                                 </li>
+                                                                </li>
+                                                               </li>
+                                                              </li>
+                                                             </li>
+                                                            </li>
+                                                           </li>
+                                                          </li>
+                                                         </li>
+                                                        </li>
+                                                       </li>
+                                                      </li>
+                                                     </li>
+                                                    </li>
+                                                   </li>
+                                                  </li>
+                                                 </li>
+                                                </li>
+                                               </li>
+                                              </li>
+                                             </li>
+                                            </li>
+                                           </li>
+                                          </li>
+                                         </li>
+                                        </li>
+                                       </li>
+                                      </li>
+                                     </li>
+                                    </li>
+                                   </li>
+                                  </li>
+                                 </li>
+                                </li>
+                               </li>
+                              </li>
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+ </body>
+</html>

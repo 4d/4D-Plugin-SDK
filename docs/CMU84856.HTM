@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   Each
+   <code>
+    <font color="#CF0000">
+     PA_LogTag
+    </font>
+   </code>
+   is followed by its specific data. The size of the log file specific data is in
+   <code>
+    fSize
+   </code>
+  </p>
+ </body>
+</html>
+<pre><code>typedef struct PA_LogTag
+{
+   long   fTag;   // always set to 0x40499999
+   long   fWhen;
+   char   fAction;   // as decribed in PA_LogAction enum
+   char   fFiller;
+   short   fProcess;
+   short   fUser;
+   long   fRecord;
+   short   fTable;
+   long   fSize;
+} PA_LogTag;</code></pre>

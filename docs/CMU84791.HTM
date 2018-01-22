@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetTableName
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetTableName
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetTableName (tableNum; tableName)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the table
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetTableName
+    </font>
+   </code>
+   returns in tableName the name of the table
+   <code>
+    tableNumber
+   </code>
+   .
+  </p>
+  <p>
+   Depending on previous calls to
+   <code>
+    <a href="CMU84846.HTM">
+     PA_UseVirtualStructure
+    </a>
+   </code>
+   (),
+   <code>
+    tableName
+   </code>
+   will contains the real or the virtual name of the table. Remember that, when using virtual names, table numbers can also change.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Build an array of table names:
+  </p>
+  <pre><code>   void BuildTableNames (PA_Variable *aNames)
+   {
+      char      name[32]; // USING C STRINGS IN THIS EXAMPLE
+      register long   i;
+   // Do nothing if the array has a bad type
+      if(theArray-&gt;fType != eVK_ArrayString)
+         return;
+   // Resize it
+      PA_SetArrayNbElements(*aNames, PA_CountTables());
+   // Fill it with table names
+      for(i = 1; i &lt;= PA_CountTables())
+      {
+         PA_GetTableName(i, name);
+         PA_SetStringInArray(*aNames, i, name);
+      }
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU00256.HTM">
+    Table name
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred.
+  </p>
+ </body>
+</html>

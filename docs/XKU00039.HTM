@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84692.HTM">
+      PA_ClearVariable
+     </a>
+    </b>
+    (aVariable)
+    <li>
+     <b>
+      <a href="CMU84718.HTM">
+       PA_CreateVariable
+      </a>
+     </b>
+     (varKind; stringSize) → PA_Variable
+     <li>
+      <b>
+       <a href="CMU84712.HTM">
+        PA_GetBlobHandleVariable
+       </a>
+      </b>
+      (aVariable) → PA_Handle
+      <li>
+       <b>
+        <a href="CMU84713.HTM">
+         PA_GetBlobVariable
+        </a>
+       </b>
+       (aVariable; theBlob) → long
+       <li>
+        <b>
+         <a href="CMU84705.HTM">
+          PA_GetBooleanVariable
+         </a>
+        </b>
+        (aVariable) → char
+        <li>
+         <b>
+          <a href="CMU84706.HTM">
+           PA_GetDateVariable
+          </a>
+         </b>
+         (aVariable; day; month; year)
+         <li>
+          <b>
+           <a href="CMU84708.HTM">
+            PA_GetLongintVariable
+           </a>
+          </b>
+          (aVariable) → long
+          <li>
+           <b>
+            <a href="CMU84710.HTM">
+             PA_GetPictureHandleVariable
+            </a>
+           </b>
+           (aVariable; pictInfo) → PA_Handle
+           <li>
+            <b>
+             <a href="CMU84711.HTM">
+              PA_GetPictureVariable
+             </a>
+            </b>
+            (aVariable; thePicture; pictInfo) → long
+            <li>
+             <b>
+              <a href="CMU84709.HTM">
+               PA_GetRealVariable
+              </a>
+             </b>
+             (aVariable) → double
+             <li>
+              <b>
+               <a href="CMU84715.HTM">
+                PA_GetStringVariable
+               </a>
+              </b>
+              (aVariable)
+              <li>
+               <b>
+                <a href="CMU84714.HTM">
+                 PA_GetTextVariable
+                </a>
+               </b>
+               (aVariable; theText) → long
+               <li>
+                <b>
+                 <a href="CMU84707.HTM">
+                  PA_GetTimeVariable
+                 </a>
+                </b>
+                (aVariable) → long
+                <li>
+                 <b>
+                  <a href="CMU84717.HTM">
+                   PA_GetVariable
+                  </a>
+                 </b>
+                 (vName) → PA_Variable
+                 <li>
+                  <b>
+                   <a href="CMU84716.HTM">
+                    PA_GetVariableKind
+                   </a>
+                  </b>
+                  (aVariable) → PA_VariableKind
+                  <li>
+                   <b>
+                    <a href="CMU84700.HTM">
+                     PA_SetBlobHandleVariable
+                    </a>
+                   </b>
+                   (aVariable; hBlob)
+                   <li>
+                    <b>
+                     <a href="CMU84701.HTM">
+                      PA_SetBlobVariable
+                     </a>
+                    </b>
+                    (aVariable; newBlob; size)
+                    <li>
+                     <b>
+                      <a href="CMU84693.HTM">
+                       PA_SetBooleanVariable
+                      </a>
+                     </b>
+                     (aVariable; newValue)
+                     <li>
+                      <b>
+                       <a href="CMU84694.HTM">
+                        PA_SetDateVariable
+                       </a>
+                      </b>
+                      (aVariable; newDay; newMonth; newYear)
+                      <li>
+                       <b>
+                        <a href="CMU84696.HTM">
+                         PA_SetLongintVariable
+                        </a>
+                       </b>
+                       (aVariable; newValue)
+                       <li>
+                        <b>
+                         <a href="CMU84698.HTM">
+                          PA_SetPictureHandleVariable
+                         </a>
+                        </b>
+                        (aVariable; hPicture; info)
+                        <li>
+                         <b>
+                          <a href="CMU84699.HTM">
+                           PA_SetPictureVariable
+                          </a>
+                         </b>
+                         (aVariable; newPicture; pictSize; info)
+                         <li>
+                          <b>
+                           <a href="CMU84697.HTM">
+                            PA_SetRealVariable
+                           </a>
+                          </b>
+                          (aVariable; newValue)
+                          <li>
+                           <b>
+                            <a href="CMU84703.HTM">
+                             PA_SetStringVariable
+                            </a>
+                           </b>
+                           (aVariable; newString)
+                           <li>
+                            <b>
+                             <a href="CMU84702.HTM">
+                              PA_SetTextVariable
+                             </a>
+                            </b>
+                            (aVariable; newText; len)
+                            <li>
+                             <b>
+                              <a href="CMU84695.HTM">
+                               PA_SetTimeVariable
+                              </a>
+                             </b>
+                             (aVariable; newValue)
+                             <li>
+                              <b>
+                               <a href="CMU84704.HTM">
+                                PA_SetVariable
+                               </a>
+                              </b>
+                              (vName; aVariable; clearOldValue)
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+ </body>
+</html>

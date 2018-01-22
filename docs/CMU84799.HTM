@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_LoadRecord
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_LoadRecord
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_LoadRecord (tableNum)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_LoadRecord
+    </font>
+   </code>
+   loads or reloads the current record for the table number
+   <code>
+    tableNum
+   </code>
+   . If there is no current record
+   <code>
+    <font color="#CF0000">
+     PA_LoadRecord
+    </font>
+   </code>
+   does nothing.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_LoadRecord
+    </font>
+   </p>
+  </code>
+  works like the 4th Dimension command
+  <code>
+   <a href="CMU00052.HTM">
+    LOAD RECORD
+   </a>
+  </code>
+  . Please refer to the 4th Dimension documentation to learn more about loading records and its modes (read only, read write, locked)
+ </body>
+</html>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Loop or loading an unlocked record.
+</p>
+<p>
+</p>
+<pre><code>   /*
+      waiting the record to be unlocked
+      a timeout is used to avoid infinite loop
+      a call to PA_Yield MUST BE DONE in such case, to give
+      the 4D scheduler time to process other tasks. If this is
+      not done, the user will think its computer is frozen.
+   */
+   void LoadRecordUnlocked(short tNum, long timeOut)
+   {
+      long   start;
+      if(timeOut &lt;= 0)
+         timeOut = 60;//default value
+   // GetTicks is a routine returns the tick count under Windows and MacOS
+      start = GetTicks();
+      do
+      {
+         PA_Yield();
+         PA_LoadRecord(tableNum);
+      } while ( PA_Locked(tableNum) || ((GetTicks() - start) &lt; timeOut) );
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU00052.HTM">
+  LOAD RECORD
+ </a>
+ ,
+ <a href="CMU84802.HTM">
+  PA_Locked
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (bad table number).
+</p>

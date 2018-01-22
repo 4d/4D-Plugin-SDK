@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_FormulaEditor
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_FormulaEditor
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_FormulaEditor (defaultTable; text; len) → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      defaultTable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Default table
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      text
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Unistring*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Default formula for the enterable text area
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      User formula
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of the defaut formula
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of the user formula
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 if the user has validated the dialog box
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_FormulaEditor
+    </font>
+   </code>
+   displays the 4D standard Formula Editor.
+  </p>
+  <code>
+   <p>
+    tableNumber
+   </p>
+  </code>
+  is the number of the table whose fields will fill the main list (this can be changed by the user if he uses the table pop-up menu). If 0 is passed, all tables are listed.
+ </body>
+</html>
+<code>
+ <p>
+  formula
+ </p>
+</code>
+is the formula displayed in the editor.
+<code>
+ <p>
+  len
+ </p>
+</code>
+is a pointer to the length of
+<code>
+ formula
+</code>
+. If *len is 0, no default formula will be displayed upon entry.
+<p>
+ If the user validates the dialog box,
+ <code>
+  <font color="#CF0000">
+   PA_FormulaEditor
+  </font>
+ </code>
+ returns 1 and fills
+ <code>
+  formula
+ </code>
+ with the formula the user has entered.
+ <code>
+  *len
+ </code>
+ contains the length of this formula.
+</p>
+<p>
+ 4th Dimension does not execute the formula. This routine is an accessor to the 4th Dimension Formula Editor. Using this routine, the developer can save/execute/tokenize/detokenize user specific formulas.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Execute a user specific formula.
+</p>
+<p>
+</p>
+<pre><code>   void UserFormula ()
+   {
+      char   *formula;
+      long   len;
+ 
+      formula = malloc(32000);
+      if(PA_FormulaEditor(0, formula, &amp;len))
+         PA_ExecuteMethod(formula);
+ 
+      free(formula);
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84734.HTM">
+  PA_Detokenize
+ </a>
+ ,
+ <a href="CMU84738.HTM">
+  PA_ExecuteMethod
+ </a>
+ ,
+ <a href="CMU84736.HTM">
+  PA_Tokenize
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+always returns
+<code>
+ eER_NoErr
+</code>

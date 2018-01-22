@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetDateField
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetDateField
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetDateField (tNum; fNum; day; month; year)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      day
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the day of the date
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      month
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the month of the date
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      year
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the year of the date
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetDateField
+    </font>
+   </code>
+   fills the shorts pointed to by
+   <code>
+    day
+   </code>
+   ,
+   <code>
+    month
+   </code>
+   ,
+   <code>
+    year
+   </code>
+   with the values of the date field number
+   <code>
+    fNum
+   </code>
+   of the current record of table number
+   <code>
+    tNum
+   </code>
+   .
+  </p>
+  <p>
+   If
+   <code>
+    aVariable
+   </code>
+   is not a
+   <code>
+    eVK_Date
+   </code>
+   variable, the routine does nothing and leaves
+   <code>
+    *day
+   </code>
+   ,
+   <code>
+    *month
+   </code>
+   and
+   <code>
+    *year
+   </code>
+   unchanged.
+  </p>
+  <code>
+   <p>
+    day
+   </p>
+  </code>
+  ,
+  <code>
+   month
+  </code>
+  and
+  <code>
+   day
+  </code>
+  can be null pointer if you do not want to read those values.
+ </body>
+</html>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Check the year of a particular date.
+</p>
+<p>
+</p>
+<pre><code>   short      year = 0;
+ 
+   PA_GetDateField( table, field, 0, 0, &amp;year );
+   if ( year == 1961 )
+   {
+      /* . . . */
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84619.HTM">
+  PA_SetDateField
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (
+ <code>
+  eER_InvalidFileNumber
+ </code>
+ ,
+ <code>
+  eER_InvalidFieldNumber
+ </code>
+ ).
+</p>

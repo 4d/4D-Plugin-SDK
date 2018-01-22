@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_DragAndDrop
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_DragAndDrop
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_DragAndDrop (startX; startY; useCustomRect; customRect)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      startX
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Horizontal global position of the mouse
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      startY
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Vertical global position of the mouse
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      useCustomRect
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 : Use custom rectangle, 0 : Do not use
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      customRect
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Rect
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Custom object rectangle
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_DragAndDrop
+    </font>
+   </code>
+   can be called when
+   <code>
+    PA_AreaEvent
+   </code>
+   returns
+   <code>
+    eAE_MouseDown
+   </code>
+   . It initiates a drag-drop operation. Pass the horizontal coordinate of the mouse in
+   <code>
+    startX
+   </code>
+   and its vertical coordinate in
+   <code>
+    startY
+   </code>
+   (be sure to use global coordinates, you may need to use
+   <code>
+    LocalToGlobal
+   </code>
+   on Macintosh or
+   <code>
+    ClientToScreen
+   </code>
+   under Windows to convert the local coordinates of the click returned by
+   <code>
+    <a href="CMU84490.HTM">
+     PA_GetClick
+    </a>
+   </code>
+   to global coordinates needed for this drag and drop operation). Pass in
+   <code>
+    customRect
+   </code>
+   the rectangle that 4D will draw during the drag operation if you set
+   <code>
+    customRect
+   </code>
+   to 1. If
+   <code>
+    customRect
+   </code>
+   is set to 0, the dragging rectangle will be the size of the external area.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   The routines "Drag and Drop" are internal to 4th Dimension. The developer cannot use them with other applications.
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84473.HTM">
+    Drag and drop with a plugin area
+   </a>
+   ,
+   <a href="CMU84485.HTM">
+    PA_AllowDrop
+   </a>
+   ,
+   <a href="CMU84490.HTM">
+    PA_GetClick
+   </a>
+   .
+  </p>
+ </body>
+</html>

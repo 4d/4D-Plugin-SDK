@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_OrderBy
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_OrderBy
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_OrderBy (tNum; fNum; oDirection)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      oDirection
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Ordering direction
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_OrderBy
+    </font>
+   </code>
+   sorts (reorders) the records of the current selection of table
+   <code>
+    tNum
+   </code>
+   for the current process using the field
+   <code>
+    fNum
+   </code>
+   . After the sort has been completed, the new first record of the selection becomes the current record.
+  </p>
+  <p>
+   Set
+   <code>
+    oDirection
+   </code>
+   to any value but 0 to order in an ascending direction.
+  </p>
+  <p>
+   Set
+   <code>
+    oDirection
+   </code>
+   to 0 to order in a descending direction.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_OrderBy
+    </font>
+   </p>
+  </code>
+  is a quick way to reorder a selection using only one field as criteria.
+ </body>
+</html>
+<p>
+ To reorder the selection using 2 or more fields, you must do so in the following manner:
+</p>
+<p>
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td align="LEFT" valign="TOP" width="7%">
+   </td>
+   <td align="LEFT" valign="TOP" width="93%">
+    1/ Tell the API that you want to start a complex sort by calling
+    <code>
+     PA_OpenOrderBy
+    </code>
+    ,
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="7%">
+   </td>
+   <td align="LEFT" valign="TOP" width="93%">
+    2/ Call
+    <code>
+     PA_AddFieldToOrderBy
+    </code>
+    for every field you want to add as a sort criteria,
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="7%">
+   </td>
+   <td align="LEFT" valign="TOP" width="93%">
+    3/ Call
+    <code>
+     PA_CloseOrderBy
+    </code>
+    to start sorting.
+   </td>
+  </tr>
+ </table>
+</p>
+<p>
+ To dispatch the standard "Order By" 4D dialog, call
+ <code>
+  <a href="CMU84719.HTM">
+   PA_OrderByDialog
+  </a>
+ </code>
+ .
+</p>
+<b>
+ <p>
+  Examples
+ </p>
+</b>
+<p>
+ (1) Reorder selection of table 2 by field 3, ascending
+</p>
+<p>
+</p>
+<pre><code>   PA_OrderBy(2, 3, 1);
+</code></pre>
+<p>
+ (2) Two macros that wrap
+ <code>
+  <font color="#CF0000">
+   PA_OrderBy
+  </font>
+ </code>
+</p>
+<p>
+</p>
+<pre><code>   #define ORDERBY_ASC(t, f)      PA_OrderBy(t, f, 1)
+   #define ORDERBY_DESC(t, f)      PA_OrderBy(t, f, 0) 
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU00049.HTM">
+  ORDER BY
+ </a>
+ ,
+ <a href="CMU84780.HTM">
+  PA_AddFieldToOrderBy
+ </a>
+ ,
+ <a href="CMU84779.HTM">
+  PA_CloseOrderBy
+ </a>
+ ,
+ <a href="CMU84781.HTM">
+  PA_OpenOrderBy
+ </a>
+ ,
+ <a href="CMU84719.HTM">
+  PA_OrderByDialog
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (bad table number)
+</p>

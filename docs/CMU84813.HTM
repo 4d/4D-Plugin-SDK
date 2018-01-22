@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <pre><code>typedef struct PA_PictureInfo   // this information is used when
+      // the picture is displayed on background
+{
+   short fMode;
+   short fHOffset;
+   short fVOffset;
+} PA_PictureInfo;
+</code></pre>
+  <p>
+   When you receive a picture as parameter, you can:
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   manage the memory yourself. In this case, make sure that you receive the picture itself with the
+   <code>
+    <font color="#CF0000">
+     PA_PictureInfo
+    </font>
+   </code>
+   concatenated at the end of the picture
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   Use the
+   <code>
+    P_GetPictureParameter
+   </code>
+   routine that returns:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="95%">
+      - the pictures "alone", without the
+      <code>
+       PA_PictureInfo
+      </code>
+      . For example, it can be used immediately under MacOS with a call to
+      <code>
+       DrawPicture
+      </code>
+      .
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="95%">
+      - the
+      <code>
+       PA_PictureInfo
+      </code>
+      structure separately.
+     </td>
+    </tr>
+   </table>
+  </p>
+ </body>
+</html>

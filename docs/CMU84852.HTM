@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <pre><code>typedef enum
+{
+   eAutomatic   = -1,   // Show layouts according to platform GUI
+   eMacintosh   = 0,   // Show layouts using Macintosh GUI   
+   eWin31   = 1,   // Show layouts using Windows 3.1.x GUI
+   eWin95   = 2   // Show layouts using Windows 95 GUI
+} PA_PlatformInterface;
+</code></pre>
+  <p>
+   The
+   <code>
+    eWin31
+   </code>
+   value exists even if 4D 6.7 does not run under this OS since you can emulate its interface.
+  </p>
+ </body>
+</html>

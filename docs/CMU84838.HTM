@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   Different selectors that can be sent to plug-in for different event
+  </p>
+  <p>
+   Usually received in PluginMain (see PluginSample.c for an example of use)
+  </p>
+  <code>
+   <p>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kServerDeinitPlugin
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -220
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kServerCleanUp
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -207
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kWriteOnServer
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -206
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kReadOnServer
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -205
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kClientDisconnect
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -202
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kClientConnect
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -201
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kServerInitPlugin
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -200
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kPackageGiveMemory
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -10
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kCreateProcess
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -3
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kCloseProcess
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -4
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kClientDeinitPlugin
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -2
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kDeinitPlugin
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       kClientDeinitPlugin
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kClientInitPlugin
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       -1
+      </td>
+     </tr>
+     <tr>
+      <td align="LEFT" valign="TOP" width="22%">
+       #define  kInitPlugin
+      </td>
+      <td align="LEFT" valign="TOP" width="18%">
+      </td>
+      <td align="LEFT" valign="TOP" width="60%">
+       kClientInitPlugin
+      </td>
+     </tr>
+    </table>
+   </p>
+  </code>
+  <p>
+   An area can receive those events. To retrieve an event, use
+   <code>
+    <a href="CMU84501.HTM">
+     PA_GetAreaEvent
+    </a>
+   </code>
+   , which returns a value of type
+   <code>
+    PA_AreaEvent
+   </code>
+   .
+  </p>
+  typedef enum
+{
+   eAE_Idle		  = 0,
+   eAE_MouseDown	  = 1,
+   eAE_MouseUp		  = 2,
+   eAE_KeyDown		  = 3,
+   eAE_KeyUp		  = 4,
+   eAE_AutoKey		  = 5,
+   eAE_Update		  = 6,
+   eAE_InitArea		  = 16,	// first call to area, time to call PA_SetAreaReference
+   eAE_Deinit		  = 17,
+   eAE_Cursor		  = 18,	// mouse has moved (even if your area is not selected)
+   eAE_IsFocusable        = 20,
+   eAE_Select		  = 21,
+   eAE_Deselect		  = 22,
+   eAE_Scroll		  = 25,	// area rect has changed, call PA_GetAreaRect
+   eAE_DesignUpdate	  = 26,
+   eAE_TestPrintSize	  = 27,
+   eAE_GetPrintSize	  = 28,
+   eAE_PrintBand          = 29,
+   eAE_UndoCommand        = 30,
+   eAE_CutCommand         = 31,
+   eAE_CopyCommand        = 32,
+   eAE_PasteCommand	  = 33,
+   eAE_ClearCommand	  = 34,
+   eAE_SelectAllCommand	  = 35,
+   eAE_RedoCommand        = 36,	// added in 4D 2004.4
+   eAE_MouseWheel         = 39,
+   eAE_UpdateEditCommands = 43,	// you need to call PA_UpdateEditMenu 
+   eAE_LoadRecord         = 69,
+   eAE_SaveRecord         = 70,
+   eAE_PageChange         = 71,
+   eAE_EndExecutionCycle  = 72,
+   eAE_AllowDrop          = 80,
+   eAE_Drag		  = 81,
+   eAE_Drop		  = 82,
+   eAE_BeginDrag	  = 85,	// added in v11
+   eAE_WebPublish	  = 128,
+   eAE_WebPublishPicture  = 129,
+   eAE_WebDisposeData	  = 130,
+   eAE_WebClick		  = 131,
+   eAE_EditAdvancedProperties        = 600,  // user clicks on "Advanced Properties" button
+   eAE_DisposeAdvancedProperties     = 601,  // 4D has stored the advanced plugin properties, you can now dispose your data
+   eAE_InitAdvancedProperties        = 602,  // it's time to read the advanced properties
+   eAE_AreAdvancedPropertiesEditable = 603,  // 4D wants to know if you want to use "Advanced Properties" button
+   eAE_GetMenuIcon                   = 604,  // 4D requests the id of the 'cicn' resources used in plugin menu
+   eAE_DesignInit                    = 605	// called when layout is opened in design mode
+} PA_AreaEvent;
+ </body>
+</html>

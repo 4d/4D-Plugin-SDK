@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Get4DWinMacOSGlobals
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Get4DWinMacOSGlobals
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Get4DWinMacOSGlobals  → void *
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to a MG structure, defined by Altura
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Mac2Win (0 under MacOS)
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Get4DWinMacOSGlobals
+    </font>
+   </code>
+   returns a pointer to the MacOS global variables data structure maintained by the Windows version of 4th Dimension.
+  </p>
+  <p>
+   This data structure is defined in the Altura Mac2Win header file "ASIEXTRN.h" below:
+  </p>
+  <pre><code>typedef struct
+{
+   short    mg_size;
+   short   mg_version;
+   short   *mg_SFSaveDisk;
+   long   *mg_CurDirStore;
+   short    *mg_SFVRefNum;
+   GDHandle   *mg_MainDevice;
+   GDHandle   *mg_DeviceList;
+   GrafPtr   *mg_WMgrPort;
+   struct QHdr   *mg_EventQueue;
+   short   *mg_MBarHeight;
+   short   *mg_MemErr;
+   RgnHandle   *mg_GrayRgn;
+   WindowPeek   *mg_WindowList;
+   GrafPt   *mg_thePort;
+   Pattern   *mg_white;
+   Pattern   *mg_black;
+   Pattern   *mg_gray;
+   Pattern   *mg_ltGray;
+   Pattern   *mg_dkGray;
+   Cursor   *mg_arrow;
+   BitMap   *mg_screenBits;
+   long   *mg_randSeed;
+   ScrapStuff   *mg_ScrapInfo;
+   short   *mg_PrintErr;
+   long   *mg_Ticks;
+   Ptr   *mg_ApplLimit;
+   THz   *mg_ApplZone;
+   Ptr   *mg_CurrentA5;
+   Ptr   *mg_CurStackBase;
+   long   *mg_CaretTime;
+   WindowPtr   *mg_CurActivate;
+   char   *mg_HilightMode;
+   GDHandle   *mg_TheGDevice;
+   short   *mg_ResErr;
+   char   *mg_CrsrNew;
+   RGBColor   *mg_HilightRGB;
+   char   *mg_MBState;
+   Point   *mg_MTemp;
+   Point   *mg_Mouse;
+   Point   *mg_RawMouse;
+   char   *mg_FractEnable;
+   WidthTableHandle *mg_WidthTabHandle;
+   short   *mg_TheMenu;
+   ProcPtr   *mg_ResumeProc;
+   short   *mg_SysEvtMask;
+   long   *mg_DoubleTime;
+   THz   *mg_TheZone;
+   Handle   *mg_MenuList;
+   short   *mg_MenuFlash;
+   short   *mg_TEScrpLength;
+   Handle   *mg_TEScrpHandle;
+   Boolean   *mg_ResLoad;
+   short   *mg_PaintWhite; 
+   long     *mg_MenuDisable;
+   WindowPtr    *mg_CurDeactive;
+   short    *mg_KeyThresh;
+   short   *mg_TEScrpHasStyle;
+   Handle    *mg_TEScrpStyleHandle;
+   Handle   *mg_AppParmHandle;
+   short   *mg_AtMenuBottom;
+   short   *mg_TopMenuItem;
+} MG, *pMG, **hMG
+</code></pre>
+  <p>
+   This routine is not available for the Macintosh version of 4th Dimension. If the 4D plug-in calls this routine on Macintosh it simply returns 0L and an error -1 in
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   Usually the 4D plug-in will access this data structure in order to read the value of Macintosh OS global variables. For example, under the Windows platform, while writing a 4D plug-in using Altura's Mac2Win technology, the 4D plug-in may need to know the value of CurDirStore. To accomplish this,  the 4D plug-in calls this routine and reads the field "mg_CurDirStore".
+  </p>
+  <p>
+   There is no way for 4th Dimension to forbid changing one of these values. If the 4D plug-in does so, it is at its own risk. Changing a value of an OS global variable may have effects and/or side effects different than those which are familiar on a Macintosh platform.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Getting the WindowList under MacOS and Windows + Altura Mac2Win:
+  </p>
+  <p>
+  </p>
+  <pre><code>   #include "ASIEXTRN.h"
+   WindowPtr   w;
+   #if VERSIONWIN
+   MG *macGlob;
+   macGlob =  PA_Get4DWinMacOSGlobals();
+   w = (WindowPtr) *macGlob-&gt;mg_WindowList;
+   #endif
+   #if VERSIONMAC
+   w = LMGetWindowList();
+   #endif
+   /* . . . work with the window list . . . */
+   
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   No reference.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_Get4DWinMacOSGlobals
+    </font>
+   </p>
+  </code>
+  returns always
+  <code>
+   eER_NoErr
+  </code>
+  under Windows, and -1 under MacOS
+ </body>
+</html>

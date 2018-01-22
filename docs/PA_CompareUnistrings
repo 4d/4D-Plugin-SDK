@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+
+char    PA_CompareUnistrings( 
+           PA_Unistring* ustr1,
+           PA_Unistring* ustr2,
+           char diacritic,
+           char useWildChar );
+
+</body></html>

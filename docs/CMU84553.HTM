@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_LockResource
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_LockResource
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_LockResource (resfile; kind; resID) → char
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resfile
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      File reference number of the file to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      kind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind (4 Bytes type) of resource to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resID
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Unique resource ID
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 = The resource has been locked. 0 = Already in use
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_LockResource
+    </font>
+   </code>
+   tries to lock the resource of type
+   <code>
+    kind
+   </code>
+   and the ID
+   <code>
+    resID
+   </code>
+   of the file
+   <code>
+    resFile
+   </code>
+   over the network; it returns 1 if successfully locked, and 0 if the resource is already in use by an other client.
+  </p>
+  <p>
+   You should always lock the resource before modifying it so that no one can modify it while you read or modify it. Once a resource is locked, it can not be modified by another process and it can neither be disposed or nor purged from memory.
+  </p>
+  <p>
+   If the resource does not exist or if
+   <code>
+    resFile
+   </code>
+   is an invalid file reference number, the routine does nothing and
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   returns -5 ("Resource not found").
+  </p>
+  <p>
+   It is not necessary to lock the resource if the plug-in only wants to read it.
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   In 4D single-user, the routine always returns 1. It is the plug-in's responsibility to manage multiprocess access in this case.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Lock the resource 'pipf' ID 128.
+  </p>
+  <p>
+  </p>
+  <pre><code>   typedef struct {
+      short   f1;
+      short   f2;
+      long   f3;
+      /* ... */
+   }PLUG_PREFS;
+ 
+   // Lock the resource
+   if( PA_LockResource(resFile, 'pipf', 128))
+   {
+   // Ok, no one can modify it on an other machine
+   // Initialize one structure
+      PLUG_PREFS   h = {1, 2, 3};
+   // Change the resource content
+      PA_SetResource(resFile, 'pipf', 128, (char *) &amp;prefs, sizeof(PLUG_PREFS));
+   //write the resource
+      PA_Write(resFile)
+   // Unlock it
+      PA_Unlockresource(resFile, 'pipf', 128);
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84573.HTM">
+    About the internal resource manager
+   </a>
+   ,
+   <a href="CMU84562.HTM">
+    PA_GetResource
+   </a>
+   ,
+   <a href="CMU84546.HTM">
+    PA_UnlockResource
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

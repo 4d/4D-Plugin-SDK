@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ReceiveDocumentFromServer
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ReceiveDocumentFromServer
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ReceiveDocumentFromServer (docName; data) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      docName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the received file
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      data
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the document data
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Received data size in bytes
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   While running under 4D Client, the routine
+   <code>
+    <font color="#CF0000">
+     PA_ReceiveDocumentFromServer
+    </font>
+   </code>
+   lets the 4D Plug-in read a document located on the server machine.
+  </p>
+  <p>
+   Pass the name of the document to read on the server side in
+   <code>
+    docName
+   </code>
+   .  The 4D plug-in MUST pass the short name of the document NOT the pathname to the document. The document must be located in the same folder/directory than the structure.
+  </p>
+  <p>
+   Pass  a pointer to a buffer that will be filled with the data fork of the document in
+   <code>
+    data
+   </code>
+   .
+  </p>
+  <p>
+   The routine returns the size of received data in bytes.
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  :
+ </body>
+</html>
+<p>
+ This routine is available only with 4D Client. To detect if the 4D plug-in is running on 4D Client, use
+ <code>
+  <a href="CMU84887.HTM">
+   PA_Is4DClient
+  </a>
+ </code>
+</p>
+<p>
+ Depending on default settings or on previous calls to
+ <code>
+  <a href="CMU84817.HTM">
+   PA_UsePStrings
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84816.HTM">
+   PA_UseCStrings
+  </a>
+ </code>
+ ,
+ <code>
+  docName
+ </code>
+ must be a Pascal or an ANSI C string.
+</p>
+<p>
+ After the call a pointer to a memory block holding the document contents is returned in
+ <code>
+  data
+ </code>
+ .
+</p>
+<p>
+ You first call the routine setting data to 0L to get the size of the needed buffer. Then you allocate this buffer and call the routine again.
+</p>
+<b>
+ <p>
+  IMPORTANT NOTE:
+ </p>
+</b>
+<code>
+ <p>
+  <font color="#CF0000">
+   PA_ReceiveDocumentFromServer
+  </font>
+ </p>
+</code>
+or
+<code>
+ <a href="CMU84578.HTM">
+  PA_SendDocumentToServer
+ </a>
+</code>
+deal only with the data fork of a document when used on a Macintosh platform.
+<b>
+ <p>
+  NOTE
+ </p>
+</b>
+:
+<p>
+ Documents stored on a server machine and accessed using
+ <code>
+  <font color="#CF0000">
+   PA_ReceiveDocumentFromServer
+  </font>
+ </code>
+ or
+ <code>
+  <a href="CMU84578.HTM">
+   PA_SendDocumentToServer
+  </a>
+ </code>
+ are sent over the network and must fit into the memory of the workstation. It is therefore a good idea to refrain from using these entry points in small or medium size documents.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Read the document "PrivatePrefs" on the server side
+</p>
+<p>
+</p>
+<pre><code>   char   *theDoc;
+   long   size;
+ 
+   size = PA_ReceiveDocumentFromServer("\pPrivatePrefs", 0L); // Use Pascal string under MacOS
+   if(PA_GetLastErro() == eER_NoEr)
+   {
+      theDoc = malloc(size);
+      if(theDoc)
+      {
+         PA_ReceiveDocumentFromServer("\pPrivatePrefs", theDoc);
+         /* . . . deal with theDoc . . . */
+      // cleanup
+         free(theDoc);
+      }
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84578.HTM">
+  PA_SendDocumentToServer
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

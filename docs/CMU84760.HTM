@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_PutProcessToSleep
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_PutProcessToSleep
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_PutProcessToSleep (pNum; time)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Process number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      time
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Delay expressed in ticks
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_PutProcessToSleep
+    </font>
+   </code>
+   delays the execution of the process whose number is passed in
+   <code>
+    pNum
+   </code>
+   for a number of ticks passed in
+   <code>
+    time
+   </code>
+   .
+  </p>
+  <p>
+   A delayed process can be awaken by
+   <code>
+    <a href="CMU84762.HTM">
+     PA_UnfreezeProcess
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   If the process was already delayed when the call is made, the new delay replaces the remaining time rather than adding to it.
+  </p>
+  <p>
+   This entry point does the same thing than the 4D Command DELAY PROCESS. For more information, refer to the 4th Dimension Language Reference manual.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Generic routine to delay any process. As the User/Custom menus process cannot be delayed using
+   <code>
+    <font color="#CF0000">
+     PA_PutProcessToSleep
+    </font>
+   </code>
+   , we must include a waiting loop in this case.
+  </p>
+  <p>
+  </p>
+  <pre><code>   long MyDelayCurrentProcess(long delayInTicks)
+   {
+      long   currentProcess = PA_GetCurrentProcessNumber();
+      if(currentProcess != 1)
+         PA_PutProcessToSleep(currentProcess, delayInTicks);
+      else
+      {
+         long   start;
+      // GetTheTicks is a routine that returns the ticks count
+      // under both Windows and MacOS
+         start = GetTheTicks();
+         while( (GetTheTicks() - start) &lt; delayInTicks )
+            PA_Yield();
+      }
+   }
+ 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU00323.HTM">
+    DELAY PROCESS
+   </a>
+   ,
+   <a href="CMU84763.HTM">
+    PA_FreezeProcess
+   </a>
+   ,
+   <a href="CMU84762.HTM">
+    PA_UnfreezeProcess
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

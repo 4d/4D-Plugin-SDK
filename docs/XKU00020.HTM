@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84478.HTM">
+      Create and use an external area
+     </a>
+    </b>
+    <li>
+     <b>
+      <a href="CMU84473.HTM">
+       Drag and drop with a plugin area
+      </a>
+     </b>
+     <li>
+      <b>
+       <a href="CMU84491.HTM">
+        PA_AcceptDeselect
+       </a>
+      </b>
+      (params; accept)
+      <li>
+       <b>
+        <a href="CMU84364.HTM">
+         PA_GotoPreviousField
+        </a>
+       </b>
+       (params)
+       <li>
+        <b>
+         <a href="CMU84366.HTM">
+          PA_GotoNextField
+         </a>
+        </b>
+        (params)
+        <li>
+         <b>
+          <a href="CMU84492.HTM">
+           PA_AcceptSelect
+          </a>
+         </b>
+         (params; accept)
+         <li>
+          <b>
+           <a href="CMU84485.HTM">
+            PA_AllowDrop
+           </a>
+          </b>
+          (params; allow)
+          <li>
+           <b>
+            <a href="CMU84471.HTM">
+             PA_CallPluginAreaMethod
+            </a>
+           </b>
+           (params)
+           <li>
+            <b>
+             <a href="CMU84488.HTM">
+              PA_CustomizeDesignMode
+             </a>
+            </b>
+            (params)
+            <li>
+             <b>
+              <a href="CMU84483.HTM">
+               PA_CustomizeDragOver
+              </a>
+             </b>
+             (params)
+             <li>
+              <b>
+               <a href="CMU84472.HTM">
+                PA_DontTakeEvent
+               </a>
+              </b>
+              (params)
+              <li>
+               <b>
+                <a href="CMU84518.HTM">
+                 PA_DragAndDrop
+                </a>
+               </b>
+               (startX; startY; useCustomRect; customRect)
+               <li>
+                <b>
+                 <a href="CMU84480.HTM">
+                  PA_GetAdvancedPropertiesToDispose
+                 </a>
+                </b>
+                (params) → void*
+                <li>
+                 <b>
+                  <a href="CMU84501.HTM">
+                   PA_GetAreaEvent
+                  </a>
+                 </b>
+                 (params) → PA_AreaEvent
+                 <li>
+                  <b>
+                   <a href="CMU84499.HTM">
+                    PA_GetAreaName
+                   </a>
+                  </b>
+                  (params; name)
+                  <li>
+                   <b>
+                    <a href="CMU84500.HTM">
+                     PA_GetAreaRect
+                    </a>
+                   </b>
+                   (params) → PA_Rect
+                   <li>
+                    <b>
+                     <a href="CMU84496.HTM">
+                      PA_GetAreaReference
+                     </a>
+                    </b>
+                    (params) → void*
+                    <li>
+                     <b>
+                      <a href="CMU84338.HTM">
+                       PA_GetPageChange
+                      </a>
+                     </b>
+                     (params; *pageFrom; *pageTo)
+                     <li>
+                      <b>
+                       <a href="CMU84490.HTM">
+                        PA_GetClick
+                       </a>
+                      </b>
+                      (params; x; y)
+                      <li>
+                       <b>
+                        <a href="CMU84486.HTM">
+                         PA_GetDragAndDropInfo
+                        </a>
+                       </b>
+                       (params) → PA_DragAndDropInfo
+                       <li>
+                        <b>
+                         <a href="CMU84476.HTM">
+                          PA_GetDragAndDropKind
+                         </a>
+                        </b>
+                        (dragInfo) → PA_DragKind
+                        <li>
+                         <b>
+                          <a href="CMU84474.HTM">
+                           PA_GetDragAndDropTableField
+                          </a>
+                         </b>
+                         (info; tNum; fNum)
+                         <li>
+                          <b>
+                           <a href="CMU84475.HTM">
+                            PA_GetDragAndDropVariable
+                           </a>
+                          </b>
+                          (info; index) → PA_Variable
+                          <li>
+                           <b>
+                            <a href="CMU84484.HTM">
+                             PA_GetDragPositions
+                            </a>
+                           </b>
+                           (params; rect; x; y)
+                           <li>
+                            <b>
+                             <a href="CMU84489.HTM">
+                              PA_GetKey
+                             </a>
+                            </b>
+                            (params) → char
+                            <li>
+                             <b>
+                              <a href="CMU84498.HTM">
+                               PA_GetPluginProperties
+                              </a>
+                             </b>
+                             (params; props)
+                             <li>
+                              <b>
+                               <a href="CMU84487.HTM">
+                                PA_GetUpdateHDC
+                               </a>
+                              </b>
+                              → long
+                              <li>
+                               <b>
+                                <a href="CMU84339.HTM">
+                                 PA_RequestRedraw
+                                </a>
+                               </b>
+                               (params)
+                               <li>
+                                <b>
+                                 <a href="CMU84494.HTM">
+                                  PA_IsActivated
+                                 </a>
+                                </b>
+                                (params) → char
+                                <li>
+                                 <b>
+                                  <a href="CMU84493.HTM">
+                                   PA_IsDeActivated
+                                  </a>
+                                 </b>
+                                 (params) → char
+                                 <li>
+                                  <b>
+                                   <a href="CMU84481.HTM">
+                                    PA_SetAdvancedProperties
+                                   </a>
+                                  </b>
+                                  (params; data; dataSize)
+                                  <li>
+                                   <b>
+                                    <a href="CMU84356.HTM">
+                                     PA_GetAdvancedProperties
+                                    </a>
+                                   </b>
+                                   (properties; dataSize) → void*
+                                   <li>
+                                    <b>
+                                     <a href="CMU84482.HTM">
+                                      PA_SetAdvancedPropertiesEditable
+                                     </a>
+                                    </b>
+                                    (params; editable)
+                                    <li>
+                                     <b>
+                                      <a href="CMU84495.HTM">
+                                       PA_SetAreaFocusable
+                                      </a>
+                                     </b>
+                                     (params; focusable)
+                                     <li>
+                                      <b>
+                                       <a href="CMU84497.HTM">
+                                        PA_SetAreaReference
+                                       </a>
+                                      </b>
+                                      (params; ref)
+                                      <li>
+                                       <b>
+                                        <a href="CMU84477.HTM">
+                                         PA_SetMenuIcon
+                                        </a>
+                                       </b>
+                                       (params; id)
+                                       <li>
+                                        <b>
+                                         <a href="CMU84361.HTM">
+                                          PA_PublishWebPicture
+                                         </a>
+                                        </b>
+                                        (params; pictureMap)
+                                        <li>
+                                         <b>
+                                          <a href="CMU84360.HTM">
+                                           PA_SendHTML
+                                          </a>
+                                         </b>
+                                         (params; webData; HTMLbuffer; BufferLen)
+                                         <li>
+                                          <b>
+                                           <a href="CMU84358.HTM">
+                                            PA_SendWebPicture
+                                           </a>
+                                          </b>
+                                          (params; webData; picture; len; kind)
+                                          <li>
+                                           <b>
+                                            <a href="CMU84357.HTM">
+                                             PA_GetWebDataToDispose
+                                            </a>
+                                           </b>
+                                           (params) → void*
+                                          </li>
+                                         </li>
+                                        </li>
+                                       </li>
+                                      </li>
+                                     </li>
+                                    </li>
+                                   </li>
+                                  </li>
+                                 </li>
+                                </li>
+                               </li>
+                              </li>
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+ </body>
+</html>

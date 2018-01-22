@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="4DPlugin.cpp" />
+    <ClCompile Include="4D Plugin API\4DPluginAPI.c">
+      <Filter>SDK</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="4DPlugin.h" />
+    <ClInclude Include="4D Plugin API\4DPluginAPI.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\EntryPoints.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\Flags.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\PrivateTypes.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="4D Plugin API\PublicTypes.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sample.4dbase\Plugins\4D Plugin.bundle\Contents\manifest.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="4D Plugin API\4DPluginAPI.def">
+      <Filter>SDK</Filter>
+    </None>
+    <None Include="sample.4dbase\Plugins\4D Plugin.bundle\Contents\Resources\constants.xlf">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{34f42a71-d624-457e-bc29-3dd676eed0df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK">
+      <UniqueIdentifier>{7ec0b26f-efd0-4b46-a6e2-7c3c42368a9d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

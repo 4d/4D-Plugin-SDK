@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// those functions are usefull to pass parameters to 4D Commands,
+   using PA_ExecuteCommandByID
+
+   // pass 0 to table to pass only the field.
+   //
+   void PA_SetTableFieldVariable (
+       PA_Variable* variable,
+       short table,
+       short field );		
+</body></html>

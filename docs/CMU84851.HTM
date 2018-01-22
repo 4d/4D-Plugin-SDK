@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   4th Dimension field types:
+  </p>
+  <pre><code>typedef enum
+{
+   eFK_InvalidFieldKind   = -1,
+   eFK_AlphaField   = 0,   //  Alphanumeric field (from 2 to 80 characters)
+   eFK_RealField   = 1,   //  Numeric field (Double or Extended value)
+   eFK_TextField   = 2,   //  Text field (up to 32000 characters)
+   eFK_PictureField   = 3,   //  Picture field (virtually any block of data)
+   eFK_DateField   = 4,   //  Date field 
+   eFK_BooleanField   = 6,   //  Boolean field
+   eFK_SubfileField   = 7,   //  Subfile field
+   eFK_IntegerField   = 8,   //  Integer field (-32768..32767)
+   eFK_LongintField   = 9,   //  Long Integer field (-2^31..(2^31)-1)
+   eFK_TimeField   = 11,   // Time field
+   eFK_BlobField   = 30   // Blob field
+} PA_FieldKind;</code></pre>
+ </body>
+</html>

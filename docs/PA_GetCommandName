@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// ---------------------------------------------------------------
+// 4D Application Methods and functions
+// ---------------------------------------------------------------
+//
+
+// use same index as the "command name" 4D command.
+//
+void    PA_GetCommandName( 
+               long index, 
+               PA_Unichar* commandName );
+//
+
+</body></html>

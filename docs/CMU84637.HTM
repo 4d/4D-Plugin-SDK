@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetBlobField
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetBlobField
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetBlobField (tNum; fNum; blob) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number of the field to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      blob
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer to the BLOB data
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      BLOB size in bytes
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetBlobField
+    </font>
+   </code>
+   puts the content of the BLOB field number
+   <code>
+    fNum
+   </code>
+   of the current record of the table number
+   <code>
+    tNum
+   </code>
+   , in the data pointed to by
+   <code>
+    blob
+   </code>
+   , and returns its size in bytes.
+  </p>
+  <p>
+   If the field is not a BLOB field, the routine leaves
+   <code>
+    blob
+   </code>
+   unchanged, returns 0 and an error code in
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   If BLOB size is unknown, call the function a first time with
+   <code>
+    blob
+   </code>
+   equal to zero. The returned value will be the size of the needed buffer. Allocate the buffer and call the function again with the correct buffer.
+  </p>
+  <code>
+   <p>
+    blob
+   </p>
+  </code>
+  is a copy of the original, you can manipulate it and dispose of it. If the BLOB is large, you can get the
+  <code>
+   eER_NotEnoughMemory
+  </code>
+  error. You can get a handle to the BLOB simply by calling
+  <code>
+   PA_GetBlobHandleField.
+  </code>
+ </body>
+</html>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Getting a BLOB field content:
+</p>
+<p>
+</p>
+<pre><code>   char   *theBlob;
+   long   blobSize;
+ 
+   // First call the routine with a null pointer to get the BLOB size
+      blobSize = PA_GetBlobField( tNum, fNum, 0 );
+   // Then allocate the buffer
+      theBlob = malloc( blobSize );
+   // If it is ok, get the BLOB
+      if( theBlob )
+      {
+         blobSize = PA_GetBlobField( tNum, fNum, theBlob );
+      // Work with it
+         /* . . . */
+      // Cleanup
+         free( theBlob );
+      }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84629.HTM">
+  PA_GetBlobHandleField
+ </a>
+ ,
+ <a href="CMU84625.HTM">
+  PA_SetBlobField
+ </a>
+ ,
+ <a href="CMU84617.HTM">
+  PA_SetBlobHandleField
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred (
+ <code>
+  eER_InvalidFileNumber
+ </code>
+ ,
+ <code>
+  eER_InvalidFieldNumber
+ </code>
+ , etc.)
+</p>

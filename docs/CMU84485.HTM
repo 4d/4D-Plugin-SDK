@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_AllowDrop
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_AllowDrop
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_AllowDrop (params; allow)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      allow
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      1 = Allow the drop, 0 = Disallow it
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_AllowDrop
+    </font>
+   </code>
+   tells 4th Dimension if the area accepts the object being dragged over it. Set
+   <code>
+    allow
+   </code>
+   to 1 if the area accepts the object, otherwise, set it to 0.
+  </p>
+  <p>
+   The area usually calls
+   <code>
+    <a href="CMU84486.HTM">
+     PA_GetDragAndDropInfo
+    </a>
+   </code>
+   to look at the object being dragged before using this routine, especially to see if the area can accept it.
+  </p>
+  <p>
+   This routine can be called only at
+   <code>
+    eAE_AllowDrop
+   </code>
+   event. If it is not called for this event, it does nothing and
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   returns
+   <code>
+    eER_BadEventCall
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    NOTE
+   </p>
+  </b>
+  <p>
+   The routines "Drag and Drop" are internal to 4th Dimension. The developer cannot use them with other applications.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See the sample in
+   <code>
+    Drag and drop with a plug-in area
+   </code>
+   and the example in
+   <code>
+    <a href="CMU84486.HTM">
+     PA_GetDragAndDropInfo
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84473.HTM">
+    Drag and drop with a plugin area
+   </a>
+   ,
+   <a href="CMU84483.HTM">
+    PA_CustomizeDragOver
+   </a>
+   ,
+   <a href="CMU84486.HTM">
+    PA_GetDragAndDropInfo
+   </a>
+   ,
+   <a href="CMU84484.HTM">
+    PA_GetDragPositions
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (
+   <code>
+    eER_BadEventCall
+   </code>
+   )
+  </p>
+ </body>
+</html>

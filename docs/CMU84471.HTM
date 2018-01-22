@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CallPluginAreaMethod
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CallPluginAreaMethod
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CallPluginAreaMethod (params)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      params
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_PluginParameters
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters received in PluginMain
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_CallPluginAreaMethod
+    </font>
+   </code>
+   tells 4D to execute the area method object if its event
+   <code>
+    On Plug in Area
+   </code>
+   is checked.
+  </p>
+  <p>
+   This routine is available only if the current event is of type
+   <code>
+    eAE_MouseDown
+   </code>
+   ,
+   <code>
+    eAE_KeyDown
+   </code>
+   , or
+   <code>
+    eAE_Idle
+   </code>
+   . All other events are ignored and
+   <code>
+    <font color="#CF0000">
+     PA_CallPluginAreaMethod
+    </font>
+   </code>
+   returns
+   <code>
+    eAE_BadEventCall
+   </code>
+   in
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   As an example, if the area event "On mouse down" is unchecked, the object method could still be executed at mouse down if:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="7%">
+     </td>
+     <td align="LEFT" valign="TOP" width="93%">
+      - the event
+      <code>
+       On Plug in Area
+      </code>
+      is checked,
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="7%">
+     </td>
+     <td align="LEFT" valign="TOP" width="93%">
+      - 4D code is entered for this event in the object method,
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="7%">
+     </td>
+     <td align="LEFT" valign="TOP" width="93%">
+      - the area calls
+      <code>
+       PA_CallPluginAreaMethod
+      </code>
+      when it receives a
+      <code>
+       eAE_MouseDown
+      </code>
+      Event.
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   The area has only the
+   <code>
+    <u>
+     On Plug in Area
+    </u>
+   </code>
+  </p>
+ </body>
+</html>
+event active, and its code is in 4D:
+<pre><code>   <b>If</b> (<b><a href="CMU00388.HTM">Form event</a></b> = <u>On Plug in Area</u>)
+      <b><a href="CMU00151.HTM">BEEP</a></b>  
+   <b>End if
+</b></code></pre>
+<p>
+ The code of the area contains:
+</p>
+<pre><code>   void MyArea (PA_PluginParameters params)
+   {
+   /* ... usual dispatch of the event. ... */
+ 
+      case eAE_MouseDown:
+         PA_CallPluginAreaMethod (params);
+         break;
+ 
+   /* ... usual dispatch of the event. ... */
+   }
+ 
+</code></pre>
+<p>
+ With this code, the method object is called and 4D beeps when the user clicks in the area.
+</p>

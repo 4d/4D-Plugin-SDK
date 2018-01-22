@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Yield
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Yield
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Yield
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" colspan="4" valign="TOP">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Yield
+    </font>
+   </code>
+   tells the 4D scheduler to execute one time-slice of all other running processes if one 60 th of a second has elapsed since the last scheduler execution cycle.
+  </p>
+  <code>
+   <p>
+    <font color="#CF0000">
+     PA_Yield
+    </font>
+   </p>
+  </code>
+  MUST be called within any 4D plug-in looping structure which is known will not give back the control to the 4D scheduler if the entry point is not called. If this is NOT done all other processes will not execute for the duration of the loop.
+ </body>
+</html>
+<p>
+ This is like the
+ <code>
+  <a href="CMU00311.HTM">
+   IDLE
+  </a>
+ </code>
+ 4th Dimension command.
+</p>
+<p>
+ Some examples:
+</p>
+<p>
+ · A 4D Extension browses a selection of records using
+ <code>
+  <a href="CMU84885.HTM">
+   PA_NextRecord
+  </a>
+ </code>
+ , or parses a document on disk, or manipulates a large amount of private data. In this case calling
+ <code>
+  <font color="#CF0000">
+   PA_Yield
+  </font>
+ </code>
+ allows the execution of the other processes while processing a time-consuming operation. In this case not calling
+ <code>
+  <font color="#CF0000">
+   PA_Yield
+  </font>
+ </code>
+ would give the user the feeling that the program is "frozen" because other processes would not be able to answer to the events. For obvious reasons this is not a desirable feature.
+</p>
+<p>
+ · A 4D Plug-in displays a modal dialog box using the API's Dialogs routines. A call to
+ <code>
+  <font color="#CF0000">
+   PA_Yield
+  </font>
+ </code>
+ is not necessary since the dialog routines include a call to the 4D scheduler.
+</p>
+<p>
+ Because calling
+ <code>
+  <font color="#CF0000">
+   PA_Yield
+  </font>
+ </code>
+ potentially allows the execution of the other processes, concurrent access to interprocess objects must be taken into account. If for example
+ <code>
+  <font color="#CF0000">
+   PA_Yield
+  </font>
+ </code>
+ is called while performing a time-consuming browsing operation on an interprocess array it is possible that another process might access this array in the middle of the operation.
+</p>
+<p>
+ To handle this case two solutions can be adopted:
+</p>
+<p>
+ · Make the operation "atomic" by not calling
+ <code>
+  <font color="#CF0000">
+   PA_Yield
+  </font>
+ </code>
+ .
+</p>
+<p>
+ · Document that a call to the 4D Extension routine applied to an interprocess object must be protected at the 4D Language level by a local semaphore.
+</p>
+<p>
+ The second solution is preferable. The execution of the 4D Environment is not "stopped" and the user of 4D plug-in (potentially a 4D developer) is allowed more freedom with respect to how the particular situation is handled.
+</p>
+<b>
+ <p>
+  Examples
+ </p>
+</b>
+<p>
+ (1) Browsing a selection of records. A call to
+ <code>
+  <font color="#CF0000">
+   PA_Yield
+  </font>
+ </code>
+ is necessary.
+</p>
+<p>
+</p>
+<pre><code>   void DoSomethingWithTheSelection(short tNum)
+   {
+      do
+      {
+         PA_Yield(); // Give time to other processes
+         /* . . . do something with the record . . .*/
+         PA_NextRecord(tNum);
+      }while(! PA_EndSelection(tNum));
+   }
+</code></pre>
+<p>
+ (2) A long internal loop:
+</p>
+<p>
+</p>
+<pre><code>   void ParseBigData (char *dataPtr, long dataSize)
+   {
+      long   i ;
+ 
+      for(i = 0; i &lt; dataSize; i++)
+      {
+         DoThis(*dataPtr++);
+         DoThat(*dataPtr++);
+         PA_Yield(); // time to breath a bit
+      }
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84754.HTM">
+  PA_YieldAbsolute
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+always returns
+<code>
+ eER_NoErr
+</code>

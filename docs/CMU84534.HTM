@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetRegisteredUserCompany
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetRegisteredUserCompany
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetRegisteredUserCompany (company)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      company
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Registered user company
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetRegisteredUserCompany
+    </font>
+   </code>
+   fills the string buffer pointed to by
+   <code>
+    company
+   </code>
+   with the registered company name. This information can then be used for display purposes, or can be included in a serialization scheme with
+   <code>
+    <a href="CMU84532.HTM">
+     PA_GetSerialKey
+    </a>
+   </code>
+   and
+   <code>
+    <a href="CMU84533.HTM">
+     PA_GetRegisteredUserName
+    </a>
+   </code>
+   .
+  </p>
+  <code>
+   <p>
+    company
+   </p>
+  </code>
+  is a buffer of max 255 characters (declared as char[256] for the length byte of a Pascal string or the 0 last char of C string)
+ </body>
+</html>
+<p>
+ Depending on default settings or on previous calls to
+ <code>
+  <a href="CMU84817.HTM">
+   PA_UsePStrings
+  </a>
+ </code>
+ or
+ <code>
+  <a href="CMU84816.HTM">
+   PA_UseCStrings
+  </a>
+ </code>
+ ,
+ <code>
+  company
+ </code>
+ will be a Pascal or an ANSI C string.
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Get user and company name.
+</p>
+<p>
+</p>
+<pre><code>   void GetUserAndCompany(char *user, char *company)
+   {
+      if(user)
+         PA_GetRegisteredUserName(user);
+      if(company)
+         PA_GetRegisteredUserCompany(company);
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84533.HTM">
+  PA_GetRegisteredUserName
+ </a>
+ ,
+ <a href="CMU84532.HTM">
+  PA_GetSerialKey
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<code>
+ <p>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </p>
+</code>
+always returns
+<code>
+ eER_NoErr
+</code>

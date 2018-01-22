@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <b>
+  </b>
+  <p>
+   Developers know how painful the creation/management of dialogs can be using an OS API -- for either MacOS or Windows.
+  </p>
+  <p>
+   4D Plug-in API gives Plug-in developers the ability to use a dialog created with the 4D Form Editor. The dialog can use any 4D object and can have object and form methods. Changing the state of an object, its color, its visibility, etc. is done through the 4D Language, a language much easier than a native Language. The API lets the Plug-in get the value of any variable used in the dialog at any time. It can set the values of objects, move them, etc. within its own C/C++ code, even if it is probably much easier to write this within the form itself using the 4D Language.
+  </p>
+  <p>
+   Beyond this facility to create a dialog, an other advantage is that by doing dialogs this way, the Plug-in developer can take advantage of the 4D virtual platform interface. The dialogs will always look nice on each platform.
+  </p>
+  <p>
+   4D Dialogs within a plug-in can be called anywhere from plug-in code, but a more usual usage is probably from External Areas, in the Advanced Properties dialog, or at Runtime for setting preferences or properties of an area.
+  </p>
+  <p>
+   To open and manage a dialog from a plug-in, the developer has to follow those 3 steps :
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="6%">
+     </td>
+     <td align="LEFT" valign="TOP" width="94%">
+      - Create and open the dialog (
+      <code>
+       PA_NewDialog
+      </code>
+      ,
+      <code>
+       PA_OpenDialog
+      </code>
+      )
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="6%">
+     </td>
+     <td align="LEFT" valign="TOP" width="94%">
+      - Then, in a loop, call
+      <code>
+       PA_ModalDialog
+      </code>
+      , until the user cancels or validates the dialog. The Plug-in can interact with the user from the 4D Dialog itself, or by using some of this API's routines (
+      <code>
+       PA_Dial4DSetLong
+      </code>
+      ,
+      <code>
+       PA_Dial4DGetDate
+      </code>
+      )
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="6%">
+     </td>
+     <td align="LEFT" valign="TOP" width="94%">
+      - Finally, the plug-in closes the dialog (
+      <code>
+       PA_CloseDialog
+      </code>
+      ).
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <u>
+    <p>
+     Sample use
+    </p>
+   </u>
+  </b>
+ </body>
+</html>
+<p>
+ This screen shot shows a sample form that uses 2 buttons ("OK" and "Cancel") with automatic action, a static prompt string, and 3 radio buttons 3D (r1 to r3) :
+</p>
+<p>
+ <img src="wikiImages/U8446001.gif"/>
+</p>
+<p>
+ The form is named "TextAlignment" and saved in the plug-in resource file (we'll learn how to do this later).
+</p>
+<p>
+ The C source code to handle this dialog looks as follows:
+</p>
+<pre><code>// Return 0, 1, or 2 for the text alignment of a private data.
+// -1 means no change (user cancelled the dialog)
+short DoTextAlignmentDialog ()
+{
+   PA_Dialog      dialog;
+   char      lastVarName[256];
+   char      okOrCancel;
+   char      alignment = -1; // No change as default
+ 
+// Create a dialog context
+   dialog = PA_NewDialog();
+// Open the saved dialog, without close box
+   PA_OpenDialog( dialog, "TextAlignement", 0 );
+// Loop until the user validates/cancels the dialog
+   do {
+      okOrCancel = PA_ModalDialog( dialog, lastVarName );
+   } while ( okOrCancel == 0 );
+ 
+   // if user validates the dialog, read the picture
+   // radio button variables to get the selected value
+   if ( okOrCancel == 1 )
+   {
+      // Look which radio button is 1
+      if ( PA_Dial4DGetLong( dialog, "r1" ) == 1 )
+         alignment = 0; 
+      else if ( PA_ Dial4DGetLong ( dialog, "r2" ) == 1 )
+         alignment = 1; 
+      else if ( PA_ Dial4DGetLong ( dialog, "r3" ) == 1 )
+         alignment = 2; 
+   }
+// At least, close the dialog
+   PA_CloseDialog( dialog );
+// return the correct alignment
+   return alignment;
+}
+ 
+</code></pre>
+<p>
+ Few lines of code are needed to handle this dialog. The same simple dialog in native Language and OS API would have take considerable time to write and even longer if the plug-in is cross platform.
+</p>
+<b>
+ <u>
+  <p>
+   In version v14 and below, Save dialogs as 'FO4D' resources:  ctrl - Action
+  </p>
+ </u>
+</b>
+<p>
+ Saving dialogs as "FO4D" resources is a basic operation:
+ <u>
+  in Forms tab press ctrl+Action button, then choose "Generate 'Dial4D Resources' folder" item
+ </u>
+ .
+</p>
+<p>
+ 4D generates one resource file per table in the structure folder. Those files are ResEdit files under MacOS and .RSR files under Windows.
+</p>
+<p>
+ Each resource fork contains as many 'FO4D' resources as the table has forms, plus the linked 'CC4D' (which contain the form/object methods), plus some 'STL#' resources that handle the styles used in the forms.
+</p>
+<p>
+ At least, each 'FO4D' resource have the name of the form. This is important since this name is used by the
+ <code>
+  <a href="CMU84456.HTM">
+   PA_OpenDialog
+  </a>
+ </code>
+ routine.
+</p>
+<b>
+ <p>
+  IMPORTANT NOTES
+ </p>
+</b>
+<p>
+ As 4D generates one file per table, the developer should create one structure and build  dialogs in the first table. Doing this avoid the creation by 4D of multiples files containing multiples FO4D resources.
+</p>
+<p>
+ Once the dialog has been saved on disk, the developer can move the dialog resources to the Plug-in resource fork. This is a basic operation on Macintosh, using ResEdit.
+</p>
+<b>
+ <u>
+  <p>
+   In future version (v14R5 and above), Save dialogs in plugin resource
+  </p>
+ </u>
+</b>
+<p>
+ You create a 4D Database with your dialogs, named by example dials.4dbase.
+</p>
+<p>
+ <u>
+  Without PluginWizard
+ </u>
+</p>
+<p>
+ Save dials.4dbase in "Plugin.Bundle/Resources/Internal Components”. PA_OpenDialog will find any of your 4D dialog in any of the databases located in the "Resources/Internal Components” folder.
+</p>
+<p>
+ <u>
+  With PluginWizard
+ </u>
+</p>
+<p>
+ Check the checkbox “Use 4D Component (Dials) and select your dials.4dbase. The PluginWizard will copy dials.4dbase in "Plugin.Bundle/Resources/Internal Components" of the target directory/Sample.4dbase/plugins.
+</p>
+<pre><code><b> 
+<img src="wikiImages/U8446002.jpg"/> 
+ 
+</b></code></pre>
+<u>
+ <p>
+  Quick overview of the 4D Dialog routines
+ </p>
+</u>
+<p>
+ Main routines used in the implementation of a 4D dialog:
+</p>
+<code>
+ <p>
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+   <tr>
+    <td align="LEFT" valign="TOP" width="6%">
+    </td>
+    <td align="LEFT" valign="TOP" width="94%">
+     <code>
+      - PA_NewDialog
+     </code>
+     creates a 4D context (discussed below),
+    </td>
+   </tr>
+   <tr>
+    <td align="LEFT" valign="TOP" width="6%">
+    </td>
+    <td align="LEFT" valign="TOP" width="94%">
+     <code>
+      - PA_OpenDialog
+     </code>
+     opens and uses a dialog in plugin resource,
+    </td>
+   </tr>
+   <tr>
+    <td align="LEFT" valign="TOP" width="6%">
+    </td>
+    <td align="LEFT" valign="TOP" width="94%">
+     <code>
+      - PA_ModalDialog
+     </code>
+     provides information on the last variable used and the validation cycle,
+    </td>
+   </tr>
+   <tr>
+    <td align="LEFT" valign="TOP" width="6%">
+    </td>
+    <td align="LEFT" valign="TOP" width="94%">
+     <code>
+      - PA_Dial4DSet
+     </code>
+     /
+     <code>
+      Getxxx
+     </code>
+     let the Plug-in retrieve or modify object values
+    </td>
+   </tr>
+   <tr>
+    <td align="LEFT" valign="TOP" width="6%">
+    </td>
+    <td align="LEFT" valign="TOP" width="94%">
+     <code>
+      -
+     </code>
+     Some routines let the developer create variables on the fly, build arrays or hierarchical list of tables/fields names, etc.
+    </td>
+   </tr>
+   <tr>
+    <td align="LEFT" valign="TOP" width="6%">
+    </td>
+    <td align="LEFT" valign="TOP" width="94%">
+     <code>
+      - PA_CloseDialog
+     </code>
+     closes the dialog and frees the memory used.
+    </td>
+   </tr>
+  </table>
+ </p>
+</code>
+<u>
+ <p>
+  PA_NewDialog and the "Dialog context"
+ </p>
+</u>
+<p>
+ We have seen that
+ <code>
+  <a href="CMU84457.HTM">
+   PA_NewDialog
+  </a>
+ </code>
+ creates a "4D context". Such a context is a kind of environment given by 4D to the dialog. In this environment, 4D deals with the dialog in interpreted mode so the plug-in can use this dialog even in a compiled database. Thus, the plug-in can use variables (and even create variables on the fly) that are unknown to the Compiler.
+</p>
+<p>
+ As a result,
+ <u>
+  a Plug-in can't directly access to any other variable while using a 4D Dialog
+ </u>
+ . If the plug-in needs to access other process variables, it must call
+ <code>
+  <a href="CMU84443.HTM">
+   PA_Dial4DsaveVariables
+  </a>
+ </code>
+ which switch from dialog variables to current process variables, then it uses the process variables and call
+ <code>
+  <a href="CMU84442.HTM">
+   PA_Dial4DrestoreVariables
+  </a>
+ </code>
+ , which switch from current process variables to dialog variables.
+</p>
+<p>
+ At least, in the object/form methods of the dialog itself, never call any other variables than the one used in the dialog.
+</p>
+<u>
+ <p>
+  PA_OpenDialog
+ </p>
+ <code>
+ </code>
+</u>
+<p>
+ <a href="CMU84456.HTM">
+  PA_OpenDialog
+ </a>
+</p>
+opens and display the dialog stored in plugin resource. 4D does almost everything for the developer: create the window at the correct size, give it the correct kind,
+<u>
+ <p>
+  PA_ModalDialog
+ </p>
+</u>
+<p>
+ Once the dialog is opened, the plug-in loops, calling
+ <code>
+  <a href="CMU84455.HTM">
+   PA_ModalDialog
+  </a>
+ </code>
+ . This routine returns 0 while the dialog is not validated or cancelled. Each time an object is modified or hit, the routine returns the name of the modified object.
+</p>
+<u>
+ <p>
+  Get/Set variables
+ </p>
+</u>
+<p>
+ During the loop time, the Plug-in can do a lot of things, such as set/get values of variables. There are plenty of accessors for that:
+ <code>
+  <a href="CMU84450.HTM">
+   PA_Dial4DGetLong
+  </a>
+ </code>
+ ,
+ <code>
+  <a href="CMU84449.HTM">
+   PA_Dial4DSetLong
+  </a>
+ </code>
+ ,
+ <code>
+  <a href="CMU84427.HTM">
+   PA_Dial4DGetDate
+  </a>
+ </code>
+ ,
+ <code>
+  <a href="CMU84428.HTM">
+   PA_Dial4DSetDate
+  </a>
+ </code>
+ . To make things easier, 4D takes care of the type casting when necessary (i.e. calling
+ <code>
+  <a href="CMU84450.HTM">
+   PA_Dial4DGetLong
+  </a>
+ </code>
+ with a 4D real variable).
+</p>
+<p>
+ Some routines deal with arrays of any kind, letting the plug-in create an array, get/set values in an array, resize the array, find in the array
+</p>
+<b>
+ <p>
+  NOTE
+ </p>
+</b>
+<p>
+ When variables are modified, the modification must be surrounded by calls to
+ <code>
+  <a href="CMU84432.HTM">
+   PA_Dial4DBeginUpdateVariables
+  </a>
+ </code>
+ and
+ <code>
+  <a href="CMU84431.HTM">
+   PA_Dial4DEndUpdateVariables
+  </a>
+ </code>
+ . This tells 4D to redraw the modified variables.
+</p>
+<u>
+ <p>
+  Utility routines
+ </p>
+</u>
+<p>
+ Some routines give the Plug-in tools to:
+</p>
+<p>
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td align="LEFT" valign="TOP" width="6%">
+   </td>
+   <td align="LEFT" valign="TOP" width="94%">
+    - build arrays from resources, from text (
+    <code>
+     PA_Dial4DSetArrayTextFromResource
+    </code>
+    ,
+    <code>
+     PA_Dial4DSetArrayTextFromTTR
+    </code>
+    ,
+    <code>
+     PA_Dial4DSetArrayPictFromResources
+    </code>
+    )
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="6%">
+   </td>
+   <td align="LEFT" valign="TOP" width="94%">
+    - Find in arrays (
+    <code>
+     PA_Dial4DFindArrayLong
+    </code>
+    ),
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="6%">
+   </td>
+   <td align="LEFT" valign="TOP" width="94%">
+    - build tables/fields arrays or hierarchical list (
+    <code>
+     PA_Dial4DNewTableFieldHList
+    </code>
+    ,
+    <code>
+     PA_Dial4DSetArrayTextFromTableList
+    </code>
+    ),
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="6%">
+   </td>
+   <td align="LEFT" valign="TOP" width="94%">
+    - change current page (
+    <code>
+     PA_Dial4DGotoPage
+    </code>
+    ,
+    <code>
+     PA_Dial4DGetCurrentPage
+    </code>
+    ),
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="6%">
+   </td>
+   <td align="LEFT" valign="TOP" width="94%">
+    - use External areas (
+    <code>
+     PA_Dial4DsetAreaHandler
+    </code>
+    ),
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="6%">
+   </td>
+   <td align="LEFT" valign="TOP" width="94%">
+    - Change properties of objects (
+    <code>
+     PA_Dial4DsetMin
+    </code>
+    ,
+    <code>
+     PA_Dial4DsetEnterable
+    </code>
+    ,
+    <code>
+     PA_Dial4DsetObjectTitle
+    </code>
+    ,
+    <code>
+     PA_Dial4DshowHideObject
+    </code>
+    ).
+   </td>
+  </tr>
+ </table>
+</p>
+<u>
+ <p>
+  PA_CloseDialog
+ </p>
+</u>
+disposes of the dialog and of all linked objects.
+<b>
+ <u>
+  <p>
+   Conclusion
+  </p>
+ </u>
+</b>
+<p>
+ Using 4D Dialogs saves development time and preserves the "persistence of user interface".
+</p>
+<p>
+ A 4D Dialog evolves in its own context using its own variables that can be created on the fly. The easiest way to handle such dialog is to write the code using as much as possible the 4D Language, in object/form methods.
+</p>

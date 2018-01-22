@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+// returns a NULL terminated UTF16 string
+// you should NOT modify the content of the given string
+// use PA_SetUnistring to modify the content of the string
+
+
+PA_Unichar*		PA_GetUnistring( PA_Unistring* ustr );
+
+
+</body></html>

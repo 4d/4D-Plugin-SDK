@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_UseRealStructure
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_UseRealStructure
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_UseRealStructure
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      This command does not require any parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The command
+   <code>
+    <font color="#CF0000">
+     PA_UseRealStructure
+    </font>
+   </code>
+   tells 4D to henceforth use real structure references in all pending API calls .
+  </p>
+  <p>
+   By default, real structure is used.
+  </p>
+  <p>
+   Note that this affects many API routines, in fact all routines using tables/fields numbers or names.
+  </p>
+  <p>
+   To know if the virtual structure mode is supported by 4D, you call
+   <code>
+    <a href="CMU84844.HTM">
+     PA_VirtualStructureDefined
+    </a>
+   </code>
+   . If it returns 1 then APIs of the Virtual structure theme can be uses safely, else they will not work or will return an error code.
+  </p>
+  <p>
+   The virtual structure is used when the 4D commands
+   <code>
+    <a href="CMU00601.HTM">
+     SET TABLE TITLES
+    </a>
+   </code>
+   and
+   <code>
+    <a href="CMU00602.HTM">
+     SET FIELD TITLES
+    </a>
+   </code>
+   are called.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See
+   <code>
+    <a href="CMU84846.HTM">
+     PA_UseVirtualStructure
+    </a>
+   </code>
+   for an example of use.
+  </p>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84846.HTM">
+    PA_UseVirtualStructure
+   </a>
+   .
+  </p>
+ </body>
+</html>

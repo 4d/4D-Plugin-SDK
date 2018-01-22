@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// ---------------------------------------------------------------
+// pictures manipulations 
+// ---------------------------------------------------------------
+
+// creates a CGImageRef on Mac, and a gdiplus::bitmap* on Windows
+//
+
+void*        PA_CreateNativePictureForScreen( PA_Picture picture );	
+
+</body></html>

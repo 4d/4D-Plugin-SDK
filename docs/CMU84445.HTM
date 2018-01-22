@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_Dial4DSetString
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_Dial4DSetString
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_Dial4DSetString (dialog; variable; newValue)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dialog
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Dial4D
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Dialog reference
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      variable
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Name of the variable to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      newValue
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      New value of the variable
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_Dial4DSetString
+    </font>
+   </code>
+   sets the value of a variable whose name is
+   <code>
+    variable
+   </code>
+   to the value in
+   <code>
+    newValue
+   </code>
+   . This command is preferred to the
+   <code>
+    <a href="CMU84451.HTM">
+     PA_Dial4DSetVariable
+    </a>
+   </code>
+   call because it handles the type conversion for you.
+  </p>
+  <p>
+   By default,
+   <code>
+    variable
+   </code>
+   and
+   <code>
+    varValue
+   </code>
+   are null terminated C strings. If you have previously called
+   <code>
+    PA_UsePStrings,
+   </code>
+   the command will expect Pascal string.
+  </p>
+  <p>
+   By default,
+   <code>
+    variable
+   </code>
+   and
+   <code>
+    varValue
+   </code>
+   use Macintosh characters set on Macintosh, and ANSI characters set under Windows. You can call
+   <code>
+    <a href="CMU84815.HTM">
+     PA_UseMacCharacters
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84814.HTM">
+     PA_UseAnsiCharacters
+    </a>
+   </code>
+   to specifically use Macintosh or ANSI characters.
+  </p>
+  <p>
+   In order that 4th Dimension knows it must redraw the dialog, all
+   <code>
+    PA_Dial4DSetxxx
+   </code>
+   routines must be squared by calls to
+   <code>
+    <a href="CMU84432.HTM">
+     PA_Dial4DBeginUpdateVariables
+    </a>
+   </code>
+   and
+   <code>
+    <a href="CMU84431.HTM">
+     PA_Dial4DEndUpdateVariables
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Set a default value to a string variable, if it was empty.
+  </p>
+  <p>
+  </p>
+  <pre><code>   /* . . . previous code . . . */
+   if ( Dial_IsEmptyString( dial, "aVariable" ) ) // see example in PA_Dial4DGetString
+   {
+      PA_DialBeginUpdateVariables( dial );
+      PA_Dial4DSetString( dial, "aVariable", "the default value" );
+      PA_Dial4DEndUpdateVariables( dial );
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84446.HTM">
+    PA_Dial4DGetString
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   None.
+  </p>
+ </body>
+</html>

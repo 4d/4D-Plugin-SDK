@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ExecuteMethodByID
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ExecuteMethodByID
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ExecuteMethodByID (id; parameters; paramCount) → PA_Variable
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      id
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      ID of the method to execute
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      parameters
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Parameters of the method
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      paramCount
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Count of parameters in parameters
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Result if the method is a function
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteMethodByID
+    </font>
+   </code>
+   executes the 4D global Method of function whose unique ID number is passed in
+   <code>
+    id
+   </code>
+   .
+  </p>
+  <p>
+   A 4D plug-in obtains the unique ID number of a 4th Dimension global Method or function using
+   <code>
+    <a href="CMU84730.HTM">
+     PA_GetMethodID
+    </a>
+   </code>
+   .
+  </p>
+  <p>
+   Contrary to the routines
+   <code>
+    <a href="CMU84738.HTM">
+     PA_ExecuteMethod
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84737.HTM">
+     PA_ExecuteFunction
+    </a>
+   </code>
+   ,
+   <code>
+    <a href="CMU84732.HTM">
+     PA_ExecuteTokens
+    </a>
+   </code>
+   and
+   <code>
+    <a href="CMU84731.HTM">
+     PA_ExecuteTokensAsFunction
+    </a>
+   </code>
+   ,
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteMethodByID
+    </font>
+   </code>
+   allows the 4D plug-in to only call a specific type of 4th Dimension global Method or function present in the database.
+  </p>
+  <p>
+   A 4D plug-in cannot execute a 4th Dimension statement nor evaluate a 4th Dimension expression using this entry point.
+  </p>
+  <p>
+   On the other hand,
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteMethodByID
+    </font>
+   </code>
+   allows the 4D plug-in to skip both the tokenization and interpretation phases when the 4D plug-in calls the 4th Dimension global Method or function.
+  </p>
+  <p>
+   The 4D plug-in does not have to build a statement or expression text to be tokenized, executed, or evaluated. The 4D plug-in calls the Method or the function using its unique ID number and specifing its parameters the fashion explained below.
+  </p>
+  <p>
+   The advantage of using this routine is speed optimization, especially when used in a compiled database. The call to the 4th Dimension global method or function is made at the same speed as native code execution (no tokenization nor interpretation is involved.)
+  </p>
+  <p>
+   The 4D plug-in specifies the number of parameters to be passed to the method or function in
+   <code>
+    paramCount
+   </code>
+   .
+  </p>
+  <p>
+   The 4D plug-in passes the parameter(s) using an array of
+   <code>
+    <a href="CMU84858.HTM">
+     PA_Variable
+    </a>
+   </code>
+   data structures that are allocated before the call.
+  </p>
+  <p>
+   The array of
+   <code>
+    <a href="CMU84858.HTM">
+     PA_Variable
+    </a>
+   </code>
+   is defined in the PublicTypes.h header file.
+  </p>
+  <b>
+   <p>
+    IMPORTANT NOTE:
+   </p>
+  </b>
+  <p>
+   After the call, it is the 4D plug-in's responsibility to dispose of the result if its type is Text, Picture or BLOB. Use
+   <code>
+    <a href="CMU84692.HTM">
+     PA_ClearVariable
+    </a>
+   </code>
+   for this purpose.
+  </p>
+  <p>
+   Using
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteMethodByID
+    </font>
+   </code>
+   assumes the developer knows or can predict the syntax of the 4D global method or function called. This is, for example, the case of the
+   <code>
+    <a href="CMU89174.HTM">
+     WR ON EVENT
+    </a>
+   </code>
+   internal callback performed by 4D Write. The manual of this 4D plug-in tells users and developers how they must declare and implement a 4D Write event function.
+  </p>
+  <p>
+   If the 4D plug-in uses
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteMethodByID
+    </font>
+   </code>
+   to implement a similarly optimized calling scheme, be sure to properly inform users and developers how they must declare and implement the 4th Dimension function or Method in the manual of the 4D plug-in.
+  </p>
+  <p>
+   In addition, make sure users or developers are provided with a routine which they can use to tell the 4D plug-in which Method or function is to be called. The 4D plug-in will need the name of this 4th Dimension Method or function in order to get its unique ID number.
+  </p>
+  <p>
+   If a 4D plug-in calls a routine that does not exist a syntax or runtime error is returned.
+  </p>
+  <p>
+   If the 4D plug-in calls a routine with the wrong parameter(s) or result information:
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   A Syntax Error is returned if the database is interpreted.
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   A Runtime error is returned if the database is compiled with "Range Checking" on.
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   A System Error may occur if "Range Checking" is off (speed has a price).
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Plug-in documentation tells the 4D developer that he can write a callback method that must declare one parameter as a long and a second parameter as a string of 31 minimum. The first parameter is the number of external areas that are in use, the second will be the name of an external area. The method does not have a return result (it is a command).
+  </p>
+  <p>
+  </p>
+  <pre><code>   // gMethodID is a global variable that stores the call back method ID
+   // methodName was received as parameter and correctly extracted
+   // (using PA_GetStringParameter)
+   gMethodID = PA_GetMethodID(methodName);
+ 
+   // The callback execution
+   void DoTheCallback()
+   {
+      PA_Variable   params[2];
+      PA_Variable   dummyVar;
+   // Set first parameter. gCountActiveAreas is a global counter
+      PA_SetLongintVariable( &amp;params[0], gCountActiveAreas);
+   // Set the second parameter
+      PA_SetStringVariable(&amp;params[1], "TheSuperName" );
+ 
+   // Now, we can execute the method
+      dummyVar = PA_ExecuteMethodByID(gMethodID, params, 2);
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84730.HTM">
+    PA_GetMethodID
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

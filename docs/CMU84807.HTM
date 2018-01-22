@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetHandleSize
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetHandleSize
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetHandleSize (handle) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      handle
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Handle to a block of memory
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Size of the data led to by handle
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetHandleSize
+    </font>
+   </code>
+   returns the size of the data led to by handle in bytes.
+  </p>
+  <p>
+   Handle should be a
+   <code>
+    PA_Handle
+   </code>
+   allocated by
+   <code>
+    <a href="CMU84809.HTM">
+     PA_NewHandle
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Create a new handle that duplicates an existing handle.
+  </p>
+  <p>
+  </p>
+  <pre><code>   PA_Handle DuplicateHandle( PA_Handle hsrc )
+   {
+      long      size;
+      PA_Handle   hdest;
+      char      *pSrc, *pDest;
+      
+   // get the source handle size
+      size = PA_GetHandleSize( hsrc );
+ 
+   // make duplicate handle and copy data to it
+      hdst = PA_NewHandle( size );
+      if ( hdest )
+      {
+         pSrc = PA_LockHandle( hsrc );
+         pDest = PA_LockHandle( hdest );
+         PA_MoveBlock( pSrc, pDest, size );
+         PA_UnlockHandle( srce );
+         PA_Unlockhandle( hdest );
+      }
+      return hdest;
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84809.HTM">
+    PA_NewHandle
+   </a>
+   ,
+   <a href="CMU84806.HTM">
+    PA_SetHandleSize
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred (not a valid handle, etc.).
+  </p>
+ </body>
+</html>

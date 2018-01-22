@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetProcessInfo
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetProcessInfo
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetProcessInfo (pNum; pName; pState; pTime)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Process number
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pName
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Process name
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pState
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Process state
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pTime
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Process state
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetProcessInfo
+    </font>
+   </code>
+   returns information on the process whose  number is passed in
+   <code>
+    pNum
+   </code>
+   .
+  </p>
+  <p>
+   This works exactly like the
+   <code>
+    <a href="CMU00336.HTM">
+     PROCESS PROPERTIES
+    </a>
+   </code>
+   command, except for the optional 4th Dimension command argument that is not handled by the routine (visible, unique ID, origin).
+  </p>
+  <p>
+   The
+   <code>
+    pState
+   </code>
+   parameter may contain the same values as 4th Dimension constants:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      <b>
+       Constant
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      <b>
+       Value
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      Aborted
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      -1
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      Delayed
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      1
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      Does not exist
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      -100
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      Executing
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      0
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      Hidden modal dialog
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      6
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      Paused
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      5
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      Waiting for input output
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      3
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      Waiting for internal flag
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      4
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="32%">
+      Waiting for user event
+     </td>
+     <td align="LEFT" valign="TOP" width="68%">
+      2
+     </td>
+    </tr>
+   </table>
+  </p>
+  <p>
+   Please refer to the 4th Dimension documentation to learn more about
+   <code>
+    <a href="CMU00336.HTM">
+     PROCESS PROPERTIES
+    </a>
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Count the paused processes (process state is 5).
+  </p>
+  <p>
+  </p>
+  <pre><code>   long CountPausedProcesses()
+   {
+      char         name[256];
+      long         i, state, time, totCount, pausedCount;
+      
+      pausedCount = 0;
+      totCount = PA_CountTotalProcess();
+      for(i = 1; i &lt;= totCount; i++)
+      {
+         state = 0;
+         PA_GetProcessInfo(i, name, &amp;state, &amp;time);
+         if(state == 5)
+            pausedCount++;
+      }
+      
+      return pausedCount;
+   }
+ 
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84765.HTM">
+    PA_CountTotalProcess
+   </a>
+   ,
+   <a href="CMU00336.HTM">
+    PROCESS PROPERTIES
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

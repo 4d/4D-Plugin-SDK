@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_ExecuteFunction
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_ExecuteFunction
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_ExecuteFunction (toExecute; len) → PA_Variable
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      toExecute
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Text of the statement to execute
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      len
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Length of toExecute
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Variable
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Function result
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_ExecuteFunction
+    </font>
+   </code>
+   allows the 4D plug-in to compute and evaluate any 4th Dimension expression that returns a result. For statements that do not return a result, use
+   <code>
+    <a href="CMU84738.HTM">
+     PA_ExecuteMethod
+    </a>
+   </code>
+   .
+  </p>
+  <code>
+   <p>
+    toExecute
+   </p>
+  </code>
+  is the statement to be executed,
+  <code>
+   len
+  </code>
+  is its length.
+ </body>
+</html>
+<p>
+ Once 4th Dimension has evaluated and executed the expression, it returns the result in a structure of type
+ <code>
+  <a href="CMU84858.HTM">
+   PA_Variable
+  </a>
+ </code>
+ . This API gives the developer accessors to
+ <code>
+  PA_Variables
+ </code>
+ .
+</p>
+<code>
+ <p>
+  <font color="#CF0000">
+   PA_ExecuteFunction
+  </font>
+ </p>
+</code>
+is subject to the 4th Dimension Language syntax. A 4D function can return String, Text, Numeric (real, long integer, integer), Date, Time, Boolean, Pointer, and Picture or BLOB expressions. It cannot return an array.
+<code>
+ <p>
+  <font color="#CF0000">
+   PA_ExecuteFunction
+  </font>
+ </p>
+</code>
+works like the EXECUTE 4D command with the exception being that it returns a result.
+<p>
+ The rule of thumb is that the expression can be executed and evaluated as a one line global method. Then it will execute properly and return a result.
+</p>
+<b>
+ <p>
+  IMPORTANT NOTE:
+ </p>
+</b>
+<p>
+ After the call, it is the 4D plug-in's responsibility to dispose of the variable created by this command. Use
+ <code>
+  <a href="CMU84692.HTM">
+   PA_ClearVariable
+  </a>
+ </code>
+ for this purpose.
+</p>
+<code>
+ <p>
+  <font color="#CF0000">
+   PA_ExecuteFunction
+  </font>
+ </p>
+</code>
+allows the 4D plug-in to execute only one line of code.
+<code>
+ toExecute
+</code>
+cannot contain several lines, such as a "Case of" or a "For" block. If you need to execute several lines of 4th Dimension code, write the code as a 4th Dimension expression and then call this expression.
+<u>
+ <p>
+  Example of 4D expressions
+ </p>
+</u>
+<p>
+ 1. This expression is valid and returns the day of one year from today:
+</p>
+<p>
+ "Current date + 365"
+</p>
+<p>
+ 2. Provided ThisFunction is a valid global project method that returns a result, this expression is valid:
+</p>
+<p>
+ ThisFunction (1;"abc")
+</p>
+<p>
+ 3. This line is not a valid expression because it contains a syntax error (comma instead of semi-colon):
+</p>
+<p>
+ ThisFunction (1,"abc")
+</p>
+<u>
+ <p>
+  When to use
+  <code>
+   <font color="#CF0000">
+    PA_ExecuteFunction
+   </font>
+  </code>
+ </p>
+</u>
+<p>
+ <font color="#CF0000">
+  PA_ExecuteFunction
+ </font>
+</p>
+allows the 4D plug-in to evaluate any 4th Dimension expression. The 4D plug-in can, for example, use
+<code>
+ <font color="#CF0000">
+  PA_ExecuteFunction
+ </font>
+</code>
+to obtain a value which is not accessible using this API.
+<p>
+ One powerful use of this routine is the insertion of 4D formulas written by the 4D developers using this type of 4D plug-in. This routine, as well as the other "Execute" routines are used by modules such as 4D Write.
+</p>
+<u>
+ <p>
+  When not to use
+  <code>
+   <font color="#CF0000">
+    PA_ExecuteFunction
+   </font>
+  </code>
+ </p>
+</u>
+<p>
+ Before evaluating the 4D plug-in's expression, 4th Dimension needs to check that the syntax is valid, otherwise unpredictable results may occur. In other words, 4th Dimension invokes its interpreter to parse, validate, and tokenize the 4D plug-in text. Then, if the text is valid, the tokenized form is evaluated. So, even if the database is running compiled, 4D will execute the formula call at the speed of an interpreted database. If a 4D plug-in calls a 4th Dimension global function the latter will run compiled, but the call itself is interpreted.
+</p>
+<p>
+ If the 4D plug-in uses
+ <code>
+  <font color="#CF0000">
+   PA_ExecuteFunction
+  </font>
+ </code>
+ to call a formula several hundreds or thousands of times inside a loop, the interpreted execution time will become significantly higher than a similarly compiled execution.
+</p>
+<p>
+ Consequently, when using this routine the developer must try to balance the functionality it adds and the inefficiency it introduces compared to compiled code. In this regard, the developer can use the
+ <code>
+  <a href="CMU84736.HTM">
+   PA_Tokenize
+  </a>
+ </code>
+ and
+ <code>
+  <a href="CMU84732.HTM">
+   PA_ExecuteTokens
+  </a>
+ </code>
+ routines that use pre-tokenized expressions.
+</p>
+<b>
+ <p>
+  IMPORTANT NOTE
+ </p>
+</b>
+:
+<p>
+ Beware of re-entrant calls to the 4D plug-in. See
+ <code>
+  <a href="CMU84738.HTM">
+   PA_ExecuteMethod
+  </a>
+ </code>
+ .
+</p>
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Getting a date and a text.
+</p>
+<p>
+</p>
+<pre><code>   PA_Variable      aText, aDate;
+   
+   // GetImportedText is a valid method that returns a text
+   aText = PA_ExecuteFunction("GetImportedText", 15);
+   aDate = PA_ExecuteFunction("Current date", 12);
+ 
+   /* Use API accessors to PA_Variable : PA_GetDateVariable */
+ 
+   /* . . . do something . . .*/
+ 
+   // Clear the text variable
+   PA_ClearVariable(&amp;aText);
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84738.HTM">
+  PA_ExecuteMethod
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

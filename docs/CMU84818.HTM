@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   When 4D Plug-in API accepts or returns a string or a text, it can use Macintosh or ANSI characters sets, and a string can also be a Pascal string or a C string.
+  </p>
+  <p>
+   By default, as defined in 4DPluginAPI.c,  4D Plug-in API uses:
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   When compiling for MacOS:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="95%">
+      ANSI C strings
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="95%">
+      Macintosh characters
+     </td>
+    </tr>
+   </table>
+  </p>
+  <p>
+   <font face="Geneva,Arial" size="2">
+    
+   </font>
+   When compiling for Windows:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="95%">
+      ANSI C strings
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="5%">
+     </td>
+     <td align="LEFT" valign="TOP" width="95%">
+      ANSI characters
+     </td>
+    </tr>
+   </table>
+  </p>
+  <p>
+   For specific needs, you can use the following routines to tell 4D Plug-in API that you want to send and receive Macintosh or ANSI characters, or if you prefer, to use Pascal or C strings:
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+     </td>
+     <td align="LEFT" valign="TOP" width="78%">
+      <code>
+       PA_UseMacCharacters
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+     </td>
+     <td align="LEFT" valign="TOP" width="78%">
+      <code>
+       PA_UseAnsiCharacters
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+     </td>
+     <td align="LEFT" valign="TOP" width="78%">
+      <code>
+       PA_UsePStrings
+      </code>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="22%">
+     </td>
+     <td align="LEFT" valign="TOP" width="78%">
+      <code>
+       PA_UseCStrings
+      </code>
+     </td>
+    </tr>
+   </table>
+  </p>
+  <p>
+   Please remember to use it carefully. For Macintosh/ANSI characters, an error will result only in bad characters received by the user. But, with strings, confusing between a Pascal or a C string can lead to a system crash because of the null terminated C string and the length byte of pascal strings.
+  </p>
+  <p>
+   The problem may occurs more often when you use a C string when 4D waits a Pascal string. It could try to fill a buffer while it doesn't reach a null character
+  </p>
+  <p>
+   Internally, 4D works with Pascal Strings and Macintosh Characters. As the API takes care of the swap stuff in every call of the API that needs it, the Plug-in developer should keep its habits, working with ANSI C strings (usually under Windows) or Pascal strings (on Macintosh). If the API receives a Pascal string, it does not convert it before calling the entry point. If i receives C string, it converts it. This is transparent for the Plug-in developer.
+  </p>
+  <p>
+   Those settings are specific to the PluginAPI.c file. They do not affect other sources files of your project. Just be careful when developing a cross-platform Plug-in, using Pascal strings with MacOS and C strings with Windows.
+  </p>
+  <p>
+   If you use Altura to compile a project for Windows using MacOS Toolbox API, you should call
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   early in your project. For the characters sets, it depends of the way you use them, and specific calls may be needed.
+  </p>
+ </body>
+</html>

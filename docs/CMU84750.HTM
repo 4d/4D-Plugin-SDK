@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_PostMacEvent
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_PostMacEvent
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_PostMacEvent (pNum; theEvent)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pNum
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Destination process of the event
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      theEvent
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Event
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Event sent to ptocess number pNum
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_PostMacEvent
+    </font>
+   </code>
+   allows the 4D Plug-in to post an event to the event queue of a particular 4th Dimension process.
+  </p>
+  <p>
+   Before the call, the plug-in must assign the different fields of the event. A
+   <code>
+    <a href="CMU84866.HTM">
+     PA_Event
+    </a>
+   </code>
+   is defined in PublicTypes.h as:
+  </p>
+  <pre><code>typedef struct PA_Event
+{
+   short   fWhat;
+   long   fMessage;
+   long   fWhen;
+   short   fWhereV;
+   short   fWhereH;
+   short   fModifiers;
+} PA_Event;
+ 
+</code></pre>
+  <p>
+   This works like the 4D command
+   <code>
+    <a href="CMU00467.HTM">
+     POST EVENT
+    </a>
+   </code>
+   . Please, refer to the 4D Language reference for more information. The 4D constant values for what message can be used.
+  </p>
+  <p>
+   One difference in
+   <code>
+    <a href="CMU00467.HTM">
+     POST EVENT
+    </a>
+   </code>
+   command is that if the plug-in sets
+   <code>
+    pNum
+   </code>
+   to -2, the event is sent to the Design Process, if it is opened.
+  </p>
+  <b>
+   <p>
+    Note for MacOS developers
+   </p>
+  </b>
+  <p>
+   A
+   <code>
+    <a href="CMU84866.HTM">
+     PA_Event
+    </a>
+   </code>
+   is just like a standard EventRecord (the field when of the EventRecord has just been wrapped in two short fields), and can be use the same way.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Send a mouse down event (left button under Windows) to front most process, at {0, 0} coordinates
+  </p>
+  <p>
+  </p>
+  <pre><code>   long      frontProcess;
+   PA_Event   event = {0, 0, 0, 0, 0, 0}; // set all fields to 0
+   // get the front most process number
+   frontPcess = PA_GetFrontWindowProcess(0);
+   //Set the appropriate fields of the event
+   event.fWhat = 1; // 1 means "Mouse down event"
+   event.fWhen = GetTheTickCount();// private routine returning the ticks on both Mac and Windows
+   // post the event
+   PA_PostEvent(frontProcess, event);
+   
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU00467.HTM">
+    POST EVENT
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

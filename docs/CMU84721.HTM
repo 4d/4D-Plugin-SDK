@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_PictureEditor
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_PictureEditor
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_PictureEditor (windowTitle; picture; pictSize) → PA_Handle
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      windowTitle
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Unichar*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Title of the editor window
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      picture
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      void *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Pointer the picture data
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      pictSize
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Size of aPicture
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Handle
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Handle to the user-modified picture
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_PictureEditor
+    </font>
+   </code>
+   displays the Picture Editor (available in the Design environment) in a new window.
+  </p>
+  <p>
+   Pass the title you want to give to the window in
+   <code>
+    windowTitle
+   </code>
+   (C or Pascal strings, depending on the platform or on the previous call to
+   <code>
+    PA_UseP/CStrings
+   </code>
+   ). It will usually be the a picture name, or a document name.
+  </p>
+  <p>
+   Pass a pointer to the picture in
+   <code>
+    Picture
+   </code>
+   , and its size (in bytes) in
+   <code>
+    pictSize
+   </code>
+   .
+  </p>
+  <p>
+   The user can then customize the picture with the same tools available to the designer in the Design environment.
+  </p>
+  <p>
+   Once the user has closed the window, the routine returns a handle to the picture. This handle belongs to the plug-in. You should dispose of it once you have finished working with it, except if you give this handle to 4th Dimension using the
+   <code>
+    <a href="CMU84606.HTM">
+     PA_ReturnPictureHandle
+    </a>
+   </code>
+   routine
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Modify a picture. The routine given to the 4D programmer has the following syntax:
+  </p>
+  <code>
+   <p>
+    newPicture:=superplug_EditPicture(oldPicture)
+   </p>
+  </code>
+  <p>
+   PluginMain simply calls this routine, passing it the PluginParameters:
+  </p>
+  <pre><code>   void EditPicture( PA_PluginParameters params )
+   {
+      PA_Handle h;
+      PA_PictureInfo info;
+      char* pt;
+      long len;
+   // Get the picture size
+      len = PA_GetPictureParameter( params, 1, 0, 0 );
+   // Make room for the new picture
+      pt = malloc( len );
+      if ( pt )
+      {
+   // get the picture parameter
+         PA_GetPictureParameter( params, 1, pt, &amp;info );
+   // edit it
+         h = PA_PictureEditor("Nice Picture", pt, len );
+   // free memory
+         free( pt );
+   // return the new picture. We need to lock the handle to avoid fool pointer
+         PA_ReturnPicture( params, PA_LockHandle( h ), PA_GetHandleSize( h ), info );
+   // Unlock the handle
+         PA_UnlockHandle( h );
+   // Free memory
+         PA_DisposeHandle( h );
+      }
+   }</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   No reference.
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <code>
+   <p>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </p>
+  </code>
+  always returns
+  <code>
+   eER_NoErr
+  </code>
+ </body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetResourceIDList
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetResourceIDList
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetResourceIDList (resFile; kind; IDlist) → long
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      resFile
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      File reference number of the file to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      kind
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      unsigned long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Kind (4 Bytes type) of resource to access
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      IDlist
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short*
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Array of IDs
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      Function result
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      long
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Number of IDs of a type
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetResourceIDList
+    </font>
+   </code>
+   fills the buffer pointed to by
+   <code>
+    IDlist
+   </code>
+   with all IDs of the resources of type
+   <code>
+    kind
+   </code>
+   found in the file referenced by
+   <code>
+    resFile,
+   </code>
+   and then returns the number of resources.
+  </p>
+  <b>
+   <p>
+    WARNING
+   </p>
+  </b>
+  <p>
+   The returned value is not the size of the data pointed to by
+   <code>
+    IDlist
+   </code>
+   , but the count of IDs in the array.
+  </p>
+  <p>
+   First call the routine passing 0L in
+   <code>
+    IDlist
+   </code>
+   to get the count of resources. Then, allocate a buffer of (thisCount * sizeof(short)) and call the routine again.
+  </p>
+  <p>
+   If there is no resources of type
+   <code>
+    kind
+   </code>
+   , the routine returns 0.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   Get the IDs of resource 'toto' and loop the IDs.
+  </p>
+  <p>
+  </p>
+  <pre><code>   short      *IDs;
+   long      count, i;
+   PA_Handle   h;
+ 
+   count = PA_GetResourceIDList(resFile, 'titi', 0L);
+   if(count)
+   {
+      IDs = malloc(count * sizeof(short));
+      if(IDs)
+      {
+         count = PA_GetResourceIDList(resFile, 'titi', IDs);
+         for(i = 0; i &lt; count; i++)
+         {
+            h = PA_GetResourceHandle(resFile, 'titi', IDs[i];
+         /* . . . do something with the resource . . .*/
+         }
+      }
+ 
+      free(IDs);
+   }
+</code></pre>
+  <b>
+   <p>
+    See Also
+   </p>
+  </b>
+  <p>
+   <a href="CMU84559.HTM">
+    PA_GetResourceKindList
+   </a>
+   ,
+   <a href="CMU84557.HTM">
+    PA_GetResourceNameList
+   </a>
+   .
+  </p>
+  <b>
+   <p>
+    Error Handling
+   </p>
+  </b>
+  <p>
+   Use
+   <code>
+    <a href="CMU84896.HTM">
+     PA_GetLastError
+    </a>
+   </code>
+   to see if an error occurred
+  </p>
+ </body>
+</html>

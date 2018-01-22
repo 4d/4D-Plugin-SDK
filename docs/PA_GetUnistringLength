@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+// returns the number of unicode characters in a string
+// (do not count NULL ending character)
+
+long    PA_GetUnistringLength( PA_Unistring* ustr );
+
+</body></html>

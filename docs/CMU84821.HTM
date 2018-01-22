@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <b>
+   <u>
+    <p>
+     4D Plugin Wizard generates the files
+    </p>
+   </u>
+  </b>
+ </body>
+</html>
+<p>
+ The fastest way to create a plug-in is by using the 4D plug-in Wizard tool. 4D plug-in Wizard is part of 4D plug-in SDK.
+</p>
+<p>
+ 4D Plugin Wizard is an easy-to-use tool. The plug-in developer creates a project for the plug-in, then enters the desired names, parameters and returned values of the routines. He or she arranges the routines by theme or can tell the wizard to prepare the creation of an external area.
+</p>
+<p>
+ Once this is done, 4D Plugin Wizard generates all the necessary files: source files, resources file, export files, and project files (for both MacOS and Windows if necessary). The source code of the plug-in is generated, containing all necessary prototypes, constants, parameters, and code skeleton.
+</p>
+<p>
+ The 4D Plugin Wizard may be very useful, particularly for Windows developers, since it generates the appropriate resources ('4BNX', 'STR#').
+</p>
+<p>
+ The 4D Plugin API files are also added in a "4D Plugin API" folder and  are necessary for the plug-in to compile. These files consist of four headers, a source file and a definition file needed for Windows:
+</p>
+<p>
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+    4DPluginAPI.h
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+    EntryPoints.h
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+    Flags.h
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+    PrivateTypes.h
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+    PublicTypes.h
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+    4DPluginAPI.c
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+   </td>
+  </tr>
+  <tr>
+   <td align="LEFT" valign="TOP" width="22%">
+   </td>
+   <td align="LEFT" valign="TOP" width="78%">
+    4DPluginAPI.def
+   </td>
+  </tr>
+ </table>
+</p>
+<p>
+ Once 4D Plugin Wizard has generate the files, the developer can open the project and start to write the plug-in code. Each time he needs to use a 4D Plugin API function, he calls the appropriate routine, (stored in 4DPluginAPI.c) and is ready for compilation.
+</p>
+<p>
+ If the plug-in developer needs to change the syntax of a routine or add routines, etc., he can use 4D Plugin Wizard to generate the new resource file. He can also cut and paste parts of the new generated source code in the source code under development.
+</p>
+<b>
+ <u>
+  <p>
+   Parameters, Returned values
+  </p>
+ </u>
+</b>
+<p>
+ The main routine of the plug-in must be called PluginMain. When 4D calls the plug-in, it calls a routine named FourDPack under Windows and Main on Macintosh. FourDPack and Main are implemented in the 4DPluginAPI.c source file and call the PluginMain routine provided by your plug-in.
+</p>
+<u>
+ <p>
+  Parameters
+ </p>
+</u>
+<p>
+ A routine can receive up to 25 parameters. The parameters are received (among other things) in a
+ <code>
+  PA_PluginBlock
+ </code>
+ structure. A pointer to this structure (
+ <code>
+  PA_PluginParameters
+ </code>
+ ) is passed to PluginMain.
+</p>
+<p>
+ 4D Plugin API gives the developer utility functions to access the parameters, making it easy to get or set the value of a parameter: simply call the appropriate API function and then give it the number of the parameter you want to access. As parameters are passed by reference, it is also possible to change the value of a parameter. The syntax of those API functions are GetXXXParameter and SetXXXParameter, where XXX is the type of the parameter. Example:
+ <code>
+  <a href="CMU84831.HTM">
+   PA_GetLongParameter
+  </a>
+ </code>
+ ,
+ <code>
+  <a href="CMU84612.HTM">
+   PA_SetLongParameter
+  </a>
+ </code>
+ ,
+ <code>
+  <a href="CMU84829.HTM">
+   PA_GetStringParameter
+  </a>
+ </code>
+ .
+</p>
+<p>
+ As an example, if a routine wants to read the value of parameters 3 that is a long, it can use:
+</p>
+<pre><code>   aLong = PA_GetLongParameter(params, 3);
+</code></pre>
+<p>
+ If a routine wants to set the value of parameter 2 that is a short, it can use:
+</p>
+<pre><code>   PA_SetShortParameter(params, 2, aShort);
+</code></pre>
+<u>
+ <p>
+  Returned values
+ </p>
+</u>
+<p>
+ Similar to parameters, the API gives the developer routines (
+ <code>
+  PA_ReturnXXX
+ </code>
+ ) to return values of any kind. This must be used when the routine is declared as returning a value (in 4D Plugin Wizard). If a routine returns a string, it needs to use
+ <code>
+  PA_ReturnString(parameters,theString)
+ </code>
+ .
+</p>
+<b>
+ <u>
+  <p>
+   Skeleton of a plug-in source code
+  </p>
+ </u>
+</b>
+<p>
+ The PluginMain routine switches the selector value and calls a routine for each case, passing the
+ <code>
+  PA_PluginParameters
+ </code>
+ received to the routine. Each routine then deals with the parameters and the returned value.
+</p>
+<p>
+ Let's look at sample code of this dispatch as it can be generated by 4D Plugin Wizard.
+</p>
+<pre><code>Void PluginMain( long selector, PA_PluginParameters params )
+{
+   switch( selector )
+   {
+      case 1:
+         aRoutine( params ); 
+         break;
+</code></pre>
+<pre><code>      case 2:
+         anotherRoutine( params );
+         break;
+   }
+}
+</code></pre>
+<pre><code>void aRoutine( PA_PluginParameters params )
+{
+// Code of first routine. It expects a long and a string
+   long   aLong;
+   char   aString[256];
+</code></pre>
+<pre><code>// We get the parameters
+   aLong = PA_GetLongParameter( params, 1 ); 
+   PA_GetStringParameter( params, 2, aString );
+</code></pre>
+<pre><code>// . . . the code . . .
+}
+</code></pre>
+<pre><code>void anotherRoutine( PA_PluginParameters params )
+{
+// Say this one returns a numeric value
+   double   theDouble;
+ 
+// . . . the code . . .
+   PA_ReturnDouble ( params, theDouble );
+}
+</code></pre>
+<b>
+ <u>
+  <p>
+   Example
+  </p>
+ </u>
+</b>
+<p>
+ In this example, we will create a sample plug-in that will demonstrate the use of routines with and without parameters and with and without a returned value.
+</p>
+<p>
+ To keep things simple, we will use 2 routines of the 4D Plugin API concerning the tips in order to build a plug-in that enables/disables the tips and returns the tips' state.
+</p>
+<p>
+ This will be done using the routines
+ <code>
+  <a href="CMU84810.HTM">
+   PA_SetTipsEnabled
+  </a>
+ </code>
+ and
+ <code>
+  <a href="CMU84811.HTM">
+   PA_GetTipsEnabled
+  </a>
+ </code>
+ of the 4DPluginAPI.c. file. We will name the plug-in "TipsPlug"; it will have 2 routines, ENABLE TIPS and GetTipsState.
+</p>
+<code>
+ <p>
+  ENABLE TIPS
+ </p>
+</code>
+accepts one parameter of type short and returns no value. If the parameter is 0, tips are disabled. For any other value, tips are enabled.
+<code>
+ <p>
+  Get Tips State
+ </p>
+</code>
+has no parameter and returns a short; 1 if tips are enabled, 0 if tips are disabled.
+<p>
+ We then launch 4D Plugin Wizard and create a new project. We first create a theme named "Tips" and then add the first command, "ENABLE TIPS", to this theme. We then add the parameter, name it "tipsState", and we select an integer parameter by clicking in the icon on the left of the list . The little arrow between the type of the parameter and its name tell if the parameter is an input, output or input/output parameter. Actually, this parameter is an input parameter. The command dialog box will appear as follows:
+</p>
+<p>
+ Add the "GetTipsState" command in the same way; simply click on the Return value pop-up to indicate that this function returns an integer.
+</p>
+<p>
+ <p>
+  4D Plugin Wizard generates the source code of your plug-in in the preview window.
+ </p>
+ <p>
+  Click on the
+  <b>
+   Generate
+  </b>
+  button. 4D Plugin Wizard creates a Metrowerks CodeWarrior and Microsoft Visual C++ project. Depending of the development environment, we can now open the appropriate project. Here is how the CodeWarrior project will look.
+ </p>
+ <p>
+  After opening the 4DPlugin.c source file, we are now ready to add code to the two routines.
+ </p>
+ <p>
+  Here is how 4D Plugin Wizard has generated the ENABLE_TIPS function:
+ </p>
+ <p>
+  Simply replace the comment lines with your own code.
+ </p>
+ <p>
+  4D Plugin Wizard generated the second command as such:
+ </p>
+ <p>
+  Replace the comment with a call to
+  <code>
+   <a href="CMU84811.HTM">
+    PA_GetTipsEnabled
+   </a>
+  </code>
+  .
+ </p>
+ <p>
+  That's it! Compile the project, verify that your first plug-in is present in the Mac4DX or Win4DX project, and create a 4D database to test it.
+ </p>
+</p>

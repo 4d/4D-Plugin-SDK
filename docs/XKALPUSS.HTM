@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <h3 align="CENTER">
+   <a href="XKALPUSA.HTM">
+    A
+   </a>
+   <a href="XKALPUSB.HTM">
+    B
+   </a>
+   <a href="XKALPUSC.HTM">
+    C
+   </a>
+   <a href="XKALPUSD.HTM">
+    D
+   </a>
+   <a href="XKALPUSE.HTM">
+    E
+   </a>
+   <a href="XKALPUSF.HTM">
+    F
+   </a>
+   <a href="XKALPUSG.HTM">
+    G
+   </a>
+   H
+   <a href="XKALPUSI.HTM">
+    I
+   </a>
+   J
+   <a href="XKALPUSK.HTM">
+    K
+   </a>
+   <a href="XKALPUSL.HTM">
+    L
+   </a>
+   <a href="XKALPUSM.HTM">
+    M
+   </a>
+   <a href="XKALPUSN.HTM">
+    N
+   </a>
+   <a href="XKALPUSO.HTM">
+    O
+   </a>
+   <a href="XKALPUSP.HTM">
+    P
+   </a>
+   <a href="XKALPUSQ.HTM">
+    Q
+   </a>
+   <a href="XKALPUSR.HTM">
+    R
+   </a>
+   S
+   <a href="XKALPUST.HTM">
+    T
+   </a>
+   <a href="XKALPUSU.HTM">
+    U
+   </a>
+   <a href="XKALPUSV.HTM">
+    V
+   </a>
+   <a href="XKALPUSW.HTM">
+    W
+   </a>
+   X
+   <a href="XKALPUSY.HTM">
+    Y
+   </a>
+   Z
+  </h3>
+  <br/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84900.HTM">
+      PA_SaveRecord
+     </a>
+    </b>
+    (tableNum)
+    <li>
+     <b>
+      <a href="CMU84877.HTM">
+       PA_SelectedRecordNumber
+      </a>
+     </b>
+     (tableNum) → long
+     <li>
+      <b>
+       <a href="CMU84576.HTM">
+        PA_SendDataToServer
+       </a>
+      </b>
+      (pluginRef; dataRef; dataKind; data; dataSize)
+      <li>
+       <b>
+        <a href="CMU84578.HTM">
+         PA_SendDocumentToServer
+        </a>
+       </b>
+       (docName; data; dataSize; docType; docCreator)
+       <li>
+        <b>
+         <a href="CMU84360.HTM">
+          PA_SendHTML
+         </a>
+        </b>
+        (params; webData; HTMLbuffer; BufferLen)
+        <li>
+         <b>
+          <a href="CMU84358.HTM">
+           PA_SendWebPicture
+          </a>
+         </b>
+         (params; webData; picture; len; kind)
+         <li>
+          <b>
+           <a href="CMU84481.HTM">
+            PA_SetAdvancedProperties
+           </a>
+          </b>
+          (params; data; dataSize)
+          <li>
+           <b>
+            <a href="CMU84482.HTM">
+             PA_SetAdvancedPropertiesEditable
+            </a>
+           </b>
+           (params; editable)
+           <li>
+            <b>
+             <a href="CMU84495.HTM">
+              PA_SetAreaFocusable
+             </a>
+            </b>
+            (params; focusable)
+            <li>
+             <b>
+              <a href="CMU84497.HTM">
+               PA_SetAreaReference
+              </a>
+             </b>
+             (params; ref)
+             <li>
+              <b>
+               <a href="CMU84688.HTM">
+                PA_SetArrayCurrent
+               </a>
+              </b>
+              (array; newCurrent)
+              <li>
+               <b>
+                <a href="CMU84346.HTM">
+                 PA_SetArrayInArray
+                </a>
+               </b>
+               (array; index; value)
+               <li>
+                <b>
+                 <a href="CMU84625.HTM">
+                  PA_SetBlobField
+                 </a>
+                </b>
+                (tNum; fNum; newBlob; len)
+                <li>
+                 <b>
+                  <a href="CMU84617.HTM">
+                   PA_SetBlobHandleField
+                  </a>
+                 </b>
+                 (tNum; fNum; newHBlob)
+                 <li>
+                  <b>
+                   <a href="CMU84602.HTM">
+                    PA_SetBlobHandleParameter
+                   </a>
+                  </b>
+                  (params; index; hblob)
+                  <li>
+                   <b>
+                    <a href="CMU84700.HTM">
+                     PA_SetBlobHandleVariable
+                    </a>
+                   </b>
+                   (aVariable; hBlob)
+                   <li>
+                    <b>
+                     <a href="CMU84608.HTM">
+                      PA_SetBlobParameter
+                     </a>
+                    </b>
+                    (params; index; blob; blobSize)
+                    <li>
+                     <b>
+                      <a href="CMU84701.HTM">
+                       PA_SetBlobVariable
+                      </a>
+                     </b>
+                     (aVariable; newBlob; size)
+                     <li>
+                      <b>
+                       <a href="CMU84618.HTM">
+                        PA_SetBooleanField
+                       </a>
+                      </b>
+                      (tNum; fNum; value)
+                      <li>
+                       <b>
+                        <a href="CMU84669.HTM">
+                         PA_SetBooleanInArray
+                        </a>
+                       </b>
+                       (array; index; value)
+                       <li>
+                        <b>
+                         <a href="CMU84693.HTM">
+                          PA_SetBooleanVariable
+                         </a>
+                        </b>
+                        (aVariable; newValue)
+                        <li>
+                         <b>
+                          <a href="CMU84619.HTM">
+                           PA_SetDateField
+                          </a>
+                         </b>
+                         (tNum; fNum; day; month; year)
+                         <li>
+                          <b>
+                           <a href="CMU84674.HTM">
+                            PA_SetDateInArray
+                           </a>
+                          </b>
+                          (array; index; newDay; newMonth; newYear)
+                          <li>
+                           <b>
+                            <a href="CMU84605.HTM">
+                             PA_SetDateParameter
+                            </a>
+                           </b>
+                           (params; index; day; month; year)
+                           <li>
+                            <b>
+                             <a href="CMU84694.HTM">
+                              PA_SetDateVariable
+                             </a>
+                            </b>
+                            (aVariable; newDay; newMonth; newYear)
+                            <li>
+                             <b>
+                              <a href="CMU84611.HTM">
+                               PA_SetDoubleParameter
+                              </a>
+                             </b>
+                             (params; index; value)
+                             <li>
+                              <b>
+                               <a href="CMU84659.HTM">
+                                PA_SetGrowZone
+                               </a>
+                              </b>
+                              (growZoneHandler) → void *
+                              <li>
+                               <b>
+                                <a href="CMU84806.HTM">
+                                 PA_SetHandleSize
+                                </a>
+                               </b>
+                               (ahandle; newlen) → char
+                               <li>
+                                <b>
+                                 <a href="CMU84385.HTM">
+                                  PA_SetHandleState
+                                 </a>
+                                </b>
+                                (handle; state)
+                                <li>
+                                 <b>
+                                  <a href="CMU84621.HTM">
+                                   PA_SetIntegerField
+                                  </a>
+                                 </b>
+                                 (tNum; fNum; value)
+                                 <li>
+                                  <b>
+                                   <a href="CMU84677.HTM">
+                                    PA_SetIntegerInArray
+                                   </a>
+                                  </b>
+                                  (array; index; value)
+                                  <li>
+                                   <b>
+                                    <a href="CMU84622.HTM">
+                                     PA_SetLongintField
+                                    </a>
+                                   </b>
+                                   (tNum; fNum; value)
+                                   <li>
+                                    <b>
+                                     <a href="CMU84676.HTM">
+                                      PA_SetLongintInArray
+                                     </a>
+                                    </b>
+                                    (array; index; value)
+                                    <li>
+                                     <b>
+                                      <a href="CMU84696.HTM">
+                                       PA_SetLongintVariable
+                                      </a>
+                                     </b>
+                                     (aVariable; newValue)
+                                     <li>
+                                      <b>
+                                       <a href="CMU84612.HTM">
+                                        PA_SetLongParameter
+                                       </a>
+                                      </b>
+                                      (params; index; value)
+                                      <li>
+                                       <b>
+                                        <a href="CMU84477.HTM">
+                                         PA_SetMenuIcon
+                                        </a>
+                                       </b>
+                                       (params; id)
+                                       <li>
+                                        <b>
+                                         <a href="CMU84871.HTM">
+                                          PA_SetMessagesStatus
+                                         </a>
+                                        </b>
+                                        (showMessage)
+                                        <li>
+                                         <b>
+                                          <a href="CMU84767.HTM">
+                                           PA_SetPackedRecord
+                                          </a>
+                                         </b>
+                                         (tNum; buffer; bufferSize)
+                                         <li>
+                                          <b>
+                                           <a href="CMU84624.HTM">
+                                            PA_SetPictureField
+                                           </a>
+                                          </b>
+                                          (tNum; fNum; newPicture; len; info)
+                                          <li>
+                                           <b>
+                                            <a href="CMU84616.HTM">
+                                             PA_SetPictureHandleField
+                                            </a>
+                                           </b>
+                                           (tNum; fNum; newHPicture)
+                                           <li>
+                                            <b>
+                                             <a href="CMU84670.HTM">
+                                              PA_SetPictureHandleInArray
+                                             </a>
+                                            </b>
+                                            (array; index; newPictHandle)
+                                            <li>
+                                             <b>
+                                              <a href="CMU84601.HTM">
+                                               PA_SetPictureHandleParameter
+                                              </a>
+                                             </b>
+                                             (params; index; hpicture; info)
+                                             <li>
+                                              <b>
+                                               <a href="CMU84698.HTM">
+                                                PA_SetPictureHandleVariable
+                                               </a>
+                                              </b>
+                                              (aVariable; hPicture; info)
+                                              <li>
+                                               <b>
+                                                <a href="CMU84671.HTM">
+                                                 PA_SetPictureInArray
+                                                </a>
+                                               </b>
+                                               (array; index; newPict; pictSize; info)
+                                               <li>
+                                                <b>
+                                                 <a href="CMU84607.HTM">
+                                                  PA_SetPictureParameter
+                                                 </a>
+                                                </b>
+                                                (params; index; newPicture; pictSize; info)
+                                                <li>
+                                                 <b>
+                                                  <a href="CMU84699.HTM">
+                                                   PA_SetPictureVariable
+                                                  </a>
+                                                 </b>
+                                                 (aVariable; newPicture; pictSize; info)
+                                                 <li>
+                                                  <b>
+                                                   <a href="CMU84520.HTM">
+                                                    PA_SetPluginWindowTitle
+                                                   </a>
+                                                  </b>
+                                                  (pluginRef; newTitle)
+                                                  <li>
+                                                   <b>
+                                                    <a href="CMU84347.HTM">
+                                                     PA_SetPointerInArray
+                                                    </a>
+                                                   </b>
+                                                   (array; index; pointer)
+                                                   <li>
+                                                    <b>
+                                                     <a href="CMU84340.HTM">
+                                                      PA_SetPointerValue
+                                                     </a>
+                                                    </b>
+                                                    (pointer; variable)
+                                                    <li>
+                                                     <b>
+                                                      <a href="CMU84623.HTM">
+                                                       PA_SetRealField
+                                                      </a>
+                                                     </b>
+                                                     (tNum; fNum; value)
+                                                     <li>
+                                                      <b>
+                                                       <a href="CMU84675.HTM">
+                                                        PA_SetRealInArray
+                                                       </a>
+                                                      </b>
+                                                      (array; index; value)
+                                                      <li>
+                                                       <b>
+                                                        <a href="CMU84697.HTM">
+                                                         PA_SetRealVariable
+                                                        </a>
+                                                       </b>
+                                                       (aVariable; newValue)
+                                                       <li>
+                                                        <b>
+                                                         <a href="CMU84548.HTM">
+                                                          PA_SetResource
+                                                         </a>
+                                                        </b>
+                                                        (resfile; kind; resID; newData; dataSize)
+                                                        <li>
+                                                         <b>
+                                                          <a href="CMU84547.HTM">
+                                                           PA_SetResourceName
+                                                          </a>
+                                                         </b>
+                                                         (resFile; kind; resID; newName)
+                                                         <li>
+                                                          <b>
+                                                           <a href="CMU84613.HTM">
+                                                            PA_SetShortParameter
+                                                           </a>
+                                                          </b>
+                                                          (params; index; value)
+                                                          <li>
+                                                           <b>
+                                                            <a href="CMU84627.HTM">
+                                                             PA_SetStringField
+                                                            </a>
+                                                           </b>
+                                                           (tNum; fNum; string)
+                                                           <li>
+                                                            <b>
+                                                             <a href="CMU84673.HTM">
+                                                              PA_SetStringInArray
+                                                             </a>
+                                                            </b>
+                                                            (array; index; newString)
+                                                            <li>
+                                                             <b>
+                                                              <a href="CMU84610.HTM">
+                                                               PA_SetStringParameter
+                                                              </a>
+                                                             </b>
+                                                             (params; index; string)
+                                                             <li>
+                                                              <b>
+                                                               <a href="CMU84703.HTM">
+                                                                PA_SetStringVariable
+                                                               </a>
+                                                              </b>
+                                                              (aVariable; newString)
+                                                              <li>
+                                                               <b>
+                                                                <a href="CMU84626.HTM">
+                                                                 PA_SetTextField
+                                                                </a>
+                                                               </b>
+                                                               (tNum; fNum; text; len)
+                                                               <li>
+                                                                <b>
+                                                                 <a href="CMU84672.HTM">
+                                                                  PA_SetTextInArray
+                                                                 </a>
+                                                                </b>
+                                                                (array; index; text; len)
+                                                                <li>
+                                                                 <b>
+                                                                  <a href="CMU84609.HTM">
+                                                                   PA_SetTextParameter
+                                                                  </a>
+                                                                 </b>
+                                                                 (params; index; text; len)
+                                                                 <li>
+                                                                  <b>
+                                                                   <a href="CMU84702.HTM">
+                                                                    PA_SetTextVariable
+                                                                   </a>
+                                                                  </b>
+                                                                  (aVariable; newText; len)
+                                                                  <li>
+                                                                   <b>
+                                                                    <a href="CMU84870.HTM">
+                                                                     PA_SetThermometerRect
+                                                                    </a>
+                                                                   </b>
+                                                                   (rect)
+                                                                   <li>
+                                                                    <b>
+                                                                     <a href="CMU84620.HTM">
+                                                                      PA_SetTimeField
+                                                                     </a>
+                                                                    </b>
+                                                                    (tNum; fNum; value)
+                                                                    <li>
+                                                                     <b>
+                                                                      <a href="CMU84604.HTM">
+                                                                       PA_SetTimeParameter
+                                                                      </a>
+                                                                     </b>
+                                                                     (params; index; value)
+                                                                     <li>
+                                                                      <b>
+                                                                       <a href="CMU84695.HTM">
+                                                                        PA_SetTimeVariable
+                                                                       </a>
+                                                                      </b>
+                                                                      (aVariable; newValue)
+                                                                      <li>
+                                                                       <b>
+                                                                        <a href="CMU84810.HTM">
+                                                                         PA_SetTipsEnabled
+                                                                        </a>
+                                                                       </b>
+                                                                       (enabled)
+                                                                       <li>
+                                                                        <b>
+                                                                         <a href="CMU84704.HTM">
+                                                                          PA_SetVariable
+                                                                         </a>
+                                                                        </b>
+                                                                        (vName; aVariable; clearOldValue)
+                                                                        <li>
+                                                                         <b>
+                                                                          <a href="CMU84603.HTM">
+                                                                           PA_SetVariableParameter
+                                                                          </a>
+                                                                         </b>
+                                                                         (params; index; variable; clearOldValue)
+                                                                         <li>
+                                                                          <b>
+                                                                           <a href="CMU84510.HTM">
+                                                                            PA_SetWebFilters
+                                                                           </a>
+                                                                          </b>
+                                                                          (filterInProcPtr; filterOutProcPtr; releasePtrProcPtr; webFilterMacChars)
+                                                                          <li>
+                                                                           <b>
+                                                                            <a href="CMU84511.HTM">
+                                                                             PA_SetWebListeners
+                                                                            </a>
+                                                                           </b>
+                                                                           (listenProcPtr; closeProcPtr; readProcPtr; writeProcPtr; idleProcPtr; errorProcPtr)
+                                                                           <li>
+                                                                            <b>
+                                                                             <a href="CMU84506.HTM">
+                                                                              PA_SetWebTCPport
+                                                                             </a>
+                                                                            </b>
+                                                                            (newTCPport)
+                                                                            <li>
+                                                                             <b>
+                                                                              <a href="CMU84503.HTM">
+                                                                               PA_SetWebTimeOut
+                                                                              </a>
+                                                                             </b>
+                                                                             (newTimeOut)
+                                                                             <li>
+                                                                              <b>
+                                                                               <a href="CMU84529.HTM">
+                                                                                PA_SetWindowFocusable
+                                                                               </a>
+                                                                              </b>
+                                                                              (windowRef; focusable)
+                                                                              <li>
+                                                                               <b>
+                                                                                <a href="CMU84526.HTM">
+                                                                                 PA_SetWindowFocused
+                                                                                </a>
+                                                                               </b>
+                                                                               (windowRef)
+                                                                               <li>
+                                                                                <b>
+                                                                                 <a href="CMU84756.HTM">
+                                                                                  PA_SetWindowProcess
+                                                                                 </a>
+                                                                                </b>
+                                                                                (wRef; pNum)
+                                                                                <li>
+                                                                                 <b>
+                                                                                  <a href="CMU84833.HTM">
+                                                                                   PA_ShowHideToolBar
+                                                                                  </a>
+                                                                                 </b>
+                                                                                 (displayed)
+                                                                                 <li>
+                                                                                  <b>
+                                                                                   <a href="CMU84509.HTM">
+                                                                                    PA_StartWebServer
+                                                                                   </a>
+                                                                                  </b>
+                                                                                  <li>
+                                                                                   <b>
+                                                                                    <a href="CMU84508.HTM">
+                                                                                     PA_StopWebServer
+                                                                                    </a>
+                                                                                   </b>
+                                                                                   <li>
+                                                                                    <b>
+                                                                                     <a href="CMU84859.HTM">
+                                                                                      PA_String
+                                                                                     </a>
+                                                                                    </b>
+                                                                                    <li>
+                                                                                     <b>
+                                                                                      <a href="CMU84838.HTM">
+                                                                                       Selectors for PluginMain and areas
+                                                                                      </a>
+                                                                                     </b>
+                                                                                     <li>
+                                                                                      <b>
+                                                                                       <a href="CMU84574.HTM">
+                                                                                        Sending data between Client and server
+                                                                                       </a>
+                                                                                      </b>
+                                                                                     </li>
+                                                                                    </li>
+                                                                                   </li>
+                                                                                  </li>
+                                                                                 </li>
+                                                                                </li>
+                                                                               </li>
+                                                                              </li>
+                                                                             </li>
+                                                                            </li>
+                                                                           </li>
+                                                                          </li>
+                                                                         </li>
+                                                                        </li>
+                                                                       </li>
+                                                                      </li>
+                                                                     </li>
+                                                                    </li>
+                                                                   </li>
+                                                                  </li>
+                                                                 </li>
+                                                                </li>
+                                                               </li>
+                                                              </li>
+                                                             </li>
+                                                            </li>
+                                                           </li>
+                                                          </li>
+                                                         </li>
+                                                        </li>
+                                                       </li>
+                                                      </li>
+                                                     </li>
+                                                    </li>
+                                                   </li>
+                                                  </li>
+                                                 </li>
+                                                </li>
+                                               </li>
+                                              </li>
+                                             </li>
+                                            </li>
+                                           </li>
+                                          </li>
+                                         </li>
+                                        </li>
+                                       </li>
+                                      </li>
+                                     </li>
+                                    </li>
+                                   </li>
+                                  </li>
+                                 </li>
+                                </li>
+                               </li>
+                              </li>
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+ </body>
+</html>

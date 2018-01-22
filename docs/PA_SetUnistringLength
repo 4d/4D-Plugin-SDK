@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+void PA_SetUnistring( PA_Unistring* ustr, PA_Unichar* str )
+{
+	EngineBlock eb;
+	eb.fUniString1 = *ustr;
+	eb.fHandle = (PA_Handle) str;
+	Call4D( EX_SET_UNISTRING, &eb );
+	*ustr = eb.fUniString1;
+}
+
+
+</body></html>

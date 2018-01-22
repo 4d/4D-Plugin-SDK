@@ -1,0 +1,5 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>// -----------------------------------------------------
+// manage the drag and drop context
+// -----------------------------------------------------
+PA_PasteboardRef PA_GetDragAndDropPasteboard ( PA_DragContextRef context );
+</body></html>

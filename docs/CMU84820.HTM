@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   The routines described in this theme do basically the same things as the corresponding 4D Commands. The plug-in developer can refer to the 4D documentation to get information on sets (size in memory, order).
+  </p>
+  <p>
+   The developer should note that:
+  </p>
+  <p>
+   1/ The API works exactly like 4D for set names. The developer can create process, interprocess or local sets, depending of the prefix of the name of the set: "$" for local sets, nothing for process sets, and "&lt;&gt;" under Windows/MacOS - diamond character under MacOS - for interprocess sets.
+  </p>
+  <p>
+   2/ The strings used for set names are C or Pascal strings, depending of previous calls to
+   <code>
+    <a href="CMU84817.HTM">
+     PA_UsePStrings
+    </a>
+   </code>
+   or
+   <code>
+    <a href="CMU84816.HTM">
+     PA_UseCStrings
+    </a>
+   </code>
+   .
+  </p>
+ </body>
+</html>

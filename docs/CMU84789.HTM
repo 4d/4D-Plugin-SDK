@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_GetTableAndFieldNumbers
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_GetTableAndFieldNumbers
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_GetTableAndFieldNumbers (tableFieldNames; tableNumPtr; fieldNumPtr)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableFieldNames
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      char *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Valid table &amp; field names
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      tableNumPtr
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Table number or 0
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      fieldNumPtr
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      short *
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      ←
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Field number or 0
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_GetTableAndFieldNumbers
+    </font>
+   </code>
+   returns into the shorts pointed to by
+   <code>
+    tableNumPtr
+   </code>
+   and
+   <code>
+    fieldNumPtr
+   </code>
+   the table and field numbers for the table/field name specified by
+   <code>
+    tableFieldName
+   </code>
+   .
+  </p>
+  <b>
+   <p>
+    NOTE:
+   </p>
+  </b>
+  This entry point cannot be used for SubFields.
+ </body>
+</html>
+<p>
+ A table name or a field name is passed using the 4th Dimension Language syntax, e.g. the name of the table enclosed by square brackets and optionally followed by the name of the field. For Example:
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Invoices is an invalid table name while [Invoices] is a valid table name,
+</p>
+<p>
+ <font face="Geneva,Arial" size="2">
+  
+ </font>
+ Customer ID is an invalid field name while [Invoices]Customer ID is a valid field name.
+</p>
+<p>
+ If the name of the field is incorrect or not specified,
+ <code>
+  *fieldNumPtr
+ </code>
+ is returned equal to 0. If the name of the table is incorrect
+ <code>
+  *tableNumPtr
+ </code>
+ is also returned equal to 0. For these cases the entry point returns no error.
+</p>
+<code>
+ <p>
+  tableFieldNames
+ </p>
+</code>
+is a C or a Pascal string, depending on previous calls to
+<code>
+ <a href="CMU84817.HTM">
+  PA_UsePStrings
+ </a>
+</code>
+or
+<code>
+ <a href="CMU84816.HTM">
+  PA_UseCStrings
+ </a>
+</code>
+.
+<b>
+ <p>
+  Example
+ </p>
+</b>
+<p>
+ Wrapping
+ <code>
+  <font color="#CF0000">
+   PA_GetTableAndFieldNumbers
+  </font>
+ </code>
+ to return an error if there is no square brackets:
+</p>
+<pre><code>   short WrapGetTableFieldNumbers (char *name, short *tNum, short *fNum)
+   {
+      *tNum = *fNum = 0;
+   // In this sample, we are using C strings
+      if( (name[0] != '[') || (strchr(name, ']') == 0L) )
+         return kMY_ERROR_BAD_SYNTAX;// defined in a header
+      PA_GetTableAndFieldNumbers(name, tNum, fNum);
+      return PA_GetLastError();
+   }
+</code></pre>
+<b>
+ <p>
+  See Also
+ </p>
+</b>
+<p>
+ <a href="CMU84788.HTM">
+  PA_GetFieldName
+ </a>
+ ,
+ <a href="CMU84791.HTM">
+  PA_GetTableName
+ </a>
+ .
+</p>
+<b>
+ <p>
+  Error Handling
+ </p>
+</b>
+<p>
+ Use
+ <code>
+  <a href="CMU84896.HTM">
+   PA_GetLastError
+  </a>
+ </code>
+ to see if an error occurred
+</p>

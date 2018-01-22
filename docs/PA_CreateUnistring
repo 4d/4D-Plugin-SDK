@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+// creates a unistring from a NULL terminated UTF16 string 
+
+PA_Unistring	PA_CreateUnistring( PA_Unichar* ustr );
+
+</body></html>

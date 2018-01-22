@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+// return values:
+// 0 if the strings are the same,
+// 1 if text1 is greater than text2,
+// 2 if text1 is less than text2
+//
+
+char    PA_CompareUniBuffers( 
+           PA_Unichar* text1,
+           long len1,
+           PA_Unichar* text2,
+           long len2,
+           char diacritic,
+           char useWildChar );
+
+</body></html>

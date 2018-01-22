@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   PA_CloseDialog
+  </title>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+  <p>
+   <h2>
+    PA_CloseDialog
+   </h2>
+  </p>
+<table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <p>
+   version 2003
+  </p>
+  <hr/>
+  <p>
+   PA_CloseDialog (dialog)
+  </p>
+  <p>
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      <b>
+       Parameter
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      <b>
+       Type
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      <b>
+      </b>
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      <b>
+       Description
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td align="LEFT" valign="TOP" width="20%">
+      dialog
+     </td>
+     <td align="LEFT" valign="TOP" width="15%">
+      PA_Dial4D
+     </td>
+     <td align="LEFT" valign="TOP" width="5%">
+      →
+     </td>
+     <td align="LEFT" valign="TOP" width="60%">
+      Dialog reference
+     </td>
+    </tr>
+   </table>
+  </p>
+  <b>
+   <p>
+    Description
+   </p>
+  </b>
+  <p>
+   The routine
+   <code>
+    <font color="#CF0000">
+     PA_CloseDialog
+    </font>
+   </code>
+   closes the dialog referenced by
+   <code>
+    dialog
+   </code>
+   . It disposes of all allocated memory used by objects such as the dialog window or the variables used and switches back to the process context.
+  </p>
+  <p>
+   Dialog variables and objects can no longer be used once this function has been called.
+  </p>
+  <b>
+   <p>
+    Example
+   </p>
+  </b>
+  <p>
+   See
+   <code>
+    <a href="CMU84457.HTM">
+     PA_NewDialog
+    </a>
+   </code>
+   and
+   <code>
+    4th Dimension Dialogs : using a Form as a dialog
+   </code>
+   for an example of use.
+   <pre><code> 
+</code></pre>
+   <b>
+    <p>
+     See Also
+    </p>
+   </b>
+   <p>
+    <a href="CMU84455.HTM">
+     PA_ModalDialog
+    </a>
+    ,
+    <a href="CMU84457.HTM">
+     PA_NewDialog
+    </a>
+    ,
+    <a href="CMU84456.HTM">
+     PA_OpenDialog
+    </a>
+    .
+   </p>
+   <b>
+    <p>
+     Error Handling
+    </p>
+   </b>
+   <p>
+    None.
+   </p>
+  </p>
+ </body>
+</html>

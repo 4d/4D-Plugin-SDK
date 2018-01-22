@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+typedef struct PA_Unistring
+{
+	long			fLength;
+	PA_Unichar*		fString;
+	long			fReserved1;
+	long			fReserved2;
+} PA_Unistring;
+
+</body></html>

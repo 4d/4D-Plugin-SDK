@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link href="favicon.gif" rel="icon" type="image/gif"/>
+  <title>
+   4D Plugin API
+  </title>
+ </head>
+ <body bgcolor="#FAFAFA" link="#008108" vlink="#008108">
+<h2>
+ 4D Plugin API
+</h2><table>
+ <tr>
+  <td>
+   <a href="http://www.4d.com">
+    <img src="menu/4D.GIF" type="image/gif"/>
+   </a>
+  </td>
+  <td>
+   <a href="index.html">
+    <img src="menu/THM.png" type="image/png"/>
+   </a>
+  </td>
+  <td>
+   <a href="XKALPUSA.HTM">
+    <img src="menu/ALPHA.png" type="image/png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<hr/>
+  <hr/>
+  <h3 align="CENTER">
+   <a href="XKALPUSA.HTM">
+    A
+   </a>
+   <a href="XKALPUSB.HTM">
+    B
+   </a>
+   C
+   <a href="XKALPUSD.HTM">
+    D
+   </a>
+   <a href="XKALPUSE.HTM">
+    E
+   </a>
+   <a href="XKALPUSF.HTM">
+    F
+   </a>
+   <a href="XKALPUSG.HTM">
+    G
+   </a>
+   H
+   <a href="XKALPUSI.HTM">
+    I
+   </a>
+   J
+   <a href="XKALPUSK.HTM">
+    K
+   </a>
+   <a href="XKALPUSL.HTM">
+    L
+   </a>
+   <a href="XKALPUSM.HTM">
+    M
+   </a>
+   <a href="XKALPUSN.HTM">
+    N
+   </a>
+   <a href="XKALPUSO.HTM">
+    O
+   </a>
+   <a href="XKALPUSP.HTM">
+    P
+   </a>
+   <a href="XKALPUSQ.HTM">
+    Q
+   </a>
+   <a href="XKALPUSR.HTM">
+    R
+   </a>
+   <a href="XKALPUSS.HTM">
+    S
+   </a>
+   <a href="XKALPUST.HTM">
+    T
+   </a>
+   <a href="XKALPUSU.HTM">
+    U
+   </a>
+   <a href="XKALPUSV.HTM">
+    V
+   </a>
+   <a href="XKALPUSW.HTM">
+    W
+   </a>
+   X
+   <a href="XKALPUSY.HTM">
+    Y
+   </a>
+   Z
+  </h3>
+  <br/>
+  <ul>
+   <li>
+    <b>
+     <a href="CMU84478.HTM">
+      Create and use an external area
+     </a>
+    </b>
+    <li>
+     <b>
+      <a href="CMU84471.HTM">
+       PA_CallPluginAreaMethod
+      </a>
+     </b>
+     (params)
+     <li>
+      <b>
+       <a href="CMU84658.HTM">
+        PA_CheckFreeStack
+       </a>
+      </b>
+      (request) → Long
+      <li>
+       <b>
+        <a href="CMU84793.HTM">
+         PA_ClearNamedSelection
+        </a>
+       </b>
+       (selName)
+       <li>
+        <b>
+         <a href="CMU84692.HTM">
+          PA_ClearVariable
+         </a>
+        </b>
+        (aVariable)
+        <li>
+         <b>
+          <a href="CMU84660.HTM">
+           PA_Close4DPreferences
+          </a>
+         </b>
+         <li>
+          <b>
+           <a href="CMU84454.HTM">
+            PA_CloseDialog
+           </a>
+          </b>
+          (dialog)
+          <li>
+           <b>
+            <a href="CMU84779.HTM">
+             PA_CloseOrderBy
+            </a>
+           </b>
+           (orderByRef)
+           <li>
+            <b>
+             <a href="CMU84530.HTM">
+              PA_ClosePluginWindow
+             </a>
+            </b>
+            (pluginRef)
+            <li>
+             <b>
+              <a href="CMU84740.HTM">
+               PA_ClosePrinterSession
+              </a>
+             </b>
+             <li>
+              <b>
+               <a href="CMU84770.HTM">
+                PA_CloseQuery
+               </a>
+              </b>
+              (queryRef)
+              <li>
+               <b>
+                <a href="CMU84572.HTM">
+                 PA_CloseResfile
+                </a>
+               </b>
+               (resfile)
+               <li>
+                <b>
+                 <a href="CMU84517.HTM">
+                  PA_CloseWindow
+                 </a>
+                </b>
+                (wRef)
+                <li>
+                 <b>
+                  <a href="CMU84641.HTM">
+                   PA_CompareStrings
+                  </a>
+                 </b>
+                 (text1; text1Length; text2; text2Length; diacritic) → char
+                 <li>
+                  <b>
+                   <a href="CMU84724.HTM">
+                    PA_Confirm
+                   </a>
+                  </b>
+                  (message) → char
+                  <li>
+                   <b>
+                    <a href="CMU84728.HTM">
+                     PA_ConvertPicture
+                    </a>
+                   </b>
+                   (picture; size; format) → PA_Handle
+                   <li>
+                    <b>
+                     <a href="CMU84640.HTM">
+                      PA_ConvertStrings
+                     </a>
+                    </b>
+                    (string1; kind1; charset1; string2; kind2; charset2)
+                    <li>
+                     <b>
+                      <a href="CMU84796.HTM">
+                       PA_CopyNamedSelection
+                      </a>
+                     </b>
+                     (tableNum; selName)
+                     <li>
+                      <b>
+                       <a href="CMU84766.HTM">
+                        PA_CountActiveProcess
+                       </a>
+                      </b>
+                      → long
+                      <li>
+                       <b>
+                        <a href="CMU84535.HTM">
+                         PA_CountConnectedUsers
+                        </a>
+                       </b>
+                       → long
+                       <li>
+                        <b>
+                         <a href="CMU84889.HTM">
+                          PA_CountFields
+                         </a>
+                        </b>
+                        (tableNum) → short
+                        <li>
+                         <b>
+                          <a href="CMU84571.HTM">
+                           PA_CountResourceKinds
+                          </a>
+                         </b>
+                         (resfile) → long
+                         <li>
+                          <b>
+                           <a href="CMU84570.HTM">
+                            PA_CountResources
+                           </a>
+                          </b>
+                          (resfile; kind) → long
+                          <li>
+                           <b>
+                            <a href="CMU84890.HTM">
+                             PA_CountTables
+                            </a>
+                           </b>
+                           → short
+                           <li>
+                            <b>
+                             <a href="CMU84765.HTM">
+                              PA_CountTotalProcess
+                             </a>
+                            </b>
+                            → long
+                            <li>
+                             <b>
+                              <a href="CMU84538.HTM">
+                               PA_CountUserGroups
+                              </a>
+                             </b>
+                             (kind) → long
+                             <li>
+                              <b>
+                               <a href="CMU84540.HTM">
+                                PA_CountUsers
+                               </a>
+                              </b>
+                              (userKind) → long
+                              <li>
+                               <b>
+                                <a href="CMU84893.HTM">
+                                 PA_CreateEmptySet
+                                </a>
+                               </b>
+                               (tableNum; setName)
+                               <li>
+                                <b>
+                                 <a href="CMU84899.HTM">
+                                  PA_CreateRecord
+                                 </a>
+                                </b>
+                                (tableNum)
+                                <li>
+                                 <b>
+                                  <a href="CMU84569.HTM">
+                                   PA_CreateResFile
+                                  </a>
+                                 </b>
+                                 (fullPath) → short
+                                 <li>
+                                  <b>
+                                   <a href="CMU84568.HTM">
+                                    PA_CreateResource
+                                   </a>
+                                  </b>
+                                  (resFile; kind; resID; name; resData; dataSize) → short
+                                  <li>
+                                   <b>
+                                    <a href="CMU84567.HTM">
+                                     PA_CreateResourceFromHandle
+                                    </a>
+                                   </b>
+                                   (resFile; kind; id; name; resourceHandle) → short
+                                   <li>
+                                    <b>
+                                     <a href="CMU84895.HTM">
+                                      PA_CreateSet
+                                     </a>
+                                    </b>
+                                    (tableNum; setName)
+                                    <li>
+                                     <b>
+                                      <a href="CMU84372.HTM">
+                                       PA_CreateTable
+                                      </a>
+                                     </b>
+                                     (tableRef; name)
+                                     <li>
+                                      <b>
+                                       <a href="CMU84382.HTM">
+                                        PA_CreateTableRef
+                                       </a>
+                                      </b>
+                                      → PA_TableRef
+                                      <li>
+                                       <b>
+                                        <a href="CMU84516.HTM">
+                                         PA_CreateTip
+                                        </a>
+                                       </b>
+                                       (tipContent; posX; posY; objectRect)
+                                       <li>
+                                        <b>
+                                         <a href="CMU84718.HTM">
+                                          PA_CreateVariable
+                                         </a>
+                                        </b>
+                                        (varKind; stringSize) → PA_Variable
+                                        <li>
+                                         <b>
+                                          <a href="CMU84488.HTM">
+                                           PA_CustomizeDesignMode
+                                          </a>
+                                         </b>
+                                         (params)
+                                         <li>
+                                          <b>
+                                           <a href="CMU84483.HTM">
+                                            PA_CustomizeDragOver
+                                           </a>
+                                          </b>
+                                          (params)
+                                          <li>
+                                           <b>
+                                            <a href="CMU84795.HTM">
+                                             PA_CutNamedSelection
+                                            </a>
+                                           </b>
+                                           (tableNum; selName)
+                                          </li>
+                                         </li>
+                                        </li>
+                                       </li>
+                                      </li>
+                                     </li>
+                                    </li>
+                                   </li>
+                                  </li>
+                                 </li>
+                                </li>
+                               </li>
+                              </li>
+                             </li>
+                            </li>
+                           </li>
+                          </li>
+                         </li>
+                        </li>
+                       </li>
+                      </li>
+                     </li>
+                    </li>
+                   </li>
+                  </li>
+                 </li>
+                </li>
+               </li>
+              </li>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </li>
+      </li>
+     </li>
+    </li>
+   </li>
+  </ul>
+ </body>
+</html>

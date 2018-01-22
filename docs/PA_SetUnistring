@@ -1,0 +1,4 @@
+<!DOCTYPE html><html><head></head><body><a href="XKALPUSA.HTM">Alphabetical command list</a>
+void    PA_SetUnistring( PA_Unistring* ustr, PA_Unichar* str );
+
+</body></html>
