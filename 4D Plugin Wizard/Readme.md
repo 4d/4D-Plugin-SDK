@@ -29,7 +29,7 @@ If the plug-in developer needs to change the syntax of a routine or add routines
 ## Installation
 
 ```
-git clone https://github.com/F4r3n/4D-Plugin-SDK.git // TODO change address
+git clone https://github.com/4D/4D-Plugin-SDK.git
 ```
 
 Then open the *4dbase* file via 4D or by double clicking on the file.
