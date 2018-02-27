@@ -31,7 +31,7 @@
 	// See http://msdn.microsoft.com/en-us/library/b0084kay(v=VS.80).aspx for predefined macros on Visual
 	#define VERSIONWIN 1
 	#define VERSIONMAC 0
-	#if defined (WIN64)
+	#if defined (_WIN64)
 		#undef PA_64BITS_ARCHITECTURE
 		#define PA_64BITS_ARCHITECTURE 1
 	#endif
