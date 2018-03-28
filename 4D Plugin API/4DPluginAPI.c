@@ -6614,7 +6614,7 @@ sLONG_PTR	PA_GetMainWindowHWND()
 {
 	sLONG_PTR result = NULL;
 	EngineBlock	pb = {0};
-	Call4D( -719, &pb );
+	Call4D( EX_GET_MAIN_MDI_WINDOW, &pb );
 	if(pb.fError==0)
 		result = pb.fParam1;
 	return result;
