@@ -597,7 +597,7 @@ PA_Variable PA_JsonParse( PA_Unistring* json, PA_VariableKind kind )
 	{
 		PA_SetStringVariable( &params[0], json );
 		params[1] = PA_CreateVariable( eVK_ArrayObject );
-		PA_ExecuteCommandByID( 12112198, params, 2 );	// JSON PARSE ARRAY
+		PA_ExecuteCommandByID( 1219, params, 2 );	// JSON PARSE ARRAY
 		result = params[1];
 	}
 	else
