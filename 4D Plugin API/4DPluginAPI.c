@@ -503,6 +503,16 @@ void PA_DisposeObject( PA_ObjectRef object )
 	}
 }
 
+void PA_DisposeCollection(PA_CollectionRef collection)
+{
+	if (collection)
+	{
+		PA_Variable	var;
+		PA_SetCollectionVariable(&var, collection);
+		PA_ClearVariable(&var);
+	}
+}
+
 
 PA_ObjectRef PA_DuplicateObject( PA_ObjectRef object )
 {
@@ -516,34 +526,99 @@ PA_ObjectRef PA_DuplicateObject( PA_ObjectRef object )
 	return PA_GetObjectVariable ( result );
 }
 
+PA_CollectionRef PA_GetCollectionVariable(PA_Variable variable)
+{
+	PA_CollectionRef collection = NULL;
 
+	if (variable.fType == eVK_Collection)
+	{
+		collection = (PA_CollectionRef)variable.uValue.fCollection;
+	}
+
+	return collection;
+}
+
+
+PA_CollectionRef PA_CreateCollection(void)
+{
+	PA_Variable result = PA_ExecuteCommandByID(1472, NULL, 0);	// New Collection
+	return PA_GetCollectionVariable(result);
+}
+
+
+//The PA_Variable should be cleared after use
+PA_Variable PA_GetCollectionElement(PA_CollectionRef collection, long index)
+{
+	PA_Variable value;
+	EngineBlock eb;
+	eb.fLongint = index;
+	eb.fPtr1 = collection;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Collection;
+	Call4D(EX_GET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+
+	return value;
+}
+
+void PA_SetCollectionElement(PA_CollectionRef collection, long index, PA_Variable value)
+{
+	EngineBlock eb;
+	eb.fLongint = index;
+	eb.fPtr1 = collection;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Collection;
+
+	Call4D(EX_SET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+
+}
+
+PA_long32 PA_GetCollectionLength(PA_CollectionRef collection)
+{
+	PA_Variable value;
+	EngineBlock eb;
+	PA_Unichar length[] = { 'l', 'e', 'n', 'g','t','h', 0 };
+	PA_Unistring key = PA_CreateUnistring(&length[0]);
+	eb.fLongint = -1;
+	eb.fUniString1 = key;
+	eb.fPtr1 = collection;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Collection;
+	Call4D(EX_GET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+	PA_DisposeUnistring(&key);
+	return value.uValue.fLongint;
+}
+
+//The PA_Variable should be cleared after use
 PA_Variable PA_GetObjectProperty( PA_ObjectRef object, PA_Unistring* key )
 {
-	PA_Variable params[2], value;
-	
-	PA_SetObjectVariable( &params[0], object );
-	PA_SetStringVariable( &params[1], key );
-	
-	value = PA_ExecuteCommandByID( 1224, params, 2 );	// OB Get
-	
+	PA_Variable value;
+	EngineBlock eb;
+	eb.fUniString1 = *key;
+	eb.fPtr1 = object;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Object;
+	Call4D(EX_GET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+
 	return value;
 }
 
 
 void PA_SetObjectProperty( PA_ObjectRef object, PA_Unistring* key, PA_Variable value )
 {
-	PA_Variable params[3];
-	
-	PA_SetObjectVariable( &params[0], object );
-	PA_SetStringVariable( &params[1], key );
-	params[2] = value;
-	
-	if( PA_GetVariableKind( value ) == eVK_Null )
-		PA_ExecuteCommandByID( 1233, params, 2 );	// OB SET NULL
-	else if( PA_IsArrayVariable( &value ) )
-		PA_ExecuteCommandByID( 1227, params, 3 );	// OB SET ARRAY
-	else
-		PA_ExecuteCommandByID( 1220, params, 3 );	// OB SET
+
+	EngineBlock eb;
+	eb.fUniString1 = *key;
+	eb.fPtr1 = object;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Object;
+
+	Call4D(EX_SET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+
 }
 
 
@@ -2191,18 +2266,6 @@ PA_Variable PA_GetVariableParameter( PA_PluginParameters params, short index )
 }
 
 
-PA_ObjectRef PA_GetObjectParameter ( PA_PluginParameters params, short index )
-{
-	PA_Variable var;
-	PA_ObjectRef object;
-	
-	var = PA_GetVariableParameter( params, index );
-	object = PA_GetObjectVariable( var );
-	
-	return object;
-}
-
-
 PA_Pointer PA_GetPointerParameter( PA_PluginParameters params, short index )
 {
 	if ( PA_IsCompiled( 1) )
@@ -2257,6 +2320,16 @@ PA_PointerKind PA_GetPointerKind( PA_Pointer pointer )
 		return ePK_PointerToTable;
 	else
 		return ePK_PointerToField;
+}
+
+PA_ObjectRef PA_GetObjectParameter(PA_PluginParameters params, short index)
+{
+	return *(((PA_ObjectRef**)params->fParameters)[index - 1]);
+}
+
+PA_CollectionRef PA_GetCollectionParameter(PA_PluginParameters params, short index)
+{
+	return *(((PA_CollectionRef**)params->fParameters)[index - 1]);
 }
 
 // do NOT call PA_ClearVariable after this call, the variable content now belongs to 4D...
@@ -2418,24 +2491,15 @@ void PA_SetVariableParameter( PA_PluginParameters params, short index, PA_Variab
 			break;
 
 		case eVK_Picture:
-		case eVK_Object:
 			paramPtr->uValue.fPicture = variable.uValue.fPicture;
+			break;
+		case eVK_Object:
+			paramPtr->uValue.fObject = variable.uValue.fObject;
 			break;
 
 		case eVK_Pointer:
 			paramPtr->uValue.fPointer = variable.uValue.fPointer;
 			break;
-	}
-}
-
-void PA_SetObjectParameter ( PA_PluginParameters params, short index, PA_ObjectRef value )
-{
-	PA_Variable var;
-	
-	if( PA_GetObjectParameter( params, index ) != value )
-	{
-		PA_SetObjectVariable( &var, value );
-		PA_SetVariableParameter( params, index, var, 1 );
 	}
 }
 
@@ -2506,13 +2570,17 @@ void PA_ReturnTime( PA_PluginParameters params, PA_long32 value )
 	*((sLONG_PTR*)params->fResult) = (sLONG_PTR)value;
 }
 
-
-void PA_ReturnObject( PA_PluginParameters params, PA_ObjectRef object )
+void PA_ReturnObject(PA_PluginParameters params, PA_ObjectRef object)
 {
-	*(PA_ObjectRef*) params->fResult = object;
+	*(PA_ObjectRef*)params->fResult = object;
+
 }
 
+void PA_ReturnCollection(PA_PluginParameters params, PA_CollectionRef collection)
+{
+	*(PA_CollectionRef*)params->fResult = collection;
 
+}
 // -----------------------------------------
 //
 // Get events in a plugin area
@@ -3571,13 +3639,13 @@ PA_ObjectRef PA_GetObjectField ( short table, short field )
 	eb.fHandle = 0;	// subtable
 	eb.fTextHandle = 0;	// subtable
 	eb.fError  = 0;
-	eb.fPicture = 0;
+	eb.fPtr1 = 0;
 	
 	Call4D( EX_GET_FIELD, &eb );
 	sErrorCode = (PA_ErrorCode) eb.fError;
 	
 	if ( sErrorCode == eER_NoErr )
-		object = (PA_ObjectRef) eb.fPicture;
+		object = (PA_ObjectRef) eb.fPtr1;
 	
 	return object;
 }
@@ -3754,7 +3822,7 @@ void PA_SetObjectField ( short table, short field, PA_ObjectRef object )
 	eb.fField = field;
 	eb.fHandle = 0;	// subtable
 	eb.fError  = 0;
-	eb.fPicture = object;
+	eb.fPtr1 = object;
 	
 	Call4D( EX_SET_FIELD, &eb );
 	sErrorCode = (PA_ErrorCode) eb.fError;
@@ -3892,7 +3960,7 @@ PA_Variable PA_CreateVariable( PA_VariableKind kind )
 			break;
 
 		case eVK_Object :
-			variable.uValue.fPicture = 0;
+			variable.uValue.fObject = 0;
 			break;
 			
 		case eVK_ArrayObject :
@@ -4064,7 +4132,7 @@ PA_ObjectRef PA_GetObjectVariable ( PA_Variable variable )
 	
 	if ( variable.fType == eVK_Object )
 	{
-		object = (PA_ObjectRef) variable.uValue.fPicture;
+		object = variable.uValue.fObject;
 	}
 	
 	return object;
@@ -4173,11 +4241,18 @@ void PA_SetBooleanVariable( PA_Variable* variable, char value )
 }
 
 
-void PA_SetObjectVariable ( PA_Variable* variable, PA_ObjectRef object )
+void PA_SetObjectVariable( PA_Variable* variable, PA_ObjectRef object )
 {
 	variable->fType = eVK_Object;
 	variable->fFiller = 0;
-	variable->uValue.fPicture = object;
+	variable->uValue.fObject = object;
+}
+
+void PA_SetCollectionVariable(PA_Variable* variable, PA_CollectionRef collection)
+{
+	variable->fType = eVK_Collection;
+	variable->fFiller = 0;
+	variable->uValue.fCollection = collection;
 }
 
 
@@ -4192,6 +4267,15 @@ void PA_SetOperationVariable( PA_Variable* variable, char op )
 	else if ( op == '>' )
 		variable->uValue.fOperation = 5;
 
+}
+
+void PA_CopyVariable(PA_Variable *source, PA_Variable *destination)
+{
+	EngineBlock eb;
+	eb.fPtr1 = source;
+	eb.fPtr2 = destination;
+	Call4D(EX_COPY_VARIABLE, &eb);
+	sErrorCode = eb.fError;
 }
 
 
@@ -6954,7 +7038,7 @@ sLONG_PTR	PA_GetMainWindowHWND()
 {
 	sLONG_PTR result = NULL;
 	EngineBlock	pb = {0};
-	Call4D( EX_GET_MAIN_MDI_WINDOW, &pb );
+	Call4D( EX_GET_MAIN_MDI_WINDOW, &pb);
 	if(pb.fError==0)
 		result = pb.fParam1;
 	return result;

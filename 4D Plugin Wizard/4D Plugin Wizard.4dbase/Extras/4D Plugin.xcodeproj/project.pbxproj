@@ -11,6 +11,7 @@
 		6D00C205174544D400C6AD41 /* 4DPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C204174544D400C6AD41 /* 4DPlugin.cpp */; };
 		6DF707151E9F739C009DDB3B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF7070C1E9F6F5D009DDB3B /* CoreFoundation.framework */; };
 		6DF707171E9F7672009DDB3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF707161E9F7672009DDB3B /* CoreGraphics.framework */; };
+		8B07B4A0209C64A3003D8DD0 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B07B49F209C64A3003D8DD0 /* manifest.json */; };
 		8D01CCCA0486CAD60068D4B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		6DF707111E9F705E009DDB3B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6DF707161E9F7672009DDB3B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6DFD9388174292F600B4A5D6 /* 4DPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 4DPlugin.h; sourceTree = "<group>"; };
+		8B07B49F209C64A3003D8DD0 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = manifest.json; path = "sample.4dbase/Plugins/4D Plugin.bundle/Contents/manifest.json"; sourceTree = "<group>"; };
 		8D01CCD10486CAD60068D4B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8B07B49F209C64A3003D8DD0 /* manifest.json */,
 				8D01CCD10486CAD60068D4B7 /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
@@ -177,6 +180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B07B4A0209C64A3003D8DD0 /* manifest.json in Resources */,
 				8D01CCCA0486CAD60068D4B7 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

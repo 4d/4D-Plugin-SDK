@@ -52,8 +52,8 @@ typedef unsigned short PA_Unichar;
 typedef void* PA_Picture;
 typedef void* PA_DragContextRef;
 typedef void* PA_PasteboardRef;
-typedef PA_Handle PA_ObjectRef;
-
+typedef void* PA_ObjectRef;
+typedef void* PA_CollectionRef;
 typedef struct
 {
 	PA_long32			fLength;
@@ -496,7 +496,8 @@ typedef struct PA_Variable
 		PA_Array		fArray;		// Any array
 		PA_Pointer*		fPointer;	// C_POINTER variables
 		unsigned char	fOperation;	// to pass '*', '<' or '>' to PA_ExecuterCommandByID
-
+		PA_ObjectRef	fObject;
+		PA_CollectionRef fCollection;
 		struct
 		{
 			short fFieldNumber;	// to pass a field or table to PA_ExecuteCommandByID

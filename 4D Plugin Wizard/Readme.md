@@ -110,7 +110,7 @@ To add a new command you need to firstly add (*Add a theme*) or select a theme. 
 ![Interface](../docs/Images/newCommand.png)
 
 * **Name**: The name of the function
-* **Return value**: The type of value returned (*None, Integer, Hour, Date, Long, Blob, Picture, Real, Text)*
+* **Return value**: The type of value returned (*None, Integer, Hour, Date, Long, Blob, Picture, Real, Text, Collection, Object)*
 * **Parameters**: The parameters of the function created
 
 ```c
