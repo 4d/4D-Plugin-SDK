@@ -104,6 +104,23 @@ void         PA_DisposePicture( PA_Picture picture );
 PA_Unistring PA_GetPictureData( PA_Picture picture, PA_long32 index, PA_Handle handle );
 PA_Picture   PA_DuplicatePicture( PA_Picture picture, char retainOnly );
 
+
+// ---------------------------------------------------------------
+// object manipulations
+// ---------------------------------------------------------------
+
+PA_ObjectRef     PA_CreateObject ( void );
+void             PA_DisposeObject ( PA_ObjectRef object );
+PA_ObjectRef     PA_DuplicateObject ( PA_ObjectRef object );
+PA_Variable      PA_GetObjectProperty( PA_ObjectRef object, PA_Unistring* key );
+void             PA_SetObjectProperty( PA_ObjectRef object, PA_Unistring* key, PA_Variable value );
+void             PA_RemoveObjectProperty( PA_ObjectRef object, PA_Unistring* key );
+char             PA_HasObjectProperty( PA_ObjectRef object, PA_Unistring* key );
+PA_VariableKind  PA_GetObjectPropertyType( PA_ObjectRef object, PA_Unistring* key );
+PA_Variable      PA_JsonParse( PA_Unistring* json, PA_VariableKind kind );
+PA_Unistring     PA_JsonStringify( PA_Variable value, char prettyPrint );
+
+
 // ---------------------------------------------------------------
 // these commands returns or set informations 
 // on 4D Application
@@ -339,6 +356,7 @@ short        PA_GetIntegerField    ( short table, short field );
 PA_long32         PA_GetTimeField       ( short table, short field );
 void         PA_GetDateField       ( short table, short field, short* day, short* month, short* year );
 char         PA_GetBooleanField    ( short table, short field );
+PA_ObjectRef PA_GetObjectField     ( short table, short field );
 
 // ---------------------------------------------------------------
 // Set fields in database
@@ -354,6 +372,7 @@ void PA_SetIntegerField    ( short table, short field, short value );
 void PA_SetTimeField       ( short table, short field, PA_long32  value );
 void PA_SetDateField       ( short table, short field, short day, short month, short year );
 void PA_SetBooleanField    ( short table, short field, char value );
+void PA_SetObjectField     ( short table, short field, PA_ObjectRef object );
 
 
 
@@ -382,6 +401,7 @@ PA_Picture		PA_GetPictureParameter       ( PA_PluginParameters params, short ind
 void			PA_GetDateParameter          ( PA_PluginParameters params, short index, short* day, short* month, short* year );
 PA_long32			PA_GetTimeParameter          ( PA_PluginParameters params, short index );
 PA_Variable		PA_GetVariableParameter      ( PA_PluginParameters params, short index );
+PA_ObjectRef    PA_GetObjectParameter        ( PA_PluginParameters params, short index );
 
 
 PA_Pointer		PA_GetPointerParameter       ( PA_PluginParameters params, short index );
@@ -405,6 +425,7 @@ void PA_ReturnBlob     ( PA_PluginParameters params, void* blob, PA_long32 len )
 void PA_ReturnPicture  ( PA_PluginParameters params, PA_Picture picture );
 void PA_ReturnDate     ( PA_PluginParameters params, short day, short month, short year );
 void PA_ReturnTime     ( PA_PluginParameters params, PA_long32 value );
+void PA_ReturnObject   ( PA_PluginParameters params, PA_ObjectRef object );
 
 void PA_ReturnBlobHandle    ( PA_PluginParameters params, PA_Handle hblob );
 
@@ -424,6 +445,7 @@ void PA_SetPictureParameter	   ( PA_PluginParameters params, short index, PA_Pic
 void PA_SetDateParameter	   ( PA_PluginParameters params, short index, short day, short month, short year );
 void PA_SetTimeParameter	   ( PA_PluginParameters params, short index, PA_long32 value );
 void PA_SetVariableParameter   ( PA_PluginParameters params, short index, PA_Variable variable, char clearOldValue );
+void PA_SetObjectParameter	   ( PA_PluginParameters params, short index, PA_ObjectRef value );
 
 
 
@@ -544,6 +566,7 @@ PA_long32         PA_GetLongintVariable     ( PA_Variable variable );
 PA_long32         PA_GetTimeVariable        ( PA_Variable variable );
 void         PA_GetDateVariable        ( PA_Variable variable, short* day, short* month, short* year );
 char         PA_GetBooleanVariable     ( PA_Variable variable );
+PA_ObjectRef PA_GetObjectVariable      ( PA_Variable variable );
 
 
 
@@ -563,6 +586,7 @@ void PA_SetLongintVariable    ( PA_Variable* variable, PA_long32 value   );
 void PA_SetTimeVariable       ( PA_Variable* variable, PA_long32 value   );
 void PA_SetDateVariable       ( PA_Variable* variable, short day, short month, short year );
 void PA_SetBooleanVariable    ( PA_Variable* variable, char value );
+void PA_SetObjectVariable     ( PA_Variable* variable, PA_ObjectRef object );
 
 // those functions are usefull to pass parameters to 4D Commands, using PA_ExecuteCommandByID
 void PA_SetOperationVariable   ( PA_Variable* variable, char op );		// op can be '*', '<', '>'...
@@ -600,6 +624,7 @@ char         PA_GetBooleanInArray ( PA_Variable ar, PA_long32 i );
 PA_Blob      PA_GetBlobInArray    ( PA_Variable ar, PA_long32 i );
 PA_Variable  PA_GetArrayInArray   ( PA_Variable ar, PA_long32 i );
 PointerBlock PA_GetPointerInArray ( PA_Variable ar, PA_long32 i );
+PA_ObjectRef PA_GetObjectInArray  ( PA_Variable ar, PA_long32 i );
 
 // Setting values on arrays
 void PA_SetIntegerInArray   ( PA_Variable ar, PA_long32 i, short value );
@@ -613,6 +638,7 @@ void PA_SetBooleanInArray   ( PA_Variable ar, PA_long32 i, char value );
 void PA_SetBlobInArray      ( PA_Variable ar, PA_long32 i, PA_Blob value );
 void PA_SetArrayInArray     ( PA_Variable ar, PA_long32 i, PA_Variable value );
 void PA_SetPointerInArray   ( PA_Variable ar, PA_long32 i, PointerBlock value );
+void PA_SetObjectInArray    ( PA_Variable ar, PA_long32 i, PA_ObjectRef object );
 
 // ---------------------------------------------------------------
 // 4D Application Methods and functions
