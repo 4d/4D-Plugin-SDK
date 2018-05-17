@@ -460,6 +460,252 @@ PA_Picture PA_DuplicatePicture( PA_Picture picture, char retainOnly )
 	return eb.fPicture;
 }
 
+
+// -----------------------------------------
+//
+// Objects
+//
+// -----------------------------------------
+
+PA_ObjectRef PA_CreateObject()
+{
+	PA_ulong32 version = PA_Get4DVersion() & 0x0000FFFF;
+	PA_Variable params[2], result;
+	PA_ObjectRef object = NULL;
+	PA_Unistring string;
+	PA_Unichar json[] = {'{','}',0};
+	
+	if( version >= 0x00001630 )
+	{
+		result = PA_ExecuteCommandByID( 1471, NULL, 0 );	// New Object
+		object = PA_GetObjectVariable( result );
+	}
+	else if( version >= 0x00001400 )
+	{
+		string = PA_CreateUnistring( json );
+		PA_SetStringVariable( &params[0], &string );
+		PA_SetLongintVariable( &params[1], eVK_Object );
+		result = PA_ExecuteCommandByID( 1218, params, 2 );	// JSON Parse
+		object = PA_GetObjectVariable( result );
+		PA_DisposeUnistring( &string );
+	}
+	
+	return object;
+}
+
+void PA_DisposeObject( PA_ObjectRef object )
+{
+	if( object )
+	{
+		PA_Variable	var;
+		PA_SetObjectVariable( &var, object );
+		PA_ClearVariable( &var );
+	}
+}
+
+void PA_DisposeCollection(PA_CollectionRef collection)
+{
+	if (collection)
+	{
+		PA_Variable	var;
+		PA_SetCollectionVariable(&var, collection);
+		PA_ClearVariable(&var);
+	}
+}
+
+
+PA_ObjectRef PA_DuplicateObject( PA_ObjectRef object )
+{
+	PA_Variable	params[1], result;
+	
+	if( object == NULL )
+		return NULL;
+	
+	PA_SetObjectVariable( &params[0], object );
+	result = PA_ExecuteCommandByID ( 1225, params, 1 );	// OB Copy
+	return PA_GetObjectVariable ( result );
+}
+
+PA_CollectionRef PA_GetCollectionVariable(PA_Variable variable)
+{
+	PA_CollectionRef collection = NULL;
+
+	if (variable.fType == eVK_Collection)
+	{
+		collection = (PA_CollectionRef)variable.uValue.fCollection;
+	}
+
+	return collection;
+}
+
+
+PA_CollectionRef PA_CreateCollection(void)
+{
+	PA_Variable result = PA_ExecuteCommandByID(1472, NULL, 0);	// New Collection
+	return PA_GetCollectionVariable(result);
+}
+
+
+//The PA_Variable should be cleared after use
+PA_Variable PA_GetCollectionElement(PA_CollectionRef collection, long index)
+{
+	PA_Variable value;
+	EngineBlock eb;
+	eb.fLongint = index;
+	eb.fPtr1 = collection;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Collection;
+	Call4D(EX_GET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+
+	return value;
+}
+
+void PA_SetCollectionElement(PA_CollectionRef collection, long index, PA_Variable value)
+{
+	EngineBlock eb;
+	eb.fLongint = index;
+	eb.fPtr1 = collection;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Collection;
+
+	Call4D(EX_SET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+
+}
+
+PA_long32 PA_GetCollectionLength(PA_CollectionRef collection)
+{
+	PA_Variable value;
+	EngineBlock eb;
+	PA_Unichar length[] = { 'l', 'e', 'n', 'g','t','h', 0 };
+	PA_Unistring key = PA_CreateUnistring(&length[0]);
+	eb.fLongint = -1;
+	eb.fUniString1 = key;
+	eb.fPtr1 = collection;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Collection;
+	Call4D(EX_GET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+	PA_DisposeUnistring(&key);
+	return value.uValue.fLongint;
+}
+
+//The PA_Variable should be cleared after use
+PA_Variable PA_GetObjectProperty( PA_ObjectRef object, PA_Unistring* key )
+{
+	PA_Variable value;
+	EngineBlock eb;
+	eb.fUniString1 = *key;
+	eb.fPtr1 = object;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Object;
+	Call4D(EX_GET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+
+	return value;
+}
+
+
+void PA_SetObjectProperty( PA_ObjectRef object, PA_Unistring* key, PA_Variable value )
+{
+
+	EngineBlock eb;
+	eb.fUniString1 = *key;
+	eb.fPtr1 = object;
+	eb.fPtr2 = &value;
+	eb.fShort = eVK_Object;
+
+	Call4D(EX_SET_OBJ_VALUE, &eb);
+	sErrorCode = eb.fError;
+
+}
+
+
+void PA_RemoveObjectProperty( PA_ObjectRef object, PA_Unistring* key )
+{
+	PA_Variable params[2];
+	
+	PA_SetObjectVariable( &params[0], object );
+	PA_SetStringVariable( &params[1], key );
+	
+	PA_ExecuteCommandByID( 1226, params, 2 );	// OB REMOVE
+}
+
+
+char PA_HasObjectProperty( PA_ObjectRef object, PA_Unistring* key )
+{
+	PA_Variable params[2], result;
+	
+	PA_SetObjectVariable( &params[0], object );
+	PA_SetStringVariable( &params[1], key );
+	
+	result = PA_ExecuteCommandByID( 1231, params, 2 );	// OB Is defined
+	
+	return PA_GetBooleanVariable( result );
+}
+
+
+PA_VariableKind  PA_GetObjectPropertyType( PA_ObjectRef object, PA_Unistring* key )
+{
+	PA_Variable params[2], result;
+	PA_VariableKind type;
+	
+	PA_SetObjectVariable( &params[0], object );
+	PA_SetStringVariable( &params[1], key );
+	
+	result = PA_ExecuteCommandByID( 1230, params, 2 );	// OB Get type
+	type = (PA_VariableKind) PA_GetLongintVariable( result );
+	
+	if( type == eVK_Text )
+		type = eVK_Unistring;
+	
+	return type;
+}
+
+
+PA_Variable PA_JsonParse( PA_Unistring* json, PA_VariableKind kind )
+{
+	PA_Variable params[2], result;
+	
+	if( kind == eVK_ArrayObject )
+	{
+		PA_SetStringVariable( &params[0], json );
+		params[1] = PA_CreateVariable( eVK_ArrayObject );
+		PA_ExecuteCommandByID( 1219, params, 2 );	// JSON PARSE ARRAY
+		result = params[1];
+	}
+	else
+	{
+		PA_SetStringVariable( &params[0], json );
+		PA_SetLongintVariable( &params[1], kind );
+		result = PA_ExecuteCommandByID( 1218, params, 2 );	// JSON Parse
+	}
+	
+	return result;
+}
+
+
+PA_Unistring PA_JsonStringify( PA_Variable value, char prettyPrint )
+{
+	PA_Variable params[2], result;
+	
+	params[0] = value;
+	PA_SetOperationVariable( &params[1], '*' );
+
+	if( PA_IsArrayVariable( &value ) )
+	{
+		result = PA_ExecuteCommandByID( 1228, params, prettyPrint ? 2 : 1 );	// JSON Stringify array
+	}
+	else
+	{
+		result = PA_ExecuteCommandByID( 1217, params, prettyPrint ? 2 : 1 );	// JSON Stringify
+	}
+	
+	return PA_GetStringVariable( result );
+}
+
+
 // -----------------------------------------
 //
 // static internal functions
@@ -1473,6 +1719,10 @@ void PA_GetPointerValueProperties( PA_Pointer inPointer, PA_VariableKind* outKin
 			case eFK_BlobField:
 				*outKind=eVK_Blob;
 				break;
+					
+			case eFK_ObjectField:
+				*outKind=eVK_Object;
+				break;
 
 			default:
 				*outKind=eVK_Undefined;
@@ -2072,6 +2322,16 @@ PA_PointerKind PA_GetPointerKind( PA_Pointer pointer )
 		return ePK_PointerToField;
 }
 
+PA_ObjectRef PA_GetObjectParameter(PA_PluginParameters params, short index)
+{
+	return *(((PA_ObjectRef**)params->fParameters)[index - 1]);
+}
+
+PA_CollectionRef PA_GetCollectionParameter(PA_PluginParameters params, short index)
+{
+	return *(((PA_CollectionRef**)params->fParameters)[index - 1]);
+}
+
 // do NOT call PA_ClearVariable after this call, the variable content now belongs to 4D...
 void PA_SetPointerValue( PA_Pointer pointer, PA_Variable variable )
 {
@@ -2215,6 +2475,7 @@ void PA_SetVariableParameter( PA_PluginParameters params, short index, PA_Variab
 		case eVK_ArrayBoolean:
 		case eVK_ArrayUnicode:
 		case eVK_ArrayTime:
+		case eVK_ArrayObject:
 			paramPtr->uValue.fArray.fCurrent = variable.uValue.fArray.fCurrent;
 			paramPtr->uValue.fArray.fNbElements = variable.uValue.fArray.fNbElements;
 			paramPtr->uValue.fArray.fData = variable.uValue.fArray.fData;
@@ -2232,12 +2493,16 @@ void PA_SetVariableParameter( PA_PluginParameters params, short index, PA_Variab
 		case eVK_Picture:
 			paramPtr->uValue.fPicture = variable.uValue.fPicture;
 			break;
+		case eVK_Object:
+			paramPtr->uValue.fObject = variable.uValue.fObject;
+			break;
 
 		case eVK_Pointer:
 			paramPtr->uValue.fPointer = variable.uValue.fPointer;
 			break;
 	}
 }
+
 
 // -----------------------------------------
 //
@@ -2305,8 +2570,17 @@ void PA_ReturnTime( PA_PluginParameters params, PA_long32 value )
 	*((sLONG_PTR*)params->fResult) = (sLONG_PTR)value;
 }
 
+void PA_ReturnObject(PA_PluginParameters params, PA_ObjectRef object)
+{
+	*(PA_ObjectRef*)params->fResult = object;
 
+}
 
+void PA_ReturnCollection(PA_PluginParameters params, PA_CollectionRef collection)
+{
+	*(PA_CollectionRef*)params->fResult = collection;
+
+}
 // -----------------------------------------
 //
 // Get events in a plugin area
@@ -3354,6 +3628,29 @@ char PA_GetBooleanField( short table, short field )
 }
 
 
+// This function does not work
+PA_ObjectRef PA_GetObjectField ( short table, short field )
+{
+	EngineBlock	eb;
+	PA_ObjectRef object = 0;
+	
+	eb.fTable  = table;
+	eb.fField  = field;
+	eb.fHandle = 0;	// subtable
+	eb.fTextHandle = 0;	// subtable
+	eb.fError  = 0;
+	eb.fPtr1 = 0;
+	
+	Call4D( EX_GET_FIELD, &eb );
+	sErrorCode = (PA_ErrorCode) eb.fError;
+	
+	if ( sErrorCode == eER_NoErr )
+		object = (PA_ObjectRef) eb.fPtr1;
+	
+	return object;
+}
+
+
 // -----------------------------------------
 //
 // Set fields in database
@@ -3516,6 +3813,21 @@ void PA_SetBooleanField( short table, short field, char value )
 	sErrorCode = (PA_ErrorCode) eb.fError;
 }
 
+// This function does not work
+void PA_SetObjectField ( short table, short field, PA_ObjectRef object )
+{
+	EngineBlock	eb;
+	
+	eb.fTable = table;
+	eb.fField = field;
+	eb.fHandle = 0;	// subtable
+	eb.fError  = 0;
+	eb.fPtr1 = object;
+	
+	Call4D( EX_SET_FIELD, &eb );
+	sErrorCode = (PA_ErrorCode) eb.fError;
+}
+
 
 // -----------------------------------------
 //
@@ -3647,6 +3959,20 @@ PA_Variable PA_CreateVariable( PA_VariableKind kind )
 			PA_UnlockHandle( variable.uValue.fArray.fData );
 			break;
 
+		case eVK_Object :
+			variable.uValue.fObject = 0;
+			break;
+			
+		case eVK_ArrayObject :
+			variable.uValue.fArray.fCurrent = 0;
+			variable.uValue.fArray.fData = PA_NewHandle( sizeof( PA_ObjectRef ) );
+			variable.uValue.fArray.fNbElements = 0;
+			pt = PA_LockHandle( variable.uValue.fArray.fData );
+			if ( pt )
+				*(PA_ObjectRef*) pt  = PA_CreateObject();
+			PA_UnlockHandle( variable.uValue.fArray.fData );
+			break;
+			
 		case eVK_Undefined :
 		case eVK_ArrayOfArray :
 		case eVK_Pointer :
@@ -3800,6 +4126,19 @@ char PA_GetBooleanVariable( PA_Variable variable )
 }
 
 
+PA_ObjectRef PA_GetObjectVariable ( PA_Variable variable )
+{
+	PA_ObjectRef object = NULL;
+	
+	if ( variable.fType == eVK_Object )
+	{
+		object = variable.uValue.fObject;
+	}
+	
+	return object;
+}
+
+
 // -----------------------------------------
 //
 // Set 4D Application variables
@@ -3901,6 +4240,22 @@ void PA_SetBooleanVariable( PA_Variable* variable, char value )
 	variable->uValue.fBoolean = value;
 }
 
+
+void PA_SetObjectVariable( PA_Variable* variable, PA_ObjectRef object )
+{
+	variable->fType = eVK_Object;
+	variable->fFiller = 0;
+	variable->uValue.fObject = object;
+}
+
+void PA_SetCollectionVariable(PA_Variable* variable, PA_CollectionRef collection)
+{
+	variable->fType = eVK_Collection;
+	variable->fFiller = 0;
+	variable->uValue.fCollection = collection;
+}
+
+
 void PA_SetOperationVariable( PA_Variable* variable, char op )
 {
 	variable->fType = 0;
@@ -3912,6 +4267,15 @@ void PA_SetOperationVariable( PA_Variable* variable, char op )
 	else if ( op == '>' )
 		variable->uValue.fOperation = 5;
 
+}
+
+void PA_CopyVariable(PA_Variable *source, PA_Variable *destination)
+{
+	EngineBlock eb;
+	eb.fPtr1 = source;
+	eb.fPtr2 = destination;
+	Call4D(EX_COPY_VARIABLE, &eb);
+	sErrorCode = eb.fError;
 }
 
 
@@ -4095,6 +4459,22 @@ void PA_ResizeArray( PA_Variable *ar, PA_long32 nb )
 				size = ( nb1 + 7 ) / 8;
 				oldSize = ( oldCount + 7 ) / 8;
 				break;
+				
+			case eVK_ArrayObject :
+				// dispose in memory object handles that will be removed
+				// if array become smaller
+				if ( nb < ar->uValue.fArray.fNbElements )
+				{
+					PA_ObjectRef *ptObject = (PA_ObjectRef*) PA_LockHandle( ar->uValue.fArray.fData );
+					
+					for ( i = nb + 1; i <= ar->uValue.fArray.fNbElements; i++ )
+						PA_DisposeObject( ptObject[ i ] );
+					
+					PA_UnlockHandle( ar->uValue.fArray.fData );
+				}
+				size = nb1 * (PA_long32) sizeof( PA_ObjectRef );
+				oldSize = oldCount * (PA_long32) sizeof( PA_ObjectRef );
+				break;
 		}
 
 		if ( PA_SetHandleSize( ar->uValue.fArray.fData, size ) )
@@ -4172,6 +4552,7 @@ char  PA_IsArrayVariable( PA_Variable* ar )
 		case eVK_ArrayBlob:
 		case eVK_ArrayTime:
 		case eVK_ArrayUnicode:
+		case eVK_ArrayObject:
 			isArray=-1;
 			break;
 		}
@@ -4386,6 +4767,23 @@ PointerBlock PA_GetPointerInArray( PA_Variable ar, PA_long32 i )
 }
 
 
+PA_ObjectRef PA_GetObjectInArray ( PA_Variable ar, PA_long32 i )
+{
+	PA_ObjectRef object = NULL;
+	
+	if (	ar.fType == eVK_ArrayObject
+		&& ar.uValue.fArray.fData
+		&& i >= 0
+		&& i <= ar.uValue.fArray.fNbElements
+		)
+	{
+		object = ( * (PA_ObjectRef**) ar.uValue.fArray.fData ) [ i ];
+	}
+	
+	return object;
+}
+
+
 void PA_SetIntegerInArray( PA_Variable ar, PA_long32 i, short value )
 {
 	if (	ar.fType == eVK_ArrayInteger
@@ -4562,6 +4960,32 @@ void PA_SetPointerInArray( PA_Variable ar, PA_long32 i, PointerBlock value )
 		 && i <= ar.uValue.fArray.fNbElements
 		)
 		( *(PointerBlock**) ar.uValue.fArray.fData ) [ i ] = value;
+}
+
+
+void PA_SetObjectInArray ( PA_Variable ar, PA_long32 i, PA_ObjectRef object )
+{
+	PA_Handle* pth;
+	
+	if (	ar.fType == eVK_ArrayObject
+		 && ar.uValue.fArray.fData
+		 && i >= 0
+		 && i <= ar.uValue.fArray.fNbElements
+		)
+	{
+		// lock the array handle and get a pointer on the element
+		pth = (PA_ObjectRef*) PA_LockHandle( ar.uValue.fArray.fData );
+		pth += i;
+		
+		// remove existing object
+		if ( *pth && *pth != object)
+			PA_DisposeObject( *pth );
+		
+		// set new object in array
+		*pth = object;
+		
+		PA_UnlockHandle( ar.uValue.fArray.fData );
+	}
 }
 
 
@@ -6614,7 +7038,7 @@ sLONG_PTR	PA_GetMainWindowHWND()
 {
 	sLONG_PTR result = NULL;
 	EngineBlock	pb = {0};
-	Call4D( EX_GET_MAIN_MDI_WINDOW, &pb );
+	Call4D( EX_GET_MAIN_MDI_WINDOW, &pb);
 	if(pb.fError==0)
 		result = pb.fParam1;
 	return result;

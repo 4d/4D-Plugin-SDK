@@ -52,7 +52,8 @@ typedef unsigned short PA_Unichar;
 typedef void* PA_Picture;
 typedef void* PA_DragContextRef;
 typedef void* PA_PasteboardRef;
-
+typedef void* PA_ObjectRef;
+typedef void* PA_CollectionRef;
 typedef struct
 {
 	PA_long32			fLength;
@@ -495,7 +496,8 @@ typedef struct PA_Variable
 		PA_Array		fArray;		// Any array
 		PA_Pointer*		fPointer;	// C_POINTER variables
 		unsigned char	fOperation;	// to pass '*', '<' or '>' to PA_ExecuterCommandByID
-
+		PA_ObjectRef	fObject;
+		PA_CollectionRef fCollection;
 		struct
 		{
 			short fFieldNumber;	// to pass a field or table to PA_ExecuteCommandByID
@@ -710,7 +712,8 @@ typedef enum
   eFK_TimeField			= 11,	//	Time field
   eFK_Long8				= 25,	
   eFK_BlobField			= 30,	//	Blob field
-  eFK_FloatField		= 35	//  Float
+  eFK_FloatField		= 35,	//  Float
+  eFK_ObjectField		= 38	//  Object field
 } PA_FieldKind;
 
 
@@ -738,6 +741,7 @@ typedef struct PA_MethodFlags
 typedef enum
 {														
 	eVK_Real			= 1,	// Variable declared using C_REAL
+	eVK_Text			= 2,
 	eVK_Date			= 4,	// Variable declared using C_DATE
 	eVK_Undefined		= 5,	// Undefined variable
 	eVK_Boolean			= 6,	// variable declared using C_BOOLEAN
@@ -750,6 +754,7 @@ typedef enum
 	eVK_ArrayInteger	= 15,	// One dimension array declared using ARRAY INTEGER
 	eVK_ArrayLongint	= 16,	// One dimension array declared using ARRAY LONGINT
 	eVK_ArrayDate		= 17,	// One dimension array declared using ARRAY DATE
+	eVK_ArrayText		= 18,
 	eVK_ArrayPicture	= 19,	// One dimension array declared using ARRAY PICTURE
 	eVK_ArrayPointer	= 20,	// One dimension array declared using ARRAY POINTER
 	eVK_ArrayBoolean	= 22,	// One dimension array declared using ARRAY BOOLEAN
@@ -758,7 +763,11 @@ typedef enum
 	eVK_ArrayBlob		= 31,	// One dimension array declared using ARRAY BLOB
 	eVK_ArrayTime		= 32,	// One dimension array declared using ARRAY TIME
 	eVK_Unistring		= 33,	// Variable declared using C_STRING or C_TEXT
-	eVK_ArrayUnicode	= 34	// One Dimension array declared using ARRAY STRING or ARRAY TEXT
+	eVK_ArrayUnicode	= 34,	// One Dimension array declared using ARRAY STRING or ARRAY TEXT
+	eVK_Object			= 38,	// Variable declared using C_OBJECT
+	eVK_ArrayObject		= 39,	// Variable declared using ARRAY OBJECT
+	eVK_Collection		= 42,	// Variable declared using C_COLLECTION
+	eVK_Null			= 255	// Null type value
 } PA_VariableKind;
 
 
