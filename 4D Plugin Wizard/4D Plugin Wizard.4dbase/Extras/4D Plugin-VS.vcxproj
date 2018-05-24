@@ -157,7 +157,8 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command />
+      <Command>copy /Y "$(SolutionDir)Resources\manifest.json" "$(TargetDir)..\manifest.json" &amp;&amp; xcopy /Y "$(SolutionDir)Resources\constants.xlf" "$(TargetDir)..\Resources\constants.xlf*"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

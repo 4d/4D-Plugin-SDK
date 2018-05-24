@@ -267,6 +267,7 @@ The manifest file must be placed inside the "contents" folder of the plug in bun
 * *commands* &rarr; is a array of commands, and is descibed with two keys:
     * *theme* &rarr; the theme name. For easy writing, this value can be a xliff resname , 4D will resolve xliff when loading the plugin.
     * *syntax* &rarr; the command syntax
+    * *threadSafe* &arr; if true, sets the command to thread safe and can be used in a preemptive process (per default, the commands are not thread safe)
 * *compiler variables* &rarr; is a string array
 
 *Sample*:
@@ -284,7 +285,8 @@ The manifest file must be placed inside the "contents" folder of the plug in bun
     },
     {
       "theme": "System Commands",
-      "syntax": "command2(&L;&L):L"
+      "syntax": "command2(&L;&L):L",
+      "threadSafe": true
     }
   ],
   "compiler variables": ["test_var:D","test_var1:L","<>test_var2:L"]
