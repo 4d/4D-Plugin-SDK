@@ -2560,9 +2560,6 @@ void PA_SetVariableParameter( PA_PluginParameters params, short index, PA_Variab
 		case eVK_Picture:
 			paramPtr->uValue.fPicture = variable.uValue.fPicture;
 			break;
-		case eVK_Object:
-			paramPtr->uValue.fObject = variable.uValue.fObject;
-			break;
 
 		case eVK_Pointer:
 			paramPtr->uValue.fPointer = variable.uValue.fPointer;
