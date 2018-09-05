@@ -68,7 +68,7 @@
 #define  EX_GET_TABLE_FIELD_NUMBER					-50		// PA_GetTableAndFieldNumbers								|| false
 #define  EX_SELECTED_RECORD_NUMBER					-51		// PA_SelectedRecordNumber									|| false
 	// 52->55 : hotlinks, obsoletes																						|| false
-#define  EX_GET_INFORMATION							-56		// PA_Get4DVersion, PA_IsDemoVersion, PA_IsDatabaseLocked, 	|| false
+#define  EX_GET_INFORMATION							-56		// PA_Get4DVersion, PA_IsDemoVersion, PA_IsDatabaseLocked, 	|| true
 															// PA_IsCompiled, PA_Is4DClient, PA_Is4DServer				
 															// PA_IsWebProcess, PA_GetMessagesStatus					
 #define  EX_MESSAGES								-57		// PA_SetMessagesStatus										|| false
@@ -328,7 +328,7 @@
 #define  EX_SET_WINDOW_FOCUSED						-421	// PA_SetWindowFocused										|| false
 #define  EX_IS_WINDOW_FOCUSED						-422	// PA_IsWindowFocused										|| false
 #define  EX_METHOD_EDITOR							-423	// PA_MethodEditor											|| false
-#define  EX_CONVERT_STRING							-424	// PA_ConvertString											|| false
+#define  EX_CONVERT_STRING							-424	// PA_ConvertString											|| true
 #define  EX_DIAL4D_CANCEL_VALIDATE					-425	// PA_Dial4DCancelValidate									|| false
 	// 426	obsolete																									
 #define  EX_GET_4D_FOLDER							-427	// PA_Get4DFolder											|| false
@@ -338,7 +338,7 @@
 #define  EX_GET_USERS_INFO							-431	// PA_CountConnectedUsers									|| false
 #define  EX_GET_4D_HINSTANCE						-432	// PA_Get4DHInstance										|| false
 	// 433 reserved																										
-#define  EX_HANDLE_MANAGER							-434	// PA_NewHandle, PA_DisposeHandle,							|| false
+#define  EX_HANDLE_MANAGER							-434	// PA_NewHandle, PA_DisposeHandle,							|| true
 															// PA_SetHandleSize, PA_GetHandleSize,						|| false
 															// PA_SetHandleState, PA_GetHandleState,					|| false
 															// PA_LockHandle, PA_UnlockHandle							|| false
@@ -347,8 +347,8 @@
 #define  EX_UNLOCK_RESOURCE							-439	// PA_UnlockResource, PA_UnlockResourceHandle				|| false
 #define  EX_METHOD_NAMES							-442	// PA_MethodNames											|| false
 																														
-#define  EX_GET_COMMAND_ID							-506	// PA_GetCommandID											|| false
-#define  EX_GET_COMMAND_NAME						-507	// PA_GetCommandName										|| false
+#define  EX_GET_COMMAND_ID							-506	// PA_GetCommandID											|| true
+#define  EX_GET_COMMAND_NAME						-507	// PA_GetCommandName										|| true
 #define  EX_GET_METHOD_ID							-508	// PA_GetMethodID											|| false
 #define  EX_GET_CENTURY_INFO						-531	// PA_GetCenturyInfo										|| false
 #define  EX_OPEN_PRINTER_SESSION					-556	// PA_OpenPrinterSession									|| false
@@ -378,7 +378,7 @@
 #define  EX_PASTEBOARD_SET_DATA						-624	// PA_SetPasteboardData										|| false
 #define  EX_GET_DRAG_AND_DROP_PASTEBOARD			-631	// PA_GetDragAndDropPasteboard								|| false
 #define  EX_GET_DRAG_AND_DROP_VARIABLE				-635	// PA_GetDragAndDropVariable								|| false
-#define  EX_EXECUTE_COMMAND_BY_ID					-636	// PA_ExecuteCommandByID									|| depends on the commands called
+#define  EX_EXECUTE_COMMAND_BY_ID					-636	// PA_ExecuteCommandByID									|| true
 #define  EX_LOCALIZE_STRING							-637	// PA_LocalizeStringByID, PA_LocalizeString					|| false
 #define  EX_DUPLICATE_PICTURE						-654	// PA_DuplicatePicture										|| false
 #define  EX_CREATE_ELEMENTS							-655	// PA_CreateElementsFromXMLDefinition						|| false
