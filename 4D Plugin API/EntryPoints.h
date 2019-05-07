@@ -32,18 +32,18 @@
 #define  EX_RECORDS_IN_SELECTION                    -6      // PA_RecordsInSelection
 #define  EX_DELETE_SELECTION                        -7      // PA_DeleteSelection
 #define  EX_FIRST_RECORD                            -8      // PA_FirstRecord
-#define  EX_COUNT_TABLES                            -9      // PA_CountTables (ThreadSafe)
-#define  EX_COUNT_FIELDS                            -10     // PA_CountFields (PA_UseVirtualStructure mode) (ThreadSafe)
-#define  EX_COUNT_INVISIBLE_FIELDS_TOO              -717    // PA_CountFields (PA_UseRealStructure mode) (ThreadSafe)
-#define  EX_GET_TABLE_NAME                          -11     // PA_GetTableName, PA_IsTableVisible (ThreadSafe)
-#define  EX_FIELD_ATTRIBUTES                        -12     // PA_GetFieldName, PA_GetFieldProperties (ThreadSafe)
+#define  EX_COUNT_TABLES                            -9      // PA_CountTables
+#define  EX_COUNT_FIELDS                            -10     // PA_CountFields (PA_UseVirtualStructure mode)
+#define  EX_COUNT_INVISIBLE_FIELDS_TOO              -717    // PA_CountFields (PA_UseRealStructure mode)
+#define  EX_GET_TABLE_NAME                          -11     // PA_GetTableName, PA_IsTableVisible 
+#define  EX_FIELD_ATTRIBUTES                        -12     // PA_GetFieldName, PA_GetFieldProperties 
 #define  EX_ORDER_BY                                -13     // PA_CloseOrderBy, PA_OrderBy, PA_OrderByDialog
 #define  EX_QUERY                                   -14     // PA_CloseQuery, PA_QueryDialog
 #define  EX_BEFORE_SELECTION                        -15     // PA_BeforeSelection
 #define  EX_END_SELECTION                           -16     // PA_EndSelection
-#define  EX_GET_FIELD                               -17     // PA_GetXXXField (ThreadSafe)
+#define  EX_GET_FIELD                               -17     // PA_GetXXXField 
 #define  EX_SET_FIELD                               -18     // PA_SetXXXField
-#define  EX_GET_VARIABLE                            -19     // PA_GetVariable (ThreadSafe)
+#define  EX_GET_VARIABLE                            -19     // PA_GetVariable 
 #define  EX_SET_VARIABLE                            -20     // PA_SetVariable
 #define  EX_GET_EXPORT_FILTER                       -24     // PA_GetExportFilter
 #define  EX_GET_IMPORT_FILTER                       -25     // PA_GetImportFilter
@@ -62,7 +62,7 @@
 #define  EX_STRING                                  -47     // PA_FormatString
 #define  EX_POPUP_FIELD_LIST                        -48     // PA_FieldPopup
 #define  EX_POPUP_TABLE_LIST                        -49     // PA_TableAndFieldPopup
-#define  EX_GET_TABLE_FIELD_NUMBER                  -50     // PA_GetTableAndFieldNumbers (ThreadSafe)
+#define  EX_GET_TABLE_FIELD_NUMBER                  -50     // PA_GetTableAndFieldNumbers
 #define  EX_SELECTED_RECORD_NUMBER                  -51     // PA_SelectedRecordNumber
 #define  EX_GET_INFORMATION                         -56     // PA_Get4DVersion, PA_IsDemoVersion, (ThreadSafe)
                                                             // PA_IsCompiled, PA_Is4DClient,
