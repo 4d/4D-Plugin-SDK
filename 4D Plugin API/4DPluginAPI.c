@@ -9065,3 +9065,103 @@ char PA_IsAreaVisible( PA_PluginParameters params )
 
 	return visible;
 }
+
+PA_Variable PA_ExecuteCollectionMethod(PA_CollectionRef inCollection, PA_Unichar* funtionName, PA_Variable* parameters, short nbParameters)
+{
+	EngineBlock eb;
+	PA_Variable returned = { 0 };
+	PA_Handle h;
+	PA_Variable** ptvar;
+	PA_long32 i;
+	const unsigned long numberParams = nbParameters + 2;
+
+	h = PA_NewHandle(numberParams * sizeof(PA_Variable*));
+	if (h)
+	{
+		returned.fType = eVK_Undefined;
+		returned.fFiller = 0;
+
+		eb.fPtr1 = PA_LockHandle(h);
+		eb.fPtr2 = &returned;
+
+		ptvar = (PA_Variable**)eb.fPtr1;
+		PA_Variable	col;
+		PA_SetCollectionVariable(&col, inCollection);
+		*ptvar = &col;
+		ptvar++;
+
+		PA_Variable	name;
+		PA_Unistring str = PA_CreateUnistring(funtionName);
+		PA_SetStringVariable(&name, &str);
+		*ptvar = &name;
+		ptvar++;
+
+		if (parameters != NULL)
+		{
+			for (i = 2; i < numberParams; i++, ptvar++, parameters++)
+				*ptvar = parameters;
+		}
+
+		eb.fError = eER_NoErr;
+		eb.fParam2 = numberParams;
+
+		Call4D(EX_CALL_OBJ_FUNCTION, &eb);
+
+		PA_UnlockHandle(h);
+		PA_DisposeHandle(h);
+
+		sErrorCode = (PA_ErrorCode)eb.fError;
+	}
+
+	return returned;
+}
+
+PA_Variable PA_ExecuteObjectMethod(PA_ObjectRef inObject, PA_Unichar* funtionName, PA_Variable* parameters, short nbParameters)
+{
+	EngineBlock eb;
+	PA_Variable returned = { 0 };
+	PA_Handle h;
+	PA_Variable** ptvar;
+	PA_long32 i;
+	const unsigned long numberParams = nbParameters + 2;
+
+	h = PA_NewHandle(numberParams * sizeof(PA_Variable*));
+	if (h)
+	{
+		returned.fType = eVK_Undefined;
+		returned.fFiller = 0;
+
+		eb.fPtr1 = PA_LockHandle(h);
+		eb.fPtr2 = &returned;
+
+		ptvar = (PA_Variable**)eb.fPtr1;
+		PA_Variable	col;
+		PA_SetObjectVariable(&col, inObject);
+		*ptvar = &col;
+		ptvar++;
+
+		PA_Variable	name;
+		PA_Unistring str = PA_CreateUnistring(funtionName);
+		PA_SetStringVariable(&name, &str);
+		*ptvar = &name;
+		ptvar++;
+
+		if (parameters != NULL)
+		{
+			for (i = 2; i < numberParams; i++, ptvar++, parameters++)
+				*ptvar = parameters;
+		}
+
+		eb.fError = eER_NoErr;
+		eb.fParam2 = numberParams;
+
+		Call4D(EX_CALL_OBJ_FUNCTION, &eb);
+
+		PA_UnlockHandle(h);
+		PA_DisposeHandle(h);
+
+		sErrorCode = (PA_ErrorCode)eb.fError;
+	}
+
+	return returned;
+}
