@@ -7156,7 +7156,12 @@ sLONG_PTR	PA_GetMainWindowHWND()
 // into a Macintosh regular WindowPtr
 sLONG_PTR PA_GetWindowPtr( PA_WindowRef windowRef )
 {
-	return windowRef;
+    EngineBlock eb;
+    eb.fHandle = (PA_Handle) windowRef;
+    eb.fError  = 0;
+    Call4D( EX_GET_HWND, &eb );
+    sErrorCode = (PA_ErrorCode) eb.fError;
+    return (sLONG_PTR)eb.fHandle;
 }
 
 
