@@ -4060,6 +4060,7 @@ PA_Variable PA_CreateVariable( PA_VariableKind kind )
 		case eVK_ArrayPointer:
 		case eVK_Integer :
 			// not supported
+        default:
 			break;
 	}
 	return variable;
@@ -8983,6 +8984,8 @@ void PA_UseQuartzAxis( PA_PluginParameters params,short *outAreaX,short *outArea
 			context = (CGContextRef) props.fMacPort;
 			break;
 		}
+        default:
+            break;
 	}
 	if(context!=NULL)
 	{
@@ -9024,6 +9027,8 @@ void PA_UseQuickdrawAxis( PA_PluginParameters params,short *outAreaX,short *outA
 			context = (CGContextRef) props.fMacPort;
 			break;
 		}
+        default:
+            break;
 	}
 	if(context!=NULL)
 	{
