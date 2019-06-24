@@ -2347,7 +2347,7 @@ PA_Pointer PA_GetPointerParameter( PA_PluginParameters params, short index )
 
 		if ( ptvar->fType == eVK_Pointer )
 		{
-			if (( ptvar->uValue.fPointer == 0 ))	// m.c
+            if ( ptvar->uValue.fPointer == 0 )	// m.c
 				return 0;
 			
 			return *ptvar->uValue.fPointer;
