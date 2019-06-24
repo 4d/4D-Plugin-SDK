@@ -22,6 +22,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if __APPLE__
+#include <CoreGraphics/CoreGraphics.h>
+#endif
+
 // gCall4D stores the address of a callback routine in 4D.
 // this address is given by 4D when it calls the plugin for the first time.
 Call4DProcPtr gCall4D = 0;
