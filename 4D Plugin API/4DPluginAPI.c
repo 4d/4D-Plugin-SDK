@@ -2886,7 +2886,7 @@ void PA_AcceptDeselect( PA_PluginParameters params, char accept )
 PA_DragAndDropInfo PA_GetDragAndDropInfo( PA_PluginParameters params )
 {
 	PA_Event			*ev;
-	PA_DragAndDropInfo	dropinfo = {0};
+    PA_DragAndDropInfo	dropinfo = {{0}};
 
 	ev = ( (PA_Event**) params->fParameters )[ 0 ];
 	if ( ev->fWhat == eAE_Drop || ev->fWhat == eAE_AllowDrop )
@@ -5897,7 +5897,7 @@ void PA_UnlockDatabase()
 // it will return 0.
 char PA_TryToOpenPrinterSession()
 {
-	EngineBlock eb={0};
+    EngineBlock eb={{0}};
 	eb.fError = eER_NoErr;
 	Call4D( EX_TRY_TO_OPEN_PRINTER_SESSION, &eb );
 	sErrorCode = (PA_ErrorCode)eb.fError;
@@ -5921,7 +5921,7 @@ char PA_TryToOpenPrinterSession()
 // so you should not call yourself PrOpen before printing
 char PA_OpenPrinterSession()
 {
-	EngineBlock eb={0};
+    EngineBlock eb={{0}};
 
 	Call4D( EX_OPEN_PRINTER_SESSION, &eb );
 	sErrorCode = (PA_ErrorCode)eb.fError;
@@ -5934,7 +5934,7 @@ char PA_OpenPrinterSession()
 // need to call PrClose yourself after printing.
 void PA_ClosePrinterSession()
 {
-	EngineBlock eb={0};
+    EngineBlock eb={{0}};
 
 	Call4D( EX_CLOSE_PRINTER_SESSION, &eb );
 	sErrorCode = (PA_ErrorCode)eb.fError;
@@ -7147,7 +7147,7 @@ sLONG_PTR PA_GetHWND( PA_WindowRef windowRef )
 sLONG_PTR	PA_GetMainWindowHWND()
 {
 	sLONG_PTR result = NULL;
-	EngineBlock	eb = {0};
+    EngineBlock	eb = {{0}};
 	Call4D( EX_GET_MAIN_MDI_WINDOW, &eb);
 	sErrorCode = (PA_ErrorCode)eb.fError;
 
