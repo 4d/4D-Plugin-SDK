@@ -1802,7 +1802,7 @@ void PA_GetPointerValueProperties( PA_Pointer inPointer, PA_VariableKind* outKin
 
 		if ( inPointer )
 		{
-			eb.fParam1 = inPointer;
+			eb.fParam1 = (sLONG_PTR)inPointer;
 			Call4D( EX_GET_POINTER_VALUE_PROPERTIES, &eb );
 			sErrorCode = eb.fError;
 
@@ -2366,7 +2366,7 @@ PA_Variable PA_GetPointerValue( PA_Pointer pointer )
 	if ( pointer )
 	{
 		eb.fHandle = (PA_Handle) &variable;
-		eb.fParam1 = pointer;
+		eb.fParam1 = (sLONG_PTR)pointer;
 		Call4D( EX_GET_POINTER_VALUE, &eb );
 		sErrorCode = eb.fError;
 	}
@@ -2409,7 +2409,7 @@ void PA_SetPointerValue( PA_Pointer pointer, PA_Variable variable )
 	if ( pointer )
 	{
 		eb.fHandle = (PA_Handle) &variable;
-		eb.fParam1 = pointer;
+		eb.fParam1 = (sLONG_PTR)pointer;
 		Call4D( EX_SET_POINTER_VALUE, &eb );
 		sErrorCode = eb.fError;
 	}
@@ -2932,7 +2932,7 @@ void PA_GetDragPositions( PA_PluginParameters params, PA_Rect* rect, short* x, s
 void PA_DragAndDrop( short startX, short startY, char useCustomRect, PA_Rect customRect )
 {
 	EngineBlock eb;
-	eb.fParam1 = &customRect;
+	eb.fParam1 = (sLONG_PTR)&customRect;
 	eb.fParam2 = useCustomRect ? 0 : -1;
 	eb.fParam3 = startX;
 	eb.fParam4 = startY;
@@ -3205,7 +3205,7 @@ char PA_GetKey( PA_PluginParameters params, PA_Unichar* unichar, PA_KeyCode* key
 				*unichar = (PA_Unichar) eb.fParam1;
 			
 			if ( NULL != keycode )
-				*keycode = eb.fLongint;
+				*keycode = (PA_KeyCode)eb.fLongint;
 
 			if ( NULL != altKey )
 				*altKey = (char) eb.fParam2;
@@ -3360,7 +3360,7 @@ void PA_SendHTML( PA_PluginParameters params, void* webData, char* HTMLbuffer, P
 
 	if ( ev->fWhat == eAE_WebPublish )
 	{
-		ev->fMessage = HTMLbuffer;
+		ev->fMessage = (sLONG_PTR)HTMLbuffer;
 		ev->fWhen = len;
 		*(void**)( & ev->fWhereV ) = webData;
 		ev->fModifiers = 1;
@@ -3380,7 +3380,7 @@ void PA_SendWebPicture( PA_PluginParameters params, void* webData, void* picture
 
 	if ( ev->fWhat == eAE_WebPublishPicture )
 	{
-		ev->fMessage = picture;
+		ev->fMessage = (sLONG_PTR)picture;
 		ev->fWhen = len;
 		*(void**)( & ev->fWhereV ) = webData;
 		ev->fModifiers = (short) kind;
@@ -4955,7 +4955,7 @@ void PA_SetPictureInArray( PA_Variable ar, PA_long32 i, PA_Picture picture )
 	   )
 	{
 		// lock the array handle and get a pointer on the element
-		pth = (PA_Picture) PA_LockHandle( ar.uValue.fArray.fData );
+		pth = (PA_Picture*)(PA_Picture) PA_LockHandle( ar.uValue.fArray.fData );
 		pth += i;
 
 		// remove existing picture
@@ -5055,7 +5055,7 @@ void PA_SetObjectInArray ( PA_Variable ar, PA_long32 i, PA_ObjectRef object )
 		)
 	{
 		// lock the array handle and get a pointer on the element
-		pth = (PA_ObjectRef*) PA_LockHandle( ar.uValue.fArray.fData );
+		pth = (PA_Handle*)(PA_ObjectRef*) PA_LockHandle( ar.uValue.fArray.fData );
 		pth += i;
 		
 		// remove existing object
@@ -5063,7 +5063,7 @@ void PA_SetObjectInArray ( PA_Variable ar, PA_long32 i, PA_ObjectRef object )
 			PA_DisposeObject( *pth );
 		
 		// set new object in array
-		*pth = object;
+		*pth = (PA_Handle)object;
 		
 		PA_UnlockHandle( ar.uValue.fArray.fData );
 	}
@@ -5232,8 +5232,8 @@ char PA_CompareMacStrings( char* text1, PA_long32 len1, char* text2, PA_long32 l
 	EngineBlock eb;
 	sErrorCode = eER_NoErr;
 
-	eb.fParam1 = text1;
-	eb.fParam2 = text2;
+	eb.fParam1 = (sLONG_PTR)text1;
+	eb.fParam2 = (sLONG_PTR)text2;
 
 	eb.fParam3 = len1;
 	eb.fParam4 = len2;
@@ -5280,8 +5280,8 @@ void PA_ConvertStrings( char* string1, PA_StringKind kind1, PA_CharSet charset1,
 			eb.fParam2 = 1;
 	}
 
-	eb.fParam3 = string1;
-	eb.fParam4 = string2;
+	eb.fParam3 = (sLONG_PTR)string1;
+	eb.fParam4 = (sLONG_PTR)string2;
 	eb.fError = eER_NoErr;
 
 	Call4D( EX_CONVERT_STRING, &eb );
@@ -5578,7 +5578,7 @@ PA_Variable PA_ExecuteFunction( PA_Unistring* ustr )
 
 	eb.fError = eER_NoErr;
 	eb.fUniString1 = *ustr;
-	eb.fParam1 = &vb;
+	eb.fParam1 = (sLONG_PTR)&vb;
 
 	Call4D( EX_EXECUTE_FUNCTION, &eb );
 
@@ -5617,7 +5617,7 @@ PA_Unistring PA_Detokenize( void* tokens, PA_long32 len )
 	eb.fUniString1.fLength = 0;
 	eb.fUniString2.fString = 0;
 
-	eb.fParam1 = FromUserData( tokens, len );
+	eb.fParam1 = (sLONG_PTR)FromUserData( tokens, len );
 	eb.fError  = eER_NoErr;
 	eb.fHandle = 0;
 
@@ -5674,7 +5674,7 @@ PA_Variable PA_ExecuteTokensAsFunction( void* tokens, PA_long32 len )
 
 	eb.fError = eER_NoErr;
 	eb.fHandle = FromUserData( tokens, len );
-	eb.fParam1 = &vb;
+	eb.fParam1 = (sLONG_PTR)&vb;
 
 	Call4D( EX_EXEC_TOKEN_FUNC, &eb );
 
@@ -7134,7 +7134,7 @@ sLONG_PTR PA_GetHWND( PA_WindowRef windowRef )
 	eb.fError  = eER_NoErr;
 	Call4D( EX_GET_HWND, &eb );
 	sErrorCode = (PA_ErrorCode) eb.fError;
-	return eb.fHandle;
+	return (sLONG_PTR)eb.fHandle;
 }
 
 // version 16.0 or greater 
@@ -7152,8 +7152,6 @@ sLONG_PTR	PA_GetMainWindowHWND()
 	return result;
 }
 
-// on Macintosh, this command can convert a 4D window reference
-// into a Macintosh regular WindowPtr
 sLONG_PTR PA_GetWindowPtr( PA_WindowRef windowRef )
 {
     EngineBlock eb;
@@ -7163,7 +7161,6 @@ sLONG_PTR PA_GetWindowPtr( PA_WindowRef windowRef )
     sErrorCode = (PA_ErrorCode) eb.fError;
     return (sLONG_PTR)eb.fHandle;
 }
-
 
 PA_PluginRef PA_OpenPluginWindow( PA_Unichar* areaName, PA_Unichar* windowTitle, PA_Rect rect )
 {
@@ -7260,7 +7257,7 @@ PA_WindowRef PA_NewWindow( PA_Rect rect, PA_WindowLevel level, short kind, PA_Un
 	Call4D( EX_NEXT_WINDOW_LEVEL, &eb );
 	sErrorCode = (PA_ErrorCode)eb.fError;
 
-	eb.fParam1 = &rect;
+	eb.fParam1 = (sLONG_PTR)&rect;
 	PA_CopyUnichars( title, eb.fUName, sizeof(eb.fUName) );
 	eb.fParam2 = kind;
 	eb.fParam3 = (char) closeBox;
@@ -7357,7 +7354,7 @@ void PA_CreateTip( PA_Unistring* ustr, char useRTF, short posX, short posY, PA_R
 	EngineBlock eb;
 
 	eb.fUniString1 = *ustr;
-	eb.fParam1 = &rect;
+	eb.fParam1 = (sLONG_PTR)&rect;
 	eb.fParam2 = useRTF;
 	eb.fParam3 = posX;
 	eb.fParam4 = posY;
@@ -7689,10 +7686,10 @@ char PA_Request( PA_Unichar* message, PA_Unichar* value, PA_Unichar* okButton, P
 {
 	EngineBlock eb;
 
-	eb.fParam1 = message;
-	eb.fParam2 = value;
-	eb.fParam3 = okButton;
-	eb.fParam4 = cancelButton;
+	eb.fParam1 = (sLONG_PTR)message;
+	eb.fParam2 = (sLONG_PTR)value;
+	eb.fParam3 = (sLONG_PTR)okButton;
+	eb.fParam4 = (sLONG_PTR)cancelButton;
 	eb.fError = eER_NoErr;
 	Call4D( EX_REQUEST, &eb );
 	sErrorCode = (PA_ErrorCode)eb.fError;
