@@ -580,7 +580,7 @@ PA_CollectionRef PA_CreateCollection(void)
 
 
 //The PA_Variable should be cleared after use
-PA_Variable PA_GetCollectionElement(PA_CollectionRef collection, long index)
+PA_Variable PA_GetCollectionElement(PA_CollectionRef collection, PA_long32 index)
 {
 	PA_Variable value;
 	EngineBlock eb;
@@ -596,7 +596,7 @@ PA_Variable PA_GetCollectionElement(PA_CollectionRef collection, long index)
 	return value;
 }
 
-void PA_SetCollectionElement(PA_CollectionRef collection, long index, PA_Variable value)
+void PA_SetCollectionElement(PA_CollectionRef collection, PA_long32 index, PA_Variable value)
 {
 	EngineBlock eb;
 	eb.fLongint = index;
