@@ -23,42 +23,6 @@
 #ifndef NULL
 #define NULL 0
 #endif
-
-//some external libraries assume first load; include this file after them 
-#if VERSIONWIN
-#ifndef _WINDOWS_
-//need to load winsock2 before windows
-//BSD wrappers
-#define close closesocket
-#define TickCount GetTickCount
-#define getpid GetCurrentProcessId
-#include <winsock2.h>
-
-#include <ws2tcpip.h>
-#pragma comment(lib, "ws2_32.lib")
-
-#include <windows.h>
-#include <iphlpapi.h>
-#include <icmpapi.h>
-
-#pragma comment(lib, "iphlpapi.lib")
-#include <time.h>
-#include <mmsystem.h>
-#pragma comment(lib, "winmm.lib")
-#endif
-#else
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netinet/ip.h>
-#include <netinet/ip_icmp.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#define SOCKET int
-#define SOCKET_ERROR (-1)
-#define INVALID_SOCKET (SOCKET)(~0)
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
