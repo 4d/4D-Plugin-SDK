@@ -1022,6 +1022,10 @@ void         PA_Dial4DAllowYResize         ( PA_Dial4D dialog, char allowResize 
 void         PA_Dial4DGetWindowMinMaxInfo  ( PA_Dial4D dialog, PA_long32* minXresize, PA_long32* maxXresize, PA_long32* minYresize, PA_long32* maxYresize );
 void         PA_Dial4DSetWindowSize        ( PA_Dial4D dialog, PA_long32 width, PA_long32 height );
 
+PA_Variable PA_ExecuteCollectionMethod(PA_CollectionRef inCollection, PA_Unichar* funtionName, PA_Variable* parameters, short nbParameters);
+PA_Variable PA_ExecuteObjectMethod(PA_ObjectRef inObject, PA_Unichar* funtionName, PA_Variable* parameters, short nbParameters);
+
+
 #ifdef __cplusplus
 }
 #endif

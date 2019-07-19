@@ -24,7 +24,7 @@
 
 //       EntryPoint
 // ===============================
-#define  EX_CREATE_RECORD                           -1      //PA_CreateRecord
+#define  EX_CREATE_RECORD                           -1      // PA_CreateRecord
 #define  EX_SAVE_RECORD                             -2      // PA_SaveRecord
 #define  EX_NEXT_RECORD                             -3      // PA_NextRecord
 #define  EX_PREVIOUS_RECORD                         -4      // PA_PreviousRecord
@@ -34,9 +34,9 @@
 #define  EX_FIRST_RECORD                            -8      // PA_FirstRecord
 #define  EX_COUNT_TABLES                            -9      // PA_CountTables
 #define  EX_COUNT_FIELDS                            -10     // PA_CountFields (PA_UseVirtualStructure mode)
-#define  EX_COUNT_INVISIBLE_FIELDS_TOO              -717    // PA_CountFields (PA_UseRealStructure mode)
-#define  EX_GET_TABLE_NAME                          -11     // PA_GetTableName, PA_IsTableVisible 
-#define  EX_FIELD_ATTRIBUTES                        -12     // PA_GetFieldName, PA_GetFieldProperties 
+#define  EX_COUNT_INVISIBLE_FIELDS_TOO              -717    // PA_CountFields (PA_UseRealStructure mode) 
+#define  EX_GET_TABLE_NAME                          -11     // PA_GetTableName, PA_IsTableVisible
+#define  EX_FIELD_ATTRIBUTES                        -12     // PA_GetFieldName, PA_GetFieldProperties
 #define  EX_ORDER_BY                                -13     // PA_CloseOrderBy, PA_OrderBy, PA_OrderByDialog
 #define  EX_QUERY                                   -14     // PA_CloseQuery, PA_QueryDialog
 #define  EX_BEFORE_SELECTION                        -15     // PA_BeforeSelection
@@ -298,7 +298,7 @@
 #define  EX_METHOD_NAMES                            -442    // PA_MethodNames
 #define  EX_GET_COMMAND_ID                          -506    // PA_GetCommandID      (ThreadSafe)
 #define  EX_GET_COMMAND_NAME                        -507    // PA_GetCommandName    (ThreadSafe)
-#define  EX_GET_METHOD_ID                           -508    // PA_GetMethodID
+#define  EX_GET_METHOD_ID                           -508    // PA_GetMethodID       (ThreadSafe)
 #define  EX_GET_CENTURY_INFO                        -531    // PA_GetCenturyInfo
 #define  EX_OPEN_PRINTER_SESSION                    -556    // PA_OpenPrinterSession
 #define  EX_CLOSE_PRINTER_SESSION                   -557    // PA_ClosePrinterSession
@@ -340,6 +340,6 @@
 #define  EX_REDRAW_AREA                             -714    // PA_RedrawArea (14.0)
 #define  EX_GET_AREA_PORT_BOUNDS                    -715    // PA_GetAreaPortBounds (14.0)
 #define  EX_GET_AREA_PORT_BOUNDS                    -715    // PA_GetAreaPortBounds (14.0)
-#define EX_GET_MAIN_MDI_WINDOW                      -719    // PA_GetMainWindowHWND (16.0)
-
+#define  EX_GET_MAIN_MDI_WINDOW                     -719    // PA_GetMainWindowHWND (16.0)
+#define	 EX_CALL_OBJ_FUNCTION                       -720    // PA_ExecuteCollectionMethod PA_ExecuteObjectMethod (ThreadSafe)
 #endif
