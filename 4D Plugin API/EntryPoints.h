@@ -34,16 +34,16 @@
 #define  EX_FIRST_RECORD                            -8      // PA_FirstRecord
 #define  EX_COUNT_TABLES                            -9      // PA_CountTables
 #define  EX_COUNT_FIELDS                            -10     // PA_CountFields (PA_UseVirtualStructure mode)
-#define  EX_COUNT_INVISIBLE_FIELDS_TOO              -717    // PA_CountFields (PA_UseRealStructure mode) 
+#define  EX_COUNT_INVISIBLE_FIELDS_TOO              -717    // PA_CountFields (PA_UseRealStructure mode)
 #define  EX_GET_TABLE_NAME                          -11     // PA_GetTableName, PA_IsTableVisible
 #define  EX_FIELD_ATTRIBUTES                        -12     // PA_GetFieldName, PA_GetFieldProperties
 #define  EX_ORDER_BY                                -13     // PA_CloseOrderBy, PA_OrderBy, PA_OrderByDialog
 #define  EX_QUERY                                   -14     // PA_CloseQuery, PA_QueryDialog
 #define  EX_BEFORE_SELECTION                        -15     // PA_BeforeSelection
 #define  EX_END_SELECTION                           -16     // PA_EndSelection
-#define  EX_GET_FIELD                               -17     // PA_GetXXXField 
+#define  EX_GET_FIELD                               -17     // PA_GetXXXField
 #define  EX_SET_FIELD                               -18     // PA_SetXXXField
-#define  EX_GET_VARIABLE                            -19     // PA_GetVariable 
+#define  EX_GET_VARIABLE                            -19     // PA_GetVariable
 #define  EX_SET_VARIABLE                            -20     // PA_SetVariable
 #define  EX_GET_EXPORT_FILTER                       -24     // PA_GetExportFilter
 #define  EX_GET_IMPORT_FILTER                       -25     // PA_GetImportFilter
@@ -51,8 +51,8 @@
 #define  EX_SET_PACKED_RECORD                       -27     // PA_SetPackedRecord
 #define  EX_CREATE_SET                              -28     // PA_CreateSet
 #define  EX_USE_SET                                 -29     // PA_UseSet
-#define  EX_EXECUTE_METHOD                          -30     // PA_ExecuteMethod
-#define  EX_EXECUTE_FUNCTION                        -31     // PA_ExecuteFunction
+#define  EX_EXECUTE_METHOD                          -30     // PA_ExecuteMethod (ThreadSafe)
+#define  EX_EXECUTE_FUNCTION                        -31     // PA_ExecuteFunction (ThreadSafe)
 #define  EX_CREATE_METHOD                           -32     // PA_CreateMethod
 #define  EX_LOCKED                                  -40     // PA_Locked
 #define  EX_READ_WRITE                              -41     // PA_ReadWrite, PA_ReadOnly
@@ -105,7 +105,7 @@
 #define  EX_UNLOCK_DATABASE                         -108    // PA_UnlockDatabase
 #define  EX_GET_USER_LIST                           -112    // PA_CountUsers
 #define  EX_GET_PREF_FILE                           -115    // PA_Get4DPreferencesFilePath
-#define  EX_CALL_BY_PROCID                          -118    // PA_ExecuteMethodByID
+#define  EX_CALL_BY_PROCID                          -118    // PA_ExecuteMethodByID (ThreadSafe)
 #define  EX_THERMOMETER                             -121    // PA_SetThermometerRect
 #define  EX_YIELD_ABSOLUTE                          -122    // PA_YieldAbsolute (ThreadSafe)
 #define  EX_GET_INTERPROCESS_VARIABLE               -125    // PA_GetVariable
@@ -268,7 +268,7 @@
 #define  EX_GET_USER_NAME                           -403    // PA_GetUserName
 #define  EX_DIAL4D_GET_LAST_OBJECT                  -405    // PA_Dial4DGetLastObject
 #define  EX_REQUEST                                 -407    // PA_Request
-#define  EX_CLEAR_VARIABLE                          -410    // PA_ClearVariable     (ThreadSafe)
+#define  EX_CLEAR_VARIABLE                          -410    // PA_ClearVariable (ThreadSafe)
 #define  EX_GET_STRUCTURE_FULLPATH                  -411    // PA_GetStructureFullPath (ThreadSafe)
 #define  EX_RELATE_ONE_SELECTION                    -412    // PA_RelateOneSelection
 #define  EX_RELATE_MANY_SELECTION                   -413    // PA_RelateManySelection
@@ -281,7 +281,7 @@
 #define  EX_SET_WINDOW_FOCUSED                      -421    // PA_SetWindowFocused
 #define  EX_IS_WINDOW_FOCUSED                       -422    // PA_IsWindowFocused
 #define  EX_METHOD_EDITOR                           -423    // PA_MethodEditor
-#define  EX_CONVERT_STRING                          -424    // PA_ConvertString         (ThreadSafe)
+#define  EX_CONVERT_STRING                          -424    // PA_ConvertString (ThreadSafe)
 #define  EX_DIAL4D_CANCEL_VALIDATE                  -425    // PA_Dial4DCancelValidate
 #define  EX_GET_4D_FOLDER                           -427    // PA_Get4DFolder (ThreadSafe)
 #define  EX_DIAL4D_HIGHLIGHT_TEXT                   -428    // PA_Dial4DHighlightText
@@ -289,57 +289,57 @@
 #define  EX_GET_REGISTRATION_INFO                   -430    // PA_GetRegistredUserName
 #define  EX_GET_USERS_INFO                          -431    // PA_CountConnectedUsers
 #define  EX_GET_4D_HINSTANCE                        -432    // PA_Get4DHInstance
-#define  EX_HANDLE_MANAGER                          -434    // PA_NewHandle, PA_DisposeHandle,      (ThreadSafe)
-                                                            // PA_SetHandleSize, PA_GetHandleSize,  
+#define  EX_HANDLE_MANAGER                          -434    // PA_NewHandle, PA_DisposeHandle, (ThreadSafe)
+                                                            // PA_SetHandleSize, PA_GetHandleSize,
                                                             // PA_SetHandleState, PA_GetHandleState,
                                                             // PA_LockHandle, PA_UnlockHandle
 #define  EX_RESIZE_ARRAY                            -438    // PA_ResizeArray
 #define  EX_UNLOCK_RESOURCE                         -439    // PA_UnlockResource, PA_UnlockResourceHandle
 #define  EX_METHOD_NAMES                            -442    // PA_MethodNames
-#define  EX_GET_COMMAND_ID                          -506    // PA_GetCommandID      (ThreadSafe)
-#define  EX_GET_COMMAND_NAME                        -507    // PA_GetCommandName    (ThreadSafe)
-#define  EX_GET_METHOD_ID                           -508    // PA_GetMethodID       (ThreadSafe)
+#define  EX_GET_COMMAND_ID                          -506    // PA_GetCommandID (ThreadSafe)
+#define  EX_GET_COMMAND_NAME                        -507    // PA_GetCommandName (ThreadSafe)
+#define  EX_GET_METHOD_ID                           -508    // PA_GetMethodID (ThreadSafe)
 #define  EX_GET_CENTURY_INFO                        -531    // PA_GetCenturyInfo
 #define  EX_OPEN_PRINTER_SESSION                    -556    // PA_OpenPrinterSession
 #define  EX_CLOSE_PRINTER_SESSION                   -557    // PA_ClosePrinterSession
 #define  EX_TRY_TO_OPEN_PRINTER_SESSION             -558    // PA_TryToOpenPrinterSession
 #define  EX_GET_TEMPLATE                            -593    // PA_GetTemplate
-#define  EX_GET_POINTER_VALUE                       -585    // PA_GetPointerValue
-#define  EX_SET_POINTER_VALUE                       -586    // PA_SetPointerValue
+#define  EX_GET_POINTER_VALUE                       -585    // PA_GetPointerValue (ThreadSafe)
+#define  EX_SET_POINTER_VALUE                       -586    // PA_SetPointerValue (ThreadSafe)
 #define  EX_SET_PLUGINAREA_CLIPMODE                 -597    // PA_SetPluginAreaClipMode
-#define  EX_COMPARE_UNIBUFFERS                      -611    // PA_CompareUniBuffers     (ThreadSafe)
-#define  EX_CREATE_UNISTRING                        -612    // PA_CreateUniString       (ThreadSafe)
-#define  EX_SET_UNISTRING                           -613    // PA_SetUniString          (ThreadSafe)
-#define  EX_DISPOSE_UNISTRING                       -614    // PA_DisposeUniString      (ThreadSafe)
-#define  EX_VARIABLE_TO_STRING                      -615    // PA_GetStringVariable     (ThreadSafe)
+#define  EX_COMPARE_UNIBUFFERS                      -611    // PA_CompareUniBuffers (ThreadSafe)
+#define  EX_CREATE_UNISTRING                        -612    // PA_CreateUniString (ThreadSafe)
+#define  EX_SET_UNISTRING                           -613    // PA_SetUniString (ThreadSafe)
+#define  EX_DISPOSE_UNISTRING                       -614    // PA_DisposeUniString (ThreadSafe)
+#define  EX_VARIABLE_TO_STRING                      -615    // PA_GetStringVariable (ThreadSafe)
 #define  EX_GET_PLUGIN_KEY_EVENT                    -616    // PA_GetKey
-#define  EX_CREATE_PICTURE                          -617    // PA_CreatePicture         (ThreadSafe)
+#define  EX_CREATE_PICTURE                          -617    // PA_CreatePicture (ThreadSafe)
 #define  EX_CREATE_NATIVE_PICTURE_FOR_SCREEN        -618    // PA_CreateNativePictureForScreen
 #define  EX_CREATE_NATIVE_PICTURE_FOR_PRINTING      -619    // PA_CreateNativePictureForPrinting
-#define  EX_DISPOSE_PICTURE                         -620    // PA_DisposePicture        (ThreadSafe)
+#define  EX_DISPOSE_PICTURE                         -620    // PA_DisposePicture (ThreadSafe)
 #define  EX_PASTEBOARD_IS_DATA_AVAILABLE            -621    // PA_IsPasteboardDataAvailable
 #define  EX_PASTEBOARD_GET_DATA                     -622    // PA_GetPasteboardData
 #define  EX_PASTEBOARD_GET_DATA_SIZE                -623    // PA_GetPasteboardDataSize
 #define  EX_PASTEBOARD_SET_DATA                     -624    // PA_SetPasteboardData
 #define  EX_GET_DRAG_AND_DROP_PASTEBOARD            -631    // PA_GetDragAndDropPasteboard
 #define  EX_GET_DRAG_AND_DROP_VARIABLE              -635    // PA_GetDragAndDropVariable
-#define  EX_EXECUTE_COMMAND_BY_ID                   -636    // PA_ExecuteCommandByID    (ThreadSafe)
-#define  EX_LOCALIZE_STRING                         -637    // PA_LocalizeStringByID, PA_LocalizeString
-#define  EX_DUPLICATE_PICTURE                       -654    // PA_DuplicatePicture     (ThreadSafe)
+#define  EX_EXECUTE_COMMAND_BY_ID                   -636    // PA_ExecuteCommandByID (ThreadSafe)
+#define  EX_LOCALIZE_STRING                         -637    // PA_LocalizeStringByID, PA_LocalizeString (ThreadSafe)
+#define  EX_DUPLICATE_PICTURE                       -654    // PA_DuplicatePicture (ThreadSafe)
 #define  EX_CREATE_ELEMENTS                         -655    // PA_CreateElementsFromXMLDefinition
 #define  EX_GET_POINTER_VALUE_PROPERTIES            -662    // PA_GetPointerValueProperties
 #define  EX_RUN_IN_MAIN_PROCESS                     -663    // PA_RunInMainProcess
 #define  EX_GET_PICTURE_DATA                        -671    // PA_GetPictureData    (11.3) (ThreadSafe)
 #define  EX_MODIFY_METHOD                           -672    // PA_ModifyMethod
 #define  EX_CONVERT_CHARSET_TO_CHARSET              -675    // PA_ConvertFromCharset (11.3) (ThreadSafe)
-#define  EX_SET_OBJ_VALUE                           -701    // PA_SetObjectProperty  (v17)   (ThreadSafe)
-                                                            // PA_SetCollectionProperty (v17) 
-#define  EX_GET_OBJ_VALUE                           -702    // PA_GetObjectProperty  (v17)   (ThreadSafe)
-                                                            // PA_GetCollectionProperty (v17) 
-#define  EX_COPY_VARIABLE                           -703    // PA_CopyVariable (v17)    (ThreadSafe)
+#define  EX_SET_OBJ_VALUE                           -701    // PA_SetObjectProperty  (v17) (ThreadSafe)
+                                                            // PA_SetCollectionProperty (v17)
+#define  EX_GET_OBJ_VALUE                           -702    // PA_GetObjectProperty  (v17) (ThreadSafe)
+                                                            // PA_GetCollectionProperty (v17)
+#define  EX_COPY_VARIABLE                           -703    // PA_CopyVariable (v17) (ThreadSafe)
 #define  EX_REDRAW_AREA                             -714    // PA_RedrawArea (14.0)
 #define  EX_GET_AREA_PORT_BOUNDS                    -715    // PA_GetAreaPortBounds (14.0)
 #define  EX_GET_AREA_PORT_BOUNDS                    -715    // PA_GetAreaPortBounds (14.0)
 #define  EX_GET_MAIN_MDI_WINDOW                     -719    // PA_GetMainWindowHWND (16.0)
-#define	 EX_CALL_OBJ_FUNCTION                       -720    // PA_ExecuteCollectionMethod PA_ExecuteObjectMethod (ThreadSafe)
+#define  EX_CALL_OBJ_FUNCTION                       -720    // PA_ExecuteCollectionMethod PA_ExecuteObjectMethod (ThreadSafe)
 #endif
