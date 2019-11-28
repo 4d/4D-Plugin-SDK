@@ -22,7 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#if __APPLE__
+#if VERSIONMAC
 #include <CoreGraphics/CoreGraphics.h>
 #endif
 
