@@ -120,7 +120,7 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(ProjectDir)Resources\manifest.json" "$(TargetDir)..\manifest.json" &amp;&amp; xcopy /Y "$(ProjectDir)Resources\constants.xlf" "$(TargetDir)..\Resources\constants.xlf*"
+      <Command>copy /Y "$(ProjectDir)Resources\manifest.json" "$(TargetDir)..\Resources\manifest.json" &amp;&amp; xcopy /Y "$(ProjectDir)Resources\constants.xlf" "$(TargetDir)..\Resources\constants.xlf*"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

@@ -20,7 +20,7 @@
 		8BA892AD20B5AA71009D565D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "4D Plugin.bundle/Contents";
+			dstPath = "4D Plugin.bundle/Contents/Resources";
 			dstSubfolderSpec = 16;
 			files = (
 				8BA892AE20B5AA8A009D565D /* manifest.json in CopyFiles */,

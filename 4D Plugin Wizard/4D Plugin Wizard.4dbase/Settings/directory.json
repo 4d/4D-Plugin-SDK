@@ -1,0 +1,31 @@
+﻿{
+	"users": {
+		"designer": {
+			"alias": "Super_Utilisateur"
+		},
+		"administrator": {
+			"alias": "Administrateur"
+		}
+	},
+	"sqlSchemaGranters": {
+		"DEFAULT_SCHEMA": {
+			"readOnlyAccessGroup": "*",
+			"readWriteAccessGroup": "*",
+			"allAccessGroup": ""
+		}
+	},
+	"remoteGranters": {
+		"oci": "*",
+		"write": "*",
+		"view": "*",
+		"odbcPro": "*"
+	},
+	"settings": {
+		"localGenericWebUser": "Super_Utilisateur",
+		"designAccessGroup": "*",
+		"localMobileAccessGroupRW": "*",
+		"remoteMobileAccessGroupRW": "*",
+		"remoteGenericWebUser": "Super_Utilisateur",
+		"remoteDefaultUser": ""
+	}
+}

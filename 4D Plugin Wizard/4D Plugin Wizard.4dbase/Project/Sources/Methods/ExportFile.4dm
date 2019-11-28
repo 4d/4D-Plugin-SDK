@@ -11,8 +11,7 @@ If ($valueTest=True:C214)
 End if 
 
 If ((hasConfirmed=True:C214) | ($valueTest=False:C215))
-	$extra:=Get 4D folder:C485(_o_Extras folder:K5:12)
-	  //$test:=Get 4D folder(4D Client database folder) + string(character code(folder separator)) + "Extras"
+	$extra:=Get 4D folder:C485(Current resources folder:K5:16)+"Extras"+Folder separator:K24:12
 	
 	COPY DOCUMENT:C541($extra+$2;$1+$2;*)
 	GET DOCUMENT PROPERTIES:C477($1+$2;$lock;$visible;$a;$b;$c;$d)

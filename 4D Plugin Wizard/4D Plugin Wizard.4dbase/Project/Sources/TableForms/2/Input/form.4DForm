@@ -272,7 +272,9 @@
 					"left": 609,
 					"height": 199,
 					"sizingY": "move",
-					"stroke": "#666666"
+					"stroke": "#666666",
+					"width": 0,
+					"startPoint": "topLeft"
 				},
 				"Champ13": {
 					"type": "checkbox",
@@ -417,7 +419,9 @@
 					"left": 232,
 					"width": 377,
 					"sizingY": "move",
-					"stroke": "#666666"
+					"stroke": "#666666",
+					"height": 0,
+					"startPoint": "topLeft"
 				},
 				"Line2": {
 					"type": "line",
@@ -425,7 +429,9 @@
 					"left": 232,
 					"width": 377,
 					"sizingY": "move",
-					"stroke": "#666666"
+					"stroke": "#666666",
+					"height": 0,
+					"startPoint": "topLeft"
 				},
 				"Line3": {
 					"type": "line",
@@ -433,7 +439,9 @@
 					"left": 404,
 					"height": 53,
 					"sizingY": "move",
-					"stroke": "#666666"
+					"stroke": "#666666",
+					"width": 0,
+					"startPoint": "topLeft"
 				},
 				"Field2": {
 					"type": "checkbox",
@@ -574,7 +582,8 @@
 					"dropping": "custom",
 					"events": [
 						"onDataChange"
-					]
+					],
+					"fill": "transparent"
 				}
 			}
 		}
@@ -593,5 +602,9 @@
 			"View 8": {},
 			"View 9": {}
 		}
+	},
+	"$4d": {
+		"version": "1",
+		"kind": "form"
 	}
 }
