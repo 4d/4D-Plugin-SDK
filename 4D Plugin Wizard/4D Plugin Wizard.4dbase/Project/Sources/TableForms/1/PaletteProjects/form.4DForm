@@ -1,0 +1,129 @@
+﻿{
+	"destination": "detailScreen",
+	"windowTitle": "Projects",
+	"windowSizingX": "fixed",
+	"windowMinHeight": 150,
+	"rightMargin": 22,
+	"bottomMargin": 22,
+	"menuBar": "Menu Bar #2",
+	"markerHeader": 15,
+	"markerBody": 200,
+	"markerBreak": 220,
+	"markerFooter": 240,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onOutsideCall",
+		"onActivate",
+		"onDeactivate",
+		"onCloseBox",
+		"onUnload"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "A4",
+		"paperWidth": "595pt",
+		"paperHeight": "842pt",
+		"orientation": "landscape"
+	},
+	"pages": [
+		null,
+		{
+			"objects": {
+				"Sous-formulaire1": {
+					"type": "subform",
+					"top": 22,
+					"left": 22,
+					"width": 322,
+					"height": 137,
+					"sizingY": "grow",
+					"dataSourceTypeHint": "text",
+					"table": 2,
+					"listForm": "Visu",
+					"focusable": false,
+					"scrollbarVertical": "visible",
+					"enterableInList": false,
+					"deletableInList": false,
+					"selectionMode": "single",
+					"printFrame": "variable",
+					"borderStyle": "sunken"
+				},
+				"Bouton1": {
+					"type": "button",
+					"top": 32,
+					"left": 395,
+					"width": 96,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton1",
+					"text": "New...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton1.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Bouton2": {
+					"type": "button",
+					"top": 112,
+					"left": 395,
+					"width": 96,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton1",
+					"text": "Delete",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton2.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Bouton3": {
+					"type": "button",
+					"top": 72,
+					"left": 395,
+					"width": 96,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton1",
+					"text": "Edit...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton3.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				}
+			}
+		}
+	],
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {},
+			"View 2": {},
+			"View 3": {},
+			"View 4": {},
+			"View 5": {},
+			"View 6": {},
+			"View 7": {},
+			"View 8": {},
+			"View 9": {}
+		}
+	}
+}

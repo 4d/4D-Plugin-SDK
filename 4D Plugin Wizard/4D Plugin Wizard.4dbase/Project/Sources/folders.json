@@ -1,0 +1,89 @@
+﻿{
+	"Default Folder": {
+		"groups": [
+			"Default Forms",
+			"Default Project Methods",
+			"Default Tables"
+		]
+	},
+	"Default Forms": {
+		"forms": [
+			"[Commands]Input",
+			"[Commands]Output",
+			"[Constants]Input",
+			"[Constants]Output",
+			"[ExternalAreas]Input",
+			"[ExternalAreas]Output",
+			"[GroupConstants]Input",
+			"[GroupConstants]Output",
+			"[Interface]PaletteProjects",
+			"[Interface]SaveCancel",
+			"[Prefs]ChooseColor",
+			"[Prefs]DoPrefsDialog",
+			"[Projects]Input",
+			"[Projects]Visu",
+			"[Themes]Input",
+			"[Themes]Output"
+		]
+	},
+	"Default Project Methods": {
+		"methods": [
+			"_DoPrefs",
+			"_LongToRGB",
+			"_PointInRect",
+			"_Prefs_ChangeColor",
+			"_Prefs_Read",
+			"_Prefs_Write",
+			"_RGBToLong",
+			"aaaStart",
+			"AddProject",
+			"ArgExtractor",
+			"BuildCase",
+			"BuildComment",
+			"BuildConstants",
+			"BuildDieseEndif",
+			"BuildDieseIf",
+			"BuildEnumCmds",
+			"BuildExternalArea",
+			"buildHList",
+			"buildHList2",
+			"BuildInclude",
+			"BuildMethode",
+			"BuildSource",
+			"CenterComment",
+			"CloseProjects",
+			"CommentColor",
+			"EditProject",
+			"ExportFile",
+			"ExportManifest",
+			"ExportWriteDoc",
+			"Import4DDialogFile",
+			"kw",
+			"MakeCommandString",
+			"MakeConstantString",
+			"NameFilter",
+			"PluginMain",
+			"ProjectsPalette",
+			"put",
+			"RSR_Import",
+			"std"
+		]
+	},
+	"Default Tables": {
+		"tables": [
+			"Commands",
+			"Constants",
+			"ExternalAreas",
+			"GroupConstants",
+			"Interface",
+			"Prefs",
+			"Projects",
+			"Themes"
+		]
+	},
+	"trash": {
+		"tables": [
+			"(serialConstants)"
+		]
+	}
+}

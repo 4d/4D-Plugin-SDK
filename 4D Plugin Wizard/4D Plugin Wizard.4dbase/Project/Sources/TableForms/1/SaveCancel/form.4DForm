@@ -1,0 +1,131 @@
+﻿{
+	"destination": "detailScreen",
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"markerHeader": 15,
+	"markerBody": 200,
+	"markerBreak": 220,
+	"markerFooter": 240,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onHeader",
+		"onPrintingBreak",
+		"onPrintingFooter",
+		"onDisplayDetail",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDataChange",
+		"onDragOver",
+		"onPrintingDetail",
+		"onOpenDetail",
+		"onCloseDetail",
+		"onTimer",
+		"onAfterKeystroke",
+		"onSelectionChange"
+	],
+	"pageFormat": {
+		"paperName": "Note US",
+		"paperWidth": "612pt",
+		"paperHeight": "792pt",
+		"orientation": "landscape"
+	},
+	"pages": [
+		null,
+		{
+			"objects": {
+				"Bouton1": {
+					"type": "button",
+					"top": 76,
+					"left": 279,
+					"width": 81,
+					"height": 20,
+					"dataSource": "bYes",
+					"text": "Yes",
+					"class": "Dialogs",
+					"defaultButton": true,
+					"method": "ObjectMethods/Bouton1.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Texte1": {
+					"type": "text",
+					"top": 14,
+					"left": 59,
+					"width": 296,
+					"height": 48,
+					"class": "Dialogs",
+					"text": "Project has changed. Save modifications?"
+				},
+				"Bouton2": {
+					"type": "button",
+					"top": 76,
+					"left": 186,
+					"width": 81,
+					"height": 20,
+					"dataSource": "bCancel",
+					"text": "Cancel",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton2.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Bouton3": {
+					"type": "button",
+					"top": 76,
+					"left": 63,
+					"width": 81,
+					"height": 20,
+					"dataSource": "bNo",
+					"text": "No",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton3.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Image1": {
+					"type": "picture",
+					"top": 39,
+					"left": -57,
+					"width": 42,
+					"height": 41,
+					"pictureFormat": "scaled",
+					"picture": "/RESOURCES/Images/library/Attention Mac.png"
+				},
+				"Image2": {
+					"type": "picture",
+					"top": 8,
+					"left": 7,
+					"width": 42,
+					"height": 41,
+					"pictureFormat": "scaled",
+					"picture": "/RESOURCES/Images/library/Attention Mac.png"
+				}
+			}
+		}
+	]
+}

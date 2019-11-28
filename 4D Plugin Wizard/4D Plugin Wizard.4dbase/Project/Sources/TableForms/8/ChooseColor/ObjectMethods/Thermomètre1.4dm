@@ -1,0 +1,1 @@
+OBJECT SET RGB COLORS:C628(*;"oTest";0;_RGBToLong (redThermo;greenThermo;blueThermo))

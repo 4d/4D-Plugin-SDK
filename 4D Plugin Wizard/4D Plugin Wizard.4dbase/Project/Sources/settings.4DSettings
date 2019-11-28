@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><preferences stamp="13">
+	<com.4d>
+		<database>
+			<cache adaptative="false" size_fixed="4" size_maximum="100" size_reserved="128"/>
+			<cpu_priority/>
+			<misc/>
+		</database>
+		<compiler>
+			<typage default_for_numeric="1"/>
+		</compiler>
+		<general startup_environnement="1">
+			<mover always_display_dialog="2"/>
+			<auto_comment use_template="e1xydGYxXGFuc2lcYW5zaWNwZzEyNTJcZGVmZjBcZGVmbGFuZzEwMzZ7XGZvbnR0Ymx7XGYwXGZuaWxcZmNoYXJzZXQwIFRhaG9tYTt9fQ0Ke1xjb2xvcnRibCA7XHJlZDBcZ3JlZW4wXGJsdWUwO30NClx2aWV3a2luZDRcdWMxXHBhcmRcY2YxXGYwXGZzMThccGFyDQp9DQo="/>
+		</general>
+		<interface>
+			<shortcuts>
+				<add_subform key_code="47" shift="false"/>
+				<cancel_input_form command="true" key_code="46"/>
+				<accept_input_form key_code="3"/>
+			</shortcuts>
+			<developper allow_read_only_structure="true" display_toolbar="true"/>
+			<user flush_window="false" formula_editor_with_full_lists="true" splash_screen="false"/>
+			<misc/>
+		</interface>
+		<sql>
+			<publication port_number="1919"/>
+		</sql>
+		<server>
+			<network>
+				<client_server auto_register_clients="false"/>
+				<options publication_name="4D_Plugin_Wizard" publish_at_startup="false" use_legacy_network_layer="true"/>
+			</network>
+			<ip_config>
+				<allow_deny_table>
+					<allow_deny address="*" allow="true"/>
+				</allow_deny_table>
+			</ip_config>
+			<misc/>
+		</server>
+		<web>
+			<standalone_server>
+				<misc/>
+				<options>
+					<web_processes max_concurrent="32000" timeout_for_inactives="5"/>
+					<cache cache_max_size="0" use_4d_web_cache="false"/>
+					<web_passwords kind="1" with_4d_passwords="true"/>
+					<filters allow_4dsync_urls="false"/>
+				</options>
+				<log>
+					<backup daily="" hourly="" monthly="" size="0" weekly=""/>
+				</log>
+				<configuration automatic_session_management="false"/>
+				<webservices>
+					<server allow_requests="false"/>
+				</webservices>
+			</standalone_server>
+			<remote>
+				<misc/>
+				<options>
+					<web_processes timeout_for_inactives="5"/>
+					<filters allow_4dsync_urls="true"/>
+					<cache use_4d_web_cache="false"/>
+				</options>
+				<configuration automatic_session_management="false"/>
+			</remote>
+		</web>
+		<deployment>
+			<options/>
+		</deployment>
+	</com.4d>
+</preferences>

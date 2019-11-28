@@ -1,0 +1,355 @@
+﻿{
+	"destination": "detailScreen",
+	"windowTitle": "Edit Command...",
+	"windowSizingX": "fixed",
+	"windowMinHeight": 200,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"markerBody": 346,
+	"markerBreak": 346,
+	"markerFooter": 356,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onHeader",
+		"onPrintingBreak",
+		"onPrintingFooter",
+		"onDisplayDetail",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDataChange",
+		"onDragOver",
+		"onPrintingDetail",
+		"onOpenDetail",
+		"onCloseDetail",
+		"onTimer",
+		"onAfterKeystroke",
+		"onSelectionChange"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "A4",
+		"paperWidth": "595pt",
+		"paperHeight": "842pt",
+		"orientation": "landscape"
+	},
+	"pages": [
+		null,
+		{
+			"objects": {
+				"Texte20": {
+					"type": "text",
+					"top": 18,
+					"left": 20,
+					"width": 44,
+					"height": 16,
+					"class": "Dialogs",
+					"text": "Name:"
+				},
+				"Nom": {
+					"type": "input",
+					"top": 18,
+					"left": 71,
+					"width": 159,
+					"height": 16,
+					"dataSource": "[Commands:4]Name:3",
+					"class": "ParamsList",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Variable96": {
+					"type": "button",
+					"top": 210,
+					"left": 441,
+					"width": 90,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "BDEL_ARG",
+					"text": "Remove",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Variable96.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Variable95": {
+					"type": "button",
+					"top": 179,
+					"left": 441,
+					"width": 90,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "BADD_ARG",
+					"text": "Add",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Variable95.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Text3": {
+					"type": "text",
+					"top": 18,
+					"left": 311,
+					"width": 92,
+					"height": 16,
+					"class": "Dialogs",
+					"textAlign": "right",
+					"text": "Return value:"
+				},
+				"Line126": {
+					"type": "line",
+					"top": 44,
+					"left": 18,
+					"width": 520
+				},
+				"Texte1": {
+					"type": "text",
+					"top": 51,
+					"left": 19,
+					"width": 118,
+					"height": 16,
+					"class": "Dialogs",
+					"text": "Parameters:"
+				},
+				"Bouton1": {
+					"type": "button",
+					"top": 254,
+					"left": 441,
+					"width": 90,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton1",
+					"action": "accept",
+					"text": "Ok",
+					"class": "Dialogs",
+					"defaultButton": true,
+					"method": "ObjectMethods/Bouton1.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Bouton2": {
+					"type": "button",
+					"top": 254,
+					"left": 336,
+					"width": 90,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton2",
+					"action": "cancel",
+					"text": "Cancel",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Ligne1": {
+					"type": "line",
+					"top": 241,
+					"left": 18,
+					"width": 520,
+					"sizingY": "move"
+				},
+				"List Box1": {
+					"type": "listbox",
+					"top": 73,
+					"left": 11,
+					"width": 402,
+					"height": 157,
+					"sizingY": "grow",
+					"resizingMode": "legacy",
+					"dataSource": "List Box1",
+					"sortable": false,
+					"rowHeight": "20px",
+					"rowHeightAutoMin": "20px",
+					"rowHeightAutoMax": "20px",
+					"staticColumnCount": 2,
+					"horizontalLineStroke": "#AAAAAA",
+					"verticalLineStroke": "#AAAAAA",
+					"fontFamily": "Segoe UI",
+					"fontSize": 12,
+					"columns": [
+						{
+							"name": "Colonne1",
+							"dataSource": "arTypeArgs",
+							"width": 67,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"requiredList": {
+								"$ref": "/SOURCES/lists.json#/ParamTypes"
+							},
+							"fontFamily": "Segoe UI",
+							"fontSize": 12,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête1",
+								"text": "Kind",
+								"dataSource": "Entête1",
+								"fontFamily": "Segoe UI",
+								"fontSize": 12
+							},
+							"footer": {
+								"name": "Footer1",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "Segoe UI",
+								"fontSize": 12
+							}
+						},
+						{
+							"name": "Colonne2",
+							"dataSource": "arInOutArgs",
+							"width": 76,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"requiredList": {
+								"$ref": "/SOURCES/lists.json#/io"
+							},
+							"fontFamily": "Segoe UI",
+							"fontSize": 12,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête2",
+								"text": "input/output",
+								"dataSource": "Entête2",
+								"fontFamily": "Segoe UI",
+								"fontSize": 12
+							},
+							"footer": {
+								"name": "Footer2",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "Segoe UI",
+								"fontSize": 12
+							}
+						},
+						{
+							"name": "Colonne3",
+							"dataSource": "arNameArgs",
+							"width": 159,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"fontFamily": "Segoe UI",
+							"fontSize": 12,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête3",
+								"text": "Name",
+								"dataSource": "Entête3",
+								"fontFamily": "Segoe UI",
+								"fontSize": 12
+							},
+							"footer": {
+								"name": "Footer3",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "Segoe UI",
+								"fontSize": 12
+							}
+						},
+						{
+							"name": "Colonne4",
+							"dataSource": "arConstantsArgs",
+							"width": 85,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"requiredList": {
+								"$ref": "/SOURCES/lists.json#/ConstantsGroups"
+							},
+							"fontFamily": "Segoe UI",
+							"fontSize": 12,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Entête4",
+								"text": "Constants",
+								"dataSource": "Entête4",
+								"fontFamily": "Segoe UI",
+								"fontSize": 12
+							},
+							"footer": {
+								"name": "Footer4",
+								"timeFormat": "hh_mm_ss",
+								"fontFamily": "Segoe UI",
+								"fontSize": 12
+							}
+						}
+					]
+				},
+				"Popup Liste déroulante1": {
+					"type": "dropdown",
+					"top": 16,
+					"left": 414,
+					"width": 117,
+					"height": 21,
+					"dataSource": "arReturnValue",
+					"class": "Dialogs",
+					"events": [
+						"onClick",
+						"onDataChange"
+					]
+				},
+				"Champ2": {
+					"type": "checkbox",
+					"top": 254,
+					"left": 11,
+					"width": 310,
+					"height": 17,
+					"sizingY": "move",
+					"dataSource": "[Commands:4]ThreadSafe:7",
+					"text": "Allow the command to run as thread safe",
+					"class": "Dialogs"
+				}
+			}
+		}
+	],
+	"editor": {
+		"activeView": "Vue 1",
+		"defaultView": "Vue 1",
+		"views": {
+			"Vue 1": {},
+			"Vue 2": {},
+			"Vue 3": {},
+			"Vue 4": {},
+			"Vue 5": {},
+			"Vue 6": {},
+			"Vue 7": {},
+			"Vue 8": {},
+			"Vue 9": {}
+		}
+	}
+}

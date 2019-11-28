@@ -1,0 +1,212 @@
+﻿{
+	"destination": "detailScreen",
+	"windowTitle": "Preferences...",
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"markerHeader": 15,
+	"markerBody": 200,
+	"markerBreak": 220,
+	"markerFooter": 240,
+	"events": [
+		"onLoad"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "Note US",
+		"paperWidth": "612pt",
+		"paperHeight": "792pt",
+		"orientation": "landscape"
+	},
+	"pages": [
+		null,
+		{
+			"objects": {
+				"Zone de groupe1": {
+					"type": "groupBox",
+					"top": 15,
+					"left": 24,
+					"width": 193,
+					"height": 97,
+					"class": "Dialogs",
+					"text": "Font"
+				},
+				"Zone de groupe2": {
+					"type": "groupBox",
+					"top": 117,
+					"left": 24,
+					"width": 193,
+					"height": 111,
+					"class": "Dialogs",
+					"text": "Source color"
+				},
+				"Pop-up/Liste déroulante1": {
+					"type": "dropdown",
+					"top": 41,
+					"left": 39,
+					"width": 165,
+					"height": 21,
+					"dataSource": "<>popFontName",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Pop-up/Liste déroulante2": {
+					"type": "dropdown",
+					"top": 78,
+					"left": 118,
+					"width": 85,
+					"height": 21,
+					"dataSource": "<>popFontSize",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Texte1": {
+					"type": "text",
+					"top": 82,
+					"left": 38,
+					"width": 76,
+					"height": 16,
+					"class": "Dialogs",
+					"textAlign": "right",
+					"text": "Size :"
+				},
+				"Texte2": {
+					"type": "text",
+					"top": 143,
+					"left": 41,
+					"width": 107,
+					"height": 19,
+					"class": "Dialogs",
+					"textAlign": "right",
+					"text": "KeyWords :"
+				},
+				"oKeyWords": {
+					"type": "rectangle",
+					"top": 141,
+					"left": 153,
+					"width": 50,
+					"height": 20,
+					"fill": "automatic"
+				},
+				"Texte3": {
+					"type": "text",
+					"top": 172,
+					"left": 41,
+					"width": 107,
+					"height": 19,
+					"class": "Dialogs",
+					"textAlign": "right",
+					"text": "Comments :"
+				},
+				"oComments": {
+					"type": "rectangle",
+					"top": 170,
+					"left": 153,
+					"width": 50,
+					"height": 20,
+					"fill": "automatic"
+				},
+				"Texte4": {
+					"type": "text",
+					"top": 201,
+					"left": 41,
+					"width": 107,
+					"height": 19,
+					"class": "Dialogs",
+					"textAlign": "right",
+					"text": "Text :"
+				},
+				"oText": {
+					"type": "rectangle",
+					"top": 199,
+					"left": 153,
+					"width": 50,
+					"height": 20,
+					"fill": "automatic"
+				},
+				"Bouton1": {
+					"type": "button",
+					"top": 206,
+					"left": 234,
+					"width": 96,
+					"height": 20,
+					"dataSource": "OK",
+					"action": "accept",
+					"text": "OK",
+					"class": "Dialogs",
+					"defaultButton": true
+				},
+				"Bouton2": {
+					"type": "button",
+					"top": 173,
+					"left": 234,
+					"width": 96,
+					"height": 20,
+					"dataSource": "bCancel",
+					"action": "cancel",
+					"text": "Cancel",
+					"class": "Dialogs"
+				},
+				"Bouton 3D1": {
+					"type": "button",
+					"top": 141,
+					"left": 153,
+					"width": 50,
+					"height": 20,
+					"dataSource": "bKW",
+					"display": false,
+					"method": "ObjectMethods/Bouton 3D1.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Bouton 3D2": {
+					"type": "button",
+					"top": 170,
+					"left": 153,
+					"width": 50,
+					"height": 20,
+					"dataSource": "bComm",
+					"display": false,
+					"method": "ObjectMethods/Bouton 3D2.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Bouton 3D3": {
+					"type": "button",
+					"top": 199,
+					"left": 153,
+					"width": 50,
+					"height": 20,
+					"dataSource": "bText",
+					"display": false,
+					"method": "ObjectMethods/Bouton 3D3.4dm",
+					"events": [
+						"onClick"
+					]
+				}
+			}
+		}
+	],
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {},
+			"View 2": {},
+			"View 3": {},
+			"View 4": {},
+			"View 5": {},
+			"View 6": {},
+			"View 7": {},
+			"View 8": {},
+			"View 9": {}
+		}
+	}
+}

@@ -1,0 +1,500 @@
+﻿{
+	"destination": "detailScreen",
+	"windowTitle": "External Area Parameters",
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"rightMargin": 15,
+	"bottomMargin": 15,
+	"markerBody": 346,
+	"markerBreak": 346,
+	"markerFooter": 356,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onHeader",
+		"onPrintingBreak",
+		"onPrintingFooter",
+		"onDisplayDetail",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDataChange",
+		"onDragOver",
+		"onPrintingDetail",
+		"onOpenDetail",
+		"onCloseDetail",
+		"onTimer",
+		"onAfterKeystroke",
+		"onSelectionChange"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "Note US",
+		"paperWidth": "612pt",
+		"paperHeight": "792pt",
+		"orientation": "landscape"
+	},
+	"pages": [
+		null,
+		{
+			"objects": {
+				"Zone de groupe4": {
+					"type": "groupBox",
+					"top": 51,
+					"left": 22,
+					"width": 271,
+					"height": 211,
+					"class": "Dialogs",
+					"text": "General settings"
+				},
+				"Zone de groupe3": {
+					"type": "groupBox",
+					"top": 267,
+					"left": 22,
+					"width": 271,
+					"height": 51,
+					"class": "Dialogs",
+					"text": "Web publishing"
+				},
+				"Zone de groupe1": {
+					"type": "groupBox",
+					"top": 51,
+					"left": 313,
+					"width": 137,
+					"height": 267,
+					"class": "Dialogs",
+					"text": "Events handled"
+				},
+				"Texte20": {
+					"type": "text",
+					"top": 23,
+					"left": 25,
+					"width": 45,
+					"height": 19,
+					"class": "Dialogs",
+					"text": "Name"
+				},
+				"Nom": {
+					"type": "input",
+					"top": 23,
+					"left": 75,
+					"width": 196,
+					"height": 17,
+					"dataSource": "[ExternalAreas:5]Name:3",
+					"class": "ParamsList",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"dragging": "none",
+					"dropping": "none",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ1": {
+					"type": "checkbox",
+					"top": 76,
+					"left": 34,
+					"width": 250,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]VisibleInPluginsMenu:4",
+					"text": "Visible in \"Plug-ins\" menu",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ4": {
+					"type": "checkbox",
+					"top": 76,
+					"left": 324,
+					"width": 106,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]KeyDownEvt:11",
+					"text": "KeyDown",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ5": {
+					"type": "checkbox",
+					"top": 102,
+					"left": 324,
+					"width": 106,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]MouseDownEvt:10",
+					"text": "MouseDown",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ6": {
+					"type": "checkbox",
+					"top": 128,
+					"left": 324,
+					"width": 106,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]UpdateEvt:9",
+					"text": "Update",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ7": {
+					"type": "checkbox",
+					"top": 154,
+					"left": 324,
+					"width": 106,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]SelectEvt:12",
+					"text": "Select",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ8": {
+					"type": "checkbox",
+					"top": 102,
+					"left": 34,
+					"width": 250,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]Focusable:5",
+					"text": "Area can take focus",
+					"class": "Small_Text",
+					"method": "ObjectMethods/Champ8.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ9": {
+					"type": "checkbox",
+					"top": 128,
+					"left": 34,
+					"width": 250,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]AdvancedProperties:8",
+					"text": "Use Advanced Properties",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ10": {
+					"type": "checkbox",
+					"top": 180,
+					"left": 324,
+					"width": 106,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]DeselectEvt:7",
+					"text": "Deselect",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ11": {
+					"type": "checkbox",
+					"top": 207,
+					"left": 34,
+					"width": 250,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]Dropable:6",
+					"text": "Dropable",
+					"class": "Small_Text",
+					"method": "ObjectMethods/Champ11.4dm",
+					"events": [
+						"onLoad",
+						"onClick"
+					]
+				},
+				"Champ12": {
+					"type": "checkbox",
+					"top": 180,
+					"left": 34,
+					"width": 250,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]DesignUpdateEvt:16",
+					"text": "Customize area in layout editor",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ13": {
+					"type": "checkbox",
+					"top": 207,
+					"left": 324,
+					"width": 106,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]CursorEvt:18",
+					"text": "Cursor",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ2": {
+					"type": "checkbox",
+					"top": 288,
+					"left": 169,
+					"width": 117,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]WebImageMap:14",
+					"text": "Use Image Map",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ14": {
+					"type": "checkbox",
+					"top": 154,
+					"left": 34,
+					"width": 250,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]MenuIcon:15",
+					"text": "Customize Menu Icon",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Bouton1": {
+					"type": "button",
+					"top": 332,
+					"left": 355,
+					"width": 95,
+					"height": 20,
+					"dataSource": "Bouton1",
+					"action": "accept",
+					"text": "Ok",
+					"class": "Dialogs",
+					"defaultButton": true,
+					"events": [
+						"onClick"
+					]
+				},
+				"Bouton2": {
+					"type": "button",
+					"top": 332,
+					"left": 244,
+					"width": 98,
+					"height": 20,
+					"dataSource": "Bouton2",
+					"action": "cancel",
+					"text": "Cancel",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ15": {
+					"type": "checkbox",
+					"top": 234,
+					"left": 324,
+					"width": 106,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]IdleEvt:17",
+					"text": "Idle",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ16": {
+					"type": "checkbox",
+					"top": 261,
+					"left": 324,
+					"width": 106,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]LoadRecordEvt:19",
+					"text": "Load Record",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ17": {
+					"type": "checkbox",
+					"top": 288,
+					"left": 324,
+					"width": 106,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]SaveRecordEvt:20",
+					"text": "Save Record",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Champ18": {
+					"type": "checkbox",
+					"top": 234,
+					"left": 34,
+					"width": 250,
+					"height": 20,
+					"dataSource": "[ExternalAreas:5]CustomizeDrag:21",
+					"text": "Customize drag feedback",
+					"class": "Small_Text",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Pop-up/Drop-down List1": {
+					"type": "dropdown",
+					"top": 287,
+					"left": 35,
+					"width": 122,
+					"height": 22,
+					"dataSource": "SelectWebMethode",
+					"choiceList": [
+						"None",
+						"HTML",
+						"Macintosh Picture",
+						"GIF",
+						"JPEG"
+					],
+					"class": "Dialogs",
+					"method": "ObjectMethods/Pop-up%2FDrop-down List1.4dm",
+					"events": [
+						"onClick"
+					]
+				}
+			}
+		}
+	]
+}
