@@ -241,11 +241,10 @@ The plugin Wizard generates multiple files ready to use, here is the general str
 Plugins
 └───4D Plugin.bundle
     └───Contents
-        │   manifest.json
-        │
+        │   
         ├───Resources
         │   │   constants.xlf // Tokenized constants
-        │   │
+        |   |   manifest.json
         │   └───Internal Components
         │           Dials.4dbase // Optional
         │
@@ -258,7 +257,7 @@ Plugins
 ```
 #### Manifest.json
 
-The manifest file must be placed inside the "contents" folder of the plug in bundle.
+The manifest file must be placed inside the "Resources" folder of the plug in bundle.
 
 
 *Keys*:
