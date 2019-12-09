@@ -1,0 +1,171 @@
+﻿{
+	"destination": "detailScreen",
+	"windowTitle": "Edit Constants...",
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"rightMargin": 22,
+	"bottomMargin": 22,
+	"markerBody": 346,
+	"markerBreak": 346,
+	"markerFooter": 356,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onHeader",
+		"onPrintingBreak",
+		"onPrintingFooter",
+		"onDisplayDetail",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDataChange",
+		"onDragOver",
+		"onPrintingDetail",
+		"onOpenDetail",
+		"onCloseDetail",
+		"onTimer",
+		"onAfterKeystroke",
+		"onSelectionChange"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "Note US",
+		"paperWidth": "612pt",
+		"paperHeight": "792pt",
+		"orientation": "landscape"
+	},
+	"pages": [
+		null,
+		{
+			"objects": {
+				"bAddGroup": {
+					"type": "button",
+					"top": 22,
+					"left": 231,
+					"width": 130,
+					"height": 20,
+					"dataSource": "bAddGroup",
+					"text": "Add Group...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/bAddGroup.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Rectangle14": {
+					"type": "rectangle",
+					"top": 54,
+					"left": 22,
+					"width": 35,
+					"height": 2,
+					"fill": "automatic",
+					"stroke": "transparent"
+				},
+				"hlist2": {
+					"type": "list",
+					"top": 22,
+					"left": 22,
+					"width": 191,
+					"height": 210,
+					"dataSource": "hlist2",
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"class": "ParamsList",
+					"borderStyle": "sunken",
+					"method": "ObjectMethods/hlist2.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDoubleClick",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"bDelete": {
+					"type": "button",
+					"top": 83,
+					"left": 231,
+					"width": 130,
+					"height": 20,
+					"dataSource": "bDelete",
+					"text": "Delete...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/bDelete.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"bClose": {
+					"type": "button",
+					"top": 212,
+					"left": 231,
+					"width": 130,
+					"height": 20,
+					"dataSource": "bClose",
+					"action": "accept",
+					"text": "Close",
+					"class": "Dialogs",
+					"method": "ObjectMethods/bClose.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"bAddConstant": {
+					"type": "button",
+					"top": 52,
+					"left": 231,
+					"width": 130,
+					"height": 20,
+					"dataSource": "bAddConstant",
+					"text": "Add Constant...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/bAddConstant.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				}
+			}
+		}
+	],
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {},
+			"View 2": {},
+			"View 3": {},
+			"View 4": {},
+			"View 5": {},
+			"View 6": {},
+			"View 7": {},
+			"View 8": {},
+			"View 9": {}
+		}
+	}
+}

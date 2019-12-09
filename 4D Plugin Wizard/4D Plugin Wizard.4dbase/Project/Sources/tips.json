@@ -1,0 +1,19 @@
+﻿{
+	"Annuler": "Annuler",
+	"OK": "Accept",
+	"Premier enreg.": "Premier enregistrement",
+	"Enreg. précéden": "Enregistrement  précédent",
+	"Enreg. suivant": "Enregistrement suivant",
+	"Dernier enreg.": "Dernier enregistrement",
+	"Supprimer enreg": "Supprimer enregistrement",
+	"Page précédente": "Page précédente",
+	"Page suivante": "Page suivante",
+	"Numéro enreg.": "Place enregistrement dans sélection",
+	"First Record": "First Record",
+	"Previous Record": "Previous Record",
+	"Next Record": "Next Record",
+	"Last Record": "Last Record",
+	"Delete Record": "Delete Record",
+	"Cancel": "Cancel",
+	"Record Number": "Record Position within Selection"
+}

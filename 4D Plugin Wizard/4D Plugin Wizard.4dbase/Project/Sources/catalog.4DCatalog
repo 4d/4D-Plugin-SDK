@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
+<base name="" uuid="E8F8273FBC29DD418059104BAD479D20" collation_locale="fr">
+	<schema name="DEFAULT_SCHEMA"/>
+	<table name="Interface" uuid="4947200222B876449805E2A56CD44EF0" id="1" leave_tag_on_delete="true">
+		<field name="ID" uuid="C022D99A3686504D8E6B5123A46F8D24" type="4" unique="true" autosequence="true" never_null="true" id="1">
+			<field_extra visible="false"/>
+		</field>
+		<primary_key field_name="ID" field_uuid="C022D99A3686504D8E6B5123A46F8D24"/>
+		<table_extra input_form="PaletteProjects" output_form="empty">
+			<editor_table_info displayable_fields_count="2">
+				<color red="0" green="0" blue="0" alpha="0"/>
+				<coordinates left="28" top="495" width="319" height="88"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="Projects" uuid="25C773027C1E8646847AC8FC58D258FF" id="2" leave_tag_on_delete="true">
+		<field name="ID" uuid="AC2C55676138DA4D97BCB38BD471DC82" type="4" unique="true" autosequence="true" never_null="true" id="1">
+			<field_extra modifiable="false"/>
+		</field>
+		<field name="Name" uuid="83EDF41986932C43AAA710521D49E78B" type="10" limiting_length="32" never_null="true" id="2"/>
+		<field name="useAnsi" uuid="864B20FE7E50F4428E1D2173F80FDD8C" type="1" never_null="true" id="3"/>
+		<field name="useWin32" uuid="431AAACC3F78CF4FAA6F6FABBB67C069" type="1" never_null="true" id="4"/>
+		<field name="useAltura" uuid="D2BF2644C3912542AD2EC10D55FB001F" type="1" never_null="true" id="5"/>
+		<field name="Init" uuid="6A5526157B4A3D48A946726539977A5E" type="1" never_null="true" id="6"/>
+		<field name="DeInit" uuid="0C47C1619DDCF94A93C1A824C8FB7978" type="1" never_null="true" id="7"/>
+		<field name="use4DDialogs" uuid="AFF5771E93B93E4798F6A3B52121FEC7" type="1" never_null="true" id="8"/>
+		<field name="DialogPath" uuid="8F69F6C839AC9D4184B244FD260A606E" type="10" never_null="true" id="9"/>
+		<field name="exportXCodeProject" uuid="B5B5D3CD32ACB0488A216A7B7B9FEAF6" type="1" never_null="true" id="10"/>
+		<field name="exportSource" uuid="14FEDF22710CCA49A8D5138A9E93047C" type="1" never_null="true" id="12"/>
+		<field name="exportResources" uuid="FC6D0AE2A0525D45BDF63B8D856320AF" type="1" never_null="true" id="13"/>
+		<field name="exportPluginAPI" uuid="9D002D5C7D67E244B5D66EFA7A00CF42" type="1" never_null="true" id="14"/>
+		<field name="lastCommandNumber" uuid="33AC7E3DB06B31449B813B4BAC8C8BFD" type="4" never_null="true" id="15"/>
+		<field name="lastThemeNumber" uuid="B7BBF62360DD1344861E5DA065AE969C" type="4" never_null="true" id="16"/>
+		<field name="lastExternalAreaNumber" uuid="BE21B3E42DCCD741B39FE7F8118232EE" type="4" never_null="true" id="17"/>
+		<field name="lastGroupNumber" uuid="A48FCEDEB23D954B8FEFD68AAAEBA384" type="4" never_null="true" id="18"/>
+		<field name="lastConstantNumber" uuid="244068927A0BF54D9845F3AF0A0F282E" type="4" never_null="true" id="19"/>
+		<field name="DefineCommand" uuid="3761C7C610CC51488BE9FEA6C8528FAC" type="1" never_null="true" id="20"/>
+		<field name="LiveUpdate" uuid="4B3CE4D671338244AF88F20C62ADBDFB" type="1" never_null="true" id="21"/>
+		<field name="ShowConstants" uuid="16E12AC66E390F4DB687807B1242C71C" type="1" never_null="true" id="22"/>
+		<field name="PluginID" uuid="9B0E120D311FBE4D8A0200C2B1F33A04" type="3" never_null="true" id="23"/>
+		<field name="exportSample" uuid="009A925A28F7AD45A1C0B2411D2051BC" type="1" never_null="true" id="24"/>
+		<field name="exportVCproject2008" uuid="7AB3F26F2F5CB64483ADAFBC3DB78C89" type="1" never_null="true" id="25"/>
+		<field name="path" uuid="CBC12B0808738648AB311CBC7B76E1F2" type="10" limiting_length="255" never_null="true" id="26"/>
+		<primary_key field_name="ID" field_uuid="AC2C55676138DA4D97BCB38BD471DC82"/>
+		<table_extra input_form="Input" output_form="Visu">
+			<editor_table_info displayable_fields_count="26">
+				<color red="0" green="0" blue="0" alpha="0"/>
+				<coordinates left="434" top="59" width="196" height="604"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="Themes" uuid="704D0C1250BBFC4EB971BDB3D658B883" id="3" leave_tag_on_delete="true">
+		<field name="ID" uuid="4B2C6D4C5BB3F34E8AB4DB82C724DFF1" type="4" unique="true" autosequence="true" never_null="true" id="1">
+			<field_extra modifiable="false"/>
+		</field>
+		<field name="Project" uuid="429AFF22C4580845952A0DD05B401A9B" type="4" never_null="true" id="2"/>
+		<field name="Name" uuid="0D66CB4588200D4ABA58C62172F0BD87" type="10" limiting_length="32" never_null="true" id="3"/>
+		<field name="order" uuid="1E8A9FCAB0BF554AA8807B28CEB38488" type="3" never_null="true" id="4"/>
+		<primary_key field_name="ID" field_uuid="4B2C6D4C5BB3F34E8AB4DB82C724DFF1"/>
+		<table_extra input_form="Input" output_form="Output">
+			<editor_table_info displayable_fields_count="5">
+				<color red="0" green="0" blue="0" alpha="0"/>
+				<coordinates left="785" top="38" width="106" height="149"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="Commands" uuid="3BA84140DE9779429F46488C3F08BC56" id="4" leave_tag_on_delete="true">
+		<field name="ID" uuid="B297B5E3898C1644B0308C84486D88AA" type="4" unique="true" autosequence="true" never_null="true" id="1"/>
+		<field name="Theme" uuid="062EFCE6E8E9BF43937815B6D5851B4B" type="4" never_null="true" id="2"/>
+		<field name="Name" uuid="373376BF40CDA64B9AAD26C2B7F8EA80" type="10" limiting_length="30" never_null="true" id="3"/>
+		<field name="Parameters" uuid="C4E44AE568DE0447853FF0EC2DB2ACE7" type="18" never_null="true" id="4"/>
+		<field name="selected" uuid="92C7772ECD0AB942B6852E2C4119083C" type="1" never_null="true" id="5"/>
+		<field name="ResIndex" uuid="689B81A8ECA329409143609AA971B18F" type="3" never_null="true" id="6"/>
+		<field name="ThreadSafe" uuid="D773C3B6D89175448A7097C8500ACE1C" type="1" never_null="true" id="7"/>
+		<primary_key field_name="ID" field_uuid="B297B5E3898C1644B0308C84486D88AA"/>
+		<table_extra input_form="Input" output_form="Output">
+			<editor_table_info displayable_fields_count="7">
+				<color red="0" green="0" blue="0" alpha="0"/>
+				<coordinates left="1034" top="0" width="123" height="189"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="ExternalAreas" uuid="376BD74C9CFFD14E8B689F135AC5449F" id="5" leave_tag_on_delete="true">
+		<field name="ID" uuid="11E2873AF222354BA5CFB034D7962749" type="4" unique="true" autosequence="true" never_null="true" id="1">
+			<field_extra mandatory="true"/>
+		</field>
+		<field name="Project" uuid="5394862660E62F4FB420D0B5302084B2" type="4" never_null="true" id="2"/>
+		<field name="Name" uuid="95DA21FDD011A0478753048F2439B80A" type="10" limiting_length="32" never_null="true" id="3"/>
+		<field name="VisibleInPluginsMenu" uuid="158992586098494C97F3A717FD354657" type="1" never_null="true" id="4"/>
+		<field name="Focusable" uuid="7D71DAEBFDA0BD4FBE8CEF47D0EAFA0B" type="1" never_null="true" id="5"/>
+		<field name="Dropable" uuid="2CDF8C8422CC6D4E84286A9FD1FF98AF" type="1" never_null="true" id="6"/>
+		<field name="DeselectEvt" uuid="44984E10DE284D41878FF04642BB1537" type="1" never_null="true" id="7"/>
+		<field name="AdvancedProperties" uuid="85A7D881DB620A4097BA9B3C211EC14A" type="1" never_null="true" id="8"/>
+		<field name="UpdateEvt" uuid="AF8DFFD325EB09488CCA5A7F256D4FD3" type="1" never_null="true" id="9"/>
+		<field name="MouseDownEvt" uuid="FDD29C3B5D7E1649A0BA6F8AA2A574AA" type="1" never_null="true" id="10"/>
+		<field name="KeyDownEvt" uuid="24A454A849BCC4448EA4245C9EDBC1DB" type="1" never_null="true" id="11"/>
+		<field name="SelectEvt" uuid="4A1613728C32124BA4444ABE93EDBAE7" type="1" never_null="true" id="12"/>
+		<field name="WebEvents" uuid="F89DD9A651F2B4489E8C5D19C805E3F5" type="3" never_null="true" id="13"/>
+		<field name="WebImageMap" uuid="E672DFB218F4F94AA0B8AD594C44D71C" type="1" never_null="true" id="14"/>
+		<field name="MenuIcon" uuid="030D23E9087DF147B754112AD42CCDFA" type="1" never_null="true" id="15"/>
+		<field name="DesignUpdateEvt" uuid="85782B81896A5F44B958FD1DD5E79A41" type="1" never_null="true" id="16"/>
+		<field name="IdleEvt" uuid="A108A6D595AA244398EE80D53C6EC13E" type="1" never_null="true" id="17"/>
+		<field name="CursorEvt" uuid="A80E97391BF9A046A0B46274C1EAC3AF" type="1" never_null="true" id="18"/>
+		<field name="LoadRecordEvt" uuid="84823A20E1843640A3875D57005B4730" type="1" never_null="true" id="19"/>
+		<field name="SaveRecordEvt" uuid="2E02EE55202BDC4284417E82794AF134" type="1" never_null="true" id="20"/>
+		<field name="CustomizeDrag" uuid="2360C23A7F7339468C062B33132D031D" type="1" never_null="true" id="21"/>
+		<primary_key field_name="ID" field_uuid="11E2873AF222354BA5CFB034D7962749"/>
+		<table_extra input_form="Input" output_form="Output">
+			<editor_table_info displayable_fields_count="6">
+				<color red="0" green="0" blue="0" alpha="0"/>
+				<coordinates left="781" top="223" width="181" height="173"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="Constants" uuid="D02FE7521DC7D442980D5E4D851C9D4A" id="6" leave_tag_on_delete="true">
+		<field name="ID" uuid="B71DD8385C64FA41A28F78EDD899AF5B" type="4" unique="true" autosequence="true" never_null="true" id="1"/>
+		<field name="GroupConst" uuid="B433EB433EA98F4EB59613CF9BC9DB38" type="4" never_null="true" id="2"/>
+		<field name="Name" uuid="6082D42603D136439ECB885E315F34D1" type="10" limiting_length="30" never_null="true" id="3"/>
+		<field name="Type" uuid="D1E6E7BF55ACD24C8D931AA4FB490E3C" type="10" limiting_length="2" never_null="true" id="4"/>
+		<field name="StringValue" uuid="6CA7A9D689C3E24CA717C93EA3D0F3DC" type="10" limiting_length="30" never_null="true" id="5"/>
+		<field name="RealValue" uuid="FE8FDB81C3EE6A4CBE5E9FFC89C5681E" type="6" never_null="true" id="6"/>
+		<field name="LongintValue" uuid="4E3F8CBECD31ED4FB1202CC69C890846" type="4" never_null="true" id="7"/>
+		<field name="ResIndex" uuid="0A127EBD317190468F934B6CD6FACC5E" type="3" never_null="true" id="8"/>
+		<primary_key field_name="ID" field_uuid="B71DD8385C64FA41A28F78EDD899AF5B"/>
+		<table_extra input_form="Input" output_form="Output">
+			<editor_table_info displayable_fields_count="9">
+				<color red="0" green="0" blue="0" alpha="0"/>
+				<coordinates left="276" top="177" width="134" height="242"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="GroupConstants" uuid="B2BC0A02A856C7498139C258FB18E259" id="7" leave_tag_on_delete="true">
+		<field name="ID" uuid="568D7435F6E5B34FB723013B01B0A03E" type="4" unique="true" autosequence="true" never_null="true" id="1"/>
+		<field name="Project" uuid="DBEAE7CB1CD84C4BBE3DD4D203CD4961" type="4" never_null="true" id="2"/>
+		<field name="Name" uuid="17CAC593715EC2428A7DD3FC7B991831" type="10" limiting_length="30" never_null="true" id="3"/>
+		<field name="resID" uuid="60FD9F0FD586A74D978753D5EA01801E" type="3" never_null="true" id="4"/>
+		<primary_key field_name="ID" field_uuid="568D7435F6E5B34FB723013B01B0A03E"/>
+		<table_extra input_form="Input" output_form="Output">
+			<editor_table_info displayable_fields_count="4">
+				<color red="0" green="0" blue="0" alpha="0"/>
+				<coordinates left="68" top="38" width="111" height="127"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="Prefs" uuid="2F57A24836E2B8438447D74D57C63B3A" id="8" leave_tag_on_delete="true">
+		<field name="KeyWordColor" uuid="A5D37E5FFAD6F94F8FE29D10B5FC50C0" type="4" never_null="true" id="1"/>
+		<field name="CommentColor" uuid="DDE252446BA5974993B14F6A8EB3B9DC" type="4" never_null="true" id="2"/>
+		<field name="TextColor" uuid="5760B38A11111643B68E0AAE4DB9A9D2" type="4" never_null="true" id="3"/>
+		<field name="FontName" uuid="6AF9F0ABA433134CB92FC3FC0C3DB3BB" type="10" limiting_length="40" never_null="true" id="4"/>
+		<field name="FontSize" uuid="CB3718BAE0FE7B4DAF2C624F55E91ED3" type="3" never_null="true" id="5"/>
+		<field name="ID" uuid="68B5C9F8D6A32C4E8AD455A1FE0AB5CD" type="4" unique="true" autosequence="true" never_null="true" id="6">
+			<field_extra visible="false"/>
+		</field>
+		<primary_key field_name="ID" field_uuid="68B5C9F8D6A32C4E8AD455A1FE0AB5CD"/>
+		<table_extra input_form="ChooseColor" output_form="DoPrefsDialog">
+			<editor_table_info displayable_fields_count="6">
+				<color red="0" green="0" blue="0" alpha="0"/>
+				<coordinates left="85" top="603" width="239" height="183"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="orderedCommands" uuid="691C717F63D7B84F9DC46D2C8AB9F585" id="9">
+		<field name="fID" uuid="6AFADEB3096B6646A69AE2A5613B9DD5" type="4" unique="true" autosequence="true" never_null="true" id="1"/>
+		<field name="fText" uuid="F0824B443956DB4BB197E7039E34593F" type="10" never_null="true" id="2"/>
+		<field name="fTheme" uuid="3A8517443DD32245B20B1DA562FEC39D" type="10" never_null="true" id="3"/>
+		<field name="fThreadSafe" uuid="0B4DDC63ECC87A40A9071C142FA496BB" type="1" never_null="true" id="4"/>
+		<primary_key field_name="fID" field_uuid="6AFADEB3096B6646A69AE2A5613B9DD5"/>
+		<table_extra input_form="Input" output_form="Output">
+			<editor_table_info displayable_fields_count="6">
+				<color red="255" green="255" blue="255" alpha="0"/>
+				<coordinates left="1233" top="106" width="120" height="168"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<table name="(serialConstants)" uuid="449E7905B2EC9C4DA7A31F32820E0228" id="10" hide_in_REST="true">
+		<field name="fID" uuid="D51D66AB92BA744EBD140CB0F5BD35FF" type="3" never_null="true" id="1"/>
+		<field name="f" uuid="184103FDC308784681BDE2A0B89B3E5D" type="10" limiting_length="255" never_null="true" id="2"/>
+		<table_extra trashed="true" input_form="" output_form="">
+			<editor_table_info displayable_fields_count="6">
+				<color red="255" green="255" blue="255" alpha="0"/>
+				<coordinates left="1084" top="260" width="120" height="168"/>
+			</editor_table_info>
+		</table_extra>
+	</table>
+	<relation uuid="168363C90C997A49A58F934D85FB14A8" name_Nto1="Project_1_ID" name_1toN="ID_1_Project" auto_load_Nto1="true" auto_load_1toN="true" foreign_key="false" state="1" integrity="delete">
+		<related_field kind="source">
+			<field_ref uuid="429AFF22C4580845952A0DD05B401A9B" name="Project">
+				<table_ref uuid="704D0C1250BBFC4EB971BDB3D658B883" name="Themes"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="AC2C55676138DA4D97BCB38BD471DC82" name="ID">
+				<table_ref uuid="25C773027C1E8646847AC8FC58D258FF" name="Projects"/>
+			</field_ref>
+		</related_field>
+		<relation_extra entry_create="true" choice_field="2"/>
+	</relation>
+	<relation uuid="9510DA584C9E6A4F9422EDC323484734" name_Nto1="Theme_2_ID" name_1toN="ID_2_Theme" auto_load_Nto1="true" auto_load_1toN="true" foreign_key="false" state="1" integrity="delete">
+		<related_field kind="source">
+			<field_ref uuid="062EFCE6E8E9BF43937815B6D5851B4B" name="Theme">
+				<table_ref uuid="3BA84140DE9779429F46488C3F08BC56" name="Commands"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="4B2C6D4C5BB3F34E8AB4DB82C724DFF1" name="ID">
+				<table_ref uuid="704D0C1250BBFC4EB971BDB3D658B883" name="Themes"/>
+			</field_ref>
+		</related_field>
+		<relation_extra entry_create="true" choice_field="3"/>
+	</relation>
+	<relation uuid="F285D119A5E5D74BA40684497AE1BBE8" name_Nto1="Project_3_ID" name_1toN="ID_3_Project" auto_load_Nto1="true" auto_load_1toN="true" foreign_key="false" state="1" integrity="delete">
+		<related_field kind="source">
+			<field_ref uuid="5394862660E62F4FB420D0B5302084B2" name="Project">
+				<table_ref uuid="376BD74C9CFFD14E8B689F135AC5449F" name="ExternalAreas"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="AC2C55676138DA4D97BCB38BD471DC82" name="ID">
+				<table_ref uuid="25C773027C1E8646847AC8FC58D258FF" name="Projects"/>
+			</field_ref>
+		</related_field>
+		<relation_extra entry_create="true" choice_field="2"/>
+	</relation>
+	<relation uuid="7B685A92FE29134F8C059A3BE8BE58F6" name_Nto1="GroupConst_4_ID" name_1toN="ID_4_GroupConst" auto_load_Nto1="true" auto_load_1toN="true" foreign_key="false" state="1" integrity="delete">
+		<related_field kind="source">
+			<field_ref uuid="B433EB433EA98F4EB59613CF9BC9DB38" name="GroupConst">
+				<table_ref uuid="D02FE7521DC7D442980D5E4D851C9D4A" name="Constants"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="568D7435F6E5B34FB723013B01B0A03E" name="ID">
+				<table_ref uuid="B2BC0A02A856C7498139C258FB18E259" name="GroupConstants"/>
+			</field_ref>
+		</related_field>
+		<relation_extra entry_create="true" choice_field="1" entry_wildchar="false" entry_autofill="false">
+			<editor_relation_info via_point_x="-1" via_point_y="-1" prefers_left="false" smartlink="true">
+				<color red="255" green="255" blue="255" alpha="0"/>
+			</editor_relation_info>
+		</relation_extra>
+	</relation>
+	<relation uuid="659A300D70A5C44D93BD65A297D33E6D" name_Nto1="Project_5_ID" name_1toN="ID_5_Project" auto_load_Nto1="false" auto_load_1toN="false" foreign_key="false" state="1" integrity="delete">
+		<related_field kind="source">
+			<field_ref uuid="DBEAE7CB1CD84C4BBE3DD4D203CD4961" name="Project">
+				<table_ref uuid="B2BC0A02A856C7498139C258FB18E259" name="GroupConstants"/>
+			</field_ref>
+		</related_field>
+		<related_field kind="destination">
+			<field_ref uuid="AC2C55676138DA4D97BCB38BD471DC82" name="ID">
+				<table_ref uuid="25C773027C1E8646847AC8FC58D258FF" name="Projects"/>
+			</field_ref>
+		</related_field>
+		<relation_extra entry_create="true" choice_field="1" entry_wildchar="false" entry_autofill="false">
+			<editor_relation_info via_point_x="-1" via_point_y="-1" prefers_left="false" smartlink="true">
+				<color red="255" green="255" blue="255" alpha="0"/>
+			</editor_relation_info>
+		</relation_extra>
+	</relation>
+	<index kind="regular" unique_keys="true" uuid="1343B86C13F89A4E99FE36F59EC15CE1" type="7">
+		<field_ref uuid="568D7435F6E5B34FB723013B01B0A03E" name="ID">
+			<table_ref uuid="B2BC0A02A856C7498139C258FB18E259" name="GroupConstants"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="2AB52BF8E1019145AB9609CB943F9574" type="7">
+		<field_ref uuid="062EFCE6E8E9BF43937815B6D5851B4B" name="Theme">
+			<table_ref uuid="3BA84140DE9779429F46488C3F08BC56" name="Commands"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="2CB20A1D4A40EF4B94F76E0B1D3B71CE" type="7">
+		<field_ref uuid="B433EB433EA98F4EB59613CF9BC9DB38" name="GroupConst">
+			<table_ref uuid="D02FE7521DC7D442980D5E4D851C9D4A" name="Constants"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="2D3908AA051FE1438B98E772311774C0" type="7">
+		<field_ref uuid="B297B5E3898C1644B0308C84486D88AA" name="ID">
+			<table_ref uuid="3BA84140DE9779429F46488C3F08BC56" name="Commands"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="2DE7C0DBC9D6F04DA0ABBD38D9DAA770" type="7">
+		<field_ref uuid="DBEAE7CB1CD84C4BBE3DD4D203CD4961" name="Project">
+			<table_ref uuid="B2BC0A02A856C7498139C258FB18E259" name="GroupConstants"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="3EB279837B5BF947A6033616B85B009B" type="7">
+		<field_ref uuid="11E2873AF222354BA5CFB034D7962749" name="ID">
+			<table_ref uuid="376BD74C9CFFD14E8B689F135AC5449F" name="ExternalAreas"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="4BB3360A1404174380DF6D8E33C24BD1" type="7">
+		<field_ref uuid="429AFF22C4580845952A0DD05B401A9B" name="Project">
+			<table_ref uuid="704D0C1250BBFC4EB971BDB3D658B883" name="Themes"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="522FF24AE67864408932B69C3137BEFA" type="7">
+		<field_ref uuid="5394862660E62F4FB420D0B5302084B2" name="Project">
+			<table_ref uuid="376BD74C9CFFD14E8B689F135AC5449F" name="ExternalAreas"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="7147348A179CC64D8E50E8647027ECBF" type="1">
+		<field_ref uuid="4B2C6D4C5BB3F34E8AB4DB82C724DFF1" name="ID">
+			<table_ref uuid="704D0C1250BBFC4EB971BDB3D658B883" name="Themes"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="B28EF4FCB835074DA683336DD3C439F2" type="1">
+		<field_ref uuid="68B5C9F8D6A32C4E8AD455A1FE0AB5CD" name="ID">
+			<table_ref uuid="2F57A24836E2B8438447D74D57C63B3A" name="Prefs"/>
+		</field_ref>
+	</index>
+	<index kind="regular" uuid="B4D6F277E185D3468DD1636B9BD0DDE7" type="7">
+		<field_ref uuid="4B3CE4D671338244AF88F20C62ADBDFB" name="LiveUpdate">
+			<table_ref uuid="25C773027C1E8646847AC8FC58D258FF" name="Projects"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="CC89F289864CF84BAA8E3DC8F6A3E0B1" type="7">
+		<field_ref uuid="AC2C55676138DA4D97BCB38BD471DC82" name="ID">
+			<table_ref uuid="25C773027C1E8646847AC8FC58D258FF" name="Projects"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="CEDB17044827734D9CF3CEF31D46579F" type="1">
+		<field_ref uuid="B71DD8385C64FA41A28F78EDD899AF5B" name="ID">
+			<table_ref uuid="D02FE7521DC7D442980D5E4D851C9D4A" name="Constants"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="DA6D7F7D18A9BF4897BD01D7189260B5" type="1">
+		<field_ref uuid="6AFADEB3096B6646A69AE2A5613B9DD5" name="fID">
+			<table_ref uuid="691C717F63D7B84F9DC46D2C8AB9F585" name="orderedCommands"/>
+		</field_ref>
+	</index>
+	<index kind="regular" unique_keys="true" uuid="F46FBBF804E7F44696E17F07C335E8C1" type="1">
+		<field_ref uuid="C022D99A3686504D8E6B5123A46F8D24" name="ID">
+			<table_ref uuid="4947200222B876449805E2A56CD44EF0" name="Interface"/>
+		</field_ref>
+	</index>
+	<base_extra data_file_path="\4D_Plugin_Wizard.4DD" package_name="4D Plugin Wizard" structure_file_name="4D_Plugin_Wizard" __stringCompHash="icu:63.1.0" __keywordBuildingHash="icu:63.1.0">
+		<temp_folder folder_selector="data"/>
+	</base_extra>
+</base>

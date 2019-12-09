@@ -1,0 +1,189 @@
+﻿{
+	"io": {
+		"lineHeight": 18,
+		"editable": false,
+		"items": [
+			{
+				"text": "input",
+				"ref": 1,
+				"editable": true,
+				"collapsed": true
+			},
+			{
+				"text": "output",
+				"ref": 2,
+				"editable": true,
+				"collapsed": true
+			},
+			{
+				"text": "input/output",
+				"ref": 3,
+				"editable": true,
+				"collapsed": true
+			}
+		]
+	},
+	"ConstType": {
+		"lineHeight": 18,
+		"editable": true,
+		"items": [
+			{
+				"text": "L",
+				"ref": 0,
+				"editable": true,
+				"collapsed": true
+			},
+			{
+				"text": "R",
+				"ref": 0,
+				"editable": true,
+				"collapsed": true
+			},
+			{
+				"text": "S",
+				"ref": 0,
+				"editable": true,
+				"collapsed": true
+			}
+		]
+	},
+	"ConstantsGroups": {
+		"lineHeight": 18,
+		"editable": false,
+		"items": [
+			{
+				"text": "None",
+				"ref": 1,
+				"editable": true,
+				"collapsed": true
+			}
+		]
+	},
+	"ParamTypes": {
+		"lineHeight": 18,
+		"editable": true,
+		"items": [
+			{
+				"text": "Date",
+				"ref": 1,
+				"editable": true
+			},
+			{
+				"text": "Hour",
+				"ref": 2,
+				"editable": true
+			},
+			{
+				"text": "Integer",
+				"ref": 3,
+				"editable": true
+			},
+			{
+				"text": "Long",
+				"ref": 4,
+				"editable": true
+			},
+			{
+				"text": "Blob",
+				"ref": 5,
+				"editable": true
+			},
+			{
+				"text": "Picture",
+				"ref": 6,
+				"editable": true
+			},
+			{
+				"text": "Real",
+				"ref": 7,
+				"editable": true
+			},
+			{
+				"text": "Text",
+				"ref": 8,
+				"editable": true
+			},
+			{
+				"text": "Array",
+				"ref": 9,
+				"editable": true
+			},
+			{
+				"text": "Pointer",
+				"ref": 10,
+				"editable": true
+			},
+			{
+				"text": "Object",
+				"ref": 11,
+				"editable": true
+			},
+			{
+				"text": "Collection",
+				"ref": 12,
+				"editable": true
+			}
+		]
+	},
+	"ReturnTypes": {
+		"lineHeight": 18,
+		"editable": true,
+		"items": [
+			{
+				"text": "None",
+				"ref": 0,
+				"editable": true
+			},
+			{
+				"text": "Date",
+				"ref": 0,
+				"editable": true
+			},
+			{
+				"text": "Hour",
+				"ref": 0,
+				"editable": true
+			},
+			{
+				"text": "Integer",
+				"ref": 0,
+				"editable": true
+			},
+			{
+				"text": "Long",
+				"ref": 0,
+				"editable": true
+			},
+			{
+				"text": "Blob",
+				"ref": 0,
+				"editable": true
+			},
+			{
+				"text": "Picture",
+				"ref": 0,
+				"editable": true
+			},
+			{
+				"text": "Real",
+				"ref": 0,
+				"editable": true
+			},
+			{
+				"text": "Text",
+				"ref": 0,
+				"editable": true
+			},
+			{
+				"text": "Object",
+				"ref": 10,
+				"editable": true
+			},
+			{
+				"text": "Collection",
+				"ref": 11,
+				"editable": true
+			}
+		]
+	}
+}

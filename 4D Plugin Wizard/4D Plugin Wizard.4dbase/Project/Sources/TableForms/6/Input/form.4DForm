@@ -1,0 +1,267 @@
+﻿{
+	"destination": "detailScreen",
+	"windowTitle": "Constant Value...",
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"markerBody": 346,
+	"markerBreak": 346,
+	"markerFooter": 356,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onHeader",
+		"onPrintingBreak",
+		"onPrintingFooter",
+		"onDisplayDetail",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDataChange",
+		"onDragOver",
+		"onPrintingDetail",
+		"onOpenDetail",
+		"onCloseDetail",
+		"onTimer",
+		"onAfterKeystroke",
+		"onSelectionChange"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "Note US",
+		"paperWidth": "612pt",
+		"paperHeight": "792pt",
+		"orientation": "landscape"
+	},
+	"pages": [
+		{
+			"objects": {
+				"Texte24": {
+					"type": "text",
+					"top": 17,
+					"left": 22,
+					"width": 48,
+					"height": 19,
+					"class": "Dialogs",
+					"text": "Name"
+				},
+				"Texte25": {
+					"type": "text",
+					"top": 48,
+					"left": 22,
+					"width": 48,
+					"height": 19,
+					"class": "Dialogs",
+					"text": "Type"
+				},
+				"Name": {
+					"type": "input",
+					"top": 17,
+					"left": 77,
+					"width": 201,
+					"height": 16,
+					"dataSource": "[Constants:6]Name:3",
+					"class": "ParamsList",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"dragging": "none",
+					"dropping": "none",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Pop-up/Drop-down List1": {
+					"type": "dropdown",
+					"top": 45,
+					"left": 75,
+					"width": 204,
+					"height": 21,
+					"dataSource": "vConstantType",
+					"choiceList": [
+						"String Value",
+						"Real Value",
+						"Long Integer Value"
+					],
+					"class": "Dialogs",
+					"method": "ObjectMethods/Pop-up%2FDrop-down List1.4dm",
+					"events": [
+						"onLoad",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Bouton1": {
+					"type": "button",
+					"top": 160,
+					"left": 191,
+					"width": 90,
+					"height": 20,
+					"dataSource": "Bouton1",
+					"action": "accept",
+					"text": "Ok",
+					"class": "Dialogs",
+					"defaultButton": true,
+					"events": [
+						"onClick"
+					]
+				},
+				"Bouton2": {
+					"type": "button",
+					"top": 160,
+					"left": 80,
+					"width": 90,
+					"height": 20,
+					"dataSource": "Bouton2",
+					"action": "cancel",
+					"text": "Cancel",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Line1": {
+					"type": "line",
+					"top": 77,
+					"left": 21,
+					"width": 259
+				},
+				"Line2": {
+					"type": "line",
+					"top": 147,
+					"left": 21,
+					"width": 259
+				}
+			}
+		},
+		{
+			"objects": {
+				"NameS": {
+					"type": "input",
+					"top": 116,
+					"left": 24,
+					"width": 253,
+					"height": 16,
+					"dataSource": "[Constants:6]StringValue:5",
+					"fontFamily": "Lucida Grande",
+					"fontSize": 13,
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"dragging": "none",
+					"dropping": "none",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Texte28": {
+					"type": "text",
+					"top": 88,
+					"left": 21,
+					"width": 98,
+					"height": 16,
+					"class": "Dialogs",
+					"text": "String Value:"
+				}
+			}
+		},
+		{
+			"objects": {
+				"NameR": {
+					"type": "input",
+					"top": 116,
+					"left": 90,
+					"width": 110,
+					"height": 16,
+					"dataSource": "[Constants:6]RealValue:6",
+					"dataSourceTypeHint": "number",
+					"class": "ParamsList",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"dragging": "none",
+					"dropping": "none",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Texte26": {
+					"type": "text",
+					"top": 88,
+					"left": 22,
+					"width": 89,
+					"height": 16,
+					"class": "Dialogs",
+					"text": "Real Value:"
+				}
+			}
+		},
+		{
+			"objects": {
+				"NameL": {
+					"type": "input",
+					"top": 116,
+					"left": 90,
+					"width": 110,
+					"height": 16,
+					"dataSource": "[Constants:6]LongintValue:7",
+					"dataSourceTypeHint": "integer",
+					"class": "ParamsList",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"dragging": "none",
+					"dropping": "none",
+					"events": [
+						"onLoad",
+						"onValidate",
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onDataChange",
+						"onPrintingDetail"
+					]
+				},
+				"Texte27": {
+					"type": "text",
+					"top": 88,
+					"left": 22,
+					"width": 157,
+					"height": 16,
+					"class": "Dialogs",
+					"text": "Long Integer Value:"
+				}
+			}
+		}
+	]
+}

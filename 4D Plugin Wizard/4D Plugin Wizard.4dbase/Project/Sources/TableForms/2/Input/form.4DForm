@@ -1,0 +1,610 @@
+﻿{
+	"destination": "detailScreen",
+	"windowMinWidth": 900,
+	"windowMinHeight": 450,
+	"rightMargin": 15,
+	"bottomMargin": 15,
+	"markerBody": 346,
+	"markerBreak": 346,
+	"markerFooter": 356,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onHeader",
+		"onPrintingBreak",
+		"onPrintingFooter",
+		"onDisplayDetail",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDataChange",
+		"onDragOver",
+		"onCloseBox",
+		"onPrintingDetail",
+		"onOpenDetail",
+		"onCloseDetail",
+		"onTimer",
+		"onAfterKeystroke",
+		"onSelectionChange"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "Note US",
+		"paperWidth": "612pt",
+		"paperHeight": "792pt"
+	},
+	"pages": [
+		{
+			"objects": {
+				"Champ1": {
+					"type": "input",
+					"top": 12,
+					"left": 11,
+					"width": 212,
+					"height": 16,
+					"dataSource": "[Projects:2]Name:2",
+					"class": "ParamsList",
+					"borderStyle": "sunken",
+					"contextMenu": "none",
+					"method": "ObjectMethods/Champ1.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"Liste hiérarchique1": {
+					"type": "list",
+					"top": 38,
+					"left": 10,
+					"width": 212,
+					"height": 260,
+					"sizingY": "grow",
+					"dataSource": "hlist",
+					"scrollbarVertical": "visible",
+					"scrollbarHorizontal": "hidden",
+					"dragging": "custom",
+					"dropping": "custom",
+					"class": "ParamsList",
+					"borderStyle": "sunken",
+					"method": "ObjectMethods/Liste hiérarchique1.4dm",
+					"events": [
+						"onClick",
+						"onDoubleClick",
+						"onDrop",
+						"onDataChange",
+						"onDragOver",
+						"onSelectionChange",
+						"onBeginDragOver",
+						"onDeleteAction"
+					]
+				},
+				"Bouton1": {
+					"type": "button",
+					"top": 305,
+					"left": 10,
+					"width": 212,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton1",
+					"text": "Add Theme...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton1.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Bouton2": {
+					"type": "button",
+					"top": 332,
+					"left": 10,
+					"width": 212,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton1",
+					"text": "Add Command...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton2.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Bouton3": {
+					"type": "button",
+					"top": 359,
+					"left": 10,
+					"width": 212,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton1",
+					"text": "Add External Area...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton3.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Bouton7": {
+					"type": "button",
+					"top": 414,
+					"left": 10,
+					"width": 212,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton1",
+					"text": "Edit Constants...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton7.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"hop": {
+					"type": "checkbox",
+					"top": 331,
+					"left": 235,
+					"width": 93,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]useAnsi:3",
+					"text": "Use Ansi",
+					"class": "Dialogs",
+					"method": "ObjectMethods/hop.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ3": {
+					"type": "checkbox",
+					"top": 305,
+					"left": 235,
+					"width": 117,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]useWin32:4",
+					"text": "Use Win32 API",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Champ3.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ5": {
+					"type": "checkbox",
+					"top": 307,
+					"left": 467,
+					"width": 137,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]Init:6",
+					"text": "Use InitPlugin()",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Champ5.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ6": {
+					"type": "checkbox",
+					"top": 331,
+					"left": 467,
+					"width": 137,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]DeInit:7",
+					"text": "Use DeInitPlugin()",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Champ6.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ7": {
+					"type": "checkbox",
+					"top": 416,
+					"left": 235,
+					"width": 356,
+					"height": 16,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]use4DDialogs:8",
+					"text": "Use 4D Component (Dials)",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Champ7.4dm",
+					"events": [
+						"onLoad",
+						"onClick"
+					]
+				},
+				"Champ8": {
+					"type": "input",
+					"top": 445,
+					"left": 235,
+					"width": 323,
+					"height": 16,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]DialogPath:9",
+					"class": "ParamsList",
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "sunken",
+					"enterable": false,
+					"contextMenu": "none"
+				},
+				"Bouton5": {
+					"type": "button",
+					"top": 441,
+					"left": 566,
+					"width": 38,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "bGetPath",
+					"text": "...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton5.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Ligne2": {
+					"type": "line",
+					"top": 304,
+					"left": 609,
+					"height": 199,
+					"sizingY": "move",
+					"stroke": "#666666",
+					"width": 0,
+					"startPoint": "topLeft"
+				},
+				"Champ13": {
+					"type": "checkbox",
+					"top": 371,
+					"left": 617,
+					"width": 245,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]exportPluginAPI:14",
+					"text": "4D Plugin API Sources Files",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ11": {
+					"type": "checkbox",
+					"top": 392,
+					"left": 617,
+					"width": 245,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]exportSource:12",
+					"text": "Source files",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ12": {
+					"type": "checkbox",
+					"top": 414,
+					"left": 617,
+					"width": 245,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]exportResources:13",
+					"text": "Resources files",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Bouton8": {
+					"type": "button",
+					"top": 488,
+					"left": 618,
+					"width": 235,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton6",
+					"text": "Generate...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton8.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Onglet1": {
+					"type": "tab",
+					"top": 7,
+					"left": 234,
+					"width": 619,
+					"height": 291,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"dataSource": "Onglet1",
+					"dataSourceTypeHint": "arrayText",
+					"labels": [
+						"4DPlugin.c",
+						"4DPlugin.h"
+					],
+					"class": "Dialogs",
+					"action": "gotoPage",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Bouton4": {
+					"type": "button",
+					"top": 387,
+					"left": 10,
+					"width": 212,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton1",
+					"text": "Delete",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton4.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Champ2": {
+					"type": "checkbox",
+					"top": 359,
+					"left": 235,
+					"width": 280,
+					"height": 17,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]DefineCommand:20",
+					"text": "Use enum for commands numbering",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Champ2.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Bouton6": {
+					"type": "button",
+					"top": 442,
+					"left": 10,
+					"width": 212,
+					"height": 20,
+					"sizingY": "move",
+					"dataSource": "Bouton6",
+					"text": "Import From Plugin...",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Bouton6.4dm",
+					"events": [
+						"onClick",
+						"onHeader",
+						"onPrintingBreak",
+						"onPrintingFooter",
+						"onDisplayDetail",
+						"onPrintingDetail"
+					]
+				},
+				"Line1": {
+					"type": "line",
+					"top": 355,
+					"left": 232,
+					"width": 377,
+					"sizingY": "move",
+					"stroke": "#666666",
+					"height": 0,
+					"startPoint": "topLeft"
+				},
+				"Line2": {
+					"type": "line",
+					"top": 411,
+					"left": 232,
+					"width": 377,
+					"sizingY": "move",
+					"stroke": "#666666",
+					"height": 0,
+					"startPoint": "topLeft"
+				},
+				"Line3": {
+					"type": "line",
+					"top": 302,
+					"left": 404,
+					"height": 53,
+					"sizingY": "move",
+					"stroke": "#666666",
+					"width": 0,
+					"startPoint": "topLeft"
+				},
+				"Field2": {
+					"type": "checkbox",
+					"top": 385,
+					"left": 235,
+					"width": 337,
+					"height": 16,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]ShowConstants:22",
+					"text": "Define Constants in 4D Plugin.h",
+					"class": "Dialogs",
+					"method": "ObjectMethods/Field2.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ9": {
+					"type": "checkbox",
+					"top": 306,
+					"left": 617,
+					"width": 245,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]exportXCodeProject:10",
+					"text": "XCode project",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ14": {
+					"type": "input",
+					"top": 474,
+					"left": 301,
+					"width": 65,
+					"height": 16,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]PluginID:23",
+					"class": "ParamsList",
+					"contextMenu": "none",
+					"method": "ObjectMethods/Champ14.4dm",
+					"events": [
+						"onValidate",
+						"onLosingFocus",
+						"onDataChange"
+					]
+				},
+				"Texte1": {
+					"type": "text",
+					"top": 474,
+					"left": 232,
+					"width": 61,
+					"height": 16,
+					"sizingY": "move",
+					"class": "Dialogs",
+					"text": "Plugin ID :"
+				},
+				"Champ4": {
+					"type": "checkbox",
+					"top": 435,
+					"left": 617,
+					"width": 245,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]exportSample:24",
+					"text": "Sample Database for Debug",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				},
+				"Champ15": {
+					"type": "checkbox",
+					"top": 332,
+					"left": 617,
+					"width": 245,
+					"height": 23,
+					"sizingY": "move",
+					"dataSource": "[Projects:2]exportVCproject2008:25",
+					"text": "Visual Studio 2017 project",
+					"class": "Dialogs",
+					"events": [
+						"onClick"
+					]
+				}
+			}
+		},
+		{
+			"objects": {
+				"Variable": {
+					"type": "input",
+					"top": 30,
+					"left": 250,
+					"width": 582,
+					"height": 249,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"dataSource": "areaCode",
+					"fontFamily": ".SF NS Text",
+					"fontSize": 12,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"enterable": false,
+					"showSelection": true,
+					"styledText": true,
+					"storeDefaultStyle": true,
+					"allowFontColorPicker": true,
+					"scrollbarVertical": "automatic",
+					"scrollbarHorizontal": "automatic",
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					]
+				}
+			}
+		},
+		{
+			"objects": {
+				"Variable2": {
+					"type": "input",
+					"top": 30,
+					"left": 250,
+					"width": 582,
+					"height": 249,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"dataSource": "areaCode2",
+					"borderStyle": "none",
+					"enterable": false,
+					"showSelection": true,
+					"styledText": true,
+					"storeDefaultStyle": true,
+					"allowFontColorPicker": true,
+					"scrollbarVertical": "automatic",
+					"scrollbarHorizontal": "automatic",
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"fill": "transparent"
+				}
+			}
+		}
+	],
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {},
+			"View 2": {},
+			"View 3": {},
+			"View 4": {},
+			"View 5": {},
+			"View 6": {},
+			"View 7": {},
+			"View 8": {},
+			"View 9": {}
+		}
+	},
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	}
+}

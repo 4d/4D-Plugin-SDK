@@ -1,0 +1,98 @@
+﻿{
+	"bars": [
+		{
+			"id": 1,
+			"name": "Menu Bar #1",
+			"items": [
+				{
+					"link": 8881
+				},
+				{
+					"link": 22213
+				}
+			]
+		},
+		{
+			"id": 2,
+			"name": "Menu Bar #2",
+			"items": []
+		}
+	],
+	"menus": [
+		{
+			"link": 8881,
+			"title": ":79,1",
+			"items": [
+				{
+					"title": "Projects",
+					"method": "ShowProjects"
+				},
+				{
+					"isSeparator": true,
+					"enabled": false
+				},
+				{
+					"title": "Go to Design",
+					"action": "design"
+				},
+				{
+					"title": "Quit",
+					"action": "quit"
+				}
+			]
+		},
+		{
+			"link": 22213,
+			"title": ":79,5",
+			"items": [
+				{
+					"title": ":131,18",
+					"shortcutAccel": true,
+					"shortcutKey": "Z",
+					"action": "undo"
+				},
+				{
+					"title": "(-",
+					"isSeparator": true
+				},
+				{
+					"title": ":131,20",
+					"shortcutAccel": true,
+					"shortcutKey": "X",
+					"action": "cut"
+				},
+				{
+					"title": ":131,21",
+					"shortcutAccel": true,
+					"shortcutKey": "C",
+					"action": "copy"
+				},
+				{
+					"title": ":131,22",
+					"shortcutAccel": true,
+					"shortcutKey": "V",
+					"action": "paste"
+				},
+				{
+					"title": ":131,23",
+					"action": "clear"
+				},
+				{
+					"title": ":131,24",
+					"shortcutAccel": true,
+					"shortcutKey": "A",
+					"action": "selectAll"
+				},
+				{
+					"title": "(-",
+					"isSeparator": true
+				},
+				{
+					"title": "Preferences",
+					"method": "_DoPrefs",
+					"action": "showClipboard"
+				}
+			]
+		}
+	]
+}

@@ -15,3 +15,10 @@ git clone https://github.com/4D/4D-Plugin-SDK.git
 ## Documentation
 
 [4D Plugin API](https://4d.github.io/4D-Plugin-SDK/)
+
+
+## Release note
+
+* v18: Update to v18
+	* 4D Plugin Wizard: Converts the 4DB in project.
+	* 4D Plugin Wizard: Move the manifest.json in the *Resources* folder of the plug-in due to Mac notarization.
