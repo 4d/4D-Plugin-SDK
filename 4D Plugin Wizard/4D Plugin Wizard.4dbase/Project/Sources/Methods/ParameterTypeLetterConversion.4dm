@@ -30,6 +30,8 @@ Case of
 		$0:="Array"
 	: ($1="Z")
 		$0:="Pointer"
+	: ($1="V")
+		$0:="Variant"
 	Else 
 		$0:="None"  // ACI0088076
 End case 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
-<base name="" uuid="E8F8273FBC29DD418059104BAD479D20" collation_locale="fr">
+<base name="4D Plugin Wizard" uuid="E8F8273FBC29DD418059104BAD479D20" collation_locale="fr">
 	<schema name="DEFAULT_SCHEMA"/>
 	<table name="Interface" uuid="4947200222B876449805E2A56CD44EF0" id="1" leave_tag_on_delete="true">
 		<field name="ID" uuid="C022D99A3686504D8E6B5123A46F8D24" type="4" unique="true" autosequence="true" never_null="true" id="1">
@@ -331,7 +331,7 @@
 			<table_ref uuid="4947200222B876449805E2A56CD44EF0" name="Interface"/>
 		</field_ref>
 	</index>
-	<base_extra data_file_path="\4D_Plugin_Wizard.4DD" package_name="4D Plugin Wizard" structure_file_name="4D_Plugin_Wizard" __stringCompHash="icu:63.1.0" __keywordBuildingHash="icu:63.1.0">
+	<base_extra data_file_path="\4D_Plugin_Wizard.4DD" package_name="4D Plugin Wizard" structure_file_name="4D_Plugin_Wizard" __stringCompHash="icu:68.1.0" __keywordBuildingHash="icu:68.1.0">
 		<temp_folder folder_selector="data"/>
 	</base_extra>
 </base>

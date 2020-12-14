@@ -81,9 +81,5 @@
 			"Themes"
 		]
 	},
-	"trash": {
-		"tables": [
-			"(serialConstants)"
-		]
-	}
+	"trash": {}
 }

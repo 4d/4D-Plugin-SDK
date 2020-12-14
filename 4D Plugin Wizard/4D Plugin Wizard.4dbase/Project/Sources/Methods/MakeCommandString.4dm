@@ -1,16 +1,16 @@
 //%attributes = {}
-_O_ARRAY STRING:C218(32;$arNameArgs;0)
-_O_ARRAY STRING:C218(32;$arTypeArgs;0)
-_O_ARRAY STRING:C218(32;$arInOutArgs;0)
-_O_ARRAY STRING:C218(32;$arConstants;0)
-_O_C_STRING:C293(32;$returnValue)
+_O_ARRAY STRING:C218(32; $arNameArgs; 0)
+_O_ARRAY STRING:C218(32; $arTypeArgs; 0)
+_O_ARRAY STRING:C218(32; $arInOutArgs; 0)
+_O_ARRAY STRING:C218(32; $arConstants; 0)
+_O_C_STRING:C293(32; $returnValue)
 
 $offset:=0
-BLOB TO VARIABLE:C533([Commands:4]Parameters:4;$arNameArgs;$offset)
-BLOB TO VARIABLE:C533([Commands:4]Parameters:4;$arTypeArgs;$offset)
-BLOB TO VARIABLE:C533([Commands:4]Parameters:4;$arInOutArgs;$offset)
-BLOB TO VARIABLE:C533([Commands:4]Parameters:4;$arConstants;$offset)
-BLOB TO VARIABLE:C533([Commands:4]Parameters:4;$returnValue;$offset)
+BLOB TO VARIABLE:C533([Commands:4]Parameters:4; $arNameArgs; $offset)
+BLOB TO VARIABLE:C533([Commands:4]Parameters:4; $arTypeArgs; $offset)
+BLOB TO VARIABLE:C533([Commands:4]Parameters:4; $arInOutArgs; $offset)
+BLOB TO VARIABLE:C533([Commands:4]Parameters:4; $arConstants; $offset)
+BLOB TO VARIABLE:C533([Commands:4]Parameters:4; $returnValue; $offset)
 
 $0:=[Commands:4]Name:3
 
@@ -18,7 +18,7 @@ If (Size of array:C274($arTypeArgs)>0)
 	
 	$0:=$0+"("
 	
-	For ($i;1;Size of array:C274($arTypeArgs))
+	For ($i; 1; Size of array:C274($arTypeArgs))
 		
 		Case of 
 			: ($arTypeArgs{$i}="Date")
@@ -51,6 +51,8 @@ If (Size of array:C274($arTypeArgs)>0)
 				$0:=$0+"&C"
 			: ($arTypeArgs{$i}="Pointer")
 				$0:=$0+"&Z"
+			: ($arTypeArgs{$i}="Variant")
+				$0:=$0+"&V"
 		End case 
 		
 		If ($i<Size of array:C274($arTypeArgs))
