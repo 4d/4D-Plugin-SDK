@@ -122,6 +122,11 @@
 				"text": "Collection",
 				"ref": 12,
 				"editable": true
+			},
+			{
+				"text": "Variant",
+				"ref": 13,
+				"editable": true
 			}
 		]
 	},
@@ -182,6 +187,11 @@
 			{
 				"text": "Collection",
 				"ref": 11,
+				"editable": true
+			},
+			{
+				"text": "Variant",
+				"ref": 12,
 				"editable": true
 			}
 		]

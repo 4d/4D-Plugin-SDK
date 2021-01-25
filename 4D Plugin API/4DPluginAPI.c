@@ -2649,6 +2649,13 @@ void PA_ReturnCollection(PA_PluginParameters params, PA_CollectionRef collection
 	*(PA_CollectionRef*)params->fResult = collection;
 
 }
+
+void PA_ReturnVariable(PA_PluginParameters params, PA_Variable* variable)
+{
+	*((sLONG_PTR*)params->fResult) = (sLONG_PTR)variable;
+}
+
+
 // -----------------------------------------
 //
 // Get events in a plugin area
@@ -4254,7 +4261,6 @@ void PA_SetVariable( PA_Unichar* variableName, PA_Variable variable, char clearO
 void PA_SetStringVariable( PA_Variable* variable, PA_Unistring* ustr )
 {
 	variable->fType = eVK_Unistring;
-	variable->fFiller = 0;
 	variable->uValue.fString = *ustr;
 }
 
@@ -4262,7 +4268,6 @@ void PA_SetStringVariable( PA_Variable* variable, PA_Unistring* ustr )
 void PA_SetBlobVariable( PA_Variable* variable, void* blob, PA_long32 len )
 {
 	variable->fType = eVK_Blob;
-	variable->fFiller = 0;
 	variable->uValue.fBlob.fHandle = FromUserData( blob, len );
 	variable->uValue.fBlob.fSize = len;
 }
@@ -4271,7 +4276,6 @@ void PA_SetBlobVariable( PA_Variable* variable, void* blob, PA_long32 len )
 void PA_SetBlobHandleVariable( PA_Variable* variable, PA_Handle hblob )
 {
 	variable->fType = eVK_Blob;
-	variable->fFiller = 0;
 	variable->uValue.fBlob.fHandle = hblob;
 	variable->uValue.fBlob.fSize = (PA_long32)PA_GetHandleSize( hblob );
 }
@@ -4280,7 +4284,6 @@ void PA_SetBlobHandleVariable( PA_Variable* variable, PA_Handle hblob )
 void PA_SetPictureVariable( PA_Variable* variable, PA_Picture picture )
 {
 	variable->fType = eVK_Picture;
-	variable->fFiller = 0;
 	variable->uValue.fPicture = picture;
 }
  
@@ -4288,7 +4291,6 @@ void PA_SetPictureVariable( PA_Variable* variable, PA_Picture picture )
 void PA_SetRealVariable( PA_Variable* variable, double value )
 {
 	variable->fType = eVK_Real;
-	variable->fFiller = 0;
 	variable->uValue.fReal = value;
 }
 
@@ -4296,7 +4298,6 @@ void PA_SetRealVariable( PA_Variable* variable, double value )
 void PA_SetLongintVariable( PA_Variable* variable, PA_long32 value )
 {
 	variable->fType = eVK_Longint;
-	variable->fFiller = 0;
 	variable->uValue.fLongint = value;
 }
 
@@ -4304,7 +4305,6 @@ void PA_SetLongintVariable( PA_Variable* variable, PA_long32 value )
 void PA_SetTimeVariable( PA_Variable* variable, PA_long32 value )
 {
 	variable->fType = eVK_Time;
-	variable->fFiller = 0;
 	variable->uValue.fTime = value;
 }
 
@@ -4312,7 +4312,6 @@ void PA_SetTimeVariable( PA_Variable* variable, PA_long32 value )
 void PA_SetDateVariable( PA_Variable* variable, short day, short month, short year )
 {
 	variable->fType = eVK_Date;
-	variable->fFiller = 0;
 	variable->uValue.fDate.fDay   = day;
 	variable->uValue.fDate.fMonth = month;
 	variable->uValue.fDate.fYear  = year;
@@ -4321,7 +4320,6 @@ void PA_SetDateVariable( PA_Variable* variable, short day, short month, short ye
 void PA_SetBooleanVariable( PA_Variable* variable, char value )
 {
 	variable->fType = eVK_Boolean;
-	variable->fFiller = 0;
 	variable->uValue.fBoolean = value;
 }
 
@@ -4329,14 +4327,12 @@ void PA_SetBooleanVariable( PA_Variable* variable, char value )
 void PA_SetObjectVariable( PA_Variable* variable, PA_ObjectRef object )
 {
 	variable->fType = eVK_Object;
-	variable->fFiller = 0;
 	variable->uValue.fObject = object;
 }
 
 void PA_SetCollectionVariable(PA_Variable* variable, PA_CollectionRef collection)
 {
 	variable->fType = eVK_Collection;
-	variable->fFiller = 0;
 	variable->uValue.fCollection = collection;
 }
 
