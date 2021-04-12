@@ -4503,11 +4503,11 @@ void PA_ResizeArray( PA_Variable *ar, PA_long32 nb )
 				// if array become smaller
 				if ( nb < ar->uValue.fArray.fNbElements )
 				{
-					PA_Blob** ptBlobHandle = (PA_Blob**) PA_LockHandle( ar->uValue.fArray.fData );
+					PA_Blob* ptBlobHandle = (PA_Blob*) PA_LockHandle( ar->uValue.fArray.fData );
 
 					for ( i = nb + 1; i <= ar->uValue.fArray.fNbElements; i++ )
 					{
-						PA_DisposeHandle(ptBlobHandle[i]->fHandle);
+						PA_DisposeHandle(ptBlobHandle[i].fHandle);
 					}
 					
 					PA_UnlockHandle( ar->uValue.fArray.fData );
