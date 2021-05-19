@@ -2339,7 +2339,7 @@ PA_Variable PA_GetVariableParameter( PA_PluginParameters params, short index )
 
 PA_Pointer PA_GetPointerParameter( PA_PluginParameters params, short index )
 {
-	if ( PA_IsCompiled( 1) )
+	if ( PA_IsCompiled( 0) )
 	{
 		PA_Variable* ptvar;
 
