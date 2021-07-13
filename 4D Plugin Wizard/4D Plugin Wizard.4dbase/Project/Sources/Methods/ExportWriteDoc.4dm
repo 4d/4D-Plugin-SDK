@@ -22,5 +22,11 @@ If ((hasConfirmed=True:C214) | ($valueTest=False:C215))
 		$file.delete()
 	End if 
 	
-	$file.setText($4)
+	C_TEXT($text)
+	C_BLOB($blob)
+	
+	$text:=Replace string($4;Char(13);Char(10))
+	TEXT TO BLOB($text;$blob;UTF8 text without length)
+	
+	BLOB TO DOCUMENT($1+$2+$3;$blob)
 End if 
